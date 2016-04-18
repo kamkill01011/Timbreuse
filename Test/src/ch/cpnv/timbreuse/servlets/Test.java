@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.DateTime;
 
-import ch.cpnv.beans.BeanTest;
+import ch.cpnv.timbreuse.beans.Student;
 
 
 public class Test extends HttpServlet {
@@ -20,8 +20,8 @@ public class Test extends HttpServlet {
 		String paramAuteur = request.getParameter("auteur");
 		String message = "Transmission de variables : OK !" + paramAuteur;
 		
-		BeanTest kamil = new BeanTest();
-		kamil.setNom("Amrani");
+		Student kamil = new Student();
+		kamil.setName("Amrani");
 		kamil.setDiff(3);
 		
 		List<Integer> premiereListe = new ArrayList<Integer>();
