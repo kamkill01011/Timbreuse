@@ -16,7 +16,7 @@ import ch.cpnv.timbreuse.beans.Student;
 
 
 public class Test extends HttpServlet {
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String paramAuteur = request.getParameter("auteur");
 		String message = "Transmission de variables : OK !" + paramAuteur;
 		
@@ -25,19 +25,19 @@ public class Test extends HttpServlet {
 		kamil.setDiff(3);
 		
 		List<Integer> premiereListe = new ArrayList<Integer>();
-		premiereListe.add( 27 );
-		premiereListe.add( 12 );
-		premiereListe.add( 138 );
-		premiereListe.add( 6 );
+		premiereListe.add(27);
+		premiereListe.add(12);
+		premiereListe.add(138);
+		premiereListe.add(6);
 		
 		DateTime dt = new DateTime();
 		Integer jourDuMois = dt.getDayOfMonth();
 		
-		request.setAttribute( "test", message );
-		request.setAttribute( "name", kamil );
-		request.setAttribute( "liste", premiereListe );
-		request.setAttribute( "jour", jourDuMois );
+		request.setAttribute("test", message);
+		request.setAttribute("name", kamil);
+		request.setAttribute("liste", premiereListe);
+		request.setAttribute("jour", jourDuMois);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/test.jsp").forward( request, response );
+		this.getServletContext().getRequestDispatcher("/WEB-INF/test.jsp").forward(request, response);
 	}
 }
