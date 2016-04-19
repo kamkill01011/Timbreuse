@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,8 +13,8 @@
     <h1>Gestion des élèves</h1>
     
     <form method="post" action="managestudents">
-		<input type="submit" value="Recherche" />
-		<input type="text" id="researchLastname" name="researchLastname" value="" size="32" maxlength="64" />
+		<input type="submit" name="research" value="Recherche" />
+		<input type="text" name="researchLastname" value="" size="32" maxlength="64" />
 	</form>
     <br/>
     <fieldset>
@@ -27,35 +26,37 @@
 	<fieldset>
 		<legend>Ajouter un élève</legend>
 		<form method="post" action="managestudents">
-			<label>Classe : </label>
+			<label for="addClass">Classe : </label>
 			<input type="text" id="addClass" name="addClass" value="" size="32" maxlength="64" />
 			<br/>
-			<label>Prénom : </label>
+			<label for="addFirstname">Prénom : </label>
 			<input type="text" id="addFirstname" name="addFirstname" value="" size="32" maxlength="64" />
 			<br/>
-			<label>Nom : </label>
+			<label for="addLastname">Nom : </label>
 			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
 			<br/>
-			<label>E-mail : </label>
-			<input type="text" id="addEmail" name="addEmail" value="" size="32" maxlength="64" />
-			<br/>
-			<input type="submit" value="Ajuter" class="sansLabel" />
+			<input type="submit" name="add" value="Ajouter" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br/>
 	<fieldset>
 		<legend>Supprimer un élève</legend>
 		<form method="post" action="managestudents">
-			<input type="text" id="deletByLastname" name="deletByLastname" value="" size="32" maxlength="64" />
-			<input type="submit" value="Supprimer" />
+			<label for="deletFirstname">Prénom : </label>
+			<input type="text" id="deletFirstname" name="deletFirstname" value="" size="32" maxlength="64" />
+			<br/>
+			<label for="deletLastname">Nom : </label>
+			<input type="text" id="deletLastname" name="deletLastname" value="" size="32" maxlength="64" />
+			<br/>
+			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br/>
 	<fieldset>
 		<legend>Modifier un élève</legend>
 		<form method="post" action="managestudents">
-			<input type="text" id="modifyTimeDiff" name="modifyTimeDiff" value="" size="32" maxlength="64" />
-			<input type="submit" value="Modifier la différence de temps" />
+			<input type="text" name="modifyTimeDiff" value="" size="32" maxlength="64" />
+			<input type="submit" name="modify" value="Modifier la différence de temps" />
 		</form>
 	</fieldset>
     </body>
