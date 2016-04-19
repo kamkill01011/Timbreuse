@@ -1,12 +1,14 @@
 package ch.cpnv.timbreuse.beans;
 
+import java.sql.Time;
+
 public class User {
 
     private Long      id;
     private String    email;
     private String    lastname;
     private String 	  firstname;
-    private Integer   timeDiff;
+    private Time   timeDiff;
 
     public Long getId() {
         return id;
@@ -28,10 +30,10 @@ public class User {
     public String getLastname() {
         return lastname;
     }
-	public Integer getTimeDiff() {
+	public Time getTimeDiff() {
 		return timeDiff;
 	}
-	public void setTimeDiff(Integer timeDiff) {
+	public void setTimeDiff(Time timeDiff) {
 		this.timeDiff = timeDiff;
 	}
 	public String getFirstname() {
