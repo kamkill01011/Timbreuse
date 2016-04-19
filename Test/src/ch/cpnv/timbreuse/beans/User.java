@@ -8,7 +8,8 @@ public class User {
     private String    email;
     private String    lastname;
     private String 	  firstname;
-    private Time   timeDiff;
+    private Time      timeDiff;
+    private String    classe;
 
     public Long getId() {
         return id;
@@ -21,7 +22,7 @@ public class User {
         this.email = email;
     }
     public String getEmail() {
-        return email;
+        return firstname+"."+lastname+"@cpnv.ch";
     }
 
     public void setLastname(String lastname) {
@@ -41,5 +42,11 @@ public class User {
 	}
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
+	}
+	public String getClasse() {
+		return classe;
+	}
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 }

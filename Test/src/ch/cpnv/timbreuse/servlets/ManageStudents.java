@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOUser;
+import ch.cpnv.timbreuse.forms.CreateStudent;
 import ch.cpnv.timbreuse.forms.StudentResearch;
 
 public class ManageStudents extends HttpServlet{
@@ -24,8 +25,10 @@ public class ManageStudents extends HttpServlet{
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StudentResearch form = new StudentResearch(daoUser);
-		User user = form.researchUser(request);
+		StudentResearch researchForm = new StudentResearch(daoUser);
+		CreateStudent createForm = new CreateStudent(daoUser);
+		User user = researchForm.researchUser(request);
+		daoUser.create(createForm.isUser(request));
 		request.setAttribute("researchStudent", user);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
