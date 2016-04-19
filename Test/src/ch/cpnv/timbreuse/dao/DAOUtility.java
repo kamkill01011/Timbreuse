@@ -63,6 +63,10 @@ public final class DAOUtility {
         }
         return preparedStatement;
     }
+	
+	public static String upperWithoutAccent(String x) {
+		final String accent = "éàö";
+	}
 }
 
 

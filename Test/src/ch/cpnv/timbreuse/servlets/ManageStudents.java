@@ -36,5 +36,4 @@ public class ManageStudents extends HttpServlet{
 		}
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
-
 }
