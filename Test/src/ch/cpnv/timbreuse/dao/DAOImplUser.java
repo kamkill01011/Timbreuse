@@ -13,7 +13,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 public class DAOImplUser implements DAOUser {
 	
 	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
-	
+	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email,Password) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?,null)";
 	private DAOFactory daoFactory;
 	
 	public DAOImplUser(DAOFactory daoFactory) {
@@ -27,7 +27,29 @@ public class DAOImplUser implements DAOUser {
 	
 	@Override
 	public void create(User user) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
 		
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, user.getClasse(),user.getLastname(),user.getFirstname(),user.getEmail());
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec de la création de l'utilisateur, aucune ligne ajoutée dans la table.");
+			}
+			/*autoGenValue = preparedStatement.getGeneratedKeys();
+			if(autoGenValue.next()) {
+				user.setId(autoGenValue.getLong(1));
+			} else {
+			throw new DAOException("Echec de la création de l'utilisateur en base, aucun ID auto-généré retourné.");
+			}
+			*/
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
 	}
 	
 	private User find(String sql, Object... objects) throws DAOException {
