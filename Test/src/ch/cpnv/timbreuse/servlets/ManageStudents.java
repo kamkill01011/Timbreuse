@@ -33,6 +33,7 @@ public class ManageStudents extends HttpServlet{
 		
 		//researchStudent.setLastname();
 		//researchStudent.setDiff(user.getTimeDiff());
+		System.out.println(user.getName());
 		
 		request.setAttribute("researchStudent", user.getName());
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
