@@ -5,7 +5,7 @@ public class User {
     private Long      id;
     private String    email;
     private String    lastname;
-    private String 	  firstName;
+    private String 	  firstname;
     private Integer   timeDiff;
 
     public Long getId() {
@@ -22,8 +22,8 @@ public class User {
         return email;
     }
 
-    public void setLastname(String name) {
-        this.lastname = name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     public String getLastname() {
         return lastname;
@@ -35,9 +35,9 @@ public class User {
 		this.timeDiff = timeDiff;
 	}
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
 }

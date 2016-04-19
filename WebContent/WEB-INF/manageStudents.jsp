@@ -20,5 +20,11 @@
     <p>Nom : ${researchStudent.lastname}</p>
     <p>Différence : ${researchStudent.timeDiff}</p>
     
+    <fieldset>
+		<legend>${researchStudent.lastname} ${researchStudent.firstName}</legend>
+		<p>Différence : ${researchStudent.timeDiff}</p>
+		<p>E-mail : ${researchStudent.email}</p>
+	</fieldset>
+    
     </body>
 </html>
