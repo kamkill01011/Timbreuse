@@ -16,12 +16,9 @@
 		<input type="submit" value="Recherche" class="sansLabel" />
 		<input type="text" id="researchLastname" name="researchLastname" value="" size="32" maxlength="64" />
 	</form>
-    
-    <p>Nom : ${researchStudent.lastname}</p>
-    <p>Différence : ${researchStudent.timeDiff}</p>
-    
+    <br>
     <fieldset>
-		<legend>${researchStudent.lastname} ${researchStudent.firstName}</legend>
+		<legend>${researchStudent.lastname} ${researchStudent.firstname}</legend>
 		<p>Différence : ${researchStudent.timeDiff}</p>
 		<p>E-mail : ${researchStudent.email}</p>
 	</fieldset>

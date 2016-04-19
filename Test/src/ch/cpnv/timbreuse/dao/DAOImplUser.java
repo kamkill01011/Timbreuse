@@ -56,6 +56,7 @@ public class DAOImplUser implements DAOUser {
 		user.setId(resultSet.getLong("id"));
 		user.setEmail(resultSet.getString("Email"));
 		user.setLastname(resultSet.getString("Lastname"));
+		user.setFirstname(resultSet.getString("Firstname"));
 		user.setTimeDiff(resultSet.getInt("TimeDiff"));
         return user;
 	}
