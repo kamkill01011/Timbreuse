@@ -21,7 +21,7 @@ public class Test extends HttpServlet {
 		String message = "Transmission de variables : OK !" + paramAuteur;
 		
 		Student kamil = new Student();
-		kamil.setName("Amrani");
+		kamil.setLastname("Amrani");
 		kamil.setDiff(3);
 		
 		List<Integer> premiereListe = new ArrayList<Integer>();
