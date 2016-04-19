@@ -12,7 +12,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
 public class DAOImplUser implements DAOUser {
 	
-	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname = ?";
+	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
 	
 	private DAOFactory daoFactory;
 	
@@ -21,8 +21,8 @@ public class DAOImplUser implements DAOUser {
 	}
 	
 	@Override
-	public User find(String Lastname) throws DAOException {
-		return find(SQL_SELECT_BY_LASTNAME, Lastname);
+	public User find(String lastname) throws DAOException {
+		return find(SQL_SELECT_BY_LASTNAME, lastname);
 	}
 	
 	@Override
@@ -41,7 +41,6 @@ public class DAOImplUser implements DAOUser {
 			preparedStatement = preparedRequestInitialisation(connection, sql, false, objects);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				System.out.println("MEEEEEEEEERDE");
 				user = map(resultSet);
 			}
 		} catch(SQLException e) {
@@ -49,7 +48,6 @@ public class DAOImplUser implements DAOUser {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		System.out.println("FIND: "+user.getLastname());
 		return user;
 	}
 	

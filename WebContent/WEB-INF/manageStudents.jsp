@@ -14,7 +14,7 @@
     
     <form method="post" action="managestudents">
 		<input type="submit" value="Recherche" class="sansLabel" />
-		<input type="text" id="research" name="research" value="" size="32" maxlength="64" />
+		<input type="text" id="researchLastname" name="researchLastname" value="" size="32" maxlength="64" />
 	</form>
     
     <p>Nom : ${researchStudent.lastname}</p>

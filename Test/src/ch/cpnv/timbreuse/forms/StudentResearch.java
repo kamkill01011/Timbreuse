@@ -11,7 +11,7 @@ import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
 public final class StudentResearch {
-	private static final String LASTNAME_FIELD = "Lastname";
+	private static final String LASTNAME_FIELD = "researchLastname";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	private DAOUser daoUser;
@@ -29,11 +29,11 @@ public final class StudentResearch {
 	}
 	
 	public User researchUser(HttpServletRequest request) {
-		String lastName = getFieldValue(request, LASTNAME_FIELD);
+		String lastname = getFieldValue(request, LASTNAME_FIELD);
 		User user = new User();
 		try {
 			if(errors.isEmpty()) {
-				user = daoUser.find(lastName);
+				user = daoUser.find(lastname);
 				result = "Succès de la recherche.";
 			} else {
 				result = "Echec de la recherche.";
@@ -42,10 +42,8 @@ public final class StudentResearch {
 			result = "Echec de la recherche: une erreur est survenue, merci de réessayer dans quelques instans.";
 			e.printStackTrace();
 		}	
-		
 		return user;
 	}
-	
 	
 	private static String getFieldValue(HttpServletRequest request, String fieldName) {
 		String value = request.getParameter(fieldName);
