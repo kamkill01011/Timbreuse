@@ -4,9 +4,9 @@ public class User {
 
     private Long      id;
     private String    email;
-    private String    lastName;
-    private String firstName;
-    private Integer timeDiff;
+    private String    lastname;
+    private String 	  firstName;
+    private Integer   timeDiff;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class User {
         return email;
     }
 
-    public void setName(String name) {
-        this.lastName = name;
+    public void setLastname(String name) {
+        this.lastname = name;
     }
-    public String getName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 	public Integer getTimeDiff() {
 		return timeDiff;

@@ -17,8 +17,8 @@
 		<input type="text" id="research" name="research" value="" size="32" maxlength="64" />
 	</form>
     
-    <p>Nom : ${researchStudent.name}</p>
-    <p>Différence : ${researchStudent.diff}</p>
+    <p>Nom : ${researchStudent.lastname}</p>
+    <p>Différence : ${researchStudent.timeDiff}</p>
     
     </body>
 </html>

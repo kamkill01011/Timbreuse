@@ -33,7 +33,7 @@ public final class StudentResearch {
 		User user = new User();
 		try {
 			if(errors.isEmpty()) {
-				daoUser.find(user.getName());
+				user = daoUser.find(lastName);
 				result = "Succès de la recherche.";
 			} else {
 				result = "Echec de la recherche.";
@@ -42,14 +42,9 @@ public final class StudentResearch {
 			result = "Echec de la recherche: une erreur est survenue, merci de réessayer dans quelques instans.";
 			e.printStackTrace();
 		}	
+		
 		return user;
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	private static String getFieldValue(HttpServletRequest request, String fieldName) {

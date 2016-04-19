@@ -41,6 +41,7 @@ public class DAOImplUser implements DAOUser {
 			preparedStatement = preparedRequestInitialisation(connection, sql, false, objects);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
+				System.out.println("MEEEEEEEEERDE");
 				user = map(resultSet);
 			}
 		} catch(SQLException e) {
@@ -48,6 +49,7 @@ public class DAOImplUser implements DAOUser {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
+		System.out.println("FIND: "+user.getLastname());
 		return user;
 	}
 	
@@ -55,7 +57,8 @@ public class DAOImplUser implements DAOUser {
 		User user = new User();
 		user.setId( resultSet.getLong("id"));
 		user.setEmail( resultSet.getString("Email"));
-		user.setName( resultSet.getString("Lastname"));
+		user.setLastname( resultSet.getString("Lastname"));
+		System.out.println("MAP Lastname: "+resultSet.getString("Lastname"));
         return user;
 	}
 }
