@@ -31,10 +31,10 @@ public class ManageStudents extends HttpServlet{
 		StudentResearch form = new StudentResearch(daoUser);
 		User user = form.researchUser(request);
 		
-		researchStudent.setLastname(user.getName());
-		researchStudent.setDiff(user.getTimeDiff());
+		//researchStudent.setLastname();
+		//researchStudent.setDiff(user.getTimeDiff());
 		
-		request.setAttribute("researchStudent", researchStudent);
+		request.setAttribute("researchStudent", user.getName());
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 	
