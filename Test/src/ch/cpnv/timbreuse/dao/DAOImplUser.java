@@ -53,10 +53,10 @@ public class DAOImplUser implements DAOUser {
 	
 	private static User map(ResultSet resultSet) throws SQLException {
 		User user = new User();
-		user.setId( resultSet.getLong("id"));
-		user.setEmail( resultSet.getString("Email"));
-		user.setLastname( resultSet.getString("Lastname"));
-		System.out.println("MAP Lastname: "+resultSet.getString("Lastname"));
+		user.setId(resultSet.getLong("id"));
+		user.setEmail(resultSet.getString("Email"));
+		user.setLastname(resultSet.getString("Lastname"));
+		user.setTimeDiff(resultSet.getInt("TimeDiff"));
         return user;
 	}
 }
