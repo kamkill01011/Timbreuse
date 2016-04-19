@@ -1,22 +1,19 @@
 package ch.cpnv.timbreuse.beans;
 
 public class Student {
-	private String name;
+	private String lastname;
 	private int diff;
-		
-	public String getName() {
-		return this.name;
+	
+	public String getLastname() {
+		return lastname;
 	}
-
+	public void setLastname(String name) {
+		this.lastname = name;
+	}
 	public int getDiff() {
-		return this.diff;
+		return diff;
 	}
-
-	public void setName( String Name ) {
-		this.name = Name;
-	}
-
-	public void setDiff( int Diff ) {
-		this.diff = Diff;
+	public void setDiff(int diff) {
+		this.diff = diff;
 	}
 }
