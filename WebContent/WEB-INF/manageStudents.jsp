@@ -12,7 +12,7 @@
     <body>
     <h1>Management des élèves</h1>
     
-    <form method="post" action="manageStudents">
+    <form method="post" action="managestudents">
 		<input type="submit" value="Recherche" class="sansLabel" />
 		<input type="text" id="research" name="research" value="" size="32" maxlength="64" />
 	</form>
