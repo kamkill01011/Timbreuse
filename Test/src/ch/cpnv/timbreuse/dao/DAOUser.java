@@ -7,5 +7,7 @@ public interface DAOUser {
     void create(User user) throws DAOException;
 
     User find(String email) throws DAOException;
+    
+    void delete(User user) throws DAOException;
 
 }

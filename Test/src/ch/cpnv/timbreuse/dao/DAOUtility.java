@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.Normalizer;
 
 
 public final class DAOUtility {
@@ -65,7 +66,18 @@ public final class DAOUtility {
     }
 	
 	public static String upperWithoutAccent(String x) {
-		final String accent = "éàö";
+		final String accents = "àäáéèëïìíöóòüúùç";
+		x=x.replaceAll("[àáä]", "a");
+		x=x.replaceAll("[éèë]", "e");
+		x=x.replaceAll("[íìï]", "i");
+		x=x.replaceAll("[óòö]", "o");
+		x=x.replaceAll("[úùü]", "u");
+		x=x.replaceAll("[ç]", "c");
+		char[] newChars = x.toCharArray();
+		for(int i=0;i<newChars.length;i++) {
+			newChars[i] = Character.toUpperCase(newChars[i]);
+		}
+		return new String(newChars);
 	}
 }
 

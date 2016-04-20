@@ -10,6 +10,7 @@ import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.CreateStudent;
+import ch.cpnv.timbreuse.forms.DeleteStudent;
 import ch.cpnv.timbreuse.forms.StudentResearch;
 
 public class ManageStudents extends HttpServlet{
@@ -33,6 +34,10 @@ public class ManageStudents extends HttpServlet{
 		if(request.getParameter("add")!=null) {
 			CreateStudent createForm = new CreateStudent(daoUser);
 			daoUser.create(createForm.isUser(request));
+		}
+		if(request.getParameter("delete")!=null) {
+			DeleteStudent deleteForm = new DeleteStudent(daoUser);
+			daoUser.delete(deleteForm.selectUserToDelete(request));
 		}
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}

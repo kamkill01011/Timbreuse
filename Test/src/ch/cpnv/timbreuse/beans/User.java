@@ -1,6 +1,7 @@
 package ch.cpnv.timbreuse.beans;
 
 import java.sql.Time;
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
 
 public class User {
 
@@ -22,7 +23,7 @@ public class User {
         this.email = email;
     }
     public String getEmail() {
-        return firstname+"."+lastname+"@cpnv.ch";
+        return firstname+"."+upperWithoutAccent(lastname)+"@cpnv.ch";
     }
 
     public void setLastname(String lastname) {
