@@ -41,9 +41,9 @@ public final class ConnectionForm {
         try {
             passwordValidation(password);
         } catch (Exception e) {
-            setError( PASSWORD_FIELD, e.getMessage());
+            setError(PASSWORD_FIELD, e.getMessage());
         }
-        user.se(password);
+        user.setPassword(password);
 
         /* Initialisation du résultat global de la validation. */
         if (errors.isEmpty()) {
@@ -51,7 +51,6 @@ public final class ConnectionForm {
         } else {
             result = "Échec de la connexion.";
         }
-
         return user;
     }
 

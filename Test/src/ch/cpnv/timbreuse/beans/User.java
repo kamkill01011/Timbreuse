@@ -11,6 +11,7 @@ public class User {
     private String 	  firstname;
     private Time      timeDiff;
     private String    classe;
+    private String password;
 
     public Long getId() {
         return id;
@@ -49,5 +50,11 @@ public class User {
 	}
 	public void setClasse(String classe) {
 		this.classe = classe;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
