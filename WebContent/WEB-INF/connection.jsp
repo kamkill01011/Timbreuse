@@ -28,8 +28,8 @@
                 
                 <c:if test="${!empty sessionScope.userSession}">
                 	<p class="succes">Vous êtes connecté avec l'e-amil : ${sessionScope.userSession.email}</p>
-                	<form method="post" action="deconnection">
-                		<input type="submit" name="deconnection" value="Déconnexion" class="sansLabel" />
+                	<form method="post" action="logout">
+                		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
                 	</form>
                 </c:if>
             </fieldset>

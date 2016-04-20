@@ -14,8 +14,8 @@
 		<servlet-class>ch.cpnv.timbreuse.servlets.Connection</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>Deconnection</servlet-name>
-		<servlet-class>ch.cpnv.timbreuse.servlets.Deconnection</servlet-class>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>ch.cpnv.timbreuse.servlets.Logout</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -27,7 +27,7 @@
 		<url-pattern>/connection</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Deconnection</servlet-name>
+		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	
