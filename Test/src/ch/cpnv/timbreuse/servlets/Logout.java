@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Deconnection extends HttpServlet {
+public class Logout extends HttpServlet {
     public static final String URL_REDIRECTION = "http://www.cpnv.ch";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
