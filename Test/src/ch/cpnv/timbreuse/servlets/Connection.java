@@ -24,7 +24,7 @@ public class Connexion extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnexionForm connexionForm = new ConnexionForm(daoUser);
+		ConnectionForm connexionForm = new ConnectionForm(daoUser);
 		User user = connexionForm.userConnexion(request);
 		
 		

@@ -10,7 +10,7 @@
 		<servlet-class>ch.cpnv.timbreuse.servlets.ManageStudents</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>Connexion</servlet-name>
+		<servlet-name>Connection</servlet-name>
 		<servlet-class>ch.cpnv.timbreuse.servlets.Connection</servlet-class>
 	</servlet>
 	

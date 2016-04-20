@@ -43,7 +43,7 @@ public final class ConnectionForm {
         } catch (Exception e) {
             setError( PASSWORD_FIELD, e.getMessage());
         }
-        user.setMotDePasse(password);
+        user.se(password);
 
         /* Initialisation du résultat global de la validation. */
         if (errors.isEmpty()) {
