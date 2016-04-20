@@ -12,7 +12,7 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
-	public static final String VIEW = "/WEB-INF/connexion.jsp";
+	public static final String VIEW = "/WEB-INF/connection.jsp";
 	private DAOUser daoUser;
 
 	public void init() {
