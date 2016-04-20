@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
@@ -13,6 +14,9 @@ import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
 	public static final String VIEW = "/WEB-INF/connection.jsp";
+	public static final String USER_ATT = "user";
+	public static final String FORM_ATT = "form";
+	public static final String USER_SESSION_ATT ="userSession";
 	private DAOUser daoUser;
 
 	public void init() {
@@ -25,16 +29,19 @@ public class Connection extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
-		User user = connectionForm.userConnection(request);
+		User user = connectionForm.connectUser(request);
+		HttpSession session = request.getSession();
 		
+		if(connectionForm.getErrors().isEmpty()) {
+			session.setAttribute(USER_SESSION_ATT, user);
+		} else {
+			session.setAttribute(USER_SESSION_ATT, null);
+		}
 		
-		/*
-		StudentResearch researchForm = new StudentResearch(daoUser);
-		User user = researchForm.researchUser(request);
-		request.setAttribute("researchStudent", user);
+		//Stockage du form et du bean dans l'obj request
+		request.setAttribute(FORM_ATT, connectionForm);
+		request.setAttribute(USER_ATT, user);
 		
-		CreateStudent createForm = new CreateStudent(daoUser);
-		daoUser.create(createForm.isUser(request));*/
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 }

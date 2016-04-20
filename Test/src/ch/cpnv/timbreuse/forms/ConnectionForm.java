@@ -6,14 +6,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.User;
+import ch.cpnv.timbreuse.dao.DAOUser;
 
 public final class ConnectionForm {
     private static final String EMAIL_FIELD = "email";
     private static final String PASSWORD_FIELD = "password";
-
     private String              result;
     private Map<String, String> errors      = new HashMap<String, String>();
-
+    private DAOUser daoUser;
+    
+    public ConnectionForm(DAOUser daoUser) {
+    	this.daoUser=daoUser;
+    }
+    
     public String getResult() {
         return result;
     }
