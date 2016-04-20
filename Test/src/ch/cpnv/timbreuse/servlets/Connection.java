@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOUser;
-import ch.cpnv.timbreuse.forms.ConnexionForm;
+import ch.cpnv.timbreuse.forms.ConnectionForm;
 
-public class Connexion extends HttpServlet {
+public class Connection extends HttpServlet {
 	public static final String VIEW = "/WEB-INF/connexion.jsp";
 	private DAOUser daoUser;
 
@@ -24,8 +24,8 @@ public class Connexion extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnectionForm connexionForm = new ConnectionForm(daoUser);
-		User user = connexionForm.userConnexion(request);
+		ConnectionForm connectionForm = new ConnectionForm(daoUser);
+		User user = connectionForm.userConnection(request);
 		
 		
 		/*
