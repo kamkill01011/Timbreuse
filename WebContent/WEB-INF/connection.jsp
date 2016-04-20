@@ -8,11 +8,9 @@
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
     <body>
-        <form method="post" action="connexion">
+        <form method="post" action="connection">
             <fieldset>
                 <legend>Connexion</legend>
-                <p>Vous pouvez vous connecter via ce formulaire.</p>
-
                 <label for="nom">Adresse email <span class="requis">*</span></label>
                 <input type="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
                 <span class="erreur">${form.erreurs['email']}</span>
