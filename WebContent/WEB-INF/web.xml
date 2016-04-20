@@ -9,10 +9,18 @@
 		<servlet-name>ManageStudents</servlet-name>
 		<servlet-class>ch.cpnv.timbreuse.servlets.ManageStudents</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>ch.cpnv.timbreuse.servlets.Connection</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>ManageStudents</servlet-name>
 		<url-pattern>/managestudents</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Connection</servlet-name>
+		<url-pattern>/connection</url-pattern>
 	</servlet-mapping>
 	
 	<listener>
