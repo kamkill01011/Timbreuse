@@ -25,6 +25,10 @@
                 <br />
                 
                 <p class="${empty form.errors ? 'succes' : 'error'}">${form.result}</p>
+                
+                <c:if test="${!empty sessionScope.userSession}">
+                	<p class="succes">Vous êtes connecté avec l'e-amil : ${sessionScope.userSession.email}</p>
+                </c:if>
             </fieldset>
         </form>
     </body>
