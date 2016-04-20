@@ -21,13 +21,16 @@
                 <span class="error">${form.errors['password']}</span>
                 <br />
 
-                <input type="submit" value="Connexion" class="sansLabel" />
+                <input type="submit" name="connection" value="Connexion" class="sansLabel" />
                 <br />
                 
                 <p class="${empty form.errors ? 'succes' : 'error'}">${form.result}</p>
                 
                 <c:if test="${!empty sessionScope.userSession}">
                 	<p class="succes">Vous êtes connecté avec l'e-amil : ${sessionScope.userSession.email}</p>
+                	<form method="post" action="deconnection">
+                		<input type="submit" name="deconnection" value="Déconnexion" class="sansLabel" />
+                	</form>
                 </c:if>
             </fieldset>
         </form>
