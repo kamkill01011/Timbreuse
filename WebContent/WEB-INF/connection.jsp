@@ -11,20 +11,20 @@
         <form method="post" action="connection">
             <fieldset>
                 <legend>Connexion</legend>
-                <label for="nom">Adresse email <span class="requis">*</span></label>
-                <input type="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
-                <span class="erreur">${form.erreurs['email']}</span>
+                <label for="email">Adresse email <span class="requis">*</span></label>
+                <input type="email" name="email" value="<c:out value="${user.email}"/>" size="20" maxlength="60" />
+                <span class="error">${form.errors['email']}</span>
                 <br />
 
                 <label for="password">Mot de passe <span class="requis">*</span></label>
                 <input type="password" name="password" value="" size="20" maxlength="20" />
-                <span class="erreur">${form.erreurs['motdepasse']}</span>
+                <span class="error">${form.errors['password']}</span>
                 <br />
 
                 <input type="submit" value="Connexion" class="sansLabel" />
                 <br />
                 
-                <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+                <p class="${empty form.errors ? 'succes' : 'error'}">${form.result}</p>
             </fieldset>
         </form>
     </body>
