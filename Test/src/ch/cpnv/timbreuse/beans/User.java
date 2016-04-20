@@ -24,7 +24,6 @@ public class User {
         this.email = email;
     }
     public String getEmail() {
-        //return firstname+"."+upperWithoutAccent(lastname)+"@cpnv.ch";
     	return email;
     }
 

@@ -9,7 +9,6 @@ import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
-
 public class DAOImplUser implements DAOUser {
 	
 	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
@@ -34,6 +33,7 @@ public class DAOImplUser implements DAOUser {
 		
 		try {
 			connection = daoFactory.getConnection();
+			
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, user.getClasse(),user.getLastname(),user.getFirstname(),user.getEmail());
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {

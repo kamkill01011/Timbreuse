@@ -9,6 +9,8 @@ import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
+
 public class CreateStudent {
 	private static final String CLASS_FIELD = "addClass";
 	private static final String FIRSTNAME_FIELD = "addFirstname";
@@ -37,6 +39,7 @@ public class CreateStudent {
 				user.setClasse(getFieldValue(request, CLASS_FIELD));
 				user.setFirstname(getFieldValue(request, FIRSTNAME_FIELD));
 				user.setLastname(getFieldValue(request, LASTNAME_FIELD));
+				user.setEmail(user.getFirstname()+"."+upperWithoutAccent(user.getLastname())+"@cpnv.ch");
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";
