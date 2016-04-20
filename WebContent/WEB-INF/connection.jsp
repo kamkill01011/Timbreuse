@@ -32,7 +32,7 @@
             </fieldset>
         </form>
         <c:if test="${!empty sessionScope.userSession}">
-			<form method="post" action="logout">
+			<form method="get" action="logout">
 				<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
 			</form>
 		</c:if>

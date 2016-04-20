@@ -11,9 +11,8 @@ import javax.servlet.http.HttpSession;
 public class Logout extends HttpServlet {
     public static final String URL_REDIRECTION = "http://www.cpnv.ch";
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         /* Récupération et destruction de la session en cours */
-    	System.out.println("SA PASSE");
         HttpSession session = request.getSession();
         session.invalidate();
         /* Redirection vers le Site du Zéro ! */
