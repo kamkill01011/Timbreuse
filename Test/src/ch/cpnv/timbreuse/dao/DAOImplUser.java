@@ -14,6 +14,8 @@ public class DAOImplUser implements DAOUser {
 	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
 	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email,Password) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?,null)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Username=?";
+	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel) VALUES(default,?,?,3)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
 	private DAOFactory daoFactory;
 	
 	public DAOImplUser(DAOFactory daoFactory) {
@@ -29,14 +31,17 @@ public class DAOImplUser implements DAOUser {
 	public void create(User user) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement2 = null;
 		ResultSet autoGenValue = null;
 		
 		try {
 			connection = daoFactory.getConnection();
 			
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, user.getClasse(),user.getLastname(),user.getFirstname(),user.getEmail());
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, user.getFirstname()+"."+user.getLastname(),"password");
 			int statut = preparedStatement.executeUpdate();
-			if(statut == 0) {
+			int statut2 = preparedStatement2.executeUpdate();
+			if(statut == 0 || statut2 == 0) {
 				throw new DAOException("Echec de la création de l'utilisateur, aucune ligne ajoutée dans la table.");
 			}
 			/*autoGenValue = preparedStatement.getGeneratedKeys();
@@ -57,12 +62,15 @@ public class DAOImplUser implements DAOUser {
 	public void delete(User user) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement2 = null;
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_DELETE, false, user.getFirstname(), user.getLastname());
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_DELETE, false, user.getFirstname()+"."+user.getLastname());
 			int statut = preparedStatement.executeUpdate();
-			if(statut == 0) {
+			int statut2 = preparedStatement2.executeUpdate();
+			if(statut == 0 || statut2 == 0) {
 				throw new DAOException("Echec de la suppression.");
 			}
 		} catch(SQLException e) {
