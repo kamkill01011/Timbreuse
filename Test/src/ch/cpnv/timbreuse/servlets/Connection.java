@@ -13,7 +13,7 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
-	public static final String VIEW = "/WEB-INF/connection.jsp";
+	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
 	public static final String VIEW_STUDENT = "/student/info.jsp";
 	public static final String VIEW_TEACHER = "/teacher/manageStudents.jsp";
 	public static final String VIEW_ADMIN = "/admin/connection.jsp";
@@ -27,7 +27,7 @@ public class Connection extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

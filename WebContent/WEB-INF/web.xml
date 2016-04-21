@@ -5,6 +5,20 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   version="3.0">
   
+	<filter>
+        <filter-name>Connetion</filter-name>
+        <filter-class>ch.cpnv.timbreuse.filters.ConnectionFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>Connetion</filter-name>
+        <url-pattern>/student/*</url-pattern>
+        <url-pattern>/teacher/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+    	<dispatcher>REQUEST</dispatcher>
+    	<dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+  
 	<servlet>
 		<servlet-name>ManageStudents</servlet-name>
 		<servlet-class>ch.cpnv.timbreuse.servlets.ManageStudents</servlet-class>
