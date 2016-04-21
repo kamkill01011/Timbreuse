@@ -1,7 +1,7 @@
 package ch.cpnv.timbreuse.beans;
 
 import java.sql.Time;
-import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
+
 
 public class User {
 

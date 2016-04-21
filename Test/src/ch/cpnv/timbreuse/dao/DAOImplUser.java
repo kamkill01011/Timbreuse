@@ -11,7 +11,8 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
 public class DAOImplUser implements DAOUser {
 	
-	private static final String SQL_SELECT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
+	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
+	private static final String SQL_SELECT_USER_BY_LASTNAME = "SELECT Lastname, Firstname, PermissionLevel FROM users WHERE Lastname=?";
 	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email,Password) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?,null)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
@@ -23,8 +24,8 @@ public class DAOImplUser implements DAOUser {
 	}
 	
 	@Override
-	public User find(String lastname) throws DAOException {
-		return find(SQL_SELECT_BY_LASTNAME, lastname);
+	public User find(String lastname) throws DAOException {	
+		return find(SQL_SELECT_STUDENT_BY_LASTNAME, lastname);
 	}
 	
 	@Override
@@ -98,8 +99,10 @@ public class DAOImplUser implements DAOUser {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
+		
 		return user;
 	}
+
 	
 	private static User map(ResultSet resultSet) throws SQLException {
 		User user = new User();
@@ -110,6 +113,5 @@ public class DAOImplUser implements DAOUser {
 		user.setTimeDiff(resultSet.getTime("timeDiff"));
         return user;
 	}
-
 	
 }
