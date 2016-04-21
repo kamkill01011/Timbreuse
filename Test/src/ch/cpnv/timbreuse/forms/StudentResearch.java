@@ -30,10 +30,12 @@ public final class StudentResearch {
 	
 	public User researchUser(HttpServletRequest request) {
 		String lastname = getFieldValue(request, LASTNAME_FIELD);
-		User user = new User();
+		User userStudent = new User(); //table eleves
+		User user = new User(); //table users
 		try {
 			if(errors.isEmpty()) {
-				user = daoUser.find(lastname);
+				userStudent = daoUser.find(lastname);
+				
 				result = "Succès de la recherche.";
 			} else {
 				result = "Echec de la recherche.";
@@ -42,7 +44,7 @@ public final class StudentResearch {
 			result = "Echec de la recherche: une erreur est survenue, merci de réessayer dans quelques instans.";
 			e.printStackTrace();
 		}	
-		return user;
+		return userStudent;
 	}
 	
 	private static String getFieldValue(HttpServletRequest request, String fieldName) {
