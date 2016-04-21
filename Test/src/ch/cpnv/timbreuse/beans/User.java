@@ -5,28 +5,27 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
 
 public class User {
 
-    private Long      id;
-    private String    email;
-    private String    lastname;
-    private String 	  firstname;
-    private Time      timeDiff;
-    private String    classe;
-    private String password;
-
+    private Long		id;
+    private String		email;
+    private String		lastname;
+    private String		firstname;
+    private Time		timeDiff;
+    private String		classe;
+    private String		password;
+    private int			permissionLevel;
+    
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
     public String getEmail() {
     	return email;
     }
-
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
@@ -56,5 +55,11 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getPermissionLevel() {
+		return permissionLevel;
+	}
+	public void setPermissionLevel(int permissionLevel) {
+		this.permissionLevel = permissionLevel;
 	}
 }

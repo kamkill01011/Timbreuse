@@ -14,6 +14,9 @@ import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
 	public static final String VIEW = "/WEB-INF/connection.jsp";
+	public static final String VIEW_STUDENT = "/student/info.jsp";
+	public static final String VIEW_TEACHER = "/teacher/manageStudents.jsp";
+	public static final String VIEW_ADMIN = "/admin/connection.jsp";
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
 	public static final String USER_SESSION_ATT ="userSession";
@@ -31,17 +34,24 @@ public class Connection extends HttpServlet {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
 		HttpSession session = request.getSession();
+
+		//Stockage du form et du bean dans l'obj request
+		request.setAttribute(FORM_ATT, connectionForm);
+		request.setAttribute(USER_ATT, user);//useless
 		
 		if(connectionForm.getErrors().isEmpty()) {
 			session.setAttribute(USER_SESSION_ATT, user);
+			if(user.getPermissionLevel() == 3) {
+				this.getServletContext().getRequestDispatcher(VIEW_STUDENT).forward(request, response);
+			} else if(user.getPermissionLevel() == 2) {
+				this.getServletContext().getRequestDispatcher(VIEW_TEACHER).forward(request, response);
+			} else if(user.getPermissionLevel() == 1) {
+				this.getServletContext().getRequestDispatcher(VIEW_ADMIN).forward(request, response);
+			}
 		} else {
 			session.setAttribute(USER_SESSION_ATT, null);
 		}
 		
-		//Stockage du form et du bean dans l'obj request
-		request.setAttribute(FORM_ATT, connectionForm);
-		request.setAttribute(USER_ATT, user);
-		
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VIEW_STUDENT).forward(request, response);
 	}
 }

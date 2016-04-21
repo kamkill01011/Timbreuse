@@ -14,7 +14,7 @@ import ch.cpnv.timbreuse.forms.DeleteStudent;
 import ch.cpnv.timbreuse.forms.StudentResearch;
 
 public class ManageStudents extends HttpServlet{
-	public static final String VIEW = "/WEB-INF/manageStudents.jsp";
+	public static final String VIEW = "/teacher/manageStudents.jsp";
 	private DAOUser daoUser;
 
 	public void init() {
