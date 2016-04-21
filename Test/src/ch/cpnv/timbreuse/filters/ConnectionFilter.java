@@ -40,18 +40,22 @@ public class ConnectionFilter implements Filter {
 
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(ATT_SESSION_USER);
         
         if(session.getAttribute(ATT_SESSION_USER) == null) {
             request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-        } else if(user.getPermissionLevel() == 3){
-        	request.getRequestDispatcher(VIEW_STUDENT).forward(request, response);
-        } else if(user.getPermissionLevel() == 2){
-        	request.getRequestDispatcher(VIEW_TEACHER).forward(request, response);
-        } else if(user.getPermissionLevel() == 1){
-        	request.getRequestDispatcher(VIEW_ADMIN).forward(request, response);
         } else {
-        	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+        	User user = (User) session.getAttribute(ATT_SESSION_USER);
+        	if(session.getAttribute(ATT_SESSION_USER) == null) {
+                request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+            } else if(user.getPermissionLevel() == 3){
+            	request.getRequestDispatcher(VIEW_STUDENT).forward(request, response);
+            } else if(user.getPermissionLevel() == 2){
+            	request.getRequestDispatcher(VIEW_TEACHER).forward(request, response);
+            } else if(user.getPermissionLevel() == 1){
+            	request.getRequestDispatcher(VIEW_ADMIN).forward(request, response);
+            } else {
+            	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+            }
         }
 	}
 

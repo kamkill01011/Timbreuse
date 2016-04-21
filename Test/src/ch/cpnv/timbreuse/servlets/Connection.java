@@ -52,6 +52,6 @@ public class Connection extends HttpServlet {
 			session.setAttribute(USER_SESSION_ATT, null);
 		}
 		
-		this.getServletContext().getRequestDispatcher(VIEW_STUDENT).forward(request, response);
+		this.getServletContext().getRequestDispatcher(VIEW_CONNECTION	).forward(request, response);
 	}
 }
