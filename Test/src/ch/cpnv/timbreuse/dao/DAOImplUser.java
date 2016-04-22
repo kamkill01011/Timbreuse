@@ -111,6 +111,7 @@ public class DAOImplUser implements DAOUser {
 		user.setLastname(resultSet.getString("Lastname"));
 		user.setFirstname(resultSet.getString("Firstname"));
 		user.setTimeDiff(resultSet.getTime("timeDiff"));
+		user.setPermissionLevel(3);
         return user;
 	}
 	

@@ -13,6 +13,7 @@ public class User {
     private String		classe;
     private String		password;
     private int			permissionLevel;
+    private String 		username;
     
     public Long getId() {
         return id;
@@ -61,5 +62,11 @@ public class User {
 	}
 	public void setPermissionLevel(int permissionLevel) {
 		this.permissionLevel = permissionLevel;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

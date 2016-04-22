@@ -81,6 +81,15 @@ public final class ConnectionForm {
         }
     }
 
+    //Vérification de l'indentifiant/motdepasse dans la base de données
+    /*private void connectionValidation(String username, String password) {
+    	if() {
+    		
+    	} else {
+    		throw new Exception("Identifiant ou mot de passe erroné.");
+    	}
+    }*/
+    
     /*
      * Ajoute un message correspondant au champ spécifié à la map des erreurs.
      */
