@@ -17,6 +17,10 @@
         <filter-name>Admin</filter-name>
         <filter-class>ch.cpnv.timbreuse.filters.AdminFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ConnectionFilter</filter-name>
+        <filter-class>ch.cpnv.timbreuse.filters.ConnectionFilter</filter-class>
+    </filter>
     
     <filter-mapping>
         <filter-name>Student</filter-name>
@@ -35,6 +39,11 @@
         <url-pattern>/admin/*</url-pattern>
     	<dispatcher>REQUEST</dispatcher>
     	<dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ConnectionFilter</filter-name>
+        <url-pattern>/WEB-INF/connection.jsp</url-pattern>
+    	<dispatcher>REQUEST</dispatcher>
     </filter-mapping>
   
 	<servlet>
