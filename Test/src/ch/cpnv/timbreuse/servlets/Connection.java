@@ -42,15 +42,16 @@ public class Connection extends HttpServlet {
 		if(connectionForm.getErrors().isEmpty()) {
 			session.setAttribute(USER_SESSION_ATT, user);
 			if(user.getPermissionLevel() == 3) {
-				response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
+				this.getServletContext().getRequestDispatcher(VIEW_STUDENT).forward(request, response);
 			} else if(user.getPermissionLevel() == 2) {
-				response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
+				this.getServletContext().getRequestDispatcher(VIEW_TEACHER).forward(request, response);
 			} else if(user.getPermissionLevel() == 1) {
-				response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
+				this.getServletContext().getRequestDispatcher(VIEW_ADMIN).forward(request, response);
 			}
 		} else {
 			session.setAttribute(USER_SESSION_ATT, null);
 		}
-		response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
+		
+		this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
 	}
 }
