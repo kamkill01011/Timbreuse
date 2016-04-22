@@ -34,24 +34,25 @@ public class Connection extends HttpServlet {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
 		HttpSession session = request.getSession();
-
+		User userTemp = new User();
+		userTemp.setPermissionLevel(2);
 		//Stockage du form et du bean dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
-		request.setAttribute(USER_ATT, user);//useless
+		request.setAttribute(USER_ATT, userTemp);//useless
 		
 		if(connectionForm.getErrors().isEmpty()) {
-			session.setAttribute(USER_SESSION_ATT, user);
-			if(user.getPermissionLevel() == 3) {
+			session.setAttribute(USER_SESSION_ATT, userTemp);
+			if(userTemp.getPermissionLevel() == 3) {
 				this.getServletContext().getRequestDispatcher(VIEW_STUDENT).forward(request, response);
-			} else if(user.getPermissionLevel() == 2) {
+			} else if(userTemp.getPermissionLevel() == 2) {
 				this.getServletContext().getRequestDispatcher(VIEW_TEACHER).forward(request, response);
-			} else if(user.getPermissionLevel() == 1) {
+			} else if(userTemp.getPermissionLevel() == 1) {
 				this.getServletContext().getRequestDispatcher(VIEW_ADMIN).forward(request, response);
 			}
 		} else {
 			session.setAttribute(USER_SESSION_ATT, null);
 		}
 		
-		this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+		//this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
 	}
 }
