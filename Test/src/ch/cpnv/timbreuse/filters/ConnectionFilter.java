@@ -16,9 +16,9 @@ import ch.cpnv.timbreuse.beans.User;
 
 public class ConnectionFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
-	public static final String VIEW_STUDENT = "/student/info.jsp";
-	public static final String VIEW_TEACHER = "/teacher/manageStudents.jsp";
-	public static final String VIEW_ADMIN = "/admin/connection.jsp";
+	public static final String VIEW_STUDENT = "/student/info";
+	public static final String VIEW_TEACHER = "/teacher/managestudents";
+	public static final String VIEW_ADMIN = "/admin/connection";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
 
 	@Override
@@ -41,22 +41,20 @@ public class ConnectionFilter implements Filter {
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
         
-        if(session.getAttribute(ATT_SESSION_USER) == null) {
-            request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-        } else {
-        	User user = (User) session.getAttribute(ATT_SESSION_USER);
-        	if(session.getAttribute(ATT_SESSION_USER) == null) {
-                request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-            } else if(user.getPermissionLevel() == 3){
-            	request.getRequestDispatcher(VIEW_STUDENT).forward(request, response);
-            } else if(user.getPermissionLevel() == 2){
-            	request.getRequestDispatcher(VIEW_TEACHER).forward(request, response);
-            } else if(user.getPermissionLevel() == 1){
-            	request.getRequestDispatcher(VIEW_ADMIN).forward(request, response);
-            } else {
-            	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+        if(path.startsWith("/student") || path.startsWith("/teacher") || path.startsWith("/admin")) {
+        	if(session.getAttribute(ATT_SESSION_USER) != null) {
+            	User user = (User) session.getAttribute(ATT_SESSION_USER);
+            	if(user.getPermissionLevel() == 3){
+            		response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
+                } else if(user.getPermissionLevel() == 2){
+                	response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
+                } else if(user.getPermissionLevel() == 1){
+                	response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
+                }
             }
         }
+        chain.doFilter(request, response);
 	}
 
 	@Override
