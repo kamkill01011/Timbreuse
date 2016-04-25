@@ -63,6 +63,10 @@
 		<servlet-name>StudentInfo</servlet-name>
 		<servlet-class>ch.cpnv.timbreuse.servlets.StudentInfo</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ChangePassword</servlet-name>
+		<servlet-class>ch.cpnv.timbreuse.servlets.ChangePassword</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>ManageStudents</servlet-name>
@@ -79,6 +83,10 @@
 	<servlet-mapping>
 		<servlet-name>StudentInfo</servlet-name>
 		<url-pattern>/info</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangePassword</servlet-name>
+		<url-pattern>/changepassword</url-pattern>
 	</servlet-mapping>
 	
 	<listener>

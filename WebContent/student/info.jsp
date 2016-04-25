@@ -11,12 +11,10 @@
     <body>
     
     <fieldset>
-		<legend>${currentStudent.lastname} ${sessionScope.currentStudent.firstname}</legend>
+		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
 		<p>Classe : ${currentStudent.classe}</p>
 		<p>Différence : ${currentStudent.timeDiff}</p>
 		<p>E-mail : ${currentStudent.email}</p>
-		<p>Password : ${currentStudent.password}</p>
-		<p>Username : ${currentStudent.username}</p>
 		<p>Status : ${currentStudent.status}</p>
 		<p>Date d'inscription : ${currentStudent.startDate}</p>
 		<p>Dernier timbrage : ${currentStudent.lastCheck}</p>
@@ -32,6 +30,11 @@
 		<p>Vendredi : ${currentStudent.friday}</p>
 		<p>Samedi : ${currentStudent.saturday}</p>
 		<p>Dimanche : ${currentStudent.sunday}</p>
+	</fieldset>
+	<fieldset>
+		<legend>Compte utilisateur</legend>
+		<p>Password : ${sessionScope.userSession.password}</p>
+		<p>Username : ${sessionScope.userSession.username}</p>
 	</fieldset>
 	<form method="get" action="/Timbreuse/logout">
 		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />

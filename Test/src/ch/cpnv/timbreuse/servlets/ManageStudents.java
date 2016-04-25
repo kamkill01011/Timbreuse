@@ -1,6 +1,9 @@
 package ch.cpnv.timbreuse.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,34 @@ public class ManageStudents extends HttpServlet{
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User tempUser = new User();
+		tempUser.setLastname("Lastname0");
+		tempUser.setFirstname("firstname");
+		List<String> classe = new ArrayList<String>();
+		List<User> studentsTest = new ArrayList<User>();
+		List<User> studentsS1a = new ArrayList<User>();
+		classe.add("YE-Test");
+		classe.add("YE-S1a");
+		studentsTest.add(tempUser);
+		tempUser.setLastname("Lastname1");
+		studentsTest.add(tempUser);
+		tempUser.setLastname("Lastname2");
+		studentsTest.add(tempUser);
+		tempUser.setLastname("Lastname3");
+		studentsS1a.add(tempUser);
+		tempUser.setLastname("Lastname4");
+		studentsS1a.add(tempUser);
+		tempUser.setLastname("Lastname5");
+		studentsS1a.add(tempUser);
+		tempUser.setLastname("Lastname6");
+		studentsS1a.add(tempUser);
+		tempUser.setLastname("Lastname7");
+		studentsS1a.add(tempUser);
+
+		request.setAttribute("classes", classe);
+		request.setAttribute("Test", studentsTest);
+		request.setAttribute("Sa1", studentsS1a);
+		
 		if(request.getParameter("research")!=null) {
 			StudentResearch researchForm = new StudentResearch(daoUser);
 			User user = researchForm.researchUser(request);

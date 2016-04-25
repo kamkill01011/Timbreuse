@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +24,21 @@
 		<p>E-mail : ${researchStudent.email}</p>
 	</fieldset>
 	<br/>
+	<fieldset>
+		<legend>Liste des classes</legend>
+		<form method="post" action="managestudents">
+			<input type="submit" name="classe" value="YE-Test" class="sansLabel" />
+			<br/>
+			<input type="submit" name="classe" value="YE-S1a" class="sansLabel" />
+			<br/>
+			<p>${param.classe}</p>
+			
+			<p>${studentsTest[0].getLastname()}</p>
+			<c:forEach items="${studentsTest}" var="i">
+				<p>${studentsTest[i].lastname}</p>
+			</c:forEach>
+		</form>
+	</fieldset>
 	<fieldset>
 		<legend>Ajouter un élève</legend>
 		<form method="post" action="managestudents">
