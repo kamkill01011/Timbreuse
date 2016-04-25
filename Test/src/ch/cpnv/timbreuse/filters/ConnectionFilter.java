@@ -16,10 +16,10 @@ import ch.cpnv.timbreuse.beans.User;
 
 public class ConnectionFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
-	public static final String VIEW_STUDENT = "/student/info";
-	public static final String VIEW_TEACHER = "/teacher/managestudents";
-	public static final String VIEW_ADMIN = "/admin/connection";
-    public static final String ATT_SESSION_USER = "sessionUtilisateur";
+	public static final String VIEW_STUDENT = "/student/info.jsp";
+	public static final String VIEW_TEACHER = "/managestudents";
+	public static final String VIEW_ADMIN = "/admin/adminPanel.jsp";
+    public static final String ATT_SESSION_USER = "userSession";
 
 	@Override
 	public void destroy() {
@@ -37,12 +37,11 @@ public class ConnectionFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }*/
-
+        
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
-        
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        if(path.startsWith("/student") || path.startsWith("/teacher") || path.startsWith("/admin")) {
+        //if(path.startsWith("/student") || path.startsWith("/teacher") || path.startsWith("/admin")) {
         	if(session.getAttribute(ATT_SESSION_USER) != null) {
             	User user = (User) session.getAttribute(ATT_SESSION_USER);
             	if(user.getPermissionLevel() == 3){
@@ -53,7 +52,7 @@ public class ConnectionFilter implements Filter {
                 	response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
                 }
             }
-        }
+        //}
         chain.doFilter(request, response);
 	}
 
