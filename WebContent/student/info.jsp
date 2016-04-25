@@ -11,12 +11,12 @@
     <body>
     
     <fieldset>
-		<legend>${sessionScope.userSession.lastname} ${sessionScope.userSession.firstname}</legend>
-		<p>Différence : ${sessionScope.userSession.timeDiff}</p>
-		<p>E-mail : ${sessionScope.userSession.email}</p>
-		<form method="get" action="/Timbreuse/logout">
-			<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
-		</form>
+		<legend>${sessionScope.currentStudent.lastname} ${sessionScope.currentStudent.firstname}</legend>
+		<p>Différence : ${sessionScope.currentStudent.timeDiff}</p>
+		<p>E-mail : ${sessionScope.currentStudent.email}</p>
 	</fieldset>
+	<form method="get" action="/Timbreuse/logout">
+		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
+	</form>
     </body>
 </html>

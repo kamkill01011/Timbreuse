@@ -14,7 +14,8 @@ import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
-	public static final String VIEW_STUDENT = "/student/info.jsp";
+	public static final String CONNECTING = "/connecting.jsp";
+	public static final String VIEW_STUDENT = "/info";
 	public static final String VIEW_TEACHER = "/managestudents";
 	public static final String VIEW_ADMIN = "/admin/adminPanel.jsp";
 	public static final String USER_ATT = "user";
@@ -40,18 +41,7 @@ public class Connection extends HttpServlet {
 		
 		if(connectionForm.getErrors().isEmpty()) {
 			session.setAttribute(USER_SESSION_ATT, user);
-			response.sendRedirect(request.getContextPath() + "/connecting.jsp");
-			//this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);//useless
-			///Timbreuse/connecting.jsp
-			/*if(userTemp.getPermissionLevel() == 3) {
-				response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
-			} else if(userTemp.getPermissionLevel() == 2) {
-				response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
-			} else if(userTemp.getPermissionLevel() == 1) {
-				response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
-			} else {
-				this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-			}*/
+			response.sendRedirect(request.getContextPath() + CONNECTING);
 		} else {
 			session.setAttribute(USER_SESSION_ATT, null);
 			this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);

@@ -59,6 +59,10 @@
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>ch.cpnv.timbreuse.servlets.Logout</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>StudentInfo</servlet-name>
+		<servlet-class>ch.cpnv.timbreuse.servlets.StudentInfo</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>ManageStudents</servlet-name>
@@ -71,6 +75,10 @@
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StudentInfo</servlet-name>
+		<url-pattern>/info</url-pattern>
 	</servlet-mapping>
 	
 	<listener>
