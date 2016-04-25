@@ -35,23 +35,25 @@ public class ManageStudents extends HttpServlet{
 		List<String> classe = new ArrayList<String>();
 		List<User> studentsTest = new ArrayList<User>();
 		List<User> studentsS1a = new ArrayList<User>();
-		classe.add("YE-Test");
-		classe.add("YE-S1a");
+		classe.add("Test");
+		classe.add("S1a");
+		
+		studentsTest.add(new User());
+		studentsTest.add(new User());
+		studentsTest.add(new User());
+		for (int i = 0; i < studentsTest.size(); i++) {
+			studentsTest.get(i).setFirstname("i");
+		}
 		studentsTest.add(tempUser);
-		tempUser.setLastname("Lastname1");
-		studentsTest.add(tempUser);
-		tempUser.setLastname("Lastname2");
-		studentsTest.add(tempUser);
-		tempUser.setLastname("Lastname3");
-		studentsS1a.add(tempUser);
-		tempUser.setLastname("Lastname4");
-		studentsS1a.add(tempUser);
-		tempUser.setLastname("Lastname5");
-		studentsS1a.add(tempUser);
-		tempUser.setLastname("Lastname6");
-		studentsS1a.add(tempUser);
-		tempUser.setLastname("Lastname7");
-		studentsS1a.add(tempUser);
+		
+		studentsS1a.add(new User());
+		studentsS1a.add(new User());
+		studentsS1a.add(new User());
+		studentsS1a.add(new User());
+		studentsS1a.add(new User());
+		for (int i = 0; i < studentsS1a.size(); i++) {
+			studentsS1a.get(i).setFirstname("i");
+		}
 
 		request.setAttribute("classes", classe);
 		request.setAttribute("Test", studentsTest);
