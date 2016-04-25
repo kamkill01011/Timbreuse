@@ -16,6 +16,7 @@ public class DAOImplUser implements DAOUser {
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
+	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	
 	private DAOFactory daoFactory;
 	
@@ -116,8 +117,7 @@ public class DAOImplUser implements DAOUser {
 	}
 
 	@Override
-	public User findStudent(User user) throws DAOException {
-		// TODO Auto-generated method stub
+	public User findStudent(String email) throws DAOException {
 		return null;
 	}
 

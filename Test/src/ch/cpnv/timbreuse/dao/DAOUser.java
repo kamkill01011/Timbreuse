@@ -8,7 +8,7 @@ public interface DAOUser {
 
     User find(String email) throws DAOException;
     
-    User findStudent(User user) throws DAOException;
+    User findStudent(String email) throws DAOException;
     
     User findUser(String username) throws DAOException;
     

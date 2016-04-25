@@ -4,15 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.joda.time.DateTime;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
 
 public class DAOImplUsername implements DAOUser {
 
 	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
-	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT * FROM eleves WHERE Lastname=?";
+	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private DAOFactory daoFactory;
 
 	public DAOImplUsername(DAOFactory daoFactory) {
@@ -50,13 +50,15 @@ public class DAOImplUsername implements DAOUser {
 	}
 
 	@Override
-	public User findStudent(User user) throws DAOException {
+	public User findStudent(String email) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		User user = new User();
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_LASTNAME, false, user.getLastname());
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, email+"@cpnv.ch");
+			
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				user = map(resultSet);

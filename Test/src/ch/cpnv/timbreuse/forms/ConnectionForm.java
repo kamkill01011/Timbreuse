@@ -51,7 +51,7 @@ public final class ConnectionForm {
         }
         
         try {        	
-        	user = daoUser.findStudent(connectionValidation(username, password));
+        	user = connectionValidation(username, password);
         } catch(Exception e) {
         	setError(EMAIL_FIELD, e.getMessage());
         }
