@@ -27,8 +27,6 @@ public class StudentInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		User user = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername());
-		System.out.println(user.getTimeDiff());
-		System.out.println(((User)session.getAttribute("userSession")).getUsername());
 		
 		request.setAttribute("currentStudent", user);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
