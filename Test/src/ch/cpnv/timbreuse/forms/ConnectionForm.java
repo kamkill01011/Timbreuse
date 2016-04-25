@@ -51,8 +51,8 @@ public final class ConnectionForm {
             setError(PASSWORD_FIELD, e.getMessage());
         }
         
-        try {
-        	user = connectionValidation(username, password);
+        try {        	
+        	user = daoUsername.findStudent(connectionValidation(username, password));
         } catch(Exception e) {
         	setError(EMAIL_FIELD, e.getMessage());
         }
@@ -93,7 +93,7 @@ public final class ConnectionForm {
     //Vérification de l'indentifiant/motdepasse dans la base de données
     private User connectionValidation(String username, String password) throws Exception {
     	User user = new User();
-        user = daoUsername.find(username);
+        user = daoUsername.findUser(username);
     	if((user.getUsername()==null) || (!(user.getUsername().equals(username) && user.getPassword().equals(password)))) {
     		throw new Exception("Identifiant ou mot de passe erroné.");
     	}

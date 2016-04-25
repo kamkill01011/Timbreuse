@@ -12,11 +12,11 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 public class DAOImplUser implements DAOUser {
 	
 	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
-	private static final String SQL_SELECT_USER_BY_LASTNAME = "SELECT Lastname, Firstname, PermissionLevel FROM users WHERE Lastname=?";
 	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email,Password) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?,null)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
+	
 	private DAOFactory daoFactory;
 	
 	public DAOImplUser(DAOFactory daoFactory) {
