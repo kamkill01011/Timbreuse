@@ -35,14 +35,15 @@ public class Connection extends HttpServlet {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
 		HttpSession session = request.getSession();
-		User userTemp = new User();
-		userTemp.setPermissionLevel(2);
+		System.out.println(user.getUsername());
+		System.out.println(user.getPermissionLevel());
+		
 		//Stockage du form et du bean dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
-		request.setAttribute(USER_ATT, userTemp);//useless
+		request.setAttribute(USER_ATT, user);//useless
 		
 		if(connectionForm.getErrors().isEmpty()) {
-			session.setAttribute(USER_SESSION_ATT, userTemp);
+			session.setAttribute(USER_SESSION_ATT, user);
 			response.sendRedirect(request.getContextPath() + "/connecting.jsp");
 			//this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);//useless
 			///Timbreuse/connecting.jsp

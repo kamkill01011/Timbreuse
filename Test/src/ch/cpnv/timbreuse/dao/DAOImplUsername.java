@@ -28,7 +28,7 @@ public class DAOImplUsername implements DAOUsername {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		User user = null;
+		User user = new User();
 		
 		try {
 			connection = daoFactory.getConnection();
@@ -39,7 +39,7 @@ public class DAOImplUsername implements DAOUsername {
 				user.setPassword(resultSet.getString("Password"));
 				user.setLastname(resultSet.getString("Lastname"));
 				user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
-			}
+			} 
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {

@@ -10,7 +10,7 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.dao.DAOUsername;
 
 public final class ConnectionForm {
-    private static final String USERNAME_FIELD = "email";
+    private static final String EMAIL_FIELD = "email";
     private static final String PASSWORD_FIELD = "password";
     private String              result;
     private Map<String, String> errors      = new HashMap<String, String>();
@@ -30,18 +30,19 @@ public final class ConnectionForm {
 
     public User connectUser(HttpServletRequest request) {
         /* Récupération des champs du formulaire */
-        String email = getFieldValue(request, USERNAME_FIELD);
+        String email = getFieldValue(request, EMAIL_FIELD);
         String password = getFieldValue(request, PASSWORD_FIELD);
-
+        String username = email.substring(0, email.lastIndexOf("@"));
+        
         User user = new User();
 
         /* Validation du champ username. */
         try {
-            usernameValidation(email);
+            emailValidation(email);
         } catch (Exception e) {
-            setError(USERNAME_FIELD, e.getMessage());
+            setError(EMAIL_FIELD, e.getMessage());
         }
-        user.setEmail(email);
+        
 
         /* Validation du champ mot de passe. */
         try {
@@ -49,8 +50,15 @@ public final class ConnectionForm {
         } catch (Exception e) {
             setError(PASSWORD_FIELD, e.getMessage());
         }
-        user.setPassword(password);
-
+        
+        try {
+        	user = connectionValidation(username, password);
+        } catch(Exception e) {
+        	setError(EMAIL_FIELD, e.getMessage());
+        }
+        
+        
+        
         /* Initialisation du résultat global de la validation. */
         if (errors.isEmpty()) {
             result = "Succès de la connexion.";
@@ -63,7 +71,7 @@ public final class ConnectionForm {
     /**
      * Valide l'adresse email saisie.
      */
-    private void usernameValidation(String username) throws Exception {
+    private void emailValidation(String username) throws Exception {
     	if (username != null && !username.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
             throw new Exception("Merci de saisir une adresse mail valide.");
         }
@@ -83,13 +91,13 @@ public final class ConnectionForm {
     }
 
     //Vérification de l'indentifiant/motdepasse dans la base de données
-    private void connectionValidation(String username, String password) throws Exception {
+    private User connectionValidation(String username, String password) throws Exception {
     	User user = new User();
         user = daoUsername.find(username);
-        System.out.println(user.getUsername());
-    	if(true) {
+    	if((user.getUsername()==null) || (!(user.getUsername().equals(username) && user.getPassword().equals(password)))) {
     		throw new Exception("Identifiant ou mot de passe erroné.");
     	}
+    	return user;
     }
     
     /*
