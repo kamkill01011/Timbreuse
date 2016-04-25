@@ -8,11 +8,12 @@ import java.sql.SQLException;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
+import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 
 public class DAOImplUser implements DAOUser {
 	
 	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
-	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email,Password) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?,null)";
+	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheck,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email) VALUES (default,?,?,?,'0','0',default,null,null,'0','0','0','0','0','0','0',?)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
@@ -40,7 +41,7 @@ public class DAOImplUser implements DAOUser {
 			connection = daoFactory.getConnection();
 			
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, user.getClasse(),user.getLastname(),user.getFirstname(),user.getEmail());
-			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, user.getFirstname()+"."+user.getLastname(),"password",user.getLastname(),user.getFirstname());
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, (user.getFirstname()+"."+user.getLastname()).toLowerCase(),randomPassword(),user.getLastname(),user.getFirstname());
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
 			if(statut == 0 || statut2 == 0) {

@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.Normalizer;
+import java.util.Random;
+
+import ch.cpnv.timbreuse.beans.User;
+import sun.text.normalizer.UBiDiProps;
 
 
 public final class DAOUtility {
@@ -78,6 +82,21 @@ public final class DAOUtility {
 			newChars[i] = Character.toUpperCase(newChars[i]);
 		}
 		return new String(newChars);
+	}
+	
+	public static User sqlSelect(String sql, String table, Object object) {
+		User user = new User();
+		return user;
+	}
+	
+	public static String randomPassword() {
+		Random r = new Random();
+		String password = "";
+		String alphabet="1234567890qwertzuiopasdfghjklyxcvbnm";
+		for(int i=0;i<8;i++) {
+			password+=alphabet.charAt(r.nextInt(alphabet.length()));
+		}
+		return password;
 	}
 }
 
