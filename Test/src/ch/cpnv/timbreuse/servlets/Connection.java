@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOUsername;
+import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 public class Connection extends HttpServlet {
@@ -20,7 +20,7 @@ public class Connection extends HttpServlet {
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
 	public static final String USER_SESSION_ATT ="userSession";
-	private DAOUsername daoUser;
+	private DAOUser daoUser;
 
 	public void init() {
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUsername();

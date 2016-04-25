@@ -114,5 +114,17 @@ public class DAOImplUser implements DAOUser {
 		user.setPermissionLevel(3);
         return user;
 	}
+
+	@Override
+	public User findStudent(User user) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findUser(String username) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

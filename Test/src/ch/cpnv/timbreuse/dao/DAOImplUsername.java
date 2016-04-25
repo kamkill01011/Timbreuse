@@ -9,7 +9,7 @@ import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
-public class DAOImplUsername implements DAOUsername {
+public class DAOImplUsername implements DAOUser {
 
 	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT * FROM eleves WHERE Lastname=?";
@@ -94,5 +94,11 @@ public class DAOImplUsername implements DAOUsername {
 		user.setEmail(resultSet.getString("Email"));
 		user.setPermissionLevel(3);
         return user;
+	}
+
+	@Override
+	public User find(String email) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

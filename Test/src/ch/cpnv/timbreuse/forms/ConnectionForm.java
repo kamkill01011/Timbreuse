@@ -7,17 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOUser;
-import ch.cpnv.timbreuse.dao.DAOUsername;
 
 public final class ConnectionForm {
     private static final String EMAIL_FIELD = "email";
     private static final String PASSWORD_FIELD = "password";
     private String              result;
     private Map<String, String> errors      = new HashMap<String, String>();
-    private DAOUsername daoUsername;
+    private DAOUser daoUser;
     
-    public ConnectionForm(DAOUsername daoUsername) {
-    	this.daoUsername=daoUsername;
+    public ConnectionForm(DAOUser daoUser) {
+    	this.daoUser=daoUser;
     }
     
     public String getResult() {
@@ -52,7 +51,7 @@ public final class ConnectionForm {
         }
         
         try {        	
-        	user = daoUsername.findStudent(connectionValidation(username, password));
+        	user = daoUser.findStudent(connectionValidation(username, password));
         } catch(Exception e) {
         	setError(EMAIL_FIELD, e.getMessage());
         }
@@ -93,7 +92,7 @@ public final class ConnectionForm {
     //Vérification de l'indentifiant/motdepasse dans la base de données
     private User connectionValidation(String username, String password) throws Exception {
     	User user = new User();
-        user = daoUsername.findUser(username);
+        user = daoUser.findUser(username);
     	if((user.getUsername()==null) || (!(user.getUsername().equals(username) && user.getPassword().equals(password)))) {
     		throw new Exception("Identifiant ou mot de passe erroné.");
     	}
