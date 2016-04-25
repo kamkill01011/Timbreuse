@@ -34,10 +34,7 @@ public class Connection extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
-		HttpSession session = request.getSession();
-		System.out.println(user.getUsername());
-		System.out.println(user.getPermissionLevel());
-		
+		HttpSession session = request.getSession();	
 		//Stockage du form et du bean dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
 		request.setAttribute(USER_ATT, user);//useless
