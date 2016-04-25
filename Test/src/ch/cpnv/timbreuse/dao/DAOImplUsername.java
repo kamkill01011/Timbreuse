@@ -9,9 +9,9 @@ import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
-public class DAOImplUsername implements DAOUser {
+public class DAOImplUsername implements DAOUsername {
 
-	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname FROM users WHERE Username=?";
+	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
 	private DAOFactory daoFactory;
 
 	public DAOImplUsername(DAOFactory daoFactory) {
@@ -25,25 +25,20 @@ public class DAOImplUsername implements DAOUser {
 
 	@Override
 	public User find(String username) throws DAOException {
-		return find(SQL_SELECT_USER_CONNECTION, username);
-	}
-
-	@Override
-	public void delete(User user) throws DAOException {
-	}
-
-	private User find(String sql, Object...objects) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		User user = null;
-
+		
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_USER_CONNECTION, false, objects);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_USER_CONNECTION, false, username);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				user = map(resultSet);
+				user.setUsername(resultSet.getString("Username"));
+				user.setPassword(resultSet.getString("Password"));
+				user.setLastname(resultSet.getString("Lastname"));
+				user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -53,11 +48,7 @@ public class DAOImplUsername implements DAOUser {
 		return user;
 	}
 
-	private static User map(ResultSet resultSet) throws SQLException {
-		User user = new User();
-		user.setUsername(resultSet.getString("Username"));
-		user.setPassword(resultSet.getString("Password"));
-		user.setLastname(resultSet.getString("Lastname"));
-		return user;
+	@Override
+	public void delete(User user) throws DAOException {
 	}
 }
