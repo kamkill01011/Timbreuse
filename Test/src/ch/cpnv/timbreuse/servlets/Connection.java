@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.dao.DAOUsername;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import ch.cpnv.timbreuse.beans.User;
 
 public class ConnectionFilter implements Filter {
-	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
+	public static final String VIEW_CONNECTION = "/connection";
 	public static final String VIEW_STUDENT = "/student/info.jsp";
 	public static final String VIEW_TEACHER = "/managestudents";
 	public static final String VIEW_ADMIN = "/admin/adminPanel.jsp";
@@ -40,20 +40,21 @@ public class ConnectionFilter implements Filter {
         
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
-        String path = request.getRequestURI().substring(request.getContextPath().length());
-        //if(path.startsWith("/student") || path.startsWith("/teacher") || path.startsWith("/admin")) {
-        	if(session.getAttribute(ATT_SESSION_USER) != null) {
-            	User user = (User) session.getAttribute(ATT_SESSION_USER);
-            	if(user.getPermissionLevel() == 3){
-            		response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
-                } else if(user.getPermissionLevel() == 2){
-                	response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
-                } else if(user.getPermissionLevel() == 1){
-                	response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
-                }
-            }
-        //}
-        chain.doFilter(request, response);
+
+        if(session.getAttribute(ATT_SESSION_USER) != null) {
+        	User user = (User) session.getAttribute(ATT_SESSION_USER);
+        	if(user.getPermissionLevel() == 3){
+        		response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
+        	} else if(user.getPermissionLevel() == 2){
+        		response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
+        	} else if(user.getPermissionLevel() == 1){
+        		response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
+        	} else {
+        		response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
+        	}
+        } else {
+        	response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
+        }
 	}
 
 	@Override

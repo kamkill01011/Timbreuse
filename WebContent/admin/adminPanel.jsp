@@ -10,5 +10,8 @@
 
     <body>
     <h1>Admin panel</h1>
+    <form method="get" action="/Timbreuse/logout">
+		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
+	</form>
     </body>
 </html>

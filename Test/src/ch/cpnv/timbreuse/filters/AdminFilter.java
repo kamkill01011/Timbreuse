@@ -17,9 +17,9 @@ import ch.cpnv.timbreuse.beans.User;
 public class AdminFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
 	public static final String VIEW_STUDENT = "/student/info.jsp";
-	public static final String VIEW_TEACHER = "/teacher/manageStudents.jsp";
+	public static final String VIEW_TEACHER = "/managestudents";
 	public static final String VIEW_ADMIN = "/admin/adminPanel.jsp";
-	public static final String ATT_SESSION_USER = "sessionUtilisateur";
+	public static final String ATT_SESSION_USER = "userSession";
 
 	@Override
 	public void destroy() {

@@ -59,5 +59,8 @@
 			<input type="submit" name="modify" value="Modifier la différence de temps" />
 		</form>
 	</fieldset>
+    <form method="get" action="/Timbreuse/logout">
+		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
+	</form>
     </body>
 </html>
