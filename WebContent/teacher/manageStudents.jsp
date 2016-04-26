@@ -32,15 +32,16 @@
 				<c:if test="${currentTeacher.classe == null}">
 					<option value="0">---</option>
 				</c:if>
-				<c:forEach items="${classes}" var="i">
-					<c:choose>
+				<c:forEach items="${currentTeacher.classe}" var="i">
+					<!--<c:choose>
 						<c:when test="${i == currentTeacher.classe}">
 							<option value="${i}" selected="selected">${i}</option>
 						</c:when>
 						<c:otherwise>
 							<option value="${i}">${i}</option>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>-->
+					<option value="${i}">${i}</option>
 					<br />
 				</c:forEach>
 			</select>

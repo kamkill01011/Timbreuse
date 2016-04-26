@@ -33,6 +33,7 @@ public class ManageStudents extends HttpServlet{
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User) session.getAttribute("userSession")).getEmail());
 		request.setAttribute("currentTeacher", teacher);
+		System.out.println(teacher.getClasse());
 		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
