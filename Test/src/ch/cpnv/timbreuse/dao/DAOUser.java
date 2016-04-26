@@ -13,5 +13,7 @@ public interface DAOUser {
     User findUser(String username) throws DAOException;
     
     void delete(User user) throws DAOException;
+    
+    void setNewPassword(User user, String newPassord) throws DAOException;
 
 }

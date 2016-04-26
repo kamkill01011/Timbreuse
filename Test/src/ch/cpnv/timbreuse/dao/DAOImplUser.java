@@ -105,7 +105,6 @@ public class DAOImplUser implements DAOUser {
 		return user;
 	}
 
-	
 	private static User map(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
@@ -127,5 +126,10 @@ public class DAOImplUser implements DAOUser {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public void setNewPassword(User user, String newPassord) throws DAOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

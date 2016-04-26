@@ -13,6 +13,7 @@ public class DAOImplUsername implements DAOUser {
 
 	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
+	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
 	private DAOFactory daoFactory;
 
 	public DAOImplUsername(DAOFactory daoFactory) {
@@ -102,5 +103,23 @@ public class DAOImplUsername implements DAOUser {
 	public User find(String email) throws DAOException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setNewPassword(User user, String newPassword) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, newPassword,user.getUsername());
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec du changement de mot de passe.");
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
 	}
 }

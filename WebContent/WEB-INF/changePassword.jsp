@@ -18,7 +18,7 @@
                 <input type="password" name="new" value="" size="20" maxlength="20" />
                 <br />
                 <label for="password">Confimrer le mot de passe <span class="requis">*</span></label>
-                <input type="password" name="confimr" value="" size="20" maxlength="20" />
+                <input type="password" name="confirm" value="" size="20" maxlength="20" />
                 <br />
                 <input type="submit" name="change" value="changer" class="sansLabel" />
                 <br />
