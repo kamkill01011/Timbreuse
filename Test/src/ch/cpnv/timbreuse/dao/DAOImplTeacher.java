@@ -53,7 +53,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, sql, false, email);
+			preparedStatement = preparedRequestInitialisation(connection, sql, false, email+"@cpnv.ch");
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				teacher = map(resultSet);
@@ -72,7 +72,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		teacher.setId(resultSet.getLong("id"));
 		teacher.setFirstname(resultSet.getString("Firstname"));
 		teacher.setLastname(resultSet.getString("Lastname"));
-		teacher.setClasse(resultSet.getString("Classe"));
+		teacher.setClasse(resultSet.getString("Class"));
 		teacher.setEmail(resultSet.getString("Email"));
 		return teacher;
 	}

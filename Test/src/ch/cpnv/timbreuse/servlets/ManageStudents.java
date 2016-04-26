@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
@@ -31,10 +32,9 @@ public class ManageStudents extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((User) session.getAttribute("userSession")).getEmail());
+		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
 		System.out.println(teacher.getClasse());
-		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
