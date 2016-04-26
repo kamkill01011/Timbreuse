@@ -3,6 +3,8 @@ package ch.cpnv.timbreuse.beans;
 import java.sql.Date;
 import java.sql.Time;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.joda.time.DateTime;
 
 
@@ -51,6 +53,11 @@ public class User {
 		this.classe = classe;
 	}
 	public String getPassword() {
+		if(password.length()>8) {
+			BasicTextEncryptor cryptor = new BasicTextEncryptor();
+			cryptor.setPassword("MonGrainDeSel");
+			return cryptor.decrypt(password);
+		}
 		return password;
 	}
 	public void setPassword(String password) {

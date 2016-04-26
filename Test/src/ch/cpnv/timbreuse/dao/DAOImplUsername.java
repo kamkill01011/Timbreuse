@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.jasypt.util.text.BasicTextEncryptor;
+
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
@@ -109,9 +112,11 @@ public class DAOImplUsername implements DAOUser {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		BasicTextEncryptor cryptor = new BasicTextEncryptor();
+		cryptor.setPassword("MonGrainDeSel");
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, newPassword,user.getUsername());
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, cryptor.encrypt(newPassword),user.getUsername());
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec du changement de mot de passe.");
