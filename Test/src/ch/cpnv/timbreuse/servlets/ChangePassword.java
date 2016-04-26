@@ -39,6 +39,7 @@ public class ChangePassword extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		request.setAttribute(FORM_ATT, passwordForm);
 		if(passwordForm.getErrors().isEmpty()) {
 			daoUser.setNewPassword(user, passwordForm.getNewPassword(request));
 			response.sendRedirect(request.getContextPath() + CONNECTING);

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
@@ -29,33 +30,25 @@ public class ManageStudents extends HttpServlet{
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User tempUser = new User();
-		tempUser.setLastname("Lastname0");
-		tempUser.setFirstname("firstname");
-		List<String> classe = new ArrayList<String>();
+		
+		List<String> classes = new ArrayList<String>();
 		List<User> studentsTest = new ArrayList<User>();
 		List<User> studentsS1a = new ArrayList<User>();
-		classe.add("Test");
-		classe.add("S1a");
+		classes.add("Test");
+		classes.add("S1a");
 		
-		studentsTest.add(new User());
-		studentsTest.add(new User());
-		studentsTest.add(new User());
-		for (int i = 0; i < studentsTest.size(); i++) {
-			studentsTest.get(i).setFirstname("i");
-		}
-		studentsTest.add(tempUser);
+		User session = (User) request.getSession().getAttribute("userSession");
+		studentsTest.add(session);
+		studentsTest.add(session);
+		studentsTest.add(session);
 		
-		studentsS1a.add(new User());
-		studentsS1a.add(new User());
-		studentsS1a.add(new User());
-		studentsS1a.add(new User());
-		studentsS1a.add(new User());
-		for (int i = 0; i < studentsS1a.size(); i++) {
-			studentsS1a.get(i).setFirstname("i");
-		}
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
 
-		request.setAttribute("classes", classe);
+		request.setAttribute("classes", classes);
 		request.setAttribute("Test", studentsTest);
 		request.setAttribute("Sa1", studentsS1a);
 		
