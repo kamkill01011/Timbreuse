@@ -29,19 +29,18 @@
 		<legend>Liste des classes</legend>
 		<form method="post" action="managestudents">
 			<select name="classe" id="classe" tabindex="30" onchange='if(this.value != 0) { this.form.submit(); }'>
-				<c:if test="${currentTeacher.classe == null}">
+				<c:if test="${selectedClasse == null}">
 					<option value="0">---</option>
 				</c:if>
 				<c:forEach items="${currentTeacher.classe}" var="i">
-					<!--<c:choose>
-						<c:when test="${i == currentTeacher.classe}">
+					<c:choose>
+						<c:when test="${i == classe}">
 							<option value="${i}" selected="selected">${i}</option>
 						</c:when>
 						<c:otherwise>
 							<option value="${i}">${i}</option>
 						</c:otherwise>
-					</c:choose>-->
-					<option value="${i}">${i}</option>
+					</c:choose>
 					<br />
 				</c:forEach>
 			</select>

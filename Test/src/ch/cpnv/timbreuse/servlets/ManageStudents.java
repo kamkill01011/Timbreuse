@@ -34,16 +34,15 @@ public class ManageStudents extends HttpServlet{
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
-		System.out.println(teacher.getClasse());
+		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String selectedClasse = "";
 		
 		List<String> classes = new ArrayList<String>();
 		List<User> studentsTest = new ArrayList<User>();
-		classes.add("Test");
-		classes.add("S1a");
 		
 		User tempUser = new User();
 		tempUser.setFirstname("fnasdfasdf");
@@ -54,7 +53,7 @@ public class ManageStudents extends HttpServlet{
 		studentsTest.add(tempUser);
 		studentsTest.add(tempUser);
 
-		request.setAttribute("classes", classes);
+		request.setAttribute("selectedClasse", selectedClasse);
 		request.setAttribute("Test", studentsTest);
 		
 		if(request.getParameter("research")!=null) {
