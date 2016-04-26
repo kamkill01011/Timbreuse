@@ -70,4 +70,7 @@ public class DAOFactory {
 	public DAOUser getDaoUsername() {
 		return new DAOImplUsername(this);
 	}
+	public DAOTeacher getDaoTeacher() {
+		return new DAOImplTeacher(this);
+	}
 }

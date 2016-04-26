@@ -29,12 +29,12 @@
 		<legend>Liste des classes</legend>
 		<form method="post" action="managestudents">
 			<select name="classe" id="classe" tabindex="30" onchange='if(this.value != 0) { this.form.submit(); }'>
-				<c:if test="${empty param.classe}">
+				<c:if test="${currentTeacher.classe == null}">
 					<option value="0">---</option>
 				</c:if>
 				<c:forEach items="${classes}" var="i">
 					<c:choose>
-						<c:when test="${i == param.classe}">
+						<c:when test="${i == currentTeacher.classe}">
 							<option value="${i}" selected="selected">${i}</option>
 						</c:when>
 						<c:otherwise>
@@ -50,12 +50,6 @@
 	<c:if test="${!empty param.classe}">
 		<fieldset>
 			<legend>${param.classe}</legend>
-			<c:forEach items="${Test}" var="i">
-				<p>test : ${i.lastname}</p>
-			</c:forEach>
-			
-			
-			
 			<table>
   				<tr>
     				<th>Nom</th>
@@ -69,48 +63,47 @@
     					<td>${i.email}</td>
   					</tr>
 				</c:forEach>
-				</table>
-			
-		
+			</table>
 		</fieldset>
 	</c:if>
 	<fieldset>
 		<legend>Ajouter un élève</legend>
 		<form method="post" action="managestudents">
-			<label for="addClass">Classe : </label> <input type="text"
-				id="addClass" name="addClass" value="" size="32" maxlength="64" />
-			<br /> <label for="addFirstname">Prénom : </label> <input type="text"
-				id="addFirstname" name="addFirstname" value="" size="32"
-				maxlength="64" /> <br /> <label for="addLastname">Nom : </label> <input
-				type="text" id="addLastname" name="addLastname" value="" size="32"
-				maxlength="64" /> <br /> <input type="submit" name="add"
-				value="Ajouter" class="sansLabel" />
+			<label for="addClass">Classe : </label>
+			<input type="text" id="addClass" name="addClass" value="" size="32" maxlength="64" />
+			<br />
+			<label for="addFirstname">Prénom : </label>
+			<input type="text" id="addFirstname" name="addFirstname" value="" size="32" maxlength="64" />
+			<br />
+			<label for="addLastname">Nom : </label>
+			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
+			<br />
+				<input type="submit" name="add" value="Ajouter" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
 	<fieldset>
 		<legend>Supprimer un élève</legend>
 		<form method="post" action="managestudents">
-			<label for="deletFirstname">Prénom : </label> <input type="text"
-				id="deletFirstname" name="deletFirstname" value="" size="32"
-				maxlength="64" /> <br /> <label for="deletLastname">Nom : </label>
-			<input type="text" id="deletLastname" name="deletLastname" value=""
-				size="32" maxlength="64" /> <br /> <input type="submit"
-				name="delete" value="Supprimer" class="sansLabel" />
+			<label for="deletFirstname">Prénom : </label>
+			<input type="text" id="deletFirstname" name="deletFirstname" value="" size="32" maxlength="64" />
+			<br />
+			<label for="deletLastname">Nom : </label>
+			<input type="text" id="deletLastname" name="deletLastname" value="" size="32" maxlength="64" />
+			<br />
+			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
 	<fieldset>
 		<legend>Modifier un élève</legend>
 		<form method="post" action="managestudents">
-			<input type="text" name="modifyTimeDiff" value="" size="32"
-				maxlength="64" /> <input type="submit" name="modify"
-				value="Modifier la différence de temps" />
+			<input type="text" name="modifyTimeDiff" value="" size="32" maxlength="64" />
+			<input type="submit" name="modify" value="Modifier la différence de temps" />
 		</form>
 	</fieldset>
 	<form method="get" action="/Timbreuse/logout">
-		<input type="submit" name="logout" value="Déconnexion"
-			class="sansLabel" />
+		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
 	</form>
 	<form method="get" action="/Timbreuse/changepassword">
 		<input type="submit" value="Changer de mot de passe" class="sansLabel" />

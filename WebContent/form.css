@@ -42,3 +42,24 @@ form input.sansLabel {
 form .requis {
     color: #c00;
 }
+
+/* Table --------------------------------------------------------------------------------------- */
+
+table, th, td {
+   border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    height: 5px;
+    vertical-align: center;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
