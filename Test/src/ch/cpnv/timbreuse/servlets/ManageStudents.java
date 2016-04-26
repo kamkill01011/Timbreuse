@@ -39,23 +39,19 @@ public class ManageStudents extends HttpServlet{
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String selectedClasse = "";
+		HttpSession session = request.getSession();
+		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
+		String selectedClasse = (String) request.getParameter("classe");
 		
-		List<String> classes = new ArrayList<String>();
-		List<User> studentsTest = new ArrayList<User>();
+		ArrayList<User> studentsInClass = new ArrayList<User>();
 		
-		User tempUser = new User();
-		tempUser.setFirstname("fnasdfasdf");
-		tempUser.setLastname("lasdfasdfn");
-		tempUser.setEmail("easdfsad.asdfasdfasf@cpnv.ch");
-		
-		studentsTest.add(tempUser);
-		studentsTest.add(tempUser);
-		studentsTest.add(tempUser);
-
+		if(request.getParameter("classe") != null) {
+			studentsInClass = daoTeacher.listClass(selectedClasse);
+			request.setAttribute("studentsInClass", studentsInClass);
+		}
+		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);
-		request.setAttribute("Test", studentsTest);
-		
+		/*
 		if(request.getParameter("research")!=null) {
 			StudentResearch researchForm = new StudentResearch(daoUser);
 			User user = researchForm.researchUser(request);
@@ -68,7 +64,8 @@ public class ManageStudents extends HttpServlet{
 		if(request.getParameter("delete")!=null) {
 			DeleteStudent deleteForm = new DeleteStudent(daoUser);
 			daoUser.delete(deleteForm.selectUserToDelete(request));
-		}
+		}*/
+		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 }

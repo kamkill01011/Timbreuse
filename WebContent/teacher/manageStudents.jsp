@@ -34,7 +34,7 @@
 				</c:if>
 				<c:forEach items="${currentTeacher.classe}" var="i">
 					<c:choose>
-						<c:when test="${i == classe}">
+						<c:when test="${i == selectedClasse}">
 							<option value="${i}" selected="selected">${i}</option>
 						</c:when>
 						<c:otherwise>
@@ -44,19 +44,18 @@
 					<br />
 				</c:forEach>
 			</select>
-			<p>${param.classe}</p>
 		</form>
 	</fieldset>
-	<c:if test="${!empty param.classe}">
+	<c:if test="${!empty studentsInClass}">
 		<fieldset>
-			<legend>${param.classe}</legend>
+			<legend>${selectedClasse}</legend>
 			<table>
   				<tr>
     				<th>Nom</th>
     				<th>Prénom</th>
     				<th>E-mail</th>
   				</tr>
-				<c:forEach items="${Test}" var="i">
+				<c:forEach items="${studentsInClass}" var="i">
   					<tr>
     					<td>${i.lastname}</td>
     					<td>${i.firstname}</td>
