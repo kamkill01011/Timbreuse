@@ -13,5 +13,8 @@
     <form method="get" action="/Timbreuse/logout">
 		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
 	</form>
+	<form method="get" action="/Timbreuse/changepassword">
+		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
+	</form>
     </body>
 </html>

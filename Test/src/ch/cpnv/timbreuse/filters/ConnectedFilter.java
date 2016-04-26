@@ -32,9 +32,9 @@ public class ConnectedFilter implements Filter {
         HttpSession session = request.getSession();
 
         if(session.getAttribute(ATT_SESSION_USER) != null) {
-        	response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
+        	chain.doFilter(request, response);
         } else {
-        	response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
+        	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
         }
 	}
 

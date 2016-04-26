@@ -26,10 +26,6 @@ public class ManageStudents extends HttpServlet{
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<String> classes = new ArrayList<String>();
 		List<User> studentsTest = new ArrayList<User>();
@@ -51,6 +47,32 @@ public class ManageStudents extends HttpServlet{
 		request.setAttribute("classes", classes);
 		request.setAttribute("Test", studentsTest);
 		request.setAttribute("Sa1", studentsS1a);
+		
+		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/*List<String> classes = new ArrayList<String>();
+		List<User> studentsTest = new ArrayList<User>();
+		List<User> studentsS1a = new ArrayList<User>();
+		classes.add("Test");
+		classes.add("S1a");
+		
+		User session = (User) request.getSession().getAttribute("userSession");
+		studentsTest.add(session);
+		studentsTest.add(session);
+		studentsTest.add(session);
+		
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+		studentsS1a.add(session);
+
+		request.setAttribute("classes", classes);
+		request.setAttribute("Test", studentsTest);
+		request.setAttribute("Sa1", studentsS1a);*/
 		
 		if(request.getParameter("research")!=null) {
 			StudentResearch researchForm = new StudentResearch(daoUser);
