@@ -31,7 +31,7 @@ public class ManageStudents extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((Teacher)session.getAttribute("userSession")).getFirstname(), ((Teacher)session.getAttribute("userSession")).getLastname());
+		Teacher teacher = daoTeacher.findTeacher(((User) session.getAttribute("userSession")).getEmail());
 		request.setAttribute("currentTeacher", teacher);
 		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);

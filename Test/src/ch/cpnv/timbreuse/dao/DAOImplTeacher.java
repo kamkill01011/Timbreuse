@@ -13,7 +13,7 @@ import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplTeacher implements DAOTeacher {
-	private static final String SQL_SELECT_PROF_BY_EMAIL = "SELECT * FROM profs WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_SELECT_PROF_BY_EMAIL = "SELECT * FROM profs WHERE Email=?";
 	private static final String SQL_LIST_STUDENTS_BY_CLASS = "SELECT * FROM eleves WHERE Class=?";
 	
 	private DAOFactory daoFactory;
@@ -29,8 +29,8 @@ public class DAOImplTeacher implements DAOTeacher {
 	}
 
 	@Override
-	public Teacher findTeacher(String firstname, String lastname) throws DAOException {
-		return findTeacher(SQL_SELECT_PROF_BY_EMAIL, firstname, lastname);
+	public Teacher findTeacher(String email) throws DAOException {
+		return findTeacher(SQL_SELECT_PROF_BY_EMAIL, email);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		return null;
 	}
 	
-	private Teacher findTeacher(String sql, String firstname, String lastname) {
+	private Teacher findTeacher(String sql, String email) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -53,7 +53,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, sql, false, firstname, lastname);
+			preparedStatement = preparedRequestInitialisation(connection, sql, false, email);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				teacher = map(resultSet);

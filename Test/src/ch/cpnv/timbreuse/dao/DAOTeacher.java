@@ -8,7 +8,7 @@ import ch.cpnv.timbreuse.beans.User;
 public interface DAOTeacher {
 	void createTeacher(Teacher teacher) throws DAOException;
 	
-	Teacher findTeacher(String firstname, String lastname) throws DAOException;
+	Teacher findTeacher(String email) throws DAOException;
 	
 	void deleteTeacher(Teacher teacher) throws DAOException;
 	
