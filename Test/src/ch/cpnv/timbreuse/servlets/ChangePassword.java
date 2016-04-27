@@ -13,6 +13,10 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ChangePasssowordForm;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 
+/**
+ * Servlet de changement de mot de passe
+ *
+ */
 public class ChangePassword extends HttpServlet {
 	public static final String VIEW_CHANGEPASSWORD = "/WEB-INF/changePassword.jsp";
 	public static final String CONNECTING = "/connecting.jsp";

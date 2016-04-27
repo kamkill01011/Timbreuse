@@ -14,6 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 
+/**
+ * Filtre les ressources du dossier teacher
+ *
+ */
 public class TeacherFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
 	public static final String VIEW_STUDENT = "/info";

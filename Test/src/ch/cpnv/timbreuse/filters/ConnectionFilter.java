@@ -14,6 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.User;
 
+/**
+ * Redirige les utilisateurs vers leur page d'accueil delon leur niveau de permission
+ *
+ */
 public class ConnectionFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/connection";
 	public static final String VIEW_STUDENT = "/info";

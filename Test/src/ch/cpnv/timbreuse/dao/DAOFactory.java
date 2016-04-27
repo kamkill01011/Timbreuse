@@ -64,11 +64,11 @@ public class DAOFactory {
 	}
 	
 	//Récupèration de l'implémentation des différentes DAO
-	public DAOUser getDaoUser() {
-		return new DAOImplUser(this);
+	public DAOStudent getDaoStudent() {
+		return new DAOImplStudent(this);
 	}
 	public DAOUser getDaoUsername() {
-		return new DAOImplUsername(this);
+		return new DAOImplUser(this);
 	}
 	public DAOTeacher getDaoTeacher() {
 		return new DAOImplTeacher(this);

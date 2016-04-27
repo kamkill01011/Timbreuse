@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ch.cpnv.timbreuse.beans.User;
-
+/**
+ * Redirige les visiteurs (non-connectés)vers la page de connexion
+ *
+ */
 public class ConnectedFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/connection";
     public static final String ATT_SESSION_USER = "userSession";

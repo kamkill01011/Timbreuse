@@ -11,10 +11,14 @@ import javax.websocket.Session;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOImplUsername;
+import ch.cpnv.timbreuse.dao.DAOImplUser;
 import ch.cpnv.timbreuse.dao.DAOUser;
-import ch.cpnv.timbreuse.forms.StudentResearch;
+import ch.cpnv.timbreuse.forms.StudentResearchForm;
 
+/**
+ * Servlet qui affiche les information d'un élève
+ *
+ */
 public class StudentInfo extends HttpServlet {
 	public static final String VIEW = "/student/info.jsp";
 	private DAOUser daoUser;

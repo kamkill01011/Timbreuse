@@ -9,10 +9,10 @@ import org.joda.time.DateTime;
 
 
 /**
- * Objet utilisateur
+ * Objet élève
  *
  */
-public class User {
+public class Student {
 
     private Long		id;
     private String		email,lastname,firstname,classe,password,username,status;

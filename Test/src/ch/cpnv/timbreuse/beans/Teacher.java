@@ -1,5 +1,9 @@
 package ch.cpnv.timbreuse.beans;
 
+/**
+ * Objet enseignant
+ *
+ */
 public class Teacher {
 	private long id;
 	private String firstname, lastname, classe, email;

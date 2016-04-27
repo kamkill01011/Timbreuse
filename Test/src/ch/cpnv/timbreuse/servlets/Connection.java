@@ -12,6 +12,10 @@ import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ConnectionForm;
 
+/**
+ * Servlet qui permet aux utilisateurs de se connecter
+ *
+ */
 public class Connection extends HttpServlet {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
 	public static final String CONNECTING = "/connecting.jsp";

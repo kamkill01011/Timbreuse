@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
+/**
+ * Formulaire pour se connecter
+ *
+ */
 public final class ConnectionForm {
     private static final String EMAIL_FIELD = "email";
     private static final String PASSWORD_FIELD = "password";
@@ -19,14 +23,24 @@ public final class ConnectionForm {
     	this.daoUser=daoUser;
     }
     
+    /**
+     * @return Le résultat
+     */
     public String getResult() {
         return result;
     }
 
+    /**
+     * @return Une ma des erreurs
+     */
     public Map<String, String> getErrors() {
         return errors;
     }
 
+    /**
+     * @param request Requête envoyée par la servlet contenant les informations nécessaire à la connection
+     * @return L'utilisateur correspondant aux identifiants donnés
+     */
     public User connectUser(HttpServletRequest request) {
         /* Récupération des champs du formulaire */
         String email = getFieldValue(request, EMAIL_FIELD);
@@ -66,18 +80,22 @@ public final class ConnectionForm {
         }
         return user;
     }
-
+    
     /**
      * Valide l'adresse email saisie.
+     * @param username Nom d'utilisateur (prénom.nom)
+     * @throws Exception ???
      */
     private void emailValidation(String username) throws Exception {
     	if (username != null && !username.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
             throw new Exception("Merci de saisir une adresse mail valide.");
         }
     }
-
+    
     /**
      * Valide le mot de passe saisi.
+     * @param password Mot de passe
+     * @throws Exception ???
      */
     private void passwordValidation(String password) throws Exception {
         if (password != null) {
@@ -88,8 +106,14 @@ public final class ConnectionForm {
             throw new Exception("Merci de saisir votre mot de passe.");
         }
     }
-
-    //Vérification de l'indentifiant/motdepasse dans la base de données
+    
+    /**
+     * Vérification de l'indentifiant/motdepasse dans la base de données
+     * @param username Nom d'utilisateur
+     * @param password Mot de passe
+     * @return L'utilisateur correspondant aux identifiants donnés
+     * @throws Exception ???
+     */
     private User connectionValidation(String username, String password) throws Exception {
     	User user = new User();
         user = daoUser.findUser(username);
@@ -99,17 +123,21 @@ public final class ConnectionForm {
     	return user;
     }
     
-    /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-     */
+    /**
+	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
+	 * @param field Nom du champ de l'erreur
+	 * @param message Message de l'erreur
+	 */
     private void setError(String field, String message) {
         errors.put(field, message);
     }
 
-    /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
+    /**
+	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu sinon.
+	 * @param request Requête envoyée par la servlet
+	 * @param fieldName Nom du champ
+	 * @return La valeur de du champ stocké dans la requête
+	 */
     private static String getFieldValue(HttpServletRequest request, String fieldName) {
         String value = request.getParameter(fieldName);
         if (value == null || value.trim().length() == 0) {

@@ -11,22 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.dao.DAOUser;
-import ch.cpnv.timbreuse.forms.CreateStudent;
-import ch.cpnv.timbreuse.forms.DeleteStudent;
-import ch.cpnv.timbreuse.forms.StudentResearch;
+import ch.cpnv.timbreuse.forms.CreateStudentForm;
+import ch.cpnv.timbreuse.forms.DeleteStudentForm;
+import ch.cpnv.timbreuse.forms.StudentResearchForm;
 
+/**
+ * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
+ *
+ */
 public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
-	private DAOUser daoUser;
+	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
 
 	public void init() {
-		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
+		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
 	}
 
@@ -51,20 +57,20 @@ public class ManageStudents extends HttpServlet{
 		}
 		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);
-		/*
+		
 		if(request.getParameter("research")!=null) {
-			StudentResearch researchForm = new StudentResearch(daoUser);
-			User user = researchForm.researchUser(request);
-			request.setAttribute("researchStudent", user);
+			StudentResearchForm researchForm = new StudentResearchForm(daoStudent);
+			Student student = researchForm.researchUser(request);
+			request.setAttribute("researchStudent", student);
 		}
 		if(request.getParameter("add")!=null) {
-			CreateStudent createForm = new CreateStudent(daoUser);
-			daoUser.create(createForm.isUser(request));
+			CreateStudentForm createForm = new CreateStudentForm(daoStudent);
+			daoStudent.create(createForm.isStudent(request));
 		}
 		if(request.getParameter("delete")!=null) {
-			DeleteStudent deleteForm = new DeleteStudent(daoUser);
-			daoUser.delete(deleteForm.selectUserToDelete(request));
-		}*/
+			DeleteStudentForm deleteForm = new DeleteStudentForm(daoStudent);
+			daoStudent.delete(deleteForm.selectStudentToDelete(request));
+		}
 		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
