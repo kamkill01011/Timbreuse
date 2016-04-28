@@ -14,13 +14,12 @@
 	<h1>Gestion des élèves</h1>
 
 	<form method="post" action="managestudents">
-		<input type="submit" name="research" value="Recherche" /> <input
-			type="text" name="researchLastname" value="" size="32" maxlength="64" />
+		<input type="submit" name="research" value="Recherche" />
+		<input type="text" name="researchLastname" value="" size="32" maxlength="64" />
 	</form>
 	<br />
 	<fieldset>
-		<legend>${researchStudent.lastname}
-			${researchStudent.firstname}</legend>
+		<legend>${researchStudent.lastname} ${researchStudent.firstname}</legend>
 		<p>Différence : ${researchStudent.timeDiff}</p>
 		<p>E-mail : ${researchStudent.email}</p>
 	</fieldset>
@@ -49,20 +48,40 @@
 	<c:if test="${!empty studentsInClass}">
 		<fieldset>
 			<legend>${selectedClasse}</legend>
-			<table>
-  				<tr>
-    				<th>Nom</th>
-    				<th>Prénom</th>
-    				<th>E-mail</th>
-  				</tr>
-				<c:forEach items="${studentsInClass}" var="i">
-  					<tr>
-    					<td>${i.lastname}</td>
-    					<td>${i.firstname}</td>
-    					<td>${i.email}</td>
-  					</tr>
-				</c:forEach>
-			</table>
+			<form method="post" action="managestudents" id="students">
+				<table>
+					<tr>
+						<td>
+							<table>
+								<tr>
+									<th><input type="checkbox" id="selectAllID" name="selectAllID" onClick='checkAll(document.forms.students,this)' /></th>	
+									<th>Nom</th>
+									<th>Prénom</th>
+									<th>Différence</th>
+									<th>Status</th>
+									<th>Dernier timbrage</th>
+									<th>E-mail</th>
+								</tr>
+								<c:forEach items="${studentsInClass}" var="i">
+									<tr>
+										<td><input type="checkbox" id="id${i.id}" name="id${i.id}" <c:if test="${selectedStudents.get(studentsInClass.indexOf(i))}">checked="checked"</c:if> /></td>
+										<td>${i.lastname}</td>
+										<td>${i.firstname}</td>
+										<td>${i.timeDiff}</td>
+										<td>${i.status}</td>
+										<td>${i.lastCheck}</td>
+										<td>${i.email}</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</td>
+						<td>
+							<input type="text" name="modifyTimeDiff" value="HH:MM:SS" size="32" maxlength="64" />
+							<input type="submit" name="addTime" value="Ajouter du temps" />
+							<br />
+						</td>
+				</table>
+			</form>
 		</fieldset>
 	</c:if>
 	<fieldset>
@@ -77,7 +96,7 @@
 			<label for="addLastname">Nom : </label>
 			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
 			<br />
-				<input type="submit" name="add" value="Ajouter" class="sansLabel" />
+			<input type="submit" name="add" value="Ajouter" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
@@ -107,5 +126,21 @@
 	<form method="get" action="/Timbreuse/changepassword">
 		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
 	</form>
+
+	<!--http://p2p.wrox.com/asp-forms/18230-how-put-check-all-checkbox.html-->
+	<script type='text/javascript'>
+		function checkAll(form, cbox) {
+			var ct;
+			if (cbox.checked == true)
+				ct = false;
+			else if (cbox.checked == false)
+				ct = true;
+			for (var i = 1; i < form.length; i++) {
+				if (form[i].type == 'checkbox')
+					form[i].checked = cbox.checked;
+			}
+		}
+	</script>
+
 </body>
 </html>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Redirige les visiteurs (non-connectés)vers la page de connexion
+ * Redirige les visiteurs (non-connectés) vers la page de connexion sauf les page .css
  *
  */
 public class ConnectedFilter implements Filter {
@@ -32,8 +32,8 @@ public class ConnectedFilter implements Filter {
         
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
-
-        if(session.getAttribute(ATT_SESSION_USER) != null) {
+        
+        if(session.getAttribute(ATT_SESSION_USER) != null || request.getRequestURI().endsWith(".css")) {
         	chain.doFilter(request, response);
         } else {
         	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
