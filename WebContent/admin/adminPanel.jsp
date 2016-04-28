@@ -19,29 +19,55 @@
 	<fieldset>
 		<legend>Ajouter un enseigant</legend>
 		<form method="post" action="admin">
-			<label for="addFirstname">Prénom : </label>
-			<input type="text" id="addFirstname" name="addFirstname" value="" size="32" maxlength="64" />
+			<label for="addFirstnameTeacher">Prénom : </label>
+			<input type="text" id="addFirstnameTeacher" name="addFirstnameTeacher" value="" size="32" maxlength="64" />
 			<br />
 			<label for="addLastname">Nom : </label>
-			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
+			<input type="text" id="addLastnameTeacher" name="addLastnameTeacher" value="" size="32" maxlength="64" />
 			<br />
 			<label for="addClasse">Classe(s) : </label>
-			<input type="text" id="addClasse" name="addClasse" value="" size="32" maxlength="64" />
+			<input type="text" id="addClasseTeacher" name="addClasseTeacher" value="" size="32" maxlength="64" />
 			<br />
-				<input type="submit" name="add" value="Ajouter" class="sansLabel" />
+				<input type="submit" name="addTeacher" value="Ajouter" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
 	<fieldset>
 		<legend>Supprimer un enseigant</legend>
 		<form method="post" action="admin">
-			<label for="deletFirstname">Prénom : </label>
-			<input type="text" id="deleteFirstname" name="deleteFirstname" value="" size="32" maxlength="64" />
+			<label for="deletFirstnameTeacger">Prénom : </label>
+			<input type="text" id="deleteFirstnameTeacher" name="deleteFirstnameTeacher" value="" size="32" maxlength="64" />
 			<br />
 			<label for="deletLastname">Nom : </label>
-			<input type="text" id="deleteLastname" name="deleteLastname" value="" size="32" maxlength="64" />
+			<input type="text" id="deleteLastnameTeacher" name="deleteLastnameTeacher" value="" size="32" maxlength="64" />
 			<br />
-			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
+			<input type="submit" name="deleteTeacher" value="Supprimer" class="sansLabel" />
+		</form>
+	</fieldset>
+	<br />
+	<fieldset>
+	<legend>Créer un admin</legend>
+	<form method="post" action="admin">
+	<label for="addFirstnameAdmin">Prénom : </label>
+			<input type="text" id="addFirstnameAdmin" name="addFirstnameAdmin" value="" size="32" maxlength="64" />
+			<br />
+			<label for="addLastnameAdmin">Nom : </label>
+			<input type="text" id="addLastnameAdmin" name="addLastnameAdmin" value="" size="32" maxlength="64" />
+			<br />
+			<input type="submit" name="addAdmin" value="Ajouter" class="sansLabel" />
+		</form>
+	</fieldset>
+	<br />
+	<fieldset>
+	<legend>Supprimer un admin</legend>
+	<form method="post" action="admin">
+	<label for="deleteFirstnameAdmin">Prénom : </label>
+			<input type="text" id="deleteFirstnameAdmin" name="deleteFirstnameAdmin" value="" size="32" maxlength="64" />
+			<br />
+			<label for="deleteLastnameAdmin">Nom : </label>
+			<input type="text" id="deleteLastnameAdmin" name="deleteLastnameAdmin" value="" size="32" maxlength="64" />
+			<br />
+			<input type="submit" name="deleteAdmin" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />

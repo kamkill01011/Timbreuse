@@ -22,7 +22,7 @@ public class ConnectionFilter implements Filter {
 	public static final String VIEW_CONNECTION = "/connection";
 	public static final String VIEW_STUDENT = "/info";
 	public static final String VIEW_TEACHER = "/managestudents";
-	public static final String VIEW_ADMIN = "/admin/adminPanel.jsp";
+	public static final String VIEW_ADMIN = "/admin";
     public static final String ATT_SESSION_USER = "userSession";
 
 	@Override

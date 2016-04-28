@@ -2,34 +2,26 @@ package ch.cpnv.timbreuse.forms;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import ch.cpnv.timbreuse.beans.Student;
-import ch.cpnv.timbreuse.beans.User;
+import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOStudent;
-import ch.cpnv.timbreuse.dao.DAOUser;
+import ch.cpnv.timbreuse.dao.DAOTeacher;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
-/**
- * Formulaire pour créer un élève dans la base de données
- *
- */
-public class CreateStudentForm {
-	private static final String CLASS_FIELD = "addClass";
-	private static final String FIRSTNAME_FIELD = "addFirstname";
-	private static final String LASTNAME_FIELD = "addLastname";
+public class CreateTeacherForm {
+	private static final String FIRSTNAME_FIELD ="addFirstnameTeacher";
+	private static final String LASTNAME_FIELD = "addLastnameTeacher";
+	private static final String CLASSES_FIELD = "addClasseTeacher";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOStudent daoStudent;
+	private DAOTeacher daoTeacher;
 	
-	public CreateStudentForm(DAOStudent daoStudent) {
-		this.daoStudent = daoStudent;
+	public CreateTeacherForm(DAOTeacher daoTeacher) {
+		this.daoTeacher = daoTeacher;
 	}
-
-    /**
+	
+	/**
      * @return Une ma des erreurs
      */
 	public Map<String, String> getErreurs() {
@@ -43,27 +35,29 @@ public class CreateStudentForm {
 		return result;
 	}
 	
+	
 	/**
-	 * @param request Requête envoyée par la servlet contenant les informations nécessaire créer un nouvel élève
-	 * @return Le nouvel élève
+	 * Associe un nouvel enseignant au champs du formulaire.
+	 * @param request
+	 * @return nouveau teacher
 	 */
-	public Student isStudent(HttpServletRequest request) {
-		Student student = new Student();
+	public Teacher getTeacher(HttpServletRequest request) {
+		Teacher teacher = new Teacher();
 		try {
 			if(errors.isEmpty()) {
-				student.setClasse(getFieldValue(request, CLASS_FIELD));
-				student.setFirstname(getFieldValue(request, FIRSTNAME_FIELD));
-				student.setLastname(getFieldValue(request, LASTNAME_FIELD));
-				student.setEmail(generateEmail(student.getFirstname(), student.getLastname()));
+				teacher.setFirstname(getFieldValue(request, FIRSTNAME_FIELD));
+				teacher.setLastname(getFieldValue(request, LASTNAME_FIELD));
+				teacher.setClasse(getFieldValue(request, CLASSES_FIELD));
+				teacher.setEmail(generateEmail(teacher.getFirstname(), teacher.getLastname()));
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";
 			e.printStackTrace();
 		}
-		return student;
+		return teacher;
 	}
-
-    /**
+	
+	/**
 	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu sinon.
 	 * @param request Requête envoyée par la servlet
 	 * @param fieldName Nom du champ

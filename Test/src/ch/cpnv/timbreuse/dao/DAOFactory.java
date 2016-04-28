@@ -73,4 +73,8 @@ public class DAOFactory {
 	public DAOTeacher getDaoTeacher() {
 		return new DAOImplTeacher(this);
 	}
+	
+	public DAOUser getDaoAdmin() {
+		return new DAOImplAdmin(this);
+	}
 }

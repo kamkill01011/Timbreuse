@@ -20,6 +20,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	
+	
 	private DAOFactory daoFactory;
 	
 	public DAOImplStudent(DAOFactory daoFactory) {

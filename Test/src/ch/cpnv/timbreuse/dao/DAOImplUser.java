@@ -10,7 +10,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
-import static ch.cpnv.timbreuse.dao.DAOUtility.upperWithoutAccent;
+
 
 public class DAOImplUser implements DAOUser {
 
@@ -25,7 +25,7 @@ public class DAOImplUser implements DAOUser {
 
 	@Override
 	public void create(User user) throws DAOException {
-
+		System.out.println("USER");
 	}
 
 	@Override

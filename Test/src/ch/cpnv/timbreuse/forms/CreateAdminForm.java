@@ -5,31 +5,25 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOStudent;
+import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
-import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
+import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
-/**
- * Formulaire pour créer un élève dans la base de données
- *
- */
-public class CreateStudentForm {
-	private static final String CLASS_FIELD = "addClass";
-	private static final String FIRSTNAME_FIELD = "addFirstname";
-	private static final String LASTNAME_FIELD = "addLastname";
+public class CreateAdminForm {
+	private static final String FIRSTNAME_FIELD ="addFirstnameAdmin";
+	private static final String LASTNAME_FIELD = "addLastnameAdmin";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOStudent daoStudent;
+	private DAOUser daoUser;
 	
-	public CreateStudentForm(DAOStudent daoStudent) {
-		this.daoStudent = daoStudent;
+	public CreateAdminForm(DAOUser daoUser) {
+		this.daoUser = daoUser;
 	}
-
-    /**
+	
+	/**
      * @return Une ma des erreurs
      */
 	public Map<String, String> getErreurs() {
@@ -43,27 +37,25 @@ public class CreateStudentForm {
 		return result;
 	}
 	
-	/**
-	 * @param request Requête envoyée par la servlet contenant les informations nécessaire créer un nouvel élève
-	 * @return Le nouvel élève
-	 */
-	public Student isStudent(HttpServletRequest request) {
-		Student student = new Student();
+	public User getAdmin(HttpServletRequest request) {
+		User admin = new User();
 		try {
 			if(errors.isEmpty()) {
-				student.setClasse(getFieldValue(request, CLASS_FIELD));
-				student.setFirstname(getFieldValue(request, FIRSTNAME_FIELD));
-				student.setLastname(getFieldValue(request, LASTNAME_FIELD));
-				student.setEmail(generateEmail(student.getFirstname(), student.getLastname()));
+				String firstname = getFieldValue(request, FIRSTNAME_FIELD);
+				String lastname = getFieldValue(request, LASTNAME_FIELD);
+				admin.setFirstname(firstname);
+				admin.setLastname(lastname);
+				admin.setUsername(generateUsername(firstname, lastname));
+				admin.setPermissionLevel(1);
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";
 			e.printStackTrace();
 		}
-		return student;
+		return admin;
 	}
-
-    /**
+	
+	/**
 	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu sinon.
 	 * @param request Requête envoyée par la servlet
 	 * @param fieldName Nom du champ
@@ -78,3 +70,15 @@ public class CreateStudentForm {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
