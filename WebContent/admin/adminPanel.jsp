@@ -16,5 +16,31 @@
 	<form method="get" action="/Timbreuse/changepassword">
 		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
 	</form>
+	<fieldset>
+		<legend>Ajouter un enseigant</legend>
+		<form method="post" action="adminpanel">
+			<label for="addFirstname">Prénom : </label>
+			<input type="text" id="addFirstname" name="addFirstname" value="" size="32" maxlength="64" />
+			<br />
+			<label for="addLastname">Nom : </label>
+			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
+			<br />
+				<input type="submit" name="add" value="Ajouter" class="sansLabel" />
+		</form>
+	</fieldset>
+	<br />
+	<fieldset>
+		<legend>Supprimer un enseigant</legend>
+		<form method="post" action="managestudents">
+			<label for="deletFirstname">Prénom : </label>
+			<input type="text" id="deletFirstname" name="deletFirstname" value="" size="32" maxlength="64" />
+			<br />
+			<label for="deletLastname">Nom : </label>
+			<input type="text" id="deletLastname" name="deletLastname" value="" size="32" maxlength="64" />
+			<br />
+			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
+		</form>
+	</fieldset>
+	<br />
     </body>
 </html>
