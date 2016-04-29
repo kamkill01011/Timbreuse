@@ -36,11 +36,11 @@
 		<p>Username : ${sessionScope.userSession.username}</p>
 		<p>Password : ${sessionScope.userSession.password}</p>
 	</fieldset>
-	<form method="get" action="/Timbreuse/logout">
-		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
+	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
+		<input type="submit" name="logout" value="Déconnexion" class="logout" />
 	</form>
-	<form method="get" action="/Timbreuse/changepassword">
-		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
+	<form method="get" action="/Timbreuse/changepassword" class="DecoPwd">
+		<input type="submit" value="Changer de mot de passe" class="changePassword" />
 	</form>
     </body>
 </html>

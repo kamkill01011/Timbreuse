@@ -14,7 +14,7 @@
 	<h1>Gestion des élèves</h1>
 
 	<form method="post" action="managestudents">
-		<input type="submit" name="research" value="Recherche" />
+		<input type="submit" name="research" value="Recherche" class="sansLabelNoSpace"/>
 		<input type="text" name="researchLastname" value="" size="32" maxlength="64" />
 	</form>
 	<br />
@@ -117,14 +117,14 @@
 		<legend>Modifier un élève</legend>
 		<form method="post" action="managestudents">
 			<input type="text" name="modifyTimeDiff" value="" size="32" maxlength="64" />
-			<input type="submit" name="modify" value="Modifier la différence de temps" />
+			<input type="submit" name="modify" value="Modifier la différence de temps" class="sansLabelNoSpace"/>
 		</form>
 	</fieldset>
-	<form method="get" action="/Timbreuse/logout">
-		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
+	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
+		<input type="submit" name="logout" value="Déconnexion" class="logout" />
 	</form>
-	<form method="get" action="/Timbreuse/changepassword">
-		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
+	<form method="get" action="/Timbreuse/changepassword" class="DecoPwd">
+		<input type="submit" value="Changer de mot de passe" class="changePassword" />
 	</form>
 
 	<!--http://p2p.wrox.com/asp-forms/18230-how-put-check-all-checkbox.html-->

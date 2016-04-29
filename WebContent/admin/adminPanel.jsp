@@ -10,12 +10,8 @@
 
     <body>
     <h1>Admin Panel</h1>
-    <form method="get" action="/Timbreuse/logout">
-		<input type="submit" name="logout" value="Déconnexion" class="sansLabel" />
-	</form>
-	<form method="get" action="/Timbreuse/changepassword">
-		<input type="submit" value="Changer de mot de passe" class="sansLabel" />
-	</form>
+    
+	
 	<fieldset>
 		<legend>Ajouter un enseigant</legend>
 		<form method="post" action="admin">
@@ -45,7 +41,7 @@
 		</form>
 	</fieldset>
 	<br />
-	<fieldset>
+	<fieldset class="adminField">
 	<legend>Créer un admin</legend>
 	<form method="post" action="admin">
 	<label for="addFirstnameAdmin">Prénom : </label>
@@ -58,7 +54,7 @@
 		</form>
 	</fieldset>
 	<br />
-	<fieldset>
+	<fieldset class="adminField">
 	<legend>Supprimer un admin</legend>
 	<form method="post" action="admin">
 	<label for="deleteFirstnameAdmin">Prénom : </label>
@@ -71,5 +67,11 @@
 		</form>
 	</fieldset>
 	<br />
+	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
+		<input type="submit" name="logout" value="Déconnexion" class="logout" />
+	</form>
+	<form method="get" action="/Timbreuse/changepassword" class="DecoPwd">
+		<input type="submit" value="Changer de mot de passe" class="changePassword" />
+	</form>
     </body>
 </html>
