@@ -9,7 +9,7 @@
     </head>
 
     <body>
-    <h1>Admin Panel</h1>
+    <h1 class="pageTitle">Admin Panel</h1>
     
 	
 	<fieldset>

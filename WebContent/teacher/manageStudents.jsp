@@ -11,7 +11,7 @@
 
 <body>
 
-	<h1>Gestion des élèves</h1>
+	<h1 class="pageTitle">Gestion des élèves</h1>
 
 	<form method="post" action="managestudents">
 		<input type="submit" name="research" value="Recherche" class="sansLabelNoSpace"/>

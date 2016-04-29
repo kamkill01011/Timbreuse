@@ -1,12 +1,12 @@
 /* Général ------------------------------------------------------------------------------------- */
 
 body, p, legend, label, input {
-    font: normal 8pt verdana, helvetica, sans-serif;
+    font: normal 10pt verdana, helvetica, sans-serif;
 }
 
 fieldset {
-    padding: 10px;
-    border: 1px #0568CD solid;
+    padding: 12px;
+    border: 2px #0568CD solid;
 }
 
 legend {
@@ -20,6 +20,19 @@ legend {
 
 .error {
 	color: #FF0000;
+}
+
+.pageTitle {
+	text-shadow:1px 1px 1px rgba(179,179,179,1);
+	font-weight:bold;
+	color:#4768ED;
+	letter-spacing:0pt;
+	font-size:30px;
+	text-align:left;
+	font-family:arial, helvetica, sans-serif;
+	line-height:1;
+	padding:10px;
+
 }
 
 /* Forms --------------------------------------------------------------------------------------- */
@@ -61,7 +74,36 @@ form .changePassword:hover {
 form label {
     float: left;
     width: 200px;
-    margin: 3px 0px 0px 0px;
+    margin: 3px 5px 0px 0px;
+}
+
+form input.login {
+	margin-top: 10px;
+  background: #07bf0e;
+  background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
+  background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
+  background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
+  background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
+  background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
+  -webkit-border-radius: 13;
+  -moz-border-radius: 13;
+  border-radius: 13px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 4px 10px 4px 10px;
+  text-decoration: none;
+  margin-left: 253px;
+}
+
+form input.login:hover {
+	background: #00c455;
+  background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+  background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+  background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+  background-image: -o-linear-gradient(top, #00c455, #0dff00);
+  background-image: linear-gradient(to bottom, #00c455, #0dff00);
+  text-decoration: none;
 }
 
 form input {
@@ -80,7 +122,7 @@ form input.sansLabel {
  	-moz-border-radius: 5;
     border-radius: 5px;
 	font-family: Arial;
-    margin-left: 200px;
+    margin-left: 205px;
 }
 
 form input.sansLabel:hover {
@@ -90,7 +132,7 @@ form input.sansLabel:hover {
   	background-image: -ms-linear-gradient(top, #fafafa, #fafafa);
   	background-image: -o-linear-gradient(top, #fafafa, #fafafa);
   	background-image: linear-gradient(to bottom, #fafafa, #fafafa);
-    margin-left: 200px;
+    
 }
 
 form input.sansLabelNoSpace {
@@ -120,7 +162,7 @@ form .requis {
 }
 
 form .logout {
-	margin-top: 20px;
+  margin-top: 20px;
   background: #07bf0e;
   background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
   background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);

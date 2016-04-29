@@ -8,6 +8,7 @@
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
     <body>
+    	<h1 class="pageTitle">Timbreuse</h1>
         <form method="post" action="connection">
             <fieldset>
                 <legend>Connexion</legend>
@@ -19,7 +20,7 @@
                 <input type="password" name="password" value="" size="20" maxlength="20" />
                 <span class="error">${form.errors['password']}</span>
                 <br />
-                <input type="submit" name="connection" value="Connexion" class="sansLabel" />
+                <input type="submit" name="connection" value="Connexion" class="login" />
                 <br />
                 
                 <p class="${empty form.errors ? 'succes' : 'error'}">${form.result}</p>

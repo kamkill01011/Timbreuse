@@ -9,7 +9,7 @@
     </head>
 
     <body>
-    
+    <h1 class="pageTitle">Informations Personnelles</h1>
     <fieldset>
 		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
 		<p>Classe : ${currentStudent.classe}</p>

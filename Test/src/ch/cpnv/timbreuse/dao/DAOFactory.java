@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.jolbox.bonecp.BoneCP;
+import com.jolbox.bonecp.BoneCPConfig;
+
 public class DAOFactory {
 	private static final String PROPERTIES_FILE   = "/ch/cpnv/timbreuse/dao/dao.properties";
 	private static final String PROPERTY_URL      = "url";
@@ -17,10 +20,10 @@ public class DAOFactory {
 	private String username;
 	private String password;
 
-	public DAOFactory(String url, String username, String password) {
-		this.url = url;
-		this.username = username;
-		this.password = password;
+	BoneCP connectionPool = null;
+	
+	public DAOFactory(BoneCP connectionPool) {
+		this.connectionPool = connectionPool;
 	}
 
 	//récupère info de connexion à la DB, Charge driver, retourne instance de la Factory
@@ -30,7 +33,7 @@ public class DAOFactory {
 		String driver;
 		String username;
 		String password;
-
+		BoneCP connectionPool = null;
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		InputStream propertiesFile = classLoader.getResourceAsStream(PROPERTIES_FILE);
 
@@ -54,13 +57,30 @@ public class DAOFactory {
 			throw new DAOException("Le driver est introuvable dans le classpath.", e);
 		}
 		
-		DAOFactory instance = new DAOFactory(url, username, password);
+		try {
+			//Création + config du pool de connexions via l'objet BoneCPConfig
+			BoneCPConfig config = new BoneCPConfig();
+			config.setJdbcUrl(url);
+			config.setUsername(username);
+			config.setPassword(password);
+			//Paramétrage taille du pool
+			config.setMinConnectionsPerPartition(5);
+			config.setMaxConnectionsPerPartition(10);
+			config.setPartitionCount(2);
+			//Création du pool avec les configs
+			connectionPool = new BoneCP(config);
+		} catch ( SQLException e ) {
+            e.printStackTrace();
+            throw new DAOException( "Erreur de configuration du pool de connexions.", e );
+        }
+		
+		DAOFactory instance = new DAOFactory(connectionPool);
 		return instance;
 	}
 	
 	//Fournit une connexion à la DB
 	Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url, username, password);
+		return connectionPool.getConnection();
 	}
 	
 	//Récupèration de l'implémentation des différentes DAO
