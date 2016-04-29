@@ -5,11 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.Normalizer;
 import java.util.Random;
 
 import ch.cpnv.timbreuse.beans.User;
-import sun.text.normalizer.UBiDiProps;
 
 
 public final class DAOUtility {
@@ -60,7 +58,15 @@ public final class DAOUtility {
 		closeObject(connection);
 	}
 	
-	//Initialise la requête préparée basée sur les arguments
+	/**
+	 * Initialise la requête préparée basée sur les arguments
+	 * @param connection Connexion à la DataBase?
+	 * @param sql Requête SQL
+	 * @param returnGeneratedKeys ???
+	 * @param objets ???
+	 * @return Requête préparée
+	 * @throws SQLException ???
+	 */
 	public static PreparedStatement preparedRequestInitialisation(Connection connection, String sql, boolean returnGeneratedKeys, Object... objets) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
         for (int i = 0; i < objets.length; i++) {
@@ -71,7 +77,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Enlève tous les accents d'un string.
-	 * @param s
+	 * @param s Chaîne de caractères à modifier
 	 * @return string sans accents
 	 */
 	private static String removeAccent(String s) {
@@ -86,7 +92,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Retourne un string en majuscule.
-	 * @param s 
+	 * @param s Chaîne de caractères à modifier
 	 * @return String en majuscules
 	 */
 	private static String upperStringWithoutAccent(String s) {
@@ -100,7 +106,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Retourne un string en minuscules.
-	 * @param s
+	 * @param s Chaîne de caractères à modifier
 	 * @return String en minuscules
 	 */
 	private static String lowerStringWithoutAccent(String s) {
@@ -114,8 +120,8 @@ public final class DAOUtility {
 	
 	/**
 	 * Génère l'email dans le format CPNV (orenom.NOM@cpnv.ch) à partir du prénom et du nom.
-	 * @param firstname
-	 * @param lastname
+	 * @param firstname Prénom
+	 * @param lastname Nom
 	 * @return email format CPNV
 	 */
 	public static String generateEmail(String firstname, String lastname) {
@@ -124,7 +130,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Retourne le nom d'utilisateur depuis l'email sans majuscules.
-	 * @param email
+	 * @param email Adresse e-mail de l'utilisateur
 	 * @return nom d'utilisateur en minuscules depuis l'email
 	 */
 	public static String getUsernameFromEmail(String email) {
@@ -138,8 +144,8 @@ public final class DAOUtility {
 	
 	/**
 	 * Génère le nom d'utilisateur sans accents à partir du prénom et du nom.
-	 * @param firstname
-	 * @param lastname
+	 * @param firstname Prénom
+	 * @param lastname Nom
 	 * @return nom d'utilisateur sans accents depuis le prénom et nom
 	 */
 	public static String generateUsername(String firstname, String lastname) {
@@ -148,7 +154,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Retourne le prénom à partir du nom d'utilisateur.
-	 * @param username
+	 * @param username Nom de l'utilisateur
 	 * @return prénom depuis le nom d'utilisateur
 	 */
 	public static String getFirstnameFromUsername(String username) {
@@ -157,7 +163,7 @@ public final class DAOUtility {
 	
 	/**
 	 * Retourne le nom à partir du nom d'utilisateur.
-	 * @param username
+	 * @param username Nom de l'utilisateur
 	 * @return nom depuis le nom d'utilisateur
 	 */
 	public static String getLastnameFromUsername(String username) {
@@ -182,8 +188,6 @@ public final class DAOUtility {
 		}
 		return password;
 	}
-	
-	
 }
 
 

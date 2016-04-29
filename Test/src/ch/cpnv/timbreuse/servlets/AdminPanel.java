@@ -33,8 +33,8 @@ public class AdminPanel extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getEmail());
+		//HttpSession session = request.getSession();
+		//Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getEmail());//useless?
 		
 		if(request.getParameter("addTeacher") != null) {
 			CreateTeacherForm createForm = new CreateTeacherForm(daoTeacher);

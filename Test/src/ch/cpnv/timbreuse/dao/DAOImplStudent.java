@@ -49,7 +49,6 @@ public class DAOImplStudent implements DAOStudent {
 		}
 		
 		return student;
-		//return find(SQL_SELECT_STUDENT_BY_LASTNAME, lastname);
 	}
 	
 	@Override
@@ -104,28 +103,6 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
 	}
-	
-	/*private Student find(String sql, Object... objects) throws DAOException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		Student student = null;
-		
-		try {
-			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, sql, false, objects);
-			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				student = map(resultSet);
-			}
-		} catch(SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			closeObjects(resultSet, preparedStatement, connection);
-		}
-		
-		return student;
-	}*/
 
 	private static Student map(ResultSet resultSet) throws SQLException {
 		Student student = new Student();

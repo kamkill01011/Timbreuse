@@ -7,13 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOImplUser;
 import ch.cpnv.timbreuse.dao.DAOUser;
-import ch.cpnv.timbreuse.forms.StudentResearchForm;
 
 /**
  * Servlet qui affiche les information d'un élève

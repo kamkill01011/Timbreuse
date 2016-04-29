@@ -11,7 +11,6 @@ import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.ChangePasssowordForm;
-import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 /**
  * Servlet de changement de mot de passe
@@ -44,6 +43,7 @@ public class ChangePassword extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute(FORM_ATT, passwordForm);
+		//change le mot de passe si les informations sont correctes
 		if(passwordForm.getErrors().isEmpty()) {
 			daoUser.setNewPassword(user, passwordForm.getNewPassword(request));
 			response.sendRedirect(request.getContextPath() + CONNECTING);

@@ -41,7 +41,7 @@ public class Connection extends HttpServlet {
 		HttpSession session = request.getSession();	
 		//Stockage du form et du bean dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
-		request.setAttribute(USER_ATT, user);//useless
+		//request.setAttribute(USER_ATT, user);//useless
 		
 		if(connectionForm.getErrors().isEmpty()) {
 			session.setAttribute(USER_SESSION_ATT, user);

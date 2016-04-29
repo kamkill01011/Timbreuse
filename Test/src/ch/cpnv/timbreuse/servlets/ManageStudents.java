@@ -35,6 +35,7 @@ public class ManageStudents extends HttpServlet{
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		//récupère l'ensaignant connecté notamment pour afficher ses classes 
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
@@ -58,7 +59,7 @@ public class ManageStudents extends HttpServlet{
 			request.setAttribute("studentsInClass", studentsInClass);
 		}
 		
-		//élèves sélectionnés
+		//enregistre quels élèves sont sélectionnés
 		ArrayList<Boolean> selectedStudents = new ArrayList<Boolean>();
 		for (int i = 0; i < studentsInClass.size(); i++) {
 			selectedStudents.add(request.getParameter("id" + studentsInClass.get(i).getId()) != null);
