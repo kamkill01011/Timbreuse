@@ -5,8 +5,6 @@ import ch.cpnv.timbreuse.beans.User;
 public interface DAOUser {
 
     void create(User user) throws DAOException;
-
-    User find(String email) throws DAOException;
     
     User findStudent(String email) throws DAOException;
     

@@ -8,6 +8,10 @@ import ch.cpnv.timbreuse.dao.DAOFactory;
 
 
 
+/**
+ * Initialisation du DAO Factory
+ *
+ */
 public class DAOFactoryInitialisation implements ServletContextListener {
     private static final String ATT_DAO_FACTORY = "daofactory";
 

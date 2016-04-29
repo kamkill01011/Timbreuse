@@ -29,7 +29,27 @@ public class DAOImplStudent implements DAOStudent {
 	
 	@Override
 	public Student find(String lastname) throws DAOException {	
-		return find(SQL_SELECT_STUDENT_BY_LASTNAME, lastname);
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Student student = null;
+		
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_LASTNAME, false, lastname);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				student = map(resultSet);
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return student;
+		//return find(SQL_SELECT_STUDENT_BY_LASTNAME, lastname);
 	}
 	
 	@Override
@@ -85,7 +105,7 @@ public class DAOImplStudent implements DAOStudent {
 		}
 	}
 	
-	private Student find(String sql, Object... objects) throws DAOException {
+	/*private Student find(String sql, Object... objects) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -105,7 +125,7 @@ public class DAOImplStudent implements DAOStudent {
 		}
 		
 		return student;
-	}
+	}*/
 
 	private static Student map(ResultSet resultSet) throws SQLException {
 		Student student = new Student();
@@ -119,19 +139,8 @@ public class DAOImplStudent implements DAOStudent {
 	}
 
 	@Override
-	public Student findStudent(String email) throws DAOException {
-		return null;
-	}
-
-	@Override
 	public User findUser(String username) throws DAOException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void setNewPassword(User user, String newPassord) throws DAOException {
-		// TODO Auto-generated method stub
-		
 	}
 }

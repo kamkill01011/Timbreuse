@@ -46,12 +46,6 @@ public class DAOImplAdmin implements DAOUser {
 	}
 	
 	@Override
-	public User find(String email) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
 	public User findStudent(String email) throws DAOException {
 		// TODO Auto-generated method stub
 		return null;

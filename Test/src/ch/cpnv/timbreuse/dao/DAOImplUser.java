@@ -101,12 +101,6 @@ public class DAOImplUser implements DAOUser {
 		user.setPermissionLevel(3);
         return user;
 	}
-
-	@Override
-	public User find(String email) throws DAOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public void setNewPassword(User user, String newPassword) {
 		Connection connection = null;

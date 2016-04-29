@@ -9,12 +9,8 @@ public interface DAOStudent {
 
     Student find(String email) throws DAOException;
     
-    Student findStudent(String email) throws DAOException;
-    
     User findUser(String username) throws DAOException;
     
     void delete(Student student) throws DAOException;
-    
-    void setNewPassword(User user, String newPassord) throws DAOException;
 
 }
