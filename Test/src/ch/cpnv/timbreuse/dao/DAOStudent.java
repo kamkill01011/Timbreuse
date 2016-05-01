@@ -17,13 +17,6 @@ public interface DAOStudent {
      * @throws DAOException ???
      */
     Student find(String email) throws DAOException;
-    
-    /**
-     * @param username Nom d'utilisateur de l'élève à trouver
-     * @return L'utilisateur correspondant au nom d'utilisateur
-     * @throws DAOException ???
-     */
-    User findUser(String username) throws DAOException;
 
     /**
      * @param student L'élève à supprimer

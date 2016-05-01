@@ -101,7 +101,8 @@ public class DAOImplUser implements DAOUser {
 		user.setPermissionLevel(3);
         return user;
 	}
-	
+
+	@Override
 	public void setNewPassword(User user, String newPassword) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
