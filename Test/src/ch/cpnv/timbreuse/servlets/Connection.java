@@ -2,6 +2,7 @@ package ch.cpnv.timbreuse.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import ch.cpnv.timbreuse.forms.ConnectionForm;
  * Servlet qui permet aux utilisateurs de se connecter
  *
  */
+@WebServlet("/connection")
 public class Connection extends HttpServlet {
 	public static final String VIEW_CONNECTION = "/WEB-INF/connection.jsp";
 	public static final String CONNECTING = "/connecting.jsp";

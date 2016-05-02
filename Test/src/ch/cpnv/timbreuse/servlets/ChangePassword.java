@@ -2,6 +2,7 @@ package ch.cpnv.timbreuse.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import ch.cpnv.timbreuse.forms.ChangePasssowordForm;
  * Servlet de changement de mot de passe
  *
  */
+@WebServlet("/changepassword")
 public class ChangePassword extends HttpServlet {
 	public static final String VIEW_CHANGEPASSWORD = "/WEB-INF/changePassword.jsp";
 	public static final String CONNECTING = "/connecting.jsp";

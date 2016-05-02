@@ -3,6 +3,7 @@ package ch.cpnv.timbreuse.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import ch.cpnv.timbreuse.forms.CreateTeacherForm;
 import ch.cpnv.timbreuse.forms.DeleteAdminForm;
 import ch.cpnv.timbreuse.forms.DeleteTeacherForm;
 
+@WebServlet("/admin")
 public class AdminPanel extends HttpServlet {
 	public static final String VIEW = "/admin/adminPanel.jsp";
 	private DAOUser daoUser;

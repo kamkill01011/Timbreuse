@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import ch.cpnv.timbreuse.forms.StudentResearchForm;
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
  *
  */
+@WebServlet("/managestudents")
 public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
 	private DAOStudent daoStudent;

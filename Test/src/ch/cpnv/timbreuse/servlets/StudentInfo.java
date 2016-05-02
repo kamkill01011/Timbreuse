@@ -3,6 +3,7 @@ package ch.cpnv.timbreuse.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import ch.cpnv.timbreuse.dao.DAOUser;
  * Servlet qui affiche les information d'un élève
  *
  */
+@WebServlet("/info")
 public class StudentInfo extends HttpServlet {
 	public static final String VIEW = "/student/info.jsp";
 	private DAOUser daoUser;
