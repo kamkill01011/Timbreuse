@@ -6,6 +6,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

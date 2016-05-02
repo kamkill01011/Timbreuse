@@ -4,6 +4,11 @@ body, p, legend, label, input {
     font: normal 10pt verdana, helvetica, sans-serif;
 }
 
+label, input {
+	display:block;
+	margin:auto;
+}
+
 fieldset {
     padding: 12px;
     border: 2px #0568CD solid;
@@ -34,6 +39,76 @@ legend {
 	padding:10px;
 
 }
+
+
+/* LOGO ---------------------------------------------------------------------------------------- */
+
+/*footer .logo {
+	padding: 20px;
+	display: block;
+	margin: auto;
+	width: 250px;
+	height: auto;
+}*/
+
+.footerLogo{
+
+	/* How pronounced should the 3D effects be */
+	perspective: 200px;
+	-webkit-perspective: 200px;
+	width:480px;
+	height:480px;
+	margin:0 auto;
+	border-radius:6px;
+	position:relative;
+}
+
+.cpnv-logo, .mct-logo {
+	/* Enable 3D transforms */
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+
+	/* We are using two separate divs for the front and back of the
+	   phone. This will hide the divs when they are flipped, so that the
+	   opposite side can be seen:  */
+
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+
+	width:200px;
+	height:333px;
+
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-166px 0 0 -100px;
+
+	background:url(http://img15.hostingpics.net/pics/477128MCT.jpg) no-repeat left center;
+
+	/* Animate the transitions */
+	transition:1.3s;
+} 
+
+.cpnv-logo {
+	/* The back side is flipped 180 deg by default */
+	transform:rotateY(180deg);
+	-webkit-transform:rotateY(180deg);
+
+	background-position:right center;
+}
+
+.footerLogo:hover .mct-logo {
+	/* When the container is hovered, flip the front side and hide it .. */
+	transform:rotateY(180deg);
+	-webkit-transform:rotateY(180deg);
+}
+
+.footerLogo:hover .cpnv-logo {
+	/* .. at the same time flip the back side into visibility */
+	transform:rotateY(360deg);
+	-webkit-transform:rotateY(360deg);
+}
+
 
 /* Forms --------------------------------------------------------------------------------------- */
 

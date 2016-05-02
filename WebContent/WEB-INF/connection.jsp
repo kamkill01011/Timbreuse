@@ -37,4 +37,11 @@
 			</form>
 		</c:if>
     </body>
+    <footer>
+    	<div class="footerLogo">
+			<div class="cpnv-logo"></div>
+			<div class="mct-logo"></div>
+		</div>
+    	<!-- <img class="logo" src="http://www.cpnv.ch/wp-content/themes/cpnv-2015/img/logo-cpnv.svg" alt="logo"/> -->
+    </footer>
 </html>
