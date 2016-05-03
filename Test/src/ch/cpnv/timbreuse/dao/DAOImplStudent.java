@@ -4,12 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+
+import org.joda.time.LocalTime;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
+import static ch.cpnv.timbreuse.dao.DAOUtility.addTime;
 
 public class DAOImplStudent implements DAOStudent {
 	
@@ -19,7 +23,8 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
-	
+	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
+	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
 	
 	private DAOFactory daoFactory;
 	
@@ -29,7 +34,6 @@ public class DAOImplStudent implements DAOStudent {
 	
 	@Override
 	public Student find(String lastname) throws DAOException {	
-		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -48,6 +52,26 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
 		
+		return student;
+	}
+	
+	public Student findStudentById(Long id) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Student student = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_ID, false, id);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				student = map(resultSet);
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
 		return student;
 	}
 	
@@ -114,4 +138,19 @@ public class DAOImplStudent implements DAOStudent {
 		student.setPermissionLevel(3);
         return student;
 	}
+	
+	public void addTimeStudent(Student student, LocalTime addedTime) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, addTime(addedTime, student.getTimeDiff()), student.getId()); //getTImeDIff mod local time
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
+	}
+	
 }

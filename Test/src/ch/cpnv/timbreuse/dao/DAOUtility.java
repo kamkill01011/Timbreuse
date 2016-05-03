@@ -5,7 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.Random;
+
+import org.joda.time.JodaTimePermission;
+import org.joda.time.LocalTime;
 
 import ch.cpnv.timbreuse.beans.User;
 
@@ -189,8 +193,7 @@ public final class DAOUtility {
 		return password;
 	}
 	
-	
+	public static LocalTime addTime(LocalTime newTime, LocalTime oldTime) {
+		return new LocalTime(oldTime.getHourOfDay()+newTime.getHourOfDay(), oldTime.getMinuteOfHour()+newTime.getMinuteOfHour(), oldTime.getSecondOfMinute()+newTime.getSecondOfMinute());
+	}	
 }
-
-
-

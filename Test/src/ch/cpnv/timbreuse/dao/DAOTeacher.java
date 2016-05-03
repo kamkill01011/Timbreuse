@@ -2,6 +2,7 @@ package ch.cpnv.timbreuse.dao;
 
 import java.util.ArrayList;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 
@@ -38,5 +39,5 @@ public interface DAOTeacher {
 	 * @return Liste de tous les élèves de la classe
 	 * @throws DAOException ???
 	 */
-	ArrayList<User> listClass(String classe) throws DAOException;
+	ArrayList<Student> listClass(String classe) throws DAOException;
 }

@@ -6,6 +6,7 @@ import java.sql.Time;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 
 
 /**
@@ -17,8 +18,9 @@ public class Student {
     private Long		id;
     private String		email,lastname,firstname,classe,password,username,status;
     private Date		lastCheck,startDate;
-    private Time		timeDiff,todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
+    private Time		todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     private int 		permissionLevel;
+    private LocalTime 	timeDiff;
     
     public Long getId() {
         return id;
@@ -38,11 +40,12 @@ public class Student {
     public String getLastname() {
         return lastname;
     }
-	public Time getTimeDiff() {
+	public LocalTime getTimeDiff() {
 		return timeDiff;
 	}
 	public void setTimeDiff(Time timeDiff) {
-		this.timeDiff = timeDiff;
+		this.timeDiff = new LocalTime(timeDiff.toLocalTime());
+		System.out.println(timeDiff.toString());
 	}
 	public String getFirstname() {
 		return firstname;

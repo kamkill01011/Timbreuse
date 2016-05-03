@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 
@@ -120,8 +121,8 @@ public class DAOImplTeacher implements DAOTeacher {
 	}
 
 	@Override
-	public ArrayList<User> listClass(String classe) throws DAOException {
-		ArrayList<User> list = new ArrayList<User>();
+	public ArrayList<Student> listClass(String classe) throws DAOException {
+		ArrayList<Student> list = new ArrayList<Student>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -131,26 +132,26 @@ public class DAOImplTeacher implements DAOTeacher {
 			preparedStatement = preparedRequestInitialisation(connection, SQL_LIST_STUDENTS_BY_CLASS, false, classe);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
-				User user = new User();
-				user.setId(resultSet.getLong("id"));
-				user.setClasse(resultSet.getString("Class"));
-				user.setLastname(resultSet.getString("Lastname"));
-				user.setFirstname(resultSet.getString("Firstname"));
-				user.setTimeDiff(resultSet.getTime("TimeDiff"));
-				user.setTodayTime(resultSet.getTime("TodayTime"));
-				user.setStatus(resultSet.getString("Status"));
-				user.setLastCheck(resultSet.getDate("LastCheck"));
-				user.setStartDate(resultSet.getDate("StartDate"));
-				user.setMonday(resultSet.getTime("Monday"));
-				user.setTuesday(resultSet.getTime("Tuesday"));
-				user.setWednesday(resultSet.getTime("Wednesday"));
-				user.setThursday(resultSet.getTime("Thursday"));
-				user.setFriday(resultSet.getTime("Friday"));
-				user.setSaturday(resultSet.getTime("Saturday"));
-				user.setSunday(resultSet.getTime("Sunday"));
-				user.setEmail(resultSet.getString("Email"));
-				user.setPermissionLevel(3);
-				list.add(user);
+				Student student = new Student();
+				student.setId(resultSet.getLong("id"));
+				student.setClasse(resultSet.getString("Class"));
+				student.setLastname(resultSet.getString("Lastname"));
+				student.setFirstname(resultSet.getString("Firstname"));
+				student.setTimeDiff(resultSet.getTime("TimeDiff"));
+				student.setTodayTime(resultSet.getTime("TodayTime"));
+				student.setStatus(resultSet.getString("Status"));
+				student.setLastCheck(resultSet.getDate("LastCheck"));
+				student.setStartDate(resultSet.getDate("StartDate"));
+				student.setMonday(resultSet.getTime("Monday"));
+				student.setTuesday(resultSet.getTime("Tuesday"));
+				student.setWednesday(resultSet.getTime("Wednesday"));
+				student.setThursday(resultSet.getTime("Thursday"));
+				student.setFriday(resultSet.getTime("Friday"));
+				student.setSaturday(resultSet.getTime("Saturday"));
+				student.setSunday(resultSet.getTime("Sunday"));
+				student.setEmail(resultSet.getString("Email"));
+				student.setPermissionLevel(3);
+				list.add(student);
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);

@@ -14,8 +14,10 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
+import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
 import ch.cpnv.timbreuse.forms.CreateStudentForm;
 import ch.cpnv.timbreuse.forms.DeleteStudentForm;
 import ch.cpnv.timbreuse.forms.StudentResearchForm;
@@ -48,17 +50,26 @@ public class ManageStudents extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
-		
+		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
 		if(tempSelectedClasse != null) {
 			selectedClasse = tempSelectedClasse;
 		}
 		//recherche les élèves de la classe (si une classe est sélectionnée)
-		ArrayList<User> studentsInClass = new ArrayList<User>();
+		ArrayList<Student> studentsInClass = new ArrayList<Student>();
 		if(selectedClasse != null) {
 			studentsInClass = daoTeacher.listClass(selectedClasse);
 			request.setAttribute("studentsInClass", studentsInClass);
+			if(request.getParameter("addTime") != null) {
+				AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
+				for (int i = 0; i < studentsInClass.size(); i++) {
+					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+					Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+					((DAOImplStudent)daoStudent).addTimeStudent(student, new addTimeForm.getTimeDiffField(request).toString());
+					}
+				}
+			}
 		}
 		
 		//enregistre quels élèves sont sélectionnés
