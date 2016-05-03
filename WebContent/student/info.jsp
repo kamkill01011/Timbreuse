@@ -43,4 +43,10 @@
 		<input type="submit" value="Changer de mot de passe" class="changePassword" />
 	</form>
     </body>
+    <footer>
+    	<div class="footerLogo">
+			<div class="cpnv-logo"></div>
+			<div class="mct-logo"></div>
+		</div>
+    </footer>
 </html>
