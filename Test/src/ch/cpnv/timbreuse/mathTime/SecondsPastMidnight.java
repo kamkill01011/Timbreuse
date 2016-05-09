@@ -3,7 +3,7 @@ package ch.cpnv.timbreuse.mathTime;
 public final class SecondsPastMidnight {
 	public static final int INFINITE = 200000; 
 	
-	private SecondsPastMidnight() { //Constructeur privé par défaut vide => rend la classe non instantiable
+	private SecondsPastMidnight() {  //Constructeur privé par défaut vide => rend la classe non instantiable
 	
 	}
 	

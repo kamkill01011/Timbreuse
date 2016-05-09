@@ -5,9 +5,6 @@ import static ch.cpnv.timbreuse.mathTime.Math.divF;
 
 public final class Date {
 	
-	public enum DayOfWeek {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
-	public enum Month {JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER}
-	
 	private int day, month, year;
 	
 	public Date(int day, int month, int year) {

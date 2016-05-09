@@ -4,7 +4,7 @@ import static java.lang.Math.floor;
 
 public final class Math {
 	
-	public Math() {		//constructeur par défaut vide pour être sûr que la classe ne peut pas être instanciée
+	public Math() {	//constructeur par défaut vide pour être sûr que la classe ne peut pas être instanciée
 		
 	}
 	

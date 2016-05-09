@@ -196,4 +196,14 @@ public final class DAOUtility {
 	public static LocalTime addTime(LocalTime newTime, LocalTime oldTime) {
 		return new LocalTime(oldTime.getHourOfDay()+newTime.getHourOfDay(), oldTime.getMinuteOfHour()+newTime.getMinuteOfHour(), oldTime.getSecondOfMinute()+newTime.getSecondOfMinute());
 	}	
+	
+	public static String upperFirstLetter(String s) {
+		s = removeAccent(s);
+		char[] newChars = s.toCharArray();
+		newChars[0] = Character.toUpperCase(newChars[0]);
+		for(int i=1;i<newChars.length;i++) {
+			newChars[i] = Character.toLowerCase(newChars[i]);
+		}
+		return new String(newChars);
+	}
 }
