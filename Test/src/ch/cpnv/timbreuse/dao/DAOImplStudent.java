@@ -33,7 +33,7 @@ public class DAOImplStudent implements DAOStudent {
 	}
 	
 	@Override
-	public Student find(String lastname) throws DAOException {	
+	public Student find(String lastname) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -135,7 +135,7 @@ public class DAOImplStudent implements DAOStudent {
 		student.setLastname(resultSet.getString("Lastname"));
 		student.setFirstname(resultSet.getString("Firstname"));
 		student.setTimeDiff(resultSet.getTime("timeDiff"));
-		student.setPermissionLevel(3);
+		//student.setPermissionLevel(3);
         return student;
 	}
 	

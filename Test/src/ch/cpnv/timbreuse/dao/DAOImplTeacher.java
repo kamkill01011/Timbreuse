@@ -150,7 +150,7 @@ public class DAOImplTeacher implements DAOTeacher {
 				student.setSaturday(resultSet.getTime("Saturday"));
 				student.setSunday(resultSet.getTime("Sunday"));
 				student.setEmail(resultSet.getString("Email"));
-				student.setPermissionLevel(3);
+				//student.setPermissionLevel(3);
 				list.add(student);
 			}
 		} catch(SQLException e) {

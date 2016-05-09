@@ -16,10 +16,9 @@ import org.joda.time.LocalTime;
 public class Student {
 
     private Long		id;
-    private String		email,lastname,firstname,classe,password,username,status;
+    private String		email,lastname,firstname,classe,password,status;
     private Date		lastCheck,startDate;
     private Time		todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
-    private int 		permissionLevel;
     private LocalTime 	timeDiff;
     
     public Long getId() {
@@ -44,7 +43,7 @@ public class Student {
 		return timeDiff;
 	}
 	public void setTimeDiff(Time timeDiff) {
-		this.timeDiff = new LocalTime(timeDiff.toLocalTime());
+		//this.timeDiff = new LocalTime(timeDiff.toLocalTime());
 		System.out.println(timeDiff.toString());
 	}
 	public String getFirstname() {
@@ -69,18 +68,6 @@ public class Student {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public int getPermissionLevel() {
-		return permissionLevel;
-	}
-	public void setPermissionLevel(int permissionLevel) {
-		this.permissionLevel = permissionLevel;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public Time getTodayTime() {
 		return todayTime;
