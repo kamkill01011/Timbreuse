@@ -1,5 +1,7 @@
 package ch.cpnv.timbreuse.beans;
 
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
+
 import org.jasypt.util.text.BasicTextEncryptor;
 
 
@@ -20,7 +22,7 @@ public class User {
         this.id = id;
     }
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = upperFirstLetter(lastname);
     }
     public String getLastname() {
         return lastname;
@@ -29,7 +31,7 @@ public class User {
 		return firstname;
 	}
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstname = upperFirstLetter(firstname);
 	}
 	public String getClasse() {
 		return classe;

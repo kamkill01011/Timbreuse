@@ -1,5 +1,7 @@
 package ch.cpnv.timbreuse.beans;
 
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
+
 /**
  * Objet enseignant
  *
@@ -17,7 +19,7 @@ public class Teacher {
 		return firstname;
 	}
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstname = upperFirstLetter(firstname);
 	}
 	public String getClasse() {
 		return classe;
@@ -35,6 +37,6 @@ public class Teacher {
 		return lastname;
 	}
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.lastname = upperFirstLetter(lastname);
 	}
 }

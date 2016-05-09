@@ -85,12 +85,13 @@ public final class DAOUtility {
 	 * @return string sans accents
 	 */
 	private static String removeAccent(String s) {
-		s=s.replaceAll("[àáä]", "a");
-		s=s.replaceAll("[éèë]", "e");
-		s=s.replaceAll("[íìï]", "i");
-		s=s.replaceAll("[óòö]", "o");
-		s=s.replaceAll("[úùü]", "u");
+		s=s.replaceAll("[âàáä]", "a");
+		s=s.replaceAll("[êéèë]", "e");
+		s=s.replaceAll("[îíìï]", "i");
+		s=s.replaceAll("[ôóòö]", "o");
+		s=s.replaceAll("[ûúùü]", "u");
 		s=s.replaceAll("[ç]", "c");
+		System.out.println(s);
 		return s;
 	}
 	

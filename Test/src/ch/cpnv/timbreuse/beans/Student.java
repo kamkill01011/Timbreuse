@@ -5,6 +5,8 @@ import java.sql.Time;
 
 import org.joda.time.LocalTime;
 
+import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
+
 
 /**
  * Objet élève
@@ -31,7 +33,7 @@ public class Student {
     	return email;
     }
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = upperFirstLetter(lastname);
     }
     public String getLastname() {
         return lastname;
@@ -47,7 +49,7 @@ public class Student {
 		return firstname;
 	}
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstname = upperFirstLetter(firstname);
 	}
 	public String getClasse() {
 		return classe;
