@@ -7,7 +7,7 @@ import java.util.Random;
 import org.junit.Test;
 
 public class TestSecondsPastMidnight {
-    /*@Test(expected = java.lang.IllegalArgumentException.class)
+    @Test(expected = java.lang.IllegalArgumentException.class)
     public void testFromHMSHourTooSmall() {
         SecondsPastMidnight.fromHMS(-1, 0, 0);
     }
@@ -68,6 +68,7 @@ public class TestSecondsPastMidnight {
             int h = rng.nextInt(30);
             int m = rng.nextInt(60);
             int s = rng.nextInt(60);
+            System.out.println(h+":"+m+":"+s);
             assertEquals(h, SecondsPastMidnight.hours(SecondsPastMidnight.fromHMS(h, m, s)));
         }
     }
@@ -98,5 +99,5 @@ public class TestSecondsPastMidnight {
     @Test
     public void testToString() {
         assertEquals("09:15:33", SecondsPastMidnight.toString(SecondsPastMidnight.fromHMS(9, 15, 33)));
-    }*/
+    }
 }
