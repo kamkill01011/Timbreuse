@@ -3,9 +3,6 @@ package ch.cpnv.timbreuse.beans;
 import java.sql.Date;
 import java.sql.Time;
 
-import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.jasypt.util.text.BasicTextEncryptor;
-import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
 
@@ -16,7 +13,7 @@ import org.joda.time.LocalTime;
 public class Student {
 
     private Long		id;
-    private String		email,lastname,firstname,classe,password,status;
+    private String		email,lastname,firstname,classe,status;
     private Date		lastCheck,startDate;
     private Time		todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     private LocalTime 	timeDiff;
@@ -57,17 +54,6 @@ public class Student {
 	}
 	public void setClasse(String classe) {
 		this.classe = classe;
-	}
-	public String getPassword() {
-		if(password.length()>8) {
-			BasicTextEncryptor cryptor = new BasicTextEncryptor();
-			cryptor.setPassword("MonGrainDeSel");
-			return cryptor.decrypt(password);
-		}
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public Time getTodayTime() {
 		return todayTime;

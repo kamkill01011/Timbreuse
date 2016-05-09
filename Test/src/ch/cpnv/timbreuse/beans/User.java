@@ -1,11 +1,6 @@
 package ch.cpnv.timbreuse.beans;
 
-import java.sql.Date;
-import java.sql.Time;
-
-import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
-import org.joda.time.DateTime;
 
 
 /**
