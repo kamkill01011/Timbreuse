@@ -85,7 +85,7 @@ public class DAOImplUser implements DAOUser {
 		user.setClasse(resultSet.getString("Class"));
 		user.setLastname(resultSet.getString("Lastname"));
 		user.setFirstname(resultSet.getString("Firstname"));
-		user.setTimeDiff(resultSet.getTime("TimeDiff"));
+		/*user.setTimeDiff(resultSet.getTime("TimeDiff"));
 		user.setTodayTime(resultSet.getTime("TodayTime"));
 		user.setStatus(resultSet.getString("Status"));
 		user.setLastCheck(resultSet.getDate("LastCheck"));
@@ -97,7 +97,7 @@ public class DAOImplUser implements DAOUser {
 		user.setFriday(resultSet.getTime("Friday"));
 		user.setSaturday(resultSet.getTime("Saturday"));
 		user.setSunday(resultSet.getTime("Sunday"));
-		user.setEmail(resultSet.getString("Email"));
+		user.setEmail(resultSet.getString("Email"));*/
 		user.setPermissionLevel(3);
         return user;
 	}

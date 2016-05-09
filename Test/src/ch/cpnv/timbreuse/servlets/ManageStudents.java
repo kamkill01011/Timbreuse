@@ -65,8 +65,8 @@ public class ManageStudents extends HttpServlet{
 				AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
 				for (int i = 0; i < studentsInClass.size(); i++) {
 					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
-					Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-					((DAOImplStudent)daoStudent).addTimeStudent(student, new addTimeForm.getTimeDiffField(request).toString());
+						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+						//((DAOImplStudent)daoStudent).addTimeStudent(student, new addTimeForm.getTimeDiffField(request).toString());
 					}
 				}
 			}
