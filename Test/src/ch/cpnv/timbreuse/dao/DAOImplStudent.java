@@ -148,6 +148,7 @@ public class DAOImplStudent implements DAOStudent {
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, addTime(addedTime, SecondsPastMidnight.stringToInt(student.getTimeDiff())), student.getId()); //getTImeDIff mod local time
+			preparedStatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {

@@ -55,6 +55,7 @@ public class AddTimeStudentsForm {
 				String minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));
 				String seconds = timeString.substring(timeString.lastIndexOf(":")+1, timeString.length());
 				time = SecondsPastMidnight.fromHMS(Integer.parseInt(hours), Integer.parseInt(minutes), Integer.parseInt(seconds));
+				System.out.println(time);
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";

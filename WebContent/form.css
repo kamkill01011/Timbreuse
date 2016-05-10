@@ -10,8 +10,10 @@ label, input {
 }
 
 fieldset {
-    padding: 12px;
-    border: 2px #0568CD solid;
+    border:2px solid green;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;	
+    border-radius:8px;	
 }
 
 legend {

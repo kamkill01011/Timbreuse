@@ -52,7 +52,7 @@ public final class SecondsPastMidnight {
 	public static int stringToInt(String s) {
 		int hours = Integer.parseInt(s.substring(0, s.indexOf(":")));
 		int minutes = Integer.parseInt(s.substring(s.indexOf(":")+1, s.lastIndexOf(":")));
-		int seconds = Integer.parseInt(s.substring(s.lastIndexOf(":"+1), s.length()));
+		int seconds = Integer.parseInt(s.substring(s.lastIndexOf(":")+1, s.length()));
 		return fromHMS(hours, minutes, seconds);
 	}
 }
