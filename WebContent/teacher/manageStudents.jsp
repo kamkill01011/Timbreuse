@@ -54,7 +54,7 @@
 						<td>
 							<table>
 								<tr>
-									<th><input type="checkbox" id="selectAllID" name="selectAllID" onClick='checkAll(document.forms.students,this)' /></th> <!-- checked="${param.selectAllID}" -->
+									<th><input type="checkbox" id="selectAllID" name="selectAllID" onClick='checkAll(document.forms.students,this)' <c:if test="${param.selectAllID != null}">checked="checked"</c:if> /></th>
 									<th>Nom</th>
 									<th>Prénom</th>
 									<th>Différence</th>

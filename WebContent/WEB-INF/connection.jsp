@@ -13,7 +13,7 @@
             <fieldset>
                 <legend>Connexion</legend>
                 <label for="username">Adresse email <span class="requis">*</span></label>
-                <input type="username" name="username" value="<c:out value="${user.username}"/>" size="20" maxlength="60" />
+                <input type="text" name="username" value="<c:out value="${user.username}"/>" size="20" maxlength="60" />
                 <span class="error">${form.errors['username']}</span>
                 <br />
                 <label for="password">Mot de passe <span class="requis">*</span></label>
