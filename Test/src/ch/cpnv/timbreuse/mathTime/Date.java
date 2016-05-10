@@ -63,7 +63,7 @@ public final class Date {
 	}
 	
 	public String toString() {
-		return Integer.toString(year)+"-"+Integer.toString(month)+"-"+Integer.toString(day);
+		return Integer.toString(day)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
 	}
 	
 	public boolean equals(Object that) {
@@ -72,6 +72,16 @@ public final class Date {
 	
 	public int compareTo(Date that) {
 		return 0;
+	}
+	
+	public static Date stringToDate(String dateString) {
+		if(dateString==null) {
+			return null;
+		}
+		int day = Integer.parseInt(dateString.substring(0, dateString.indexOf("-")));
+		int month = Integer.parseInt(dateString.substring(dateString.indexOf("-")+1, dateString.lastIndexOf("-")));
+		int year = Integer.parseInt(dateString.substring(dateString.lastIndexOf("-")+1, dateString.length()));
+		return new Date(day, month, year);
 	}
 	
 	private static boolean isLeapYear(int y) {

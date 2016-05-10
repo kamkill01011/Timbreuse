@@ -1,8 +1,10 @@
 package ch.cpnv.timbreuse.beans;
 
 import ch.cpnv.timbreuse.mathTime.Date;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
+import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
 
 
 /**
@@ -55,23 +57,23 @@ public class Student {
 	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDate(String startDate) {
+		this.startDate = stringToDate(startDate);
 	}
 	public Date getLastCheckDate() {
 		return lastCheckDate;
 	}
-	public void setLastCheckDate(Date lastCheckDate) {
-		this.lastCheckDate = lastCheckDate;
+	public void setLastCheckDate(String lastCheckDate) {
+		this.lastCheckDate = stringToDate(lastCheckDate);
 	}
-	public int getLastCheckTime() {
-		return lastCheckTime;
+	public String getLastCheckTime() {
+		return SecondsPastMidnight.toString(lastCheckTime);
 	}
 	public void setLastCheckTime(int lastCheckTime) {
 		this.lastCheckTime = lastCheckTime;
 	}
-	public int getTimeDiff() {
-		return timeDiff;
+	public String getTimeDiff() {
+		return SecondsPastMidnight.toString(timeDiff);
 	}
 	public void setTimeDiff(int timeDiff) {
 		this.timeDiff = timeDiff;

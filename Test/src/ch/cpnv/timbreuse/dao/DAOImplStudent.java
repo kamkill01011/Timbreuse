@@ -10,6 +10,8 @@ import org.joda.time.LocalTime;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
+
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
@@ -139,13 +141,13 @@ public class DAOImplStudent implements DAOStudent {
         return student;
 	}
 	
-	public void addTimeStudent(Student student, LocalTime addedTime) {
+	public void addTimeStudent(Student student, int addedTime) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, addTime(addedTime, student.getTimeDiff()), student.getId()); //getTImeDIff mod local time
+			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, addTime(addedTime, SecondsPastMidnight.stringToInt(student.getTimeDiff())), student.getId()); //getTImeDIff mod local time
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {

@@ -59,7 +59,8 @@
 									<th>Prénom</th>
 									<th>Différence</th>
 									<th>Status</th>
-									<th>Dernier timbrage</th>
+									<th>Dernier timbrage (date)</th>
+									<th>Dernier timbrage (heure)</th>
 									<th>E-mail</th>
 								</tr>
 								<c:forEach items="${studentsInClass}" var="i">
@@ -69,7 +70,8 @@
 										<td>${i.firstname}</td>
 										<td>${i.timeDiff}</td>
 										<td>${i.status}</td>
-										<td>${i.lastCheck}</td>
+										<td>${i.lastCheckDate}</td>
+										<td>${i.lastCheckTime}</td>
 										<td>${i.email}</td>
 									</tr>
 								</c:forEach>

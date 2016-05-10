@@ -11,6 +11,7 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOStudent;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 public class AddTimeStudentsForm {
 	private static final String ADD_TIME_FIELD = "modifyTimeDiff";
@@ -45,16 +46,15 @@ public class AddTimeStudentsForm {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	public Time getTimeDiffField(HttpServletRequest request) {
-		Time time = null;
+	public int getTimeDiffField(HttpServletRequest request) {
+		int time = 0;
 		try {
 			if(errors.isEmpty()) {
 				String timeString = getFieldValue(request, ADD_TIME_FIELD);
 				String hours = timeString.substring(0, timeString.indexOf(":"));
 				String minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));
 				String seconds = timeString.substring(timeString.lastIndexOf(":")+1, timeString.length());
-				time = new Time(Integer.parseInt(hours), Integer.parseInt(minutes), Integer.parseInt(seconds));
+				time = SecondsPastMidnight.fromHMS(Integer.parseInt(hours), Integer.parseInt(minutes), Integer.parseInt(seconds));
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";

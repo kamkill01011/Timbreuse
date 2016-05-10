@@ -91,7 +91,6 @@ public final class DAOUtility {
 		s=s.replaceAll("[ôóòö]", "o");
 		s=s.replaceAll("[ûúùü]", "u");
 		s=s.replaceAll("[ç]", "c");
-		System.out.println(s);
 		return s;
 	}
 	
@@ -194,8 +193,8 @@ public final class DAOUtility {
 		return password;
 	}
 	
-	public static LocalTime addTime(LocalTime newTime, LocalTime oldTime) {
-		return new LocalTime(oldTime.getHourOfDay()+newTime.getHourOfDay(), oldTime.getMinuteOfHour()+newTime.getMinuteOfHour(), oldTime.getSecondOfMinute()+newTime.getSecondOfMinute());
+	public static int addTime(int newTime, int oldTime) {
+		return newTime + oldTime;
 	}	
 	
 	public static String upperFirstLetter(String s) {

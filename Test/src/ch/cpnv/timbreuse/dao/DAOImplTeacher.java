@@ -140,8 +140,8 @@ public class DAOImplTeacher implements DAOTeacher {
 				student.setTimeDiff(resultSet.getInt("TimeDiff"));
 				student.setTodayTime(resultSet.getInt("TodayTime"));
 				student.setStatus(resultSet.getString("Status"));
-				student.setLastCheckTime(resultSet.getInt("LastCheck"));
-				student.setLastCheckDate(resultSet.getString("LastCheck"));//!!!
+				student.setLastCheckTime(resultSet.getInt("LastCheckTime"));
+				student.setLastCheckDate(resultSet.getString("LastCheckDate"));
 				student.setStartDate(resultSet.getString("StartDate"));
 				student.setMonday(resultSet.getInt("Monday"));
 				student.setTuesday(resultSet.getInt("Tuesday"));
