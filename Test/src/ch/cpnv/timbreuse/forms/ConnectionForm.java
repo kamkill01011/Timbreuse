@@ -13,10 +13,10 @@ import ch.cpnv.timbreuse.dao.DAOUser;
  *
  */
 public final class ConnectionForm {
-    private static final String EMAIL_FIELD = "email";
+    private static final String USERNAME_FIELD = "username";
     private static final String PASSWORD_FIELD = "password";
-    private String              result;
-    private Map<String, String> errors      = new HashMap<String, String>();
+    private String result;
+    private Map<String, String> errors = new HashMap<String, String>();
     private DAOUser daoUser;
     
     public ConnectionForm(DAOUser daoUser) {
@@ -43,18 +43,23 @@ public final class ConnectionForm {
      */
     public User connectUser(HttpServletRequest request) {
         /* Récupération des champs du formulaire */
-        String email = getFieldValue(request, EMAIL_FIELD);
+        String email = getFieldValue(request, USERNAME_FIELD);
         String password = getFieldValue(request, PASSWORD_FIELD);
-        String username = email.substring(0, email.lastIndexOf("@"));
+        String username;
+        if(email.lastIndexOf("@") > 0) {
+        	username = email.substring(0, email.lastIndexOf("@"));
+        } else {
+        	username = email;
+        }
         
         User user = new User();
 
         /* Validation du champ username. */
-        try {
+        /*try {
             emailValidation(email);
         } catch (Exception e) {
-            setError(EMAIL_FIELD, e.getMessage());
-        }
+            setError(USERNAME_FIELD, e.getMessage());
+        }*/
         
 
         /* Validation du champ mot de passe. */
@@ -67,7 +72,7 @@ public final class ConnectionForm {
         try {        	
         	user = connectionValidation(username, password);
         } catch(Exception e) {
-        	setError(EMAIL_FIELD, e.getMessage());
+        	setError(USERNAME_FIELD, e.getMessage());
         }
         
         

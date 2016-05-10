@@ -41,7 +41,7 @@ public class Connection extends HttpServlet {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
 		HttpSession session = request.getSession();	
-		//Stockage du form et du bean dans l'obj request
+		//Stockage du form dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
 		//request.setAttribute(USER_ATT, user);//useless
 		

@@ -12,9 +12,9 @@
         <form method="post" action="connection">
             <fieldset>
                 <legend>Connexion</legend>
-                <label for="email">Adresse email <span class="requis">*</span></label>
-                <input type="email" name="email" value="<c:out value="${user.email}"/>" size="20" maxlength="60" />
-                <span class="error">${form.errors['email']}</span>
+                <label for="username">Adresse email <span class="requis">*</span></label>
+                <input type="username" name="username" value="<c:out value="${user.username}"/>" size="20" maxlength="60" />
+                <span class="error">${form.errors['username']}</span>
                 <br />
                 <label for="password">Mot de passe <span class="requis">*</span></label>
                 <input type="password" name="password" value="" size="20" maxlength="20" />
@@ -26,7 +26,7 @@
                 <p class="${empty form.errors ? 'succes' : 'error'}">${form.result}</p>
                 
                 <c:if test="${!empty sessionScope.userSession}">
-                	<p class="succes">Vous êtes connecté avec l'e-amil : ${sessionScope.userSession.email}</p>
+                	<p class="succes">Vous êtes connecté en tant que : ${sessionScope.userSession.username}</p>
                 </c:if>
             </fieldset>
         </form>
