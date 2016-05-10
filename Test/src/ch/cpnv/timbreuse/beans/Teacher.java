@@ -7,8 +7,10 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
  *
  */
 public class Teacher {
+	
 	private long id;
 	private String firstname, lastname, classe, email;
+	
 	public long getId() {
 		return id;
 	}

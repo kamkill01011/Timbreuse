@@ -1,9 +1,6 @@
 package ch.cpnv.timbreuse.beans;
 
-import java.sql.Date;
-import java.sql.Time;
-
-import org.joda.time.LocalTime;
+import ch.cpnv.timbreuse.mathTime.Date;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
 
@@ -16,9 +13,8 @@ public class Student {
 
     private Long		id;
     private String		email,lastname,firstname,classe,status;
-    private Date		lastCheck,startDate;
-    private Time		todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
-    private LocalTime 	timeDiff;
+    private Date		lastCheckDate,startDate;
+    private int			lastCheckTime,timeDiff,todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;
     
     public Long getId() {
         return id;
@@ -38,13 +34,6 @@ public class Student {
     public String getLastname() {
         return lastname;
     }
-	public LocalTime getTimeDiff() {
-		return timeDiff;
-	}
-	public void setTimeDiff(Time timeDiff) {
-		//this.timeDiff = new LocalTime(timeDiff.toLocalTime());
-		System.out.println(timeDiff.toString());
-	}
 	public String getFirstname() {
 		return firstname;
 	}
@@ -57,70 +46,82 @@ public class Student {
 	public void setClasse(String classe) {
 		this.classe = classe;
 	}
-	public Time getTodayTime() {
-		return todayTime;
-	}
-	public void setTodayTime(Time todayTime) {
-		this.todayTime = todayTime;
-	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getLastCheck() {
-		return lastCheck;
-	}
-	public void setLastCheck(Date lastCheck) {
-		this.lastCheck = lastCheck;
-	}
-	public Time getSaturday() {
-		return saturday;
-	}
-	public void setSaturday(Time saturday) {
-		this.saturday = saturday;
-	}
-	public Time getSunday() {
-		return sunday;
-	}
-	public void setSunday(Time sunday) {
-		this.sunday = sunday;
-	}
-	public Time getWednesday() {
-		return wednesday;
-	}
-	public void setWednesday(Time wednesday) {
-		this.wednesday = wednesday;
-	}
-	public Time getThursday() {
-		return thursday;
-	}
-	public void setThursday(Time thursday) {
-		this.thursday = thursday;
-	}
-	public Time getFriday() {
-		return friday;
-	}
-	public void setFriday(Time friday) {
-		this.friday = friday;
-	}
-	public Time getMonday() {
-		return monday;
-	}
-	public void setMonday(Time monday) {
-		this.monday = monday;
-	}
-	public Time getTuesday() {
-		return tuesday;
-	}
-	public void setTuesday(Time tuesday) {
-		this.tuesday = tuesday;
-	}
 	public Date getStartDate() {
 		return startDate;
 	}
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+	public Date getLastCheckDate() {
+		return lastCheckDate;
+	}
+	public void setLastCheckDate(Date lastCheckDate) {
+		this.lastCheckDate = lastCheckDate;
+	}
+	public int getLastCheckTime() {
+		return lastCheckTime;
+	}
+	public void setLastCheckTime(int lastCheckTime) {
+		this.lastCheckTime = lastCheckTime;
+	}
+	public int getTimeDiff() {
+		return timeDiff;
+	}
+	public void setTimeDiff(int timeDiff) {
+		this.timeDiff = timeDiff;
+	}
+	public int getTodayTime() {
+		return todayTime;
+	}
+	public void setTodayTime(int todayTime) {
+		this.todayTime = todayTime;
+	}
+	public int getMonday() {
+		return monday;
+	}
+	public void setMonday(int monday) {
+		this.monday = monday;
+	}
+	public int getTuesday() {
+		return tuesday;
+	}
+	public void setTuesday(int tuesday) {
+		this.tuesday = tuesday;
+	}
+	public int getWednesday() {
+		return wednesday;
+	}
+	public void setWednesday(int wednesday) {
+		this.wednesday = wednesday;
+	}
+	public int getThursday() {
+		return thursday;
+	}
+	public void setThursday(int thursday) {
+		this.thursday = thursday;
+	}
+	public int getFriday() {
+		return friday;
+	}
+	public void setFriday(int friday) {
+		this.friday = friday;
+	}
+	public int getSaturday() {
+		return saturday;
+	}
+	public void setSaturday(int saturday) {
+		this.saturday = saturday;
+	}
+	public int getSunday() {
+		return sunday;
+	}
+	public void setSunday(int sunday) {
+		this.sunday = sunday;
 	}
 }
