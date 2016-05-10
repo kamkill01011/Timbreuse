@@ -134,7 +134,7 @@ public class DAOImplStudent implements DAOStudent {
 		student.setEmail(resultSet.getString("Email"));
 		student.setLastname(resultSet.getString("Lastname"));
 		student.setFirstname(resultSet.getString("Firstname"));
-		student.setTimeDiff(resultSet.getTime("timeDiff"));
+		student.setTimeDiff(resultSet.getInt("timeDiff"));
 		//student.setPermissionLevel(3);
         return student;
 	}

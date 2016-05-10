@@ -137,20 +137,20 @@ public class DAOImplTeacher implements DAOTeacher {
 				student.setClasse(resultSet.getString("Class"));
 				student.setLastname(resultSet.getString("Lastname"));
 				student.setFirstname(resultSet.getString("Firstname"));
-				student.setTimeDiff(resultSet.getTime("TimeDiff"));
-				student.setTodayTime(resultSet.getTime("TodayTime"));
+				student.setTimeDiff(resultSet.getInt("TimeDiff"));
+				student.setTodayTime(resultSet.getInt("TodayTime"));
 				student.setStatus(resultSet.getString("Status"));
-				student.setLastCheck(resultSet.getDate("LastCheck"));
-				student.setStartDate(resultSet.getDate("StartDate"));
-				student.setMonday(resultSet.getTime("Monday"));
-				student.setTuesday(resultSet.getTime("Tuesday"));
-				student.setWednesday(resultSet.getTime("Wednesday"));
-				student.setThursday(resultSet.getTime("Thursday"));
-				student.setFriday(resultSet.getTime("Friday"));
-				student.setSaturday(resultSet.getTime("Saturday"));
-				student.setSunday(resultSet.getTime("Sunday"));
+				student.setLastCheckTime(resultSet.getInt("LastCheck"));
+				student.setLastCheckDate(resultSet.getString("LastCheck"));//!!!
+				student.setStartDate(resultSet.getString("StartDate"));
+				student.setMonday(resultSet.getInt("Monday"));
+				student.setTuesday(resultSet.getInt("Tuesday"));
+				student.setWednesday(resultSet.getInt("Wednesday"));
+				student.setThursday(resultSet.getInt("Thursday"));
+				student.setFriday(resultSet.getInt("Friday"));
+				student.setSaturday(resultSet.getInt("Saturday"));
+				student.setSunday(resultSet.getInt("Sunday"));
 				student.setEmail(resultSet.getString("Email"));
-				//student.setPermissionLevel(3);
 				list.add(student);
 			}
 		} catch(SQLException e) {
