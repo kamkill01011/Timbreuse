@@ -39,23 +39,24 @@ public class AddTimeStudentsForm {
 		return result;
 	}
 
-	public void test () {
-		for (int i = 0; i < classe.size(); i++) {
-			String s = "id"+classe.get(i).getId();
-			System.out.println(s);
-		}
-	}
-
 	public int getTimeDiffField(HttpServletRequest request) {
 		int time = 0;
 		try {
 			if(errors.isEmpty()) {
 				String timeString = getFieldValue(request, ADD_TIME_FIELD);
-				String hours = timeString.substring(0, timeString.indexOf(":"));
-				String minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));
-				String seconds = timeString.substring(timeString.lastIndexOf(":")+1, timeString.length());
-				time = SecondsPastMidnight.fromHMS(Integer.parseInt(hours), Integer.parseInt(minutes), Integer.parseInt(seconds));
-				System.out.println(time);
+				timeString = timeString.replaceAll("\\s+", ""); //supprime les espaces
+				String hours, minutes, seconds;
+				if(timeString.contains("-")) {
+					hours = timeString.substring(1, timeString.indexOf(":"));
+					minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));
+					seconds = timeString.substring(timeString.lastIndexOf(":")+1, timeString.length());
+					time = SecondsPastMidnight.fromHMS(Integer.parseInt(hours)*(-1), Integer.parseInt(minutes)*(-1), Integer.parseInt(seconds)*(-1));
+				} else {		
+					hours = timeString.substring(0, timeString.indexOf(":"));
+					minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));
+					seconds = timeString.substring(timeString.lastIndexOf(":")+1, timeString.length());
+					time = SecondsPastMidnight.fromHMS(Integer.parseInt(hours), Integer.parseInt(minutes), Integer.parseInt(seconds));
+				}
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";

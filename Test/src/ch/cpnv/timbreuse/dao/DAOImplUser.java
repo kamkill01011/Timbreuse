@@ -25,7 +25,6 @@ public class DAOImplUser implements DAOUser {
 
 	@Override
 	public void create(User user) throws DAOException {
-		System.out.println("USER");//useless ?
 	}
 
 	@Override
