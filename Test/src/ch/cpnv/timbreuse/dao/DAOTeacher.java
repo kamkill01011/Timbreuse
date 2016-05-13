@@ -39,5 +39,5 @@ public interface DAOTeacher {
 	 * @return Liste de tous les élèves de la classe
 	 * @throws DAOException ???
 	 */
-	ArrayList<Student> listClass(String classe) throws DAOException;
+	ArrayList<Student> listClass(String classe, DAOStudent daoStudent) throws DAOException;
 }

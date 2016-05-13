@@ -121,7 +121,7 @@ public class DAOImplTeacher implements DAOTeacher {
 	}
 
 	@Override
-	public ArrayList<Student> listClass(String classe) throws DAOException {
+	public ArrayList<Student> listClass(String classe, DAOStudent daoStudent) throws DAOException {
 		ArrayList<Student> list = new ArrayList<Student>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -132,8 +132,10 @@ public class DAOImplTeacher implements DAOTeacher {
 			preparedStatement = preparedRequestInitialisation(connection, SQL_LIST_STUDENTS_BY_CLASS, false, classe);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
-				Student student = new Student();
-				student.setId(resultSet.getLong("id"));
+				String email = resultSet.getString("Email");
+				Student student = daoStudent.find(email.substring(0, email.indexOf("@")));
+				
+				/*student.setId(resultSet.getLong("id"));
 				student.setClasse(resultSet.getString("Class"));
 				student.setLastname(resultSet.getString("Lastname"));
 				student.setFirstname(resultSet.getString("Firstname"));
@@ -150,7 +152,8 @@ public class DAOImplTeacher implements DAOTeacher {
 				student.setFriday(resultSet.getInt("Friday"));
 				student.setSaturday(resultSet.getInt("Saturday"));
 				student.setSunday(resultSet.getInt("Sunday"));
-				student.setEmail(resultSet.getString("Email"));
+				student.setEmail(resultSet.getString("Email"));*/
+				
 				list.add(student);
 			}
 		} catch(SQLException e) {
