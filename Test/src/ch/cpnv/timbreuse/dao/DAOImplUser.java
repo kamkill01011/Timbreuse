@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
@@ -53,25 +54,25 @@ public class DAOImplUser implements DAOUser {
 	}
 
 	@Override
-	public User findStudent(String email) throws DAOException {
+	public Student findStudent(String username, DAOStudent daoStudent) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		User user = new User();
+		Student student = new Student();
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, email+"@cpnv.ch");
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, username+"@cpnv.ch");
 			
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				user = map(resultSet);
+				student = daoStudent.find(username);
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		return user;
+		return student;
 	}
 	
 	@Override

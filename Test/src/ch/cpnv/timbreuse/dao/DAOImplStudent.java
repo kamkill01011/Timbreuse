@@ -35,7 +35,7 @@ public class DAOImplStudent implements DAOStudent {
 	}
 	
 	@Override
-	public Student find(String lastname) throws DAOException {
+	public Student find(String username) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -43,7 +43,7 @@ public class DAOImplStudent implements DAOStudent {
 		
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_LASTNAME, false, lastname);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, username+"@cpnv.ch");
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				student = map(resultSet);
