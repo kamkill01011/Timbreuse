@@ -32,7 +32,6 @@ public class StudentInfo extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		
 		request.setAttribute("currentStudent", student);

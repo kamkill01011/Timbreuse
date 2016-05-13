@@ -40,10 +40,7 @@ public class DAOImplUser implements DAOUser {
 			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_USER_CONNECTION, false, username);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				user.setUsername(resultSet.getString("Username"));
-				user.setPassword(resultSet.getString("Password"));
-				user.setLastname(resultSet.getString("Lastname"));
-				user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
+				user = map(resultSet);
 			} 
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -83,22 +80,11 @@ public class DAOImplUser implements DAOUser {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
 		user.setClasse(resultSet.getString("Class"));
+		user.setUsername(resultSet.getString("Username"));
+		user.setPassword(resultSet.getString("Password"));
 		user.setLastname(resultSet.getString("Lastname"));
 		user.setFirstname(resultSet.getString("Firstname"));
-		/*user.setTimeDiff(resultSet.getTime("TimeDiff"));
-		user.setTodayTime(resultSet.getTime("TodayTime"));
-		user.setStatus(resultSet.getString("Status"));
-		user.setLastCheck(resultSet.getDate("LastCheck"));
-		user.setStartDate(resultSet.getDate("StartDate"));
-		user.setMonday(resultSet.getTime("Monday"));
-		user.setTuesday(resultSet.getTime("Tuesday"));
-		user.setWednesday(resultSet.getTime("Wednesday"));
-		user.setThursday(resultSet.getTime("Thursday"));
-		user.setFriday(resultSet.getTime("Friday"));
-		user.setSaturday(resultSet.getTime("Saturday"));
-		user.setSunday(resultSet.getTime("Sunday"));
-		user.setEmail(resultSet.getString("Email"));*/
-		user.setPermissionLevel(3);
+		user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
         return user;
 	}
 

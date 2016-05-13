@@ -133,11 +133,23 @@ public class DAOImplStudent implements DAOStudent {
 	private static Student map(ResultSet resultSet) throws SQLException {
 		Student student = new Student();
 		student.setId(resultSet.getLong("id"));
-		student.setEmail(resultSet.getString("Email"));
+		student.setClasse(resultSet.getString("Class"));
 		student.setLastname(resultSet.getString("Lastname"));
 		student.setFirstname(resultSet.getString("Firstname"));
-		student.setTimeDiff(resultSet.getInt("timeDiff"));
-		//student.setPermissionLevel(3);
+		student.setTimeDiff(resultSet.getInt("TimeDiff"));
+		student.setTodayTime(resultSet.getInt("TodayTime"));
+		student.setStatus(resultSet.getString("Status"));
+		student.setLastCheckDate(resultSet.getString("LastCheckDate"));
+		student.setLastCheckTime(resultSet.getInt("LastCheckTime"));
+		student.setStartDate(resultSet.getString("StartDate"));
+		student.setMonday(resultSet.getInt("Monday"));
+		student.setTuesday(resultSet.getInt("Tuesday"));
+		student.setWednesday(resultSet.getInt("Wednesday"));
+		student.setThursday(resultSet.getInt("Thursday"));
+		student.setFriday(resultSet.getInt("Friday"));
+		student.setSaturday(resultSet.getInt("Saturday"));
+		student.setSunday(resultSet.getInt("Sunday"));
+		student.setEmail(resultSet.getString("Email"));
         return student;
 	}
 	
