@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 
 import org.joda.time.JodaTimePermission;
 import org.joda.time.LocalTime;
 
 import ch.cpnv.timbreuse.beans.User;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 
 public final class DAOUtility {
@@ -193,10 +197,21 @@ public final class DAOUtility {
 		return password;
 	}
 	
+	/**
+	 * Additione l'ancien temps et le nouveau (timeDiff).
+	 * @param newTime nouveau temps
+	 * @param oldTime ancien temps
+	 * @return somme nouveau temps + ancien temps
+	 */
 	public static int addTime(int newTime, int oldTime) {
 		return newTime + oldTime;
 	}	
 	
+	/**
+	 * Modifie une chaîne de caractères en enlevant les éventuels accents et imposant une majuscule pour la première lettre.
+	 * @param s chaîne de caractères à modifier
+	 * @return chaîne de caractères sans accents et première lettre majuscule
+	 */
 	public static String upperFirstLetter(String s) {
 		s = removeAccent(s);
 		char[] newChars = s.toCharArray();
@@ -205,5 +220,26 @@ public final class DAOUtility {
 			newChars[i] = Character.toLowerCase(newChars[i]);
 		}
 		return new String(newChars);
+	}
+	
+	/**
+	 * Retourne la date actuelle (jj-MM-aaaa)
+	 * @return date actuelle
+	 */
+	public static String currentDate() {
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Calendar calendar = Calendar.getInstance();
+		return dateFormat.format(calendar.getTime());
+	}
+	
+	/**
+	 * Retourne le temps actuel (HH:mm:ss)
+	 * @return temps actuel
+	 */
+	public static int currentTime() {
+		DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+		Calendar calendar = Calendar.getInstance();
+		String time = timeFormat.format(calendar.getTime());
+		return SecondsPastMidnight.stringToInt(time);
 	}
 }
