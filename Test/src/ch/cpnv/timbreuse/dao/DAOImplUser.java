@@ -15,7 +15,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
 public class DAOImplUser implements DAOUser {
 
-	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
+	private static final String SQL_SELECT_USER_CONNECTION = "SELECT * FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
 	private DAOFactory daoFactory;
@@ -79,7 +79,6 @@ public class DAOImplUser implements DAOUser {
 	private static User map(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
-		user.setClasse(resultSet.getString("Class"));
 		user.setUsername(resultSet.getString("Username"));
 		user.setPassword(resultSet.getString("Password"));
 		user.setLastname(resultSet.getString("Lastname"));

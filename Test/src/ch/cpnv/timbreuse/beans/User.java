@@ -12,7 +12,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 public class User {
 
     private Long		id;
-    private String		lastname,firstname,classe,password,username;
+    private String		lastname,firstname,password,username;
     private int 		permissionLevel;
     
     public Long getId() {
@@ -32,12 +32,6 @@ public class User {
 	}
 	public void setFirstname(String firstname) {
 		this.firstname = upperFirstLetter(firstname);
-	}
-	public String getClasse() {
-		return classe;
-	}
-	public void setClasse(String classe) {
-		this.classe = classe;
 	}
 	public String getPassword() {
 		if(password.length()>8) {
