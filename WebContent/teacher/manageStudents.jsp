@@ -80,6 +80,7 @@
 						<td>
 							<input type="text" name="modifyTimeDiff" value="HH:MM:SS" size="32" maxlength="64" />
 							<input type="submit" name="addTime" value="Ajouter du temps" />
+							<input type="submit" name="newStatus" value="Timbrer"/>
 							<br />
 						</td>
 				</table>

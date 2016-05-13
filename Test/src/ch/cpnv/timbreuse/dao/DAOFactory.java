@@ -65,7 +65,7 @@ public class DAOFactory {
 			config.setPassword(password);
 			//Paramétrage taille du pool
 			config.setMinConnectionsPerPartition(5);
-			config.setMaxConnectionsPerPartition(10);
+			config.setMaxConnectionsPerPartition(15);
 			config.setPartitionCount(2);
 			//Création du pool avec les configs
 			connectionPool = new BoneCP(config);
@@ -96,5 +96,9 @@ public class DAOFactory {
 	
 	public DAOUser getDaoAdmin() {
 		return new DAOImplAdmin(this);
+	}
+	
+	public DAOLogs getDaoLogs() {
+		return new DAOImplLogs(this);
 	}
 }

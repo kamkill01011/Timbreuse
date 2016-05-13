@@ -1,13 +1,20 @@
 package ch.cpnv.timbreuse.dao;
 
-import ch.cpnv.timbreuse.beans.User;
+import ch.cpnv.timbreuse.beans.Student;
 
 public interface DAOLogs {
 	
 	
 	/**
-	 * Ajoute un log
-	 * @param user utilisateur concerné
+	 * Ajoute un log et retourne le nouveau status (DEP, ARR)
+	 * @param student eleve concerné
 	 */
-	void addLog(User user);
+	String addLog(Student student) throws DAOException;
+	
+	/**
+	 * Retourne le statut de l'eleve
+	 * @param student eleve concerné
+	 * @return statut de l'utilisateur
+	 */
+	String getNewStatus(Student student) throws DAOException;
 }

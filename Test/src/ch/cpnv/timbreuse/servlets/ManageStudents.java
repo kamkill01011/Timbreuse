@@ -14,7 +14,9 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOImplLogs;
 import ch.cpnv.timbreuse.dao.DAOImplStudent;
+import ch.cpnv.timbreuse.dao.DAOLogs;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
@@ -31,11 +33,13 @@ public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
 	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
+	private DAOLogs daoLogs;
 	private String selectedClasse;
 
 	public void init() {
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
+		this.daoLogs 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLogs();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -67,6 +71,15 @@ public class ManageStudents extends HttpServlet{
 					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
+					}
+				}
+			}
+			if(request.getParameter("newStatus") != null) {
+				for (int i = 0; i < studentsInClass.size(); i++) {
+					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+						String newStatus = ((DAOImplLogs)daoLogs).addLog(student);
+						((DAOStudent)daoStudent).changeStatus(student, newStatus);
 					}
 				}
 			}
