@@ -70,6 +70,15 @@ public class ManageStudents extends HttpServlet{
 					}
 				}
 			}
+			if(request.getParameter("newStatus") != null) {
+				for (int i = 0; i < studentsInClass.size(); i++) {
+					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+						String newStatus = ((DAOImplLogs)daoLogs).addLog(student);
+						((DAOStudent)daoStudent).changeStatus(student, newStatus);
+					}
+				}
+			}
 		}
 		
 		//enregistre quels élèves sont sélectionnés

@@ -29,4 +29,11 @@ public interface DAOStudent {
      * @param addedTime, nouveau temps à ajouter
      */
    // void addTimeStudent(int id, Time addedTime) throws DAOException;
+    
+    
+    /**
+     * Modifie la colonne statut. (DEP => ARR, ARR => DEP)
+     * @param student eleve concerné
+     */
+    void changeStatus(Student student, String newStatus) throws DAOException;
 }

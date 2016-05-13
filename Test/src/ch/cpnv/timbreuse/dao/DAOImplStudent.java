@@ -27,6 +27,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
+	private static final String SQL_UPDATE_STUDENT_STATUS = "UPDATE eleves SET Status=? WHERE Firstname=? AND Lastname=?";
 	
 	private DAOFactory daoFactory;
 	
@@ -167,5 +168,22 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
 	}
-	
+
+	@Override
+	public void changeStatus(Student student, String newStatus) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		String firstname = student.getFirstname();
+		String lastname = student.getLastname();
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_STUDENT_STATUS, false, newStatus, firstname, lastname);
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
+	}
 }
