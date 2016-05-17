@@ -98,7 +98,7 @@ public class DAOFactory {
 		return new DAOImplAdmin(this);
 	}
 	
-	public DAOLogs getDaoLogs() {
-		return new DAOImplLogs(this);
+	public DAOLog getDaoLog() {
+		return new DAOImplLog(this);
 	}
 }

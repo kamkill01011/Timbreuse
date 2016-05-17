@@ -1,6 +1,5 @@
 package ch.cpnv.timbreuse.servlets;
 
-import java.awt.Window;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,15 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOImplLogs;
+import ch.cpnv.timbreuse.dao.DAOImplLog;
 import ch.cpnv.timbreuse.dao.DAOImplStudent;
-import ch.cpnv.timbreuse.dao.DAOLogs;
+import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
@@ -38,13 +35,13 @@ public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
 	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
-	private DAOLogs daoLogs;
+	private DAOLog daoLog;
 	private String selectedClasse;
 
 	public void init() {
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
-		this.daoLogs 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLogs();
+		this.daoLog 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -83,7 +80,7 @@ public class ManageStudents extends HttpServlet{
 				for (int i = 0; i < studentsInClass.size(); i++) {
 					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						String newStatus = ((DAOImplLogs)daoLogs).addLog(student);
+						String newStatus = ((DAOImplLog)daoLog).addLog(student);
 						((DAOStudent)daoStudent).changeStatus(student, newStatus);
 					}
 				}

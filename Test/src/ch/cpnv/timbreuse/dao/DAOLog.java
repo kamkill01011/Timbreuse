@@ -1,8 +1,11 @@
 package ch.cpnv.timbreuse.dao;
 
+import java.util.ArrayList;
+
+import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 
-public interface DAOLogs {
+public interface DAOLog {
 	
 	
 	/**
@@ -17,4 +20,6 @@ public interface DAOLogs {
 	 * @return statut de l'utilisateur
 	 */
 	String getNewStatus(Student student) throws DAOException;
+
+	ArrayList<Log> getStudentLogs(Student student);
 }

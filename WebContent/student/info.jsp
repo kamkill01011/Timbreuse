@@ -36,6 +36,36 @@
 		<p>Username : ${sessionScope.userSession.username}</p>
 		<p>Password : ${sessionScope.userSession.password}</p>
 	</fieldset>
+	
+	<fieldset>
+		<legend>Logs</legend>
+		<form method="post" action="managestudents" id="students">
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<th>ID</th>
+								<th>Username</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Status</th>
+							</tr>
+							<c:forEach items="${logs}" var="i">
+								<tr>
+									<td>${i.id}</td>
+									<td>${i.username}</td>
+									<td>${i.date}</td>
+									<td>${i.time}</td>
+									<td>${i.status}</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</td>
+			</table>
+		</form>
+	</fieldset>
+	
 	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
 		<input type="submit" name="logout" value="Déconnexion" class="logout" />
 	</form>
