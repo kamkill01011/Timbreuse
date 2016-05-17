@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
-import ch.cpnv.timbreuse.beans.User;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
@@ -97,7 +96,7 @@ public class DAOImplLog implements DAOLog {
 			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_LOGS, false, generateUsername(firstname, lastname));
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
-				logs.add(map(resultSet));
+				logs.add(0, map(resultSet));
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
