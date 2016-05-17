@@ -96,7 +96,7 @@ public class DAOImplLog implements DAOLog {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_LOGS, false, generateUsername(firstname, lastname));
 			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
+			while(resultSet.next()) {
 				logs.add(map(resultSet));
 			}
 		} catch(SQLException e) {
