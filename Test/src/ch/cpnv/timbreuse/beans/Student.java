@@ -78,50 +78,50 @@ public class Student {
 	public void setTimeDiff(int timeDiff) {
 		this.timeDiff = timeDiff;
 	}
-	public int getTodayTime() {
-		return todayTime;
+	public String getTodayTime() {
+		return SecondsPastMidnight.toString(todayTime);
 	}
 	public void setTodayTime(int todayTime) {
 		this.todayTime = todayTime;
 	}
-	public int getMonday() {
-		return monday;
+	public String getMonday() {
+		return SecondsPastMidnight.toString(monday);
 	}
 	public void setMonday(int monday) {
 		this.monday = monday;
 	}
-	public int getTuesday() {
-		return tuesday;
+	public String getTuesday() {
+		return SecondsPastMidnight.toString(tuesday);
 	}
 	public void setTuesday(int tuesday) {
 		this.tuesday = tuesday;
 	}
-	public int getWednesday() {
-		return wednesday;
+	public String getWednesday() {
+		return SecondsPastMidnight.toString(wednesday);
 	}
 	public void setWednesday(int wednesday) {
 		this.wednesday = wednesday;
 	}
-	public int getThursday() {
-		return thursday;
+	public String getThursday() {
+		return SecondsPastMidnight.toString(thursday);
 	}
 	public void setThursday(int thursday) {
 		this.thursday = thursday;
 	}
-	public int getFriday() {
-		return friday;
+	public String getFriday() {
+		return SecondsPastMidnight.toString(friday);
 	}
 	public void setFriday(int friday) {
 		this.friday = friday;
 	}
-	public int getSaturday() {
-		return saturday;
+	public String getSaturday() {
+		return SecondsPastMidnight.toString(saturday);
 	}
 	public void setSaturday(int saturday) {
 		this.saturday = saturday;
 	}
-	public int getSunday() {
-		return sunday;
+	public String getSunday() {
+		return SecondsPastMidnight.toString(sunday);
 	}
 	public void setSunday(int sunday) {
 		this.sunday = sunday;

@@ -1,5 +1,6 @@
 package ch.cpnv.timbreuse.beans;
 
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 /**
  * Objet utilisateur
@@ -35,8 +36,8 @@ public class Log {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getTime() {
-		return time;
+	public String getTime() {
+		return SecondsPastMidnight.toString(time);
 	}
 	public void setTime(int time) {
 		this.time = time;
