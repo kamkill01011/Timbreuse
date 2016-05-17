@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import com.sun.org.apache.bcel.internal.generic.DALOAD;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplAdmin implements DAOUser {
@@ -46,7 +47,7 @@ public class DAOImplAdmin implements DAOUser {
 	}
 	
 	@Override
-	public User findStudent(String email) throws DAOException {
+	public Student findStudent(String username, DAOStudent daoStudent) throws DAOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,5 +1,6 @@
 package ch.cpnv.timbreuse.dao;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 
 public interface DAOUser {
@@ -11,11 +12,11 @@ public interface DAOUser {
     void create(User user) throws DAOException;
     
     /**
-     * @param email Adresse mail de l'élève à trouver
+     * @param username Nom d'utilisateur de l'élève à trouver
      * @return L'élève correspondant à l'adresse mail
      * @throws DAOException ???
      */
-    User findStudent(String email) throws DAOException;
+    Student findStudent(String usename, DAOStudent daoStudent) throws DAOException;
     
     /**
      * @param username Nom d'utilisateur à trouver

@@ -87,7 +87,7 @@ public class DAOFactory {
 	public DAOStudent getDaoStudent() {
 		return new DAOImplStudent(this);
 	}
-	public DAOUser getDaoUsername() {
+	public DAOUser getDaoUser() {
 		return new DAOImplUser(this);
 	}
 	public DAOTeacher getDaoTeacher() {

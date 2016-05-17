@@ -30,7 +30,7 @@ public class Connection extends HttpServlet {
 	private DAOUser daoUser;
 
 	public void init() {
-		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUsername();
+		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

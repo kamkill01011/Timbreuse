@@ -13,10 +13,10 @@ public interface DAOStudent {
     void create(Student student) throws DAOException;
 
     /**
-     * @param email Adresse mail de l'élève à trouver
+     * @param username Nom d'utilisateur de l'élève à trouver
      * @return L'élève correspondant à l'adresse mail
      */
-    Student find(String email) throws DAOException;
+    Student find(String username) throws DAOException;
 
     /**
      * @param student L'élève à supprimer

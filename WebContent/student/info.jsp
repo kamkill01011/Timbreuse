@@ -17,8 +17,8 @@
 		<p>E-mail : ${currentStudent.email}</p>
 		<p>Status : ${currentStudent.status}</p>
 		<p>Date d'inscription : ${currentStudent.startDate}</p>
-		<p>Dernier timbrage : ${currentStudent.lastCheck}</p>
-		<p>Niveau de permission : ${currentStudent.permissionLevel}</p>
+		<p>Date dernier timbrage : ${currentStudent.lastCheckDate}</p>
+		<p>Heure dernier timbrage : ${currentStudent.lastCheckTime}</p>
 		<p>Heures effectuées aujourd'hui : ${currentStudent.todayTime}</p>
 	</fieldset>
 	<fieldset>

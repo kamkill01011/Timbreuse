@@ -63,7 +63,7 @@ public class ManageStudents extends HttpServlet{
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();
 		if(selectedClasse != null) {
-			studentsInClass = daoTeacher.listClass(selectedClasse);
+			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
 			request.setAttribute("studentsInClass", studentsInClass);
 			if(request.getParameter("addTime") != null) {
 				AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);

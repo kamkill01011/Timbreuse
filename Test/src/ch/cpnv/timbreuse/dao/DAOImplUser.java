@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
@@ -14,7 +15,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 
 public class DAOImplUser implements DAOUser {
 
-	private static final String SQL_SELECT_USER_CONNECTION = "SELECT Username, Password, Lastname, PermissionLevel FROM users WHERE Username=?";
+	private static final String SQL_SELECT_USER_CONNECTION = "SELECT * FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
 	private DAOFactory daoFactory;
@@ -39,10 +40,7 @@ public class DAOImplUser implements DAOUser {
 			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_USER_CONNECTION, false, username);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				user.setUsername(resultSet.getString("Username"));
-				user.setPassword(resultSet.getString("Password"));
-				user.setLastname(resultSet.getString("Lastname"));
-				user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
+				user = map(resultSet);
 			} 
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -53,25 +51,25 @@ public class DAOImplUser implements DAOUser {
 	}
 
 	@Override
-	public User findStudent(String email) throws DAOException {
+	public Student findStudent(String username, DAOStudent daoStudent) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		User user = new User();
+		Student student = new Student();
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, email+"@cpnv.ch");
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_EMAIL, false, username+"@cpnv.ch");
 			
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				user = map(resultSet);
+				student = daoStudent.find(username);
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		return user;
+		return student;
 	}
 	
 	@Override
@@ -81,23 +79,11 @@ public class DAOImplUser implements DAOUser {
 	private static User map(ResultSet resultSet) throws SQLException {
 		User user = new User();
 		user.setId(resultSet.getLong("id"));
-		user.setClasse(resultSet.getString("Class"));
+		user.setUsername(resultSet.getString("Username"));
+		user.setPassword(resultSet.getString("Password"));
 		user.setLastname(resultSet.getString("Lastname"));
 		user.setFirstname(resultSet.getString("Firstname"));
-		/*user.setTimeDiff(resultSet.getTime("TimeDiff"));
-		user.setTodayTime(resultSet.getTime("TodayTime"));
-		user.setStatus(resultSet.getString("Status"));
-		user.setLastCheck(resultSet.getDate("LastCheck"));
-		user.setStartDate(resultSet.getDate("StartDate"));
-		user.setMonday(resultSet.getTime("Monday"));
-		user.setTuesday(resultSet.getTime("Tuesday"));
-		user.setWednesday(resultSet.getTime("Wednesday"));
-		user.setThursday(resultSet.getTime("Thursday"));
-		user.setFriday(resultSet.getTime("Friday"));
-		user.setSaturday(resultSet.getTime("Saturday"));
-		user.setSunday(resultSet.getTime("Sunday"));
-		user.setEmail(resultSet.getString("Email"));*/
-		user.setPermissionLevel(3);
+		user.setPermissionLevel(resultSet.getInt("PermissionLevel"));
         return user;
 	}
 
