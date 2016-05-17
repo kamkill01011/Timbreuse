@@ -16,6 +16,8 @@ import ch.cpnv.timbreuse.forms.CreateTeacherForm;
 import ch.cpnv.timbreuse.forms.DeleteAdminForm;
 import ch.cpnv.timbreuse.forms.DeleteTeacherForm;
 
+import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
+
 @WebServlet("/admin")
 public class AdminPanel extends HttpServlet {
 	public static final String VIEW = "/admin/adminPanel.jsp";
@@ -37,7 +39,9 @@ public class AdminPanel extends HttpServlet {
 		
 		if(request.getParameter("addTeacher") != null) {
 			CreateTeacherForm createForm = new CreateTeacherForm(daoTeacher);
+			if(daoTeacher.findTeacher(generateEmail(createForm.getTeacher(request).getFirstname(), createForm.getTeacher(request).getLastname())) == null) {
 			daoTeacher.createTeacher(createForm.getTeacher(request));
+			}
 		}
 		
 		if(request.getParameter("deleteTeacher") != null) {

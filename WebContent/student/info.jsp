@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/header.jsp"%>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -65,18 +66,6 @@
 			</table>
 		</form>
 	</fieldset>
-	
-	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
-		<input type="submit" name="logout" value="Déconnexion" class="logout" />
-	</form>
-	<form method="get" action="/Timbreuse/changepassword" class="DecoPwd">
-		<input type="submit" value="Changer de mot de passe" class="changePassword" />
-	</form>
     </body>
-    <footer>
-    	<div class="footerLogo">
-			<div class="cpnv-logo"></div>
-			<div class="mct-logo"></div>
-		</div>
-    </footer>
 </html>
+<%@include file="/WEB-INF/footer.jsp"%>

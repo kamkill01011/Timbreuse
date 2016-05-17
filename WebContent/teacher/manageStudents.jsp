@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/header.jsp"%>
 <html>
 <head>
 <meta charset="utf-8" />
@@ -104,14 +105,6 @@
 			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
-	<br />
-	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
-		<input type="submit" name="logout" value="Déconnexion" class="logout" />
-	</form>
-	<form method="get" action="/Timbreuse/changepassword" class="DecoPwd">
-		<input type="submit" value="Changer de mot de passe" class="changePassword" />
-	</form>
-
 	<!--http://p2p.wrox.com/asp-forms/18230-how-put-check-all-checkbox.html-->
 	<script type='text/javascript'>
 		function checkAll(form, cbox) {
@@ -126,12 +119,6 @@
 			}
 		}
 	</script>
-
 </body>
-<footer>
-    	<div class="footerLogo">
-			<div class="cpnv-logo"></div>
-			<div class="mct-logo"></div>
-		</div>
-    </footer>
 </html>
+<%@include file="/WEB-INF/footer.jsp"%>

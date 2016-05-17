@@ -13,7 +13,8 @@ fieldset {
     border:2px solid green;
     -moz-border-radius:8px;
     -webkit-border-radius:8px;	
-    border-radius:8px;	
+    border-radius:8px;
+    margin-top: 20px;
 }
 
 legend {
@@ -119,34 +120,6 @@ legend {
     
 }
 
-form .changePassword {
-	margin-top: 20px;
-	margin-left: 20px;
-	background: #005eff;
-  	background-image: -webkit-linear-gradient(top, #005eff, #7fb0ff);
-  	background-image: -moz-linear-gradient(top, #005eff, #7fb0ff);
-  	background-image: -ms-linear-gradient(top, #005eff, #7fb0ff);
-  	background-image: -o-linear-gradient(top, #005eff, #7fb0ff);
-  	background-image: linear-gradient(to bottom, #005eff, #7fb0ff);
-  	-webkit-border-radius: 13;
- 	-moz-border-radius: 13;
-    border-radius: 13px;
-	font-family: Arial;
-	color: #ffffff;
-	font-size: 13px;
-	padding: 6px 13px 6px 13px;
-	text-decoration: none;
-}
-
-form .changePassword:hover {
-	background: #00acfc;
-  	background-image: -webkit-linear-gradient(top, #00acfc, #6dbefc);
-  	background-image: -moz-linear-gradient(top, #00acfc, #6dbefc);
-  	background-image: -ms-linear-gradient(top, #00acfc, #6dbefc);
-  	background-image: -o-linear-gradient(top, #00acfc, #6dbefc);
-  	background-image: linear-gradient(to bottom, #00acfc, #6dbefc);
-	text-decoration: none;
-}
 
 form label {
     float: left;
@@ -286,3 +259,32 @@ th, td {
     text-align: left;
 }
 
+/* MENU BAR --------------------------------------------------------------------------------------------------*/
+
+.menu {
+  	list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #333;
+    padding: 0px ;
+}
+
+.menu li {
+  float: left;
+}
+
+.menu li a {
+  display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu li a:hover:not(.homeActive) {
+  background-color: #111;
+}
+
+.homeActive {
+	background-color: #4CAF50;
+}

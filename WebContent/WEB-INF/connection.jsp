@@ -37,10 +37,5 @@
 			</form>
 		</c:if>
     </body>
-    <footer>
-    	<div class="footerLogo">
-			<div class="cpnv-logo"></div>
-			<div class="mct-logo"></div>
-		</div>
-    </footer>
 </html>
+<%@include file="footer.jsp"%>

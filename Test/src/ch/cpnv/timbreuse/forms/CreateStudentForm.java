@@ -44,6 +44,15 @@ public class CreateStudentForm {
 	}
 	
 	/**
+	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
+	 * @param field Nom du champ de l'erreur
+	 * @param message Message de l'erreur
+	 */
+	private void setError(String field, String message) {
+        errors.put(field, message);
+    }
+	
+	/**
 	 * @param request Requête envoyée par la servlet contenant les informations nécessaire créer un nouvel élève
 	 * @return Le nouvel élève
 	 */
@@ -58,7 +67,7 @@ public class CreateStudentForm {
 			}
 		} catch(DAOException e) {
 			result = "Echec de la création.";
-			e.printStackTrace();
+			setError(LASTNAME_FIELD, e.getMessage());
 		}
 		return student;
 	}

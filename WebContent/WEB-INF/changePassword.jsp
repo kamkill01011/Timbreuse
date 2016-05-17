@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/header.jsp"%>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -27,10 +28,5 @@
             </fieldset>
         </form>
     </body>
-    <footer>
-    	<div class="footerLogo">
-			<div class="cpnv-logo"></div>
-			<div class="mct-logo"></div>
-		</div>
-    </footer>
 </html>
+<%@include file="footer.jsp"%>
