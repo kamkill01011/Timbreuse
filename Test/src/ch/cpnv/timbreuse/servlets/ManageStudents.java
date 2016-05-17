@@ -22,7 +22,6 @@ import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
 import ch.cpnv.timbreuse.forms.CreateStudentForm;
 import ch.cpnv.timbreuse.forms.DeleteStudentForm;
-import ch.cpnv.timbreuse.forms.StudentResearchForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
@@ -67,18 +66,14 @@ public class ManageStudents extends HttpServlet{
 		if(selectedClasse != null) {
 			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
 			request.setAttribute("studentsInClass", studentsInClass);
-			if(request.getParameter("addTime") != null) {
-				AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
-				for (int i = 0; i < studentsInClass.size(); i++) {
-					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+			for (int i = 0; i < studentsInClass.size(); i++) {
+				if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+					if(request.getParameter("addTime") != null) {
+						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
 					}
-				}
-			}
-			if(request.getParameter("newStatus") != null) {
-				for (int i = 0; i < studentsInClass.size(); i++) {
-					if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						String newStatus = ((DAOImplLog)daoLog).addLog(student);
 						((DAOStudent)daoStudent).changeStatus(student, newStatus);
@@ -86,23 +81,16 @@ public class ManageStudents extends HttpServlet{
 				}
 			}
 		}
-
-		//enregistre quels élèves sont sélectionnés
-		ArrayList<Boolean> selectedStudents = new ArrayList<Boolean>();
-		for (int i = 0; i < studentsInClass.size(); i++) {
-			selectedStudents.add(request.getParameter("id" + studentsInClass.get(i).getId()) != null);
-		}
-
-		request.setAttribute("selectedStudents", selectedStudents);
+		
 		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);
 
 		//à supprimer ou modifier
-		if(request.getParameter("research")!=null) {
+		/*if(request.getParameter("research")!=null) {
 			StudentResearchForm researchForm = new StudentResearchForm(daoStudent);
 			Student student = researchForm.researchUser(request);
 			request.setAttribute("researchStudent", student);
-		}
+		}*/
 		if(request.getParameter("add")!=null) {
 			CreateStudentForm createForm = new CreateStudentForm(daoStudent);
 			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {

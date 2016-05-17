@@ -13,17 +13,6 @@
 
 	<h1 class="pageTitle">Gestion des élèves</h1>
 
-	<form method="post" action="managestudents">
-		<input type="submit" name="research" value="Recherche" class="sansLabelNoSpace"/>
-		<input type="text" name="researchLastname" value="" size="32" maxlength="64" />
-	</form>
-	<br />
-	<fieldset>
-		<legend>${researchStudent.lastname} ${researchStudent.firstname}</legend>
-		<p>Différence : ${researchStudent.timeDiff}</p>
-		<p>E-mail : ${researchStudent.email}</p>
-	</fieldset>
-	<br />
 	<fieldset>
 		<legend>Liste des classes</legend>
 		<form method="post" action="managestudents">
@@ -116,13 +105,6 @@
 		</form>
 	</fieldset>
 	<br />
-	<fieldset>
-		<legend>Modifier un élève</legend>
-		<form method="post" action="managestudents">
-			<input type="text" name="modifyTimeDiff" value="" size="32" maxlength="64" />
-			<input type="submit" name="modify" value="Modifier la différence de temps" class="sansLabelNoSpace"/>
-		</form>
-	</fieldset>
 	<form method="get" action="/Timbreuse/logout" class="DecoPwd">
 		<input type="submit" name="logout" value="Déconnexion" class="logout" />
 	</form>
