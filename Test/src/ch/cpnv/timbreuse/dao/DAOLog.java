@@ -22,4 +22,6 @@ public interface DAOLog {
 	String getNewStatus(Student student) throws DAOException;
 
 	ArrayList<Log> getStudentLogs(Student student);
+
+	String addTimeLog(Student student, int time);
 }
