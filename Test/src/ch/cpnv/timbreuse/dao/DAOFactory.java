@@ -101,4 +101,8 @@ public class DAOFactory {
 	public DAOLog getDaoLog() {
 		return new DAOImplLog(this);
 	}
+	
+	public DAOHolyday getDaoHolyday() {
+		return new DAOImplHolyday(this);
+	}
 }

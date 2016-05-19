@@ -129,7 +129,7 @@ public final class DAOUtility {
 	 * @return email format CPNV
 	 */
 	public static String generateEmail(String firstname, String lastname) {
-		return removeAccent(firstname)+"."+upperStringWithoutAccent(lastname)+"@cpnv.ch";
+		return (removeAccent(firstname)+"."+upperStringWithoutAccent(lastname)+"@cpnv.ch").replaceAll("\\s+", "");
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public final class DAOUtility {
 	 * @return nom d'utilisateur sans accents depuis le prénom et nom
 	 */
 	public static String generateUsername(String firstname, String lastname) {
-		return lowerStringWithoutAccent(firstname+"."+lastname);
+		return (lowerStringWithoutAccent(firstname+"."+lastname)).replaceAll("\\s+", "");
 	}
 	
 	/**

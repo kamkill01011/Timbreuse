@@ -39,7 +39,7 @@
 		<fieldset>
 			<legend>${selectedClasse}</legend>
 			<form method="post" action="managestudents" id="students">
-				<table>
+				<table class="noBorder">
 					<tr>
 						<td>
 							<table>
@@ -83,9 +83,6 @@
 	<c:if test="${!empty logs}">
 		<fieldset>
 		<legend>Logs</legend>
-		<table>
-			<tr>
-				<td>
 					<table>
 						<tr>
 							<th>Username</th>
@@ -102,8 +99,6 @@
 							</tr>
 						</c:forEach>
 					</table>
-				</td>
-		</table>
 		</fieldset>
 	</c:if>
 	

@@ -14,6 +14,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 import static ch.cpnv.timbreuse.dao.DAOUtility.addTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
+import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
 public class DAOImplStudent implements DAOStudent {
 
@@ -87,7 +88,7 @@ public class DAOImplStudent implements DAOStudent {
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, student.getClasse(),student.getLastname(),student.getFirstname(),student.getEmail());
-			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, (student.getFirstname()+"."+student.getLastname()).toLowerCase(),randomPassword(),student.getLastname(),student.getFirstname());
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, generateUsername(student.getFirstname(),student.getLastname()),randomPassword(),student.getLastname(),student.getFirstname());
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
 			if(statut == 0 || statut2 == 0) {

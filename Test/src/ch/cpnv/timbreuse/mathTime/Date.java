@@ -138,7 +138,7 @@ public final class Date {
 		return new Date(d,m,y0+1);
 	}
 	
-	private int fixed() {
+	public int fixed() {
 		return dateToFixed(day, month, year);
 	}
 }
