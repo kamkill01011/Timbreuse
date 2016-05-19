@@ -30,6 +30,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=?, TimeDiff=? WHERE Firstname=? AND Lastname=?";
 
 	private DAOFactory daoFactory;
 
@@ -176,11 +177,19 @@ public class DAOImplStudent implements DAOStudent {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
-		String firstname = student.getFirstname();
+		String firstname = student.getFirstname();//avec ID et pas nom + prénom
 		String lastname = student.getLastname();
+		int newTimeDiff = 0;
+		if(newStatus.equals("DEP")) {
+			newTimeDiff = SecondsPastMidnight.stringToInt(student.getTimeDiff()) + (currentTime() - SecondsPastMidnight.stringToInt(student.getLastCheckTime()));
+		}
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT, false, newStatus, currentDate(), currentTime(), firstname, lastname);
+			if(newStatus.equals("DEP")) {
+				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP, false, newStatus, currentDate(), currentTime(), newTimeDiff, firstname, lastname);
+			} else {
+				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT, false, newStatus, currentDate(), currentTime(), firstname, lastname);
+			}
 			preparedStatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new DAOException(e);

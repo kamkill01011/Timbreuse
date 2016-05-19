@@ -51,7 +51,7 @@ public class DAOImplLog implements DAOLog {
 	}
 
 	@Override
-	public  String getNewStatus(Student student) {
+	public  String getNewStatus(Student student) {//private ?
 		String firstname = student.getFirstname();
 		String lastname = student.getLastname();
 		Connection connection = null;
@@ -74,7 +74,7 @@ public class DAOImplLog implements DAOLog {
 		return inverseStatus(status);
 	}
 	
-	private String inverseStatus(String actualStatus) {
+	private String inverseStatus(String actualStatus) {//private ?
 		if(actualStatus.equals("DEP")) {
 			return "ARR";
 		} else if(actualStatus.equals("ARR")) {
