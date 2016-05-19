@@ -64,15 +64,15 @@
 										<td>${i.lastCheckDate}</td>
 										<td>${i.lastCheckTime}</td>
 										<td>${i.email}</td>
-										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" /></td>
+										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" class="sansLabelNoSpace" /></td>
 									</tr>
 								</c:forEach>
 							</table>
 						</td>
 						<td>
 							<input type="text" name="modifyTimeDiff" value="HH:MM:SS" size="32" maxlength="64" />
-							<input type="submit" name="addTime" value="Ajouter du temps" />
-							<input type="submit" name="newStatus" value="Timbrer"/>
+							<input type="submit" name="addTime" value="Ajouter du temps" class="sansLabelNoSpace" />
+							<input type="submit" name="newStatus" value="Timbrer" class="sansLabelNoSpace" />
 							<br />
 						</td>
 				</table>
