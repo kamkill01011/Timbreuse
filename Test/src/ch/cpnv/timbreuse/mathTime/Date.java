@@ -141,6 +141,13 @@ public final class Date {
 	public int fixed() {
 		return dateToFixed(day, month, year);
 	}
+	
+	/**Retourne le jour de la semaine de la date
+	 * @return jour de la semaine de la date
+	 */
+	public int dayOfWeek() {
+		return Math.modF(dateToFixed(day, month, year)-1,7);
+	}
 }
 
 

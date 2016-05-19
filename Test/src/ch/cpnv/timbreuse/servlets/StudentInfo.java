@@ -14,6 +14,7 @@ import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOUser;
@@ -38,6 +39,22 @@ public class StudentInfo extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
+		ArrayList<Log> logs = daoLog.getStudentLogs(student);
+		
+		request.setAttribute("currentStudent", student);
+		request.setAttribute("logs", logs);
+		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+	}
+	
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
+		if(request.getParameter("newStatus") != null) {
+			String newStatus = daoLog.addLog(student);
+			daoStudent.changeStatus(student, newStatus);
+		}
+		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
 		
 		request.setAttribute("currentStudent", student);
