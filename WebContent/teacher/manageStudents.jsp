@@ -88,7 +88,6 @@
 				<td>
 					<table>
 						<tr>
-							<th>ID</th>
 							<th>Username</th>
 							<th>Date</th>
 							<th>Time</th>
@@ -96,7 +95,6 @@
 						</tr>
 						<c:forEach items="${logs}" var="i">
 							<tr>
-								<td>${i.id}</td>
 								<td>${i.username}</td>
 								<td>${i.date}</td>
 								<td>${i.time}</td>
