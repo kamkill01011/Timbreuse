@@ -14,7 +14,6 @@ import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOUser;

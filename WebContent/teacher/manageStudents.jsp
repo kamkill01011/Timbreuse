@@ -90,7 +90,7 @@
 							<th>Time</th>
 							<th>Status</th>
 						</tr>
-						<c:forEach items="${logs}" var="i">
+						<c:forEach items="${logs}" var="i" end="30">
 							<tr>
 								<td>${i.username}</td>
 								<td>${i.date}</td>

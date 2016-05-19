@@ -36,6 +36,7 @@ public class ManageStudents extends HttpServlet{
 	private DAOTeacher daoTeacher;
 	private DAOLog daoLog;
 	private String selectedClasse;
+	private Student selectedStudent;
 	private ArrayList<Log> logs = new ArrayList<>();
 
 	public void init() {
@@ -59,9 +60,8 @@ public class ManageStudents extends HttpServlet{
 		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
-		if(tempSelectedClasse != null) {
-			selectedClasse = tempSelectedClasse;
-		}
+		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;
+		
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();
 		if(selectedClasse != null) {
@@ -69,7 +69,7 @@ public class ManageStudents extends HttpServlet{
 			request.setAttribute("studentsInClass", studentsInClass);
 			for (int i = 0; i < studentsInClass.size(); i++) {
 				if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
-					logs = daoLog.getStudentLogs(studentsInClass.get(i));
+					selectedStudent = studentsInClass.get(i);
 					break;//quitter la boucle car on affiche que les logs d'un seul élève
 				}else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 					if(request.getParameter("addTime") != null) {
@@ -86,10 +86,6 @@ public class ManageStudents extends HttpServlet{
 				}
 			}
 		}
-		
-		request.setAttribute("logs", logs);
-		request.setAttribute("currentTeacher", teacher);
-		request.setAttribute("selectedClasse", selectedClasse);
 
 		//à supprimer ou modifier
 		if(request.getParameter("add")!=null) {
@@ -102,6 +98,14 @@ public class ManageStudents extends HttpServlet{
 			DeleteStudentForm deleteForm = new DeleteStudentForm(daoStudent);
 			daoStudent.delete(deleteForm.selectStudentToDelete(request));
 		}
+		
+		if(selectedStudent != null) logs = daoLog.getStudentLogs(selectedStudent);
+		
+		if(selectedClasse != null) request.setAttribute("studentsInClass", daoTeacher.listClass(selectedClasse, daoStudent));
+		
+		request.setAttribute("logs", logs);
+		request.setAttribute("currentTeacher", teacher);
+		request.setAttribute("selectedClasse", selectedClasse);
 
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
