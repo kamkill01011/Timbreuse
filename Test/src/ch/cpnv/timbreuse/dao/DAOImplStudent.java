@@ -16,6 +16,8 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 import static ch.cpnv.timbreuse.dao.DAOUtility.addTime;
+import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
+import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 
 public class DAOImplStudent implements DAOStudent {
 
@@ -27,7 +29,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
-	private static final String SQL_UPDATE_STUDENT_STATUS = "UPDATE eleves SET Status=? WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
 
 	private DAOFactory daoFactory;
 
@@ -178,7 +180,7 @@ public class DAOImplStudent implements DAOStudent {
 		String lastname = student.getLastname();
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_STUDENT_STATUS, false, newStatus, firstname, lastname);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT, false, newStatus, currentDate(), currentTime(), firstname, lastname);
 			preparedStatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new DAOException(e);
