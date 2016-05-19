@@ -1,9 +1,6 @@
 package ch.cpnv.timbreuse.dao;
 
-import java.sql.Time;
-
 import ch.cpnv.timbreuse.beans.Student;
-import ch.cpnv.timbreuse.beans.User;
 
 public interface DAOStudent {
 

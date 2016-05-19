@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
-import ch.cpnv.timbreuse.beans.User;
 
 public interface DAOTeacher {
 	

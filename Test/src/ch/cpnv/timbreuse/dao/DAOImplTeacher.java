@@ -6,7 +6,6 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
-import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplTeacher implements DAOTeacher {
 	private static final String SQL_SELECT_PROF_BY_EMAIL = "SELECT * FROM profs WHERE Email=?";

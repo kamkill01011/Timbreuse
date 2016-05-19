@@ -5,14 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
-
-import org.joda.time.JodaTimePermission;
-import org.joda.time.LocalTime;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
