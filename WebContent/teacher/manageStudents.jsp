@@ -52,6 +52,7 @@
 									<th>Dernier timbrage (date)</th>
 									<th>Dernier timbrage (heure)</th>
 									<th>E-mail</th>
+									<th>Logs</th>
 								</tr>
 								<c:forEach items="${studentsInClass}" var="i">
 									<tr>
@@ -63,6 +64,7 @@
 										<td>${i.lastCheckDate}</td>
 										<td>${i.lastCheckTime}</td>
 										<td>${i.email}</td>
+										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" /></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -77,6 +79,36 @@
 			</form>
 		</fieldset>
 	</c:if>
+	
+	<c:if test="${!empty logs}">
+		<fieldset>
+		<legend>Logs</legend>
+		<table>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<th>ID</th>
+							<th>Username</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Status</th>
+						</tr>
+						<c:forEach items="${logs}" var="i">
+							<tr>
+								<td>${i.id}</td>
+								<td>${i.username}</td>
+								<td>${i.date}</td>
+								<td>${i.time}</td>
+								<td>${i.status}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</td>
+		</table>
+		</fieldset>
+	</c:if>
+	
 	<fieldset>
 		<legend>Ajouter un élève</legend>
 		<form method="post" action="managestudents">

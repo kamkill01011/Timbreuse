@@ -40,31 +40,29 @@
 	
 	<fieldset>
 		<legend>Logs</legend>
-		<form method="post" action="managestudents" id="students">
-			<table>
-				<tr>
-					<td>
-						<table>
+		<table>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<th>ID</th>
+							<th>Username</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Status</th>
+						</tr>
+						<c:forEach items="${logs}" var="i">
 							<tr>
-								<th>ID</th>
-								<th>Username</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Status</th>
+								<td>${i.id}</td>
+								<td>${i.username}</td>
+								<td>${i.date}</td>
+								<td>${i.time}</td>
+								<td>${i.status}</td>
 							</tr>
-							<c:forEach items="${logs}" var="i">
-								<tr>
-									<td>${i.id}</td>
-									<td>${i.username}</td>
-									<td>${i.date}</td>
-									<td>${i.time}</td>
-									<td>${i.status}</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</td>
-			</table>
-		</form>
+						</c:forEach>
+					</table>
+				</td>
+		</table>
 	</fieldset>
     </body>
 </html>

@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
-import ch.cpnv.timbreuse.dao.DAOImplLog;
 import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
@@ -36,6 +36,7 @@ public class ManageStudents extends HttpServlet{
 	private DAOTeacher daoTeacher;
 	private DAOLog daoLog;
 	private String selectedClasse;
+	private ArrayList<Log> logs = new ArrayList<>();
 
 	public void init() {
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
@@ -67,7 +68,10 @@ public class ManageStudents extends HttpServlet{
 			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
 			request.setAttribute("studentsInClass", studentsInClass);
 			for (int i = 0; i < studentsInClass.size(); i++) {
-				if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+				if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
+					logs = daoLog.getStudentLogs(studentsInClass.get(i));
+					break;//quitter la boucle car on affiche que les logs d'un seul élève
+				}else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 					if(request.getParameter("addTime") != null) {
 						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
@@ -75,22 +79,18 @@ public class ManageStudents extends HttpServlet{
 					}
 					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						String newStatus = ((DAOImplLog)daoLog).addLog(student);
-						((DAOStudent)daoStudent).changeStatus(student, newStatus);
+						String newStatus = daoLog.addLog(student);
+						daoStudent.changeStatus(student, newStatus);
 					}
 				}
 			}
 		}
 		
+		request.setAttribute("logs", logs);
 		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);
 
 		//à supprimer ou modifier
-		/*if(request.getParameter("research")!=null) {
-			StudentResearchForm researchForm = new StudentResearchForm(daoStudent);
-			Student student = researchForm.researchUser(request);
-			request.setAttribute("researchStudent", student);
-		}*/
 		if(request.getParameter("add")!=null) {
 			CreateStudentForm createForm = new CreateStudentForm(daoStudent);
 			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
@@ -101,7 +101,6 @@ public class ManageStudents extends HttpServlet{
 			DeleteStudentForm deleteForm = new DeleteStudentForm(daoStudent);
 			daoStudent.delete(deleteForm.selectStudentToDelete(request));
 		}
-		//---
 
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}

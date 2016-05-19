@@ -28,7 +28,7 @@ public interface DAOStudent {
      * @param id de l'élève en base de données
      * @param addedTime, nouveau temps à ajouter
      */
-   // void addTimeStudent(int id, Time addedTime) throws DAOException;
+   // void addTimeStudent(int id, Time addedTime) throws DAOException;// Pourquoi pas dans linterface ?
     
     
     /**
