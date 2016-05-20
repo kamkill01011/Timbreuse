@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
 import ch.cpnv.timbreuse.dao.DAOUser;
+import ch.cpnv.timbreuse.forms.SetHolydaysForm;
 
 @WebServlet("/setholydays")
 public class SetHolydays extends HttpServlet {
@@ -22,10 +24,10 @@ public class SetHolydays extends HttpServlet {
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
 	public static final String USER_SESSION_ATT ="userSession";
-	private DAOTeacher daoTeacher;
+	private DAOHolyday daoHolyday;
 
 	public void init() {
-		this.daoTeacher = ((DAOFactory)getServletContext().getAttribute("daofactory")).getDaoTeacher();
+		this.daoHolyday = ((DAOFactory)getServletContext().getAttribute("daofactory")).getDaoHolyday();
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -34,6 +36,15 @@ public class SetHolydays extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if(request.getParameter("addSingleHolydayButton")!=null) {
+			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			daoHolyday.addHolyday(holydaysForm.getSingleHolyday(request));
+		}
+		if(request.getParameter("addHolydayGapButton")!=null) {
+			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			daoHolyday.addHolyday(holydaysForm.getHolydaysGap(request));
+		}
 		
+		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
 }

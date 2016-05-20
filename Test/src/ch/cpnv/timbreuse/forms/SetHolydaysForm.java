@@ -42,8 +42,10 @@ public class SetHolydaysForm {
 	 * @param request
 	 * @return jour ferié (int)
 	 */
-	public int getSingleHolyday(HttpServletRequest request) {
-		return stringToDate(getFieldValue(request, ADD_SINGLE_HOLYDAY)).fixed();
+	public ArrayList<Integer> getSingleHolyday(HttpServletRequest request) {
+		ArrayList<Integer> singleHolyday = new ArrayList<Integer>();
+		singleHolyday.add(stringToDate(getFieldValue(request, ADD_SINGLE_HOLYDAY)).fixed());
+		return singleHolyday;
 	}
 	
 	/**

@@ -6,7 +6,7 @@ import ch.cpnv.timbreuse.beans.Holyday;
 
 public interface DAOHolyday {
 
-		void addHolyday(String date) throws DAOException;
+		void addHolyday(ArrayList<Integer> date) throws DAOException;
 		
 		ArrayList<Holyday> getHolydays() throws DAOException;
 }
