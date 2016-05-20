@@ -1,5 +1,7 @@
 package ch.cpnv.timbreuse.mathTime;
 
+import static java.lang.Math.abs;
+
 public final class SecondsPastMidnight {
 	public static final int INFINITE = 200000; 
 	
@@ -46,18 +48,25 @@ public final class SecondsPastMidnight {
 	}
 	
 	public static String toString(int spm) {
-		int hours = hours(spm);
-		int minutes = minutes(spm);
-		int seconds = seconds(spm);
-		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		int hours = abs(hours(spm));
+		int minutes = abs(minutes(spm));
+		int seconds = abs(seconds(spm));
+		String sign = "";
+		if(spm < 0) sign = "-";
+		return sign+String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
 
 
 
 	public static int stringToInt(String s) {
+		int sign = 1;
+		if(s.startsWith("-")) {
+			s = s.substring(1);
+			sign = -1;
+		}
 		int hours = Integer.parseInt(s.substring(0, s.indexOf(":")));
 		int minutes = Integer.parseInt(s.substring(s.indexOf(":")+1, s.lastIndexOf(":")));
 		int seconds = Integer.parseInt(s.substring(s.lastIndexOf(":")+1, s.length()));
-		return fromHMS(hours, minutes, seconds);
+		return sign * fromHMS(hours, minutes, seconds);
 	}
 }
