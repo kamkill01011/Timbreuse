@@ -13,7 +13,8 @@
     <h1 class="pageTitle">Informations Personnelles</h1>
     <form method="post" action="info">
     	<input type="submit" name="newStatus" value="Timbrer" class="timbrage" />
-    	<input type="submit" name="testDayOfWeek" value="TESTDAYOFWEEK" class="timbrage" />
+    	<br />
+    	<input type="submit" name="testDayOfWeek" value="TESTDAYOFWEEK" class="testdayofweek" />
     </form>
     <fieldset>
 		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
@@ -30,7 +31,7 @@
 		<legend>Horaire</legend>
 		<p>Lund : ${currentStudent.monday}</p>
 		<p>Mardi : ${currentStudent.tuesday}</p>
-		<p>Mercrei : ${currentStudent.wednesday}</p>
+		<p>Mercredi : ${currentStudent.wednesday}</p>
 		<p>Jeudi : ${currentStudent.thursday}</p>
 		<p>Vendredi : ${currentStudent.friday}</p>
 		<p>Samedi : ${currentStudent.saturday}</p>

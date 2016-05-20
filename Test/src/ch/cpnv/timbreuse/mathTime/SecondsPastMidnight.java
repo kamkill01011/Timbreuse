@@ -46,9 +46,14 @@ public final class SecondsPastMidnight {
 	}
 	
 	public static String toString(int spm) {
-		return String.format("%02d:%02d:%02d", hours(spm), minutes(spm), seconds(spm));
+		int hours = hours(spm);
+		int minutes = minutes(spm);
+		int seconds = seconds(spm);
+		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
 	}
-	
+
+
+
 	public static int stringToInt(String s) {
 		int hours = Integer.parseInt(s.substring(0, s.indexOf(":")));
 		int minutes = Integer.parseInt(s.substring(s.indexOf(":")+1, s.lastIndexOf(":")));
