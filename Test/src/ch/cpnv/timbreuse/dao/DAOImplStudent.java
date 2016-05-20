@@ -15,6 +15,8 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.addTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
+import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.automation.Automation.updateTime;
 
 public class DAOImplStudent implements DAOStudent {
 
@@ -28,6 +30,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=?, TimeDiff=?, TodayTime=? WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_FRACTION_SELECT_DAY_OF_WEEK_TIME = " FROM eleves WHERE Firstname=? AND Lastname=?";
 
 	private DAOFactory daoFactory;
 
@@ -176,16 +179,14 @@ public class DAOImplStudent implements DAOStudent {
 		ResultSet autoGenValue = null;
 		String firstname = student.getFirstname();//avec ID et pas nom + prénom
 		String lastname = student.getLastname();
-		int newTimeDiff = 0;
-		int newTodayTime = 0;
+		int[] updatedTime = {0, 0};
 		if(newStatus.equals("DEP")) {
-			newTimeDiff = SecondsPastMidnight.stringToInt(student.getTimeDiff()) + (currentTime() - SecondsPastMidnight.stringToInt(student.getLastCheckTime()));
-			newTodayTime = SecondsPastMidnight.stringToInt(student.getTodayTime()) + (currentTime() - SecondsPastMidnight.stringToInt(student.getLastCheckTime()));
+			updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime());
 		}
 		try {
 			connection = daoFactory.getConnection();
 			if(newStatus.equals("DEP")) {
-				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP, false, newStatus, currentDate(), currentTime(), newTimeDiff, newTodayTime, firstname, lastname);
+				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP, false, newStatus, currentDate(), currentTime(), updatedTime[0], updatedTime[1], firstname, lastname);
 			} else {
 				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT, false, newStatus, currentDate(), currentTime(), firstname, lastname);
 			}
@@ -196,4 +197,48 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
 	}
+	
+	public int getDayOfWeekTimetable(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int result = 0;
+		String firstname = student.getFirstname();
+		String lastname = student.getLastname();
+		String dayOfWeek = stringToDate(currentDate()).dayOfWeek();
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, "SELECT "+dayOfWeek+SQL_FRACTION_SELECT_DAY_OF_WEEK_TIME, false, firstname, lastname);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				result = resultSet.getInt(dayOfWeek);
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		System.out.println(result);
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

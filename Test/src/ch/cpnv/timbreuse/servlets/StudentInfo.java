@@ -14,6 +14,7 @@ import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOUser;
@@ -52,6 +53,9 @@ public class StudentInfo extends HttpServlet {
 		if(request.getParameter("newStatus") != null) {
 			String newStatus = daoLog.addLog(student);
 			daoStudent.changeStatus(student, newStatus);
+		}
+		if(request.getParameter("testDayOfWeek") != null) {
+			((DAOImplStudent)daoStudent).getDayOfWeekTimetable(student);
 		}
 		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
