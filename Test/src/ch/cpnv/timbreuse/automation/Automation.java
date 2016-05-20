@@ -35,7 +35,7 @@ public final class Automation {
 	public static void endDay(DAOStudent daoStudent, DAOLog daoLog) {
 		ArrayList<Student> students = daoStudent.getNotCheckedOutStudents();
 		for (int i = 0; i < students.size(); i++) {
-			if(students.get(i).getStatus().equals("DEP")) {			
+			if(students.get(i).getStatus().equals("ARR")) {			
 				checkoutAllStudent(students.get(i),daoStudent, daoLog);
 			}
 			resetTodayTime(students.get(i), daoStudent);
