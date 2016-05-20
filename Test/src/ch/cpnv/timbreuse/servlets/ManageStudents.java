@@ -25,6 +25,8 @@ import ch.cpnv.timbreuse.forms.DeleteStudentForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
+import static ch.cpnv.timbreuse.automation.Automation.endDay;
+
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
  *
@@ -61,6 +63,12 @@ public class ManageStudents extends HttpServlet{
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
 		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;
+		
+		//TEST
+		if(request.getParameter("EndOfDay")!=null) {
+			endDay(daoStudent, daoLog);
+		}
+		//---
 		
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();

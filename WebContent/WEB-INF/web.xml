@@ -70,5 +70,10 @@
     	<dispatcher>REQUEST</dispatcher>
     	<dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+	<servlet>
+		<servlet-name>EndOfDay</servlet-name>
+		<servlet-class>ch.cpnv.timbreuse.servlets.EndDay</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
  	
 </web-app>

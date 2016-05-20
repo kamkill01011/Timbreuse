@@ -1,5 +1,7 @@
 package ch.cpnv.timbreuse.dao;
 
+import java.util.ArrayList;
+
 import ch.cpnv.timbreuse.beans.Student;
 
 public interface DAOStudent {
@@ -33,4 +35,10 @@ public interface DAOStudent {
      * @param student eleve concerné
      */
     void changeStatus(Student student, String newStatus) throws DAOException;
+
+	ArrayList<Student>getNotCheckedOutStudents();
+
+	void resetTodayTime(Student student);
+
+	void setTimeDiff(Student student);
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
@@ -31,6 +32,9 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=?, TimeDiff=?, TodayTime=? WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_FRACTION_SELECT_DAY_OF_WEEK_TIME = " FROM eleves WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM eleves";
+	private static final String SQL_RESET_TODAYTIME = "UPDATE eleves SET TodayTime='0' WHERE id=?";
+	private static final String SQL_SET_TIMEDIFF = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 
 	private DAOFactory daoFactory;
 
@@ -218,27 +222,60 @@ public class DAOImplStudent implements DAOStudent {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		System.out.println(result);
 		return result;
 	}
+
+	@Override
+	public ArrayList<Student> getNotCheckedOutStudents() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		ArrayList<Student> students = new ArrayList<>();
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_ALL_STUDENTS, false);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				students.add(map(resultSet));
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		return students;
+	}
+	
+	@Override
+	public void resetTodayTime(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_RESET_TODAYTIME, false, student.getId());
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+
+		}
+	}
+	
+	@Override
+	public void setTimeDiff(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_TIMEDIFF, false, SecondsPastMidnight.stringToInt(student.getTimeDiff()) - getDayOfWeekTimetable(student), student.getId());
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
