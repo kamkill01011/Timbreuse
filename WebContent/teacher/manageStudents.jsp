@@ -14,10 +14,6 @@
 
 	<h1 class="pageTitle">Gestion des élèves</h1>
 
-	<form method="post" action="managestudents">
-    	<input type="submit" name="EndOfDay" value="EndOfDay" />
-    </form>
-
 	<fieldset>
 		<legend>Liste des classes</legend>
 		<form method="post" action="managestudents">

@@ -21,7 +21,6 @@ import static ch.cpnv.timbreuse.automation.Automation.updateTime;
 
 public class DAOImplStudent implements DAOStudent {
 
-	private static final String SQL_SELECT_STUDENT_BY_LASTNAME = "SELECT id, Class, Lastname, Firstname, Email, TimeDiff FROM eleves WHERE Lastname =?";
 	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheckDate,LastCheckTime,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email) VALUES (default,?,?,?,'0','0',default,null,null,null,'25200','25200','0','25200','14400','0','0',?)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";

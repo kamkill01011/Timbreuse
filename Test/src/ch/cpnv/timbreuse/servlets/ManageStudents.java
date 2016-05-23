@@ -64,12 +64,6 @@ public class ManageStudents extends HttpServlet{
 		String tempSelectedClasse = (String) request.getParameter("classe");
 		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;
 		
-		//TEST
-		if(request.getParameter("EndOfDay")!=null) {
-			endDay(daoStudent, daoLog);
-		}
-		//---
-		
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();
 		if(selectedClasse != null) {

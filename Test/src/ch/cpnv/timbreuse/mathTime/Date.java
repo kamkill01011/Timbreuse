@@ -149,7 +149,8 @@ public final class Date {
 		int x = Math.modF(dateToFixed(day, month, year)-1,7);
 		String result;
 		switch(x) {
-			case 0: result = "Monday";
+		case 0: result = "Monday";
+		break;
 		case 1: result = "Tuesday";
 		break;
 		case 2: result = "Wednesday";
@@ -166,13 +167,4 @@ public final class Date {
 		}
 		return result;
 	}
-
-	
-	
 }
-
-
-
-
-
-

@@ -1,10 +1,13 @@
 package ch.cpnv.timbreuse.automation;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
+import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 
 import java.util.ArrayList;
 
+import ch.cpnv.timbreuse.beans.Holyday;
 import ch.cpnv.timbreuse.beans.Student;
+import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
@@ -32,7 +35,16 @@ public final class Automation {
 		return timeUpdated;
 	}
 	
-	public static void endDay(DAOStudent daoStudent, DAOLog daoLog) {
+	public static void endDay(DAOStudent daoStudent, DAOLog daoLog, DAOHolyday daoHolyday) {
+		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
+		for (int i = 0; i < holydays.size(); i++) {
+			Date date = null;
+			date
+			if(holydays.get(i).getDate()) {
+				System.out.println("Holyday, day ended.");
+				return;
+			}
+		}
 		ArrayList<Student> students = daoStudent.getNotCheckedOutStudents();
 		for (int i = 0; i < students.size(); i++) {
 			if(students.get(i).getStatus().equals("ARR")) {			

@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 
@@ -13,10 +14,12 @@ public class EndOfDay {
 	Timer timer;
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
+	private DAOHolyday daoHolyday;
 	
-	public EndOfDay(DAOStudent daoStudent, DAOLog daoLog) {
+	public EndOfDay(DAOStudent daoStudent, DAOLog daoLog, DAOHolyday daoHolyday) {
 		this.daoStudent = daoStudent;
 		this.daoLog = daoLog;
+		this.daoHolyday = daoHolyday;
 	}
 	
 	public void init() {
@@ -35,7 +38,7 @@ public class EndOfDay {
 
 		@Override
 		public void run() {
-			endDay(daoStudent, daoLog);
+			endDay(daoStudent, daoLog, daoHolyday);
 		}
 	}
 }
