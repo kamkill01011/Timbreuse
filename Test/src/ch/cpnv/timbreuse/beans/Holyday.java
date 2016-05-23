@@ -2,7 +2,7 @@ package ch.cpnv.timbreuse.beans;
 
 public class Holyday {
 	private Long id;
-	private int date;
+	private String date;
 	
 	public Long getId() {
 		return id;
@@ -10,10 +10,10 @@ public class Holyday {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(int date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 }

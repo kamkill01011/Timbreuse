@@ -72,7 +72,7 @@ public class DAOImplHolyday implements DAOHolyday {
 	private static Holyday map(ResultSet resultSet) throws SQLException {
 		Holyday holyday = new Holyday();
 		holyday.setId(resultSet.getLong("id"));
-		holyday.setDate(stringToDate(resultSet.getString("Date")).fixed());
+		holyday.setDate(resultSet.getString("Date"));
 		return holyday;
 	}
 

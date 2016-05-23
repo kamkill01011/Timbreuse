@@ -184,7 +184,7 @@ public class DAOImplStudent implements DAOStudent {
 		String lastname = student.getLastname();
 		int[] updatedTime = {0, 0};
 		if(newStatus.equals("DEP")) {
-			updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime());
+			updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime(), currentTime());
 		}
 		try {
 			connection = daoFactory.getConnection();

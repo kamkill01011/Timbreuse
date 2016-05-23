@@ -10,6 +10,7 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
+import ch.cpnv.timbreuse.mathTime.Date;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 public final class Automation {
@@ -28,19 +29,17 @@ public final class Automation {
 		return doneTime - toDoTime;
 	}
 	
-	public static int[] updateTime(String timeDiff, String todayTime, String lastCheckTime) {
+	public static int[] updateTime(String timeDiff, String todayTime, String lastCheckTime, int newCheckTime) {
 		int[] timeUpdated = new int[2];
-		timeUpdated[0] = SecondsPastMidnight.stringToInt(timeDiff) + (currentTime() - SecondsPastMidnight.stringToInt(lastCheckTime));
-		timeUpdated[1] = SecondsPastMidnight.stringToInt(todayTime) + (currentTime() - SecondsPastMidnight.stringToInt(lastCheckTime));
+		timeUpdated[0] = SecondsPastMidnight.stringToInt(timeDiff) + (newCheckTime - SecondsPastMidnight.stringToInt(lastCheckTime));
+		timeUpdated[1] = SecondsPastMidnight.stringToInt(todayTime) + (newCheckTime - SecondsPastMidnight.stringToInt(lastCheckTime));
 		return timeUpdated;
 	}
 	
 	public static void endDay(DAOStudent daoStudent, DAOLog daoLog, DAOHolyday daoHolyday) {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		for (int i = 0; i < holydays.size(); i++) {
-			Date date = null;
-			date
-			if(holydays.get(i).getDate()) {
+			if(Date.stringToDate(holydays.get(i).getDate()).equals(Date.stringToDate(currentDate()))) {
 				System.out.println("Holyday, day ended.");
 				return;
 			}
