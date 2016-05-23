@@ -11,41 +11,67 @@
 </head>
 <body>
 	<h1 class="pageTitle">Gestion des congés</h1>
-	
+
 	<fieldset>
 		<legend>Ajouter des congés</legend>
 		<form method="post" action="setholydays">
-		<table class="noBorder">
-			<tr>
-				<td>
-					Ajouter un congé : 
-				</td>
-				<td>
-					<input type="text" id="addSingleHolyday" name="addSingleHolyday" value="" size="16" maxlength="16" />
-				</td>
-				<td>
-					<input type="submit" name="addSingleHolydayButton" value="Ajouter" class="sansLabelNoSpace" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Ajouter une plage de congés : Du
-				</td>
-				<td>
-					<input type="text" id="addHolydaysGapA" name="addHolydaysGapA" value="" size="16" maxlength="16" />	
-				</td>
-				<td class="centre">
-					Au
-				</td>
-				<td>
-					<input type="text" id="addHolydaysGapB" name="addHolydaysGapB" value="" size="16" maxlength="16" />	
-				</td>
-				<td> 
-					<input type="submit" name="addHolydayGapButton" value="Ajouter" class="sansLabelNoSpace" />
-				</td>
-			</tr>
-		</table>	
+			<table class="noBorder">
+				<tr>
+					<td>Ajouter un congé :</td>
+					<td><input type="text" id="addSingleHolyday"
+						name="addSingleHolyday" value="" size="16" maxlength="16" /></td>
+					<td><input type="submit" name="addSingleHolydayButton"
+						value="Ajouter" class="sansLabelNoSpace" /></td>
+				</tr>
+				<tr>
+					<td>Ajouter une plage de congés : Du</td>
+					<td><input type="text" id="addHolydaysGapA"
+						name="addHolydaysGapA" value="" size="16" maxlength="16" /></td>
+					<td class="centre">Au</td>
+					<td><input type="text" id="addHolydaysGapB"
+						name="addHolydaysGapB" value="" size="16" maxlength="16" /></td>
+					<td><input type="submit" name="addHolydayGapButton"
+						value="Ajouter" class="sansLabelNoSpace" /></td>
+				</tr>
+			</table>
 		</form>
+	</fieldset>
+	<fieldset>
+		<legend>Supprimer des congés</legend>
+		<form method="post" action="setholydays">
+			<table class="noBorder">
+				<tr>
+					<td>Supprimer un congé</td>
+					<td><input type="text" id="deleteSingleHolyday"
+						name="deleteSingleHolyday" value="" size="16" maxlength="16" /></td>
+					<td><input type="submit" name="deleteSingleHolydayButton"
+						value="Supprimer" class="sansLabelNoSpace" /></td>
+				</tr>
+				<tr>
+					<td>Supprimer une plage de congés: Du</td>
+					<td><input type="text" id="deleteHolydaysGapA"
+						name="deleteHolydaysGapA" value="" size="16" maxlength="16" /></td>
+					<td class="centre">Au</td>
+					<td><input type="text" id="deleteHolydaysGapB"
+						name="deleteHolydaysGapB" value="" size="16" maxlength="16" /></td>
+					<td><input type="submit" name="deleteHolydaysGapButton"
+						value="Supprimer" class="sansLabelNoSpace" /></td>
+				</tr>
+			</table>
+		</form>
+	</fieldset>
+	<fieldset>
+		<legend>Jours de congés</legend>
+		<table>
+			<tr>
+				<th>Date</th>
+			</tr>
+
+			<tr>
+				<td></td>
+			</tr>
+		</table>
 	</fieldset>
 </body>
 </html>
+<%@include file="/WEB-INF/footer.jsp"%>
