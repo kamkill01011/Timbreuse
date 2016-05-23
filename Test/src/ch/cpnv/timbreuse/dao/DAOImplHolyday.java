@@ -28,14 +28,14 @@ public class DAOImplHolyday implements DAOHolyday {
 	}
 
 	@Override
-	public void addHolyday(ArrayList<Integer> dateList) throws DAOException {
+	public void addHolyday(ArrayList<String> dateList) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
 			for (int i = 0; i < dateList.size(); i++) {
-				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, fixedToDate(dateList.get(i)).toString());
+				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, (dateList.get(i)));
 				int statut = preparedStatement.executeUpdate();	
 				if(statut == 0) {
 					throw new DAOException("Echec de l'ajout du jour férié.");

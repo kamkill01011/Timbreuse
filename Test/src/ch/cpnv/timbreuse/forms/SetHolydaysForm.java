@@ -42,9 +42,9 @@ public class SetHolydaysForm {
 	 * @param request
 	 * @return jour ferié (int)
 	 */
-	public ArrayList<Integer> getSingleHolyday(HttpServletRequest request) {
-		ArrayList<Integer> singleHolyday = new ArrayList<Integer>();
-		singleHolyday.add(stringToDate(getFieldValue(request, ADD_SINGLE_HOLYDAY)).fixed());
+	public ArrayList<String> getSingleHolyday(HttpServletRequest request) {
+		ArrayList<String> singleHolyday = new ArrayList<String>();
+		singleHolyday.add(stringToDate(getFieldValue(request, ADD_SINGLE_HOLYDAY)).toString());
 		return singleHolyday;
 	}
 	
@@ -53,18 +53,18 @@ public class SetHolydaysForm {
 	 * @param request
 	 * @return arrayList plage de jours feriés
 	 */
-	public ArrayList<Integer> getHolydaysGap(HttpServletRequest request) {
-		ArrayList<Integer> holydaysGap = new ArrayList<Integer>();
-		int dateA = stringToDate(getFieldValue(request, ADD_HOLYDAYS_GAP_A)).fixed();
-		int dateB = stringToDate(getFieldValue(request, ADD_HOLYDAYS_GAP_B)).fixed();
+	public ArrayList<String> getHolydaysGap(HttpServletRequest request) {
+		ArrayList<String> holydaysGap = new ArrayList<String>();
+		Date dateA = stringToDate(getFieldValue(request, ADD_HOLYDAYS_GAP_A));
+		Date dateB = stringToDate(getFieldValue(request, ADD_HOLYDAYS_GAP_B));
 		try {
-			checkHolydayGap(dateA, dateB);
+			checkHolydayGap(dateA.fixed(), dateB.fixed());
 		} catch(Exception e) {
 			setError(ADD_HOLYDAYS_GAP_B, e.getMessage()); //vérifie si l'intervalle entré est possible
 		}
 		
-		for (int i = dateA; i <= dateB; i++) {
-			holydaysGap.add(i);
+		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {
+			holydaysGap.add(Date.fixedToDate(i).toString());
 		}
 		return holydaysGap;
 	}
