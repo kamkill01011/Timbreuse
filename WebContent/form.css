@@ -127,33 +127,62 @@ form label {
     margin: 3px 5px 0px 0px;
 }
 
+form input.timbrage {
+	margin-top: 10px;
+	background: #4CAF50;
+	background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
+	-webkit-border-radius: 13;
+	-moz-border-radius: 13;
+	border-radius: 13px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 4px 10px 4px 10px;
+	text-decoration: none;
+	margin-left: 0px;
+}
+
+form input.timbrage:hover {
+	background: #00c455;
+  	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -o-linear-gradient(top, #00c455, #0dff00);
+  	background-image: linear-gradient(to bottom, #00c455, #0dff00);
+  	text-decoration: none;
+}
+
 form input.login {
 	margin-top: 10px;
-  background: #07bf0e;
-  background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
-  -webkit-border-radius: 13;
-  -moz-border-radius: 13;
-  border-radius: 13px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 13px;
-  padding: 4px 10px 4px 10px;
-  text-decoration: none;
-  margin-left: 248px;
+	background: #07bf0e;
+	background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
+	background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
+	-webkit-border-radius: 13;
+	-moz-border-radius: 13;
+	border-radius: 13px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 4px 10px 4px 10px;
+	text-decoration: none;
+	margin-left: 248px;
 }
 
 form input.login:hover {
 	background: #00c455;
-  background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
-  background-image: -moz-linear-gradient(top, #00c455, #0dff00);
-  background-image: -ms-linear-gradient(top, #00c455, #0dff00);
-  background-image: -o-linear-gradient(top, #00c455, #0dff00);
-  background-image: linear-gradient(to bottom, #00c455, #0dff00);
-  text-decoration: none;
+  	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+  	background-image: -o-linear-gradient(top, #00c455, #0dff00);
+  	background-image: linear-gradient(to bottom, #00c455, #0dff00);
+  	text-decoration: none;
 }
 
 form input {
@@ -238,53 +267,6 @@ form .logout:hover {
   background-image: linear-gradient(to bottom, #00c455, #0dff00);
   text-decoration: none;
 }
-
-form input.timbrage {
-	display: block;
-    float: left;
-    position: relative;
-    height: 25px;
-    width: 80px;
-    margin: 0 10px 18px 0;
-     
-    text-decoration: none;
-    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    line-height: 25px;
-    text-align: center;
-     
-    -webkit-border-radius: 3px; 
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
-form input.timbrage:before,
-form input.timbrage:after {
-	content: '';
-    position: absolute;
-    left: -1px;
-    height: 25px;
-    width: 80px;
-    bottom: -1px;
-     
-    -webkit-border-radius: 3px; 
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
-form input.timbrage:before {
-    height: 23px;
-    bottom: -4px;
-    border-top: 0;
-     
-    -webkit-border-radius: 0 0 3px 3px; 
-    -moz-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-     
-    -webkit-box-shadow: 0 1px 1px 0px #bfbfbf;
-    -moz-box-shadow: 0 1px 1px 0px #bfbfbf;
-    box-shadow: 0 1px 1px 0px #bfbfbf;
-}
  
 a.button:before,
 a.button:after {
@@ -302,42 +284,6 @@ a.button:before {
     border-top: 0;
 }
 
-form input.timbrage:hover {
-	color: #555;
-    border-bottom: 4px solid #b2b1b1;
-    text-shadow: 0px 1px 0px #fafafa;
-     
-    background: #eee;
-    background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#e2e2e2));
-    background: -moz-linear-gradient(top,  #eee,  #e2e2e2);
-     
-    box-shadow: inset 1px 1px 0 #f5f5f5;
-}
-
-form input.timbrage:hover {
-	background: #e2e2e2;
-    background: -webkit-gradient(linear, left top, left bottom, from(#e2e2e2), to(#eee));
-    background: -moz-linear-gradient(top,  #e2e2e2,  #eee);
-}
-
-form input.timbrage:active {
-	border: none;
-    bottom: -4px;
-    margin-bottom: 22px;
-     
-    -webkit-box-shadow: 0 1px 1px #fff;
-    -moz-box-shadow:  0 1px 1px #fff;
-    box-shadow:  1px 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-form input.timbrage:active:before,
-form input.timbrage:active:after {
-	border: none;   
-     
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
 
 /* Table --------------------------------------------------------------------------------------- */
 
@@ -390,3 +336,7 @@ th, td {
 }
 
 /* OTHERS ----------------------------------------------------------------------------*/
+
+.noBorder {
+	border: none;
+}

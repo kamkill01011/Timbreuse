@@ -119,7 +119,7 @@ public final class Date {
 		else { return 2;}
 	}
 
-	private static Date fixedToDate(int n) {
+	public static Date fixedToDate(int n) {
 		int d0 = n-1;
 		int n400 = divF(d0, 146097);
 		int d1 = modF(d0, 146097);

@@ -54,9 +54,6 @@ public class StudentInfo extends HttpServlet {
 			String newStatus = daoLog.addLog(student);
 			daoStudent.changeStatus(student, newStatus);
 		}
-		if(request.getParameter("testDayOfWeek") != null) {
-			((DAOImplStudent)daoStudent).getDayOfWeekTimetable(student);
-		}
 		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
 		

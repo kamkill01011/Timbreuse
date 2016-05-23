@@ -13,19 +13,17 @@
     <h1 class="pageTitle">Informations Personnelles</h1>
     <form method="post" action="info">
     	<input type="submit" name="newStatus" value="Timbrer" class="timbrage" />
-    	<br />
-    	<input type="submit" name="testDayOfWeek" value="TESTDAYOFWEEK" class="testdayofweek" />
     </form>
     <fieldset>
 		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
-		<p>Classe : ${currentStudent.classe}</p>
-		<p>Différence : ${currentStudent.timeDiff}</p>
-		<p>E-mail : ${currentStudent.email}</p>
 		<p>Status : ${currentStudent.status}</p>
-		<p>Date d'inscription : ${currentStudent.startDate}</p>
-		<p>Date dernier timbrage : ${currentStudent.lastCheckDate}</p>
+		<p>Différence : ${currentStudent.timeDiff}</p>
+		<p>Temps effectué aujourd'hui : ${currentStudent.todayTime}</p>
+		<p>Classe : ${currentStudent.classe}</p>
+		<p>E-mail : ${currentStudent.email}</p>
 		<p>Heure dernier timbrage : ${currentStudent.lastCheckTime}</p>
-		<p>Heures effectuées aujourd'hui : ${currentStudent.todayTime}</p>
+		<p>Date dernier timbrage : ${currentStudent.lastCheckDate}</p>
+		<p>Date d'inscription : ${currentStudent.startDate}</p>
 	</fieldset>
 	<fieldset>
 		<legend>Horaire</legend>
@@ -39,18 +37,19 @@
 	</fieldset>
 	<fieldset>
 		<legend>Compte utilisateur</legend>
-		<p>Username : ${sessionScope.userSession.username}</p>
-		<p>Password : ${sessionScope.userSession.password}</p>
+		<p>Nom d'utilisateur : ${sessionScope.userSession.username}</p>
+		<p>Mot de passe : ${sessionScope.userSession.password}</p>
 	</fieldset>
 	
 	<fieldset>
 		<legend>Logs</legend>
 		<table>
 			<tr>
-				<th>Username</th>
+				<th>Nom d'utilisateur</th>
 				<th>Date</th>
-				<th>Time</th>
-				<th>Status</th>
+				<th>Heure</th>
+				<th>Statut</th>
+				<td>Légende: DEP=Départ, ARR=Arrivée, ADD=Temps Ajouté, ERR=Erreur</td>
 			</tr>
 			<c:forEach items="${logs}" var="i" end="10">
 				<tr>

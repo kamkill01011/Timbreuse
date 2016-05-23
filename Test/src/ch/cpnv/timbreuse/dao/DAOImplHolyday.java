@@ -2,6 +2,8 @@ package ch.cpnv.timbreuse.dao;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
+import static ch.cpnv.timbreuse.mathTime.Date.fixedToDate;
+import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +35,7 @@ public class DAOImplHolyday implements DAOHolyday {
 		try {
 			connection = daoFactory.getConnection();
 			for (int i = 0; i < dateList.size(); i++) {
-				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, dateList.get(i));
+				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, fixedToDate(dateList.get(i)).toString());
 				int statut = preparedStatement.executeUpdate();	
 				if(statut == 0) {
 					throw new DAOException("Echec de l'ajout du jour férié.");
@@ -70,7 +72,7 @@ public class DAOImplHolyday implements DAOHolyday {
 	private static Holyday map(ResultSet resultSet) throws SQLException {
 		Holyday holyday = new Holyday();
 		holyday.setId(resultSet.getLong("id"));
-		holyday.setDate(resultSet.getInt("Date"));
+		holyday.setDate(stringToDate(resultSet.getString("Date")).fixed());
 		return holyday;
 	}
 
