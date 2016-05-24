@@ -43,7 +43,6 @@ legend {
 
 }
 
-
 /* LOGO ---------------------------------------------------------------------------------------- */
 
 /*footer .logo {
@@ -303,6 +302,26 @@ td {
 th, td {
     padding: 5px;
     text-align: left;
+}
+
+td.DEP {
+	background-color: #FF0000;
+}
+
+td.ARR {
+	background-color: #00FF00;
+}
+
+td.ADD {
+	background-color: #FFFF00;
+}
+
+td.ERR {
+	background-color: #000000;
+}
+
+td.MED {
+	background-color: #0000FF;
 }
 
 /* MENU BAR --------------------------------------------------------------------------------------------------*/

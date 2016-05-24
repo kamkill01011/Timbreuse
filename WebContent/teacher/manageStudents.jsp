@@ -60,7 +60,7 @@
 										<td>${i.lastname}</td>
 										<td>${i.firstname}</td>
 										<td>${i.timeDiff}</td>
-										<td>${i.status}</td>
+										<td class="${i.status}" >${i.status}</td>
 										<td>${i.lastCheckDate}</td>
 										<td>${i.lastCheckTime}</td>
 										<td>${i.email}</td>
@@ -95,7 +95,7 @@
 								<td>${i.username}</td>
 								<td>${i.date}</td>
 								<td>${i.time}</td>
-								<td>${i.status}</td>
+								<td class="${i.status}" >${i.status}</td>
 							</tr>
 						</c:forEach>
 					</table>

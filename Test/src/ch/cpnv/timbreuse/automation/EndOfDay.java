@@ -1,8 +1,12 @@
 package ch.cpnv.timbreuse.automation;
 
+import java.awt.BorderLayout;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
@@ -23,15 +27,21 @@ public class EndOfDay {
 	}
 	
 	public void init() {
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(Calendar.HOUR_OF_DAY, 22);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.SECOND, 0);
-
-    timer = new Timer();
-    timer.schedule(new EndOfDayTask(), calendar.getTime());
-    
-    System.out.println("End of day init...");
+		/*JFrame frame = new JFrame("test");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(new JLabel("test"), BorderLayout.CENTER);
+		frame.pack();
+		frame.setVisible(true);*/
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 22);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		timer = new Timer();
+		timer.schedule(new EndOfDayTask(), calendar.getTime());
+		
+		System.out.println("End of day init...");
 	}
 	
 	class EndOfDayTask extends TimerTask {

@@ -56,7 +56,7 @@
 					<td>${i.username}</td>
 					<td>${i.date}</td>
 					<td>${i.time}</td>
-					<td>${i.status}</td>
+					<td class="${i.status}" >${i.status}</td>
 				</tr>
 			</c:forEach>
 		</table>
