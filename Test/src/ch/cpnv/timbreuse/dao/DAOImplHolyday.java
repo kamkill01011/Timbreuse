@@ -4,6 +4,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.mathTime.Date.fixedToDate;
 import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.dao.DAOUtility.addZeroToString;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,9 @@ import javafx.scene.shape.CircleBuilder;
 
 public class DAOImplHolyday implements DAOHolyday {
 	private static final String SQL_ADD_SINGLE_HOLYDAY = "INSERT INTO holydays(id, Date) VALUES(default, ?)";
-	private static final String SQL_SELECT_ALL_HOLYDAYS = "SELECT * FROM eleves";
+	private static final String SQL_SELECT_ALL_HOLYDAYS = "SELECT * FROM holydays";
+	private static final String SQL_SELECT_SINGLE_HOLYDAY = "SELECT Date FROM holydays WHERE Date=?";
+	private static final String SQL_DELETE_SINGLE_HOLYDAY = "DELETE FROM holydays WHERE Date=?";
 	
 	private DAOFactory daoFactory;
 	
@@ -35,7 +38,7 @@ public class DAOImplHolyday implements DAOHolyday {
 		try {
 			connection = daoFactory.getConnection();
 			for (int i = 0; i < dateList.size(); i++) {
-				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, (dateList.get(i)));
+				preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_SINGLE_HOLYDAY, true, addZeroToString(dateList.get(i)));
 				int statut = preparedStatement.executeUpdate();	
 				if(statut == 0) {
 					throw new DAOException("Echec de l'ajout du jour férié.");
@@ -77,9 +80,44 @@ public class DAOImplHolyday implements DAOHolyday {
 	}
 
 	@Override
-	public ArrayList<Holyday> getHolydays() throws DAOException {
-		
-		return null;
+	public Holyday isHolyday(String holyday) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Holyday isHolyday = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_SINGLE_HOLYDAY, false, holyday);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				isHolyday = new Holyday();
+				isHolyday.setDate(resultSet.getString("Date"));
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		return isHolyday;
+	}
+
+	@Override
+	public void deleteHolyday(String holyday) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_DELETE_SINGLE_HOLYDAY, false, holyday);
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec de la suppression.");
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
 	}
 	
 	

@@ -9,7 +9,9 @@ public interface DAOHolyday {
 
 		void addHolyday(ArrayList<String> date) throws DAOException;
 		
-		ArrayList<Holyday> getHolydays() throws DAOException;
+		Holyday isHolyday(String holyday) throws DAOException;
 
-		ArrayList<Holyday> getAllHolydays();
+		ArrayList<Holyday> getAllHolydays() throws DAOException;
+		
+		void deleteHolyday(String holyday) throws DAOException;
 }

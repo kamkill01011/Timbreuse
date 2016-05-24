@@ -10,11 +10,13 @@ import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.mathTime.Date;
 
 import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.dao.DAOUtility.addZeroToString;
 
 public class SetHolydaysForm {
 	private static final String ADD_SINGLE_HOLYDAY = "addSingleHolyday";
 	private static final String ADD_HOLYDAYS_GAP_A = "addHolydaysGapA";
 	private static final String ADD_HOLYDAYS_GAP_B = "addHolydaysGapB";
+	private static final String DEL_SINGLE_HOLYDAY = "deleteSingleHolyday";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	private DAOHolyday daoHolyday;
@@ -42,10 +44,12 @@ public class SetHolydaysForm {
 	 * @param request
 	 * @return jour ferié (int)
 	 */
-	public ArrayList<String> getSingleHolyday(HttpServletRequest request) {
-		ArrayList<String> singleHolyday = new ArrayList<String>();
-		singleHolyday.add(stringToDate(getFieldValue(request, ADD_SINGLE_HOLYDAY)).toString());
-		return singleHolyday;
+	public String getSingleHolyday(HttpServletRequest request) {
+		return getFieldValue(request, ADD_SINGLE_HOLYDAY);
+	}
+	
+	public String getDelSingleHolyday(HttpServletRequest request) {
+		return getFieldValue(request, DEL_SINGLE_HOLYDAY);
 	}
 	
 	/**
@@ -64,7 +68,7 @@ public class SetHolydaysForm {
 		}
 		
 		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {
-			holydaysGap.add(Date.fixedToDate(i).toString());
+			holydaysGap.add(addZeroToString(Date.fixedToDate(i).toString()));
 		}
 		return holydaysGap;
 	}

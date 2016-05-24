@@ -238,4 +238,23 @@ public final class DAOUtility {
 		String time = timeFormat.format(calendar.getTime());
 		return SecondsPastMidnight.stringToInt(time);
 	}
+	
+	/**
+	 * Si le chiffre est sur un seul digit, rajoute un zéro devant.
+	 * @param x
+	 * @return
+	 */
+	public static String addZeroToString(String x) {
+		String a = x.substring(0,x.indexOf("-"));
+		String b = x.substring(x.indexOf("-")+1, x.lastIndexOf("-"));
+		String c = x.substring(x.lastIndexOf("-")+1, x.length());
+		if(a.length()<2) {
+			a = "0"+a;
+		}
+		if(b.length()<2) {
+			b = "0"+b;
+		}
+		return a+"-"+b+"-"+c;
+	}
 }
+
