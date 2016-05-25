@@ -183,13 +183,15 @@ public class DAOImplStudent implements DAOStudent {
 		String firstname = student.getFirstname();//avec ID et pas nom + prénom
 		String lastname = student.getLastname();
 		int[] updatedTime = {0, 0};
-		if(newStatus.equals("DEP")) {
-			updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime(), currentTime());
-		}
+		int checkoutTime = currentTime();
+		if(currentTime() > 82800 && SecondsPastMidnight.stringToInt(student.getLastCheckTime()) < 57600) checkoutTime = 57600;//need to be soft coded (82800 = 23h, 57600 = 16h)
+		else checkoutTime = SecondsPastMidnight.stringToInt(student.getLastCheckTime())+1;
+		
+		if(newStatus.equals("DEP")) updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime(), checkoutTime);
 		try {
 			connection = daoFactory.getConnection();
 			if(newStatus.equals("DEP")) {
-				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP, false, newStatus, currentDate(), currentTime(), updatedTime[0], updatedTime[1], firstname, lastname);
+				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP, false, newStatus, currentDate(), checkoutTime, updatedTime[0], updatedTime[1], firstname, lastname);
 			} else {
 				preparedStatement = preparedRequestInitialisation(connection, SQL_UPDATE_LASTCHECK_STATUS_STUDENT, false, newStatus, currentDate(), currentTime(), firstname, lastname);
 			}
