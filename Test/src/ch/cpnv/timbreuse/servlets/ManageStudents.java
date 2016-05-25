@@ -82,8 +82,7 @@ public class ManageStudents extends HttpServlet{
 					}
 					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						String newStatus = daoLog.addLog(student);
-						daoStudent.changeStatus(student, newStatus);
+						daoStudent.changeStatus(student, daoLog.addLog(student));
 					}
 				}
 			}

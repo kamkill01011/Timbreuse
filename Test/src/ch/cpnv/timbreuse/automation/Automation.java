@@ -55,8 +55,7 @@ public final class Automation {
 	}
 	
 	private static void checkoutAllStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {
-		String newStatus = daoLog.addLog(student);//change time
-		daoStudent.changeStatus(student, newStatus);
+		daoStudent.changeStatus(student, daoLog.addLog(student));//change time
 	}
 	
 	private static void resetTodayTime(Student student, DAOStudent daoStudent) {

@@ -51,8 +51,7 @@ public class StudentInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		if(request.getParameter("newStatus") != null) {
-			String newStatus = daoLog.addLog(student);
-			daoStudent.changeStatus(student, newStatus);
+			daoStudent.changeStatus(student, daoLog.addLog(student));
 		}
 		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
