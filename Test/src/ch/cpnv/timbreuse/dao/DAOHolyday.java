@@ -13,5 +13,5 @@ public interface DAOHolyday {
 
 		ArrayList<Holyday> getAllHolydays() throws DAOException;
 		
-		void deleteHolyday(String holyday) throws DAOException;
+		void deleteHolyday(ArrayList<String> holyday) throws DAOException;
 }

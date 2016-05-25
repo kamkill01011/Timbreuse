@@ -7,61 +7,66 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
+import ch.cpnv.timbreuse.beans.Holyday;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
+
+import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.mathTime.Date.fixedToDate;
 
 
 public final class DAOUtility {
 	//Constructeur private => final class, utilitaire, contient uniquement des méthodes statiques
 	private DAOUtility() {
-		
-    }
-	
+
+	}
+
 	//Fermetures d'objets
 	public static void closeObject(ResultSet resultSet) {
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                System.out.println( "Echec de la fermeture du ResultSet : " + e.getMessage());
-            }
-        }
-    }
-	
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				System.out.println( "Echec de la fermeture du ResultSet : " + e.getMessage());
+			}
+		}
+	}
+
 	public static void closeObject(Statement statement) {
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                System.out.println("Echec de la fermeture du Statement : " + e.getMessage());
-            }
-        }
-    }
-	
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				System.out.println("Echec de la fermeture du Statement : " + e.getMessage());
+			}
+		}
+	}
+
 	public static void closeObject(Connection connection) {
-        if (connection != null) {
-            try {
-            	connection.close();
-            } catch (SQLException e) {
-                System.out.println("Echec de la fermeture de la connexion : " + e.getMessage());
-            }
-        }
-    }
-	
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Echec de la fermeture de la connexion : " + e.getMessage());
+			}
+		}
+	}
+
 	public static void closeObjects(Statement statement, Connection connection) {
 		closeObject(statement);
 		closeObject(connection);
 	}
-	
+
 	public static void closeObjects(ResultSet resultSet, Statement statement, Connection connection) {
 		closeObject(resultSet);
 		closeObject(statement);
 		closeObject(connection);
 	}
-	
+
 	/**
 	 * Initialise la requête préparée basée sur les arguments
 	 * @param connection Connexion à la DataBase?
@@ -72,13 +77,13 @@ public final class DAOUtility {
 	 * @throws SQLException ???
 	 */
 	public static PreparedStatement preparedRequestInitialisation(Connection connection, String sql, boolean returnGeneratedKeys, Object... objets) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
-        for (int i = 0; i < objets.length; i++) {
-            preparedStatement.setObject(i + 1, objets[i]);
-        }
-        return preparedStatement;
-    }
-	
+		PreparedStatement preparedStatement = connection.prepareStatement(sql, returnGeneratedKeys ? Statement.RETURN_GENERATED_KEYS : Statement.NO_GENERATED_KEYS);
+		for (int i = 0; i < objets.length; i++) {
+			preparedStatement.setObject(i + 1, objets[i]);
+		}
+		return preparedStatement;
+	}
+
 	/**
 	 * Enlève tous les accents d'un string.
 	 * @param s Chaîne de caractères à modifier
@@ -93,7 +98,7 @@ public final class DAOUtility {
 		s=s.replaceAll("[ç]", "c");
 		return s;
 	}
-	
+
 	/**
 	 * Retourne un string en majuscule.
 	 * @param s Chaîne de caractères à modifier
@@ -107,7 +112,7 @@ public final class DAOUtility {
 		}
 		return new String(newChars);
 	}
-	
+
 	/**
 	 * Retourne un string en minuscules.
 	 * @param s Chaîne de caractères à modifier
@@ -121,7 +126,7 @@ public final class DAOUtility {
 		}
 		return new String(newChars);
 	}
-	
+
 	/**
 	 * Génère l'email dans le format CPNV (orenom.NOM@cpnv.ch) à partir du prénom et du nom.
 	 * @param firstname Prénom
@@ -131,7 +136,7 @@ public final class DAOUtility {
 	public static String generateEmail(String firstname, String lastname) {
 		return (removeAccent(firstname)+"."+upperStringWithoutAccent(lastname)+"@cpnv.ch").replaceAll("\\s+", "");
 	}
-	
+
 	/**
 	 * Retourne le nom d'utilisateur depuis l'email sans majuscules.
 	 * @param email Adresse e-mail de l'utilisateur
@@ -145,7 +150,7 @@ public final class DAOUtility {
 		}
 		return new String(usernameTab);
 	}
-	
+
 	/**
 	 * Génère le nom d'utilisateur sans accents à partir du prénom et du nom.
 	 * @param firstname Prénom
@@ -155,7 +160,7 @@ public final class DAOUtility {
 	public static String generateUsername(String firstname, String lastname) {
 		return (lowerStringWithoutAccent(firstname+"."+lastname)).replaceAll("\\s+", "");
 	}
-	
+
 	/**
 	 * Retourne le prénom à partir du nom d'utilisateur.
 	 * @param username Nom de l'utilisateur
@@ -164,7 +169,7 @@ public final class DAOUtility {
 	public static String getFirstnameFromUsername(String username) {
 		return username.substring(0, username.lastIndexOf("."));
 	}
-	
+
 	/**
 	 * Retourne le nom à partir du nom d'utilisateur.
 	 * @param username Nom de l'utilisateur
@@ -173,12 +178,12 @@ public final class DAOUtility {
 	public static String getLastnameFromUsername(String username) {
 		return username.substring(username.lastIndexOf(".")+1, username.length());
 	}
-	
+
 	public static User sqlSelect(String sql, String table, Object object) {
 		User user = new User();
 		return user;
 	}
-	
+
 	/**
 	 * Génère un mot de passe aléatoire de longueur 8 pour la 1ère connexion
 	 * @return Mot de passe 8 caractères
@@ -192,7 +197,7 @@ public final class DAOUtility {
 		}
 		return password;
 	}
-	
+
 	/**
 	 * Additione l'ancien temps et le nouveau (timeDiff).
 	 * @param newTime nouveau temps
@@ -202,7 +207,7 @@ public final class DAOUtility {
 	public static int addTime(int newTime, int oldTime) {
 		return newTime + oldTime;
 	}	
-	
+
 	/**
 	 * Modifie une chaîne de caractères en enlevant les éventuels accents et imposant une majuscule pour la première lettre.
 	 * @param s chaîne de caractères à modifier
@@ -217,7 +222,7 @@ public final class DAOUtility {
 		}
 		return new String(newChars);
 	}
-	
+
 	/**
 	 * Retourne la date actuelle (jj-MM-aaaa)
 	 * @return date actuelle
@@ -227,7 +232,7 @@ public final class DAOUtility {
 		Calendar calendar = Calendar.getInstance();
 		return dateFormat.format(calendar.getTime());
 	}
-	
+
 	/**
 	 * Retourne le temps actuel (HH:mm:ss)
 	 * @return temps actuel
@@ -238,7 +243,7 @@ public final class DAOUtility {
 		String time = timeFormat.format(calendar.getTime());
 		return SecondsPastMidnight.stringToInt(time);
 	}
-	
+
 	/**
 	 * Si le chiffre est sur un seul digit, rajoute un zéro devant.
 	 * @param x
@@ -255,6 +260,28 @@ public final class DAOUtility {
 			b = "0"+b;
 		}
 		return a+"-"+b+"-"+c;
+	}
+
+	/**
+	 * Retourne la liste triée des congés
+	 * @param dateList Liste de congés non classé
+	 * @return liste triée des congés
+	 */
+	public static ArrayList<Holyday> sortDateList(ArrayList<Holyday> dateList) {
+		if(dateList.size()!=0 || dateList == null) {
+			int[] dateListInt = new int[dateList.size()];
+			for (int i = 0; i < dateList.size(); i++) {
+				dateListInt[i] = stringToDate(dateList.get(i).getDate()).fixed();
+			}
+			java.util.Arrays.sort(dateListInt);
+			ArrayList<Holyday> result = new ArrayList<Holyday>();
+			for (int i = 0; i < dateListInt.length; i++) {
+				Holyday holyday = new Holyday();
+				holyday.setDate(addZeroToString(fixedToDate(dateListInt[i]).toString()));
+				result.add(holyday);
+			}
+			return result;
+		} return dateList;
 	}
 }
 

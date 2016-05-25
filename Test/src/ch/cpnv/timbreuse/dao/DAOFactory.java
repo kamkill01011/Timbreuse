@@ -16,9 +16,6 @@ public class DAOFactory {
 	private static final String PROPERTY_DRIVER   = "driver";
 	private static final String PROPERTY_USERNAME = "username";
 	private static final String PROPERTY_PASSWORD = "password";
-	private String url;
-	private String username;
-	private String password;
 
 	BoneCP connectionPool = null;
 	

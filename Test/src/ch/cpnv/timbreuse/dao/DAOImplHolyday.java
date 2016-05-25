@@ -2,9 +2,8 @@ package ch.cpnv.timbreuse.dao;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
-import static ch.cpnv.timbreuse.mathTime.Date.fixedToDate;
-import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
 import static ch.cpnv.timbreuse.dao.DAOUtility.addZeroToString;
+import static ch.cpnv.timbreuse.dao.DAOUtility.sortDateList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,11 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.crypto.CipherInputStream;
-
 import ch.cpnv.timbreuse.beans.Holyday;
-import ch.cpnv.timbreuse.beans.Student;
-import javafx.scene.shape.CircleBuilder;
 
 public class DAOImplHolyday implements DAOHolyday {
 	private static final String SQL_ADD_SINGLE_HOLYDAY = "INSERT INTO holydays(id, Date) VALUES(default, ?)";
@@ -69,7 +64,7 @@ public class DAOImplHolyday implements DAOHolyday {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		return holdaydays;
+		return sortDateList(holdaydays);
 	}
 
 	private static Holyday map(ResultSet resultSet) throws SQLException {
@@ -102,16 +97,15 @@ public class DAOImplHolyday implements DAOHolyday {
 	}
 
 	@Override
-	public void deleteHolyday(String holyday) throws DAOException {
+	public void deleteHolyday(ArrayList<String> dateList) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_DELETE_SINGLE_HOLYDAY, false, holyday);
-			int statut = preparedStatement.executeUpdate();
-			if(statut == 0) {
-				throw new DAOException("Echec de la suppression.");
+			for (int i = 0; i < dateList.size(); i++) {
+				preparedStatement = preparedRequestInitialisation(connection, SQL_DELETE_SINGLE_HOLYDAY, false, addZeroToString(dateList.get(i)));
+				preparedStatement.executeUpdate();				
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);

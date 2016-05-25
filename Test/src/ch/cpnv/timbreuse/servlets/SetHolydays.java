@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.Holyday;
-import ch.cpnv.timbreuse.beans.Teacher;
-import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOHolyday;
-import ch.cpnv.timbreuse.dao.DAOTeacher;
-import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.SetHolydaysForm;
 
 @WebServlet("/setholydays")
@@ -33,6 +29,10 @@ public class SetHolydays extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
+		
+		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
 	
@@ -59,12 +59,18 @@ public class SetHolydays extends HttpServlet {
 		}
 		if(request.getParameter("deleteSingleHolydayButton")!=null) {
 			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
-			daoHolyday.deleteHolyday(holydaysForm.getDelSingleHolyday(request));
+			ArrayList<String> holyday = new ArrayList<String>();
+			holyday.add(holydaysForm.getDelSingleHolyday(request));
+			daoHolyday.deleteHolyday(holyday);
 		}
 		if(request.getParameter("deleteHolydaysGapButton")!=null) {
-			
+			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			ArrayList<String> holydays = holydaysForm.getDelHolydaysGap(request);
+			daoHolyday.deleteHolyday(holydays);
 		}
 		
+		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
+		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
 }

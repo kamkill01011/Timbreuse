@@ -10,6 +10,7 @@ import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.mathTime.Date;
 
 import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.mathTime.Date.isDayValid;
 import static ch.cpnv.timbreuse.dao.DAOUtility.addZeroToString;
 
 public class SetHolydaysForm {
@@ -17,6 +18,9 @@ public class SetHolydaysForm {
 	private static final String ADD_HOLYDAYS_GAP_A = "addHolydaysGapA";
 	private static final String ADD_HOLYDAYS_GAP_B = "addHolydaysGapB";
 	private static final String DEL_SINGLE_HOLYDAY = "deleteSingleHolyday";
+	private static final String DEL_HOLYDAYS_GAP_A = "deleteHolydaysGapA";
+	private static final String DEL_HOLYDAYS_GAP_B = "deleteHolydaysGapB";
+	
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	private DAOHolyday daoHolyday;
@@ -65,6 +69,29 @@ public class SetHolydaysForm {
 			checkHolydayGap(dateA.fixed(), dateB.fixed());
 		} catch(Exception e) {
 			setError(ADD_HOLYDAYS_GAP_B, e.getMessage()); //vérifie si l'intervalle entré est possible
+		}
+		
+		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {
+			if(isDayValid(i)) {
+			holydaysGap.add(addZeroToString(Date.fixedToDate(i).toString()));
+		}
+		}
+		return holydaysGap;
+	}
+	
+	/**
+	 * Retourne un arryList de la plage de jours feriés.
+	 * @param request
+	 * @return arrayList plage de jours feriés
+	 */
+	public ArrayList<String> getDelHolydaysGap(HttpServletRequest request) {
+		ArrayList<String> holydaysGap = new ArrayList<String>();
+		Date dateA = stringToDate(getFieldValue(request, DEL_HOLYDAYS_GAP_A));
+		Date dateB = stringToDate(getFieldValue(request, DEL_HOLYDAYS_GAP_B));
+		try {
+			checkHolydayGap(dateA.fixed(), dateB.fixed());
+		} catch(Exception e) {
+			setError(DEL_HOLYDAYS_GAP_B, e.getMessage()); //vérifie si l'intervalle entré est possible
 		}
 		
 		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {

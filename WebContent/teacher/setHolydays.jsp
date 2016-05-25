@@ -60,18 +60,18 @@
 			</table>
 		</form>
 	</fieldset>
+	<c:if test="${!empty holydays}">
 	<fieldset>
 		<legend>Jours de congés</legend>
 		<table>
-			<tr>
-				<th>Date</th>
-			</tr>
-
-			<tr>
-				<td></td>
-			</tr>
+			<c:forEach items="${holydays}" var="i">
+				<tr>
+					<td>${i.date}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</fieldset>
+	</c:if>
 </body>
 </html>
 <%@include file="/WEB-INF/footer.jsp"%>

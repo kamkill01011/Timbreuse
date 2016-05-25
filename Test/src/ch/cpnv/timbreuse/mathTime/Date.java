@@ -8,10 +8,10 @@ public final class Date {
 	private int day, month, year;
 
 	public Date(int day, int month, int year) {
-		if(day<1 || day>daysInMonth(month, year)) {
+		if(day<1) {
 			throw new IllegalArgumentException("Jour invalide.");
 		}
-		else if(month<1 || month>12) {
+		else if(month<0) {
 			throw new IllegalArgumentException("Mois invalide.");
 		}
 		this.day = day;
@@ -100,6 +100,13 @@ public final class Date {
 		}
 	}
 
+	public static boolean isDayValid(int dateInt) {
+		Date date = fixedToDate(dateInt);
+		if(date.day()>daysInMonth(date.month(), date.year())) {
+			return false;
+		} return true;
+	}
+	
 	private static int calculC(int m, int y) {
 		if(m<=2) { return 0;}
 		else if(m>2 && isLeapYear(y)) { return -1;}
