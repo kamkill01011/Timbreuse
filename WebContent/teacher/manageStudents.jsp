@@ -70,7 +70,7 @@
 							</table>
 						</td>
 						<td>
-							<input type="text" name="modifyTimeDiff" value="HH:MM:SS" size="32" maxlength="64" />
+							<input type="text" name="modifyTimeDiff" placeholder="HH:MM:SS" size="32" maxlength="64" />
 							<input type="submit" name="addTime" value="Ajouter du temps" class="sansLabelNoSpace" />
 							<input type="submit" name="newStatus" value="Timbrer" class="sansLabelNoSpace" />
 							<br />
@@ -106,13 +106,13 @@
 		<legend>Ajouter un élève</legend>
 		<form method="post" action="managestudents">
 			<label for="addClass">Classe : </label>
-			<input type="text" id="addClass" name="addClass" value="" size="32" maxlength="64" />
+			<input type="text" id="addClass" name="addClass" placeholder="YE-S1a" size="32" maxlength="64" />
 			<br />
 			<label for="addFirstname">Prénom : </label>
-			<input type="text" id="addFirstname" name="addFirstname" value="" size="32" maxlength="64" />
+			<input type="text" id="addFirstname" name="addFirstname" placeholder="Jean" size="32" maxlength="64" />
 			<br />
 			<label for="addLastname">Nom : </label>
-			<input type="text" id="addLastname" name="addLastname" value="" size="32" maxlength="64" />
+			<input type="text" id="addLastname" name="addLastname" placeholder="Dupond" size="32" maxlength="64" />
 			<br />
 			<input type="submit" name="add" value="Ajouter" class="sansLabel" />
 		</form>

@@ -19,17 +19,17 @@
 				<tr>
 					<td>Ajouter un congé :</td>
 					<td><input type="text" id="addSingleHolyday"
-						name="addSingleHolyday" value="" size="16" maxlength="16" /></td>
+						name="addSingleHolyday" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td><input type="submit" name="addSingleHolydayButton"
 						value="Ajouter" class="sansLabelNoSpace" /></td>
 				</tr>
 				<tr>
 					<td>Ajouter une plage de congés : Du</td>
 					<td><input type="text" id="addHolydaysGapA"
-						name="addHolydaysGapA" value="" size="16" maxlength="16" /></td>
+						name="addHolydaysGapA" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td class="centre">Au</td>
 					<td><input type="text" id="addHolydaysGapB"
-						name="addHolydaysGapB" value="" size="16" maxlength="16" /></td>
+						name="addHolydaysGapB" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td><input type="submit" name="addHolydayGapButton"
 						value="Ajouter" class="sansLabelNoSpace" /></td>
 				</tr>
@@ -43,17 +43,17 @@
 				<tr>
 					<td>Supprimer un congé</td>
 					<td><input type="text" id="deleteSingleHolyday"
-						name="deleteSingleHolyday" value="" size="16" maxlength="16" /></td>
+						name="deleteSingleHolyday" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td><input type="submit" name="deleteSingleHolydayButton"
 						value="Supprimer" class="sansLabelNoSpace" /></td>
 				</tr>
 				<tr>
 					<td>Supprimer une plage de congés: Du</td>
 					<td><input type="text" id="deleteHolydaysGapA"
-						name="deleteHolydaysGapA" value="" size="16" maxlength="16" /></td>
+						name="deleteHolydaysGapA" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td class="centre">Au</td>
 					<td><input type="text" id="deleteHolydaysGapB"
-						name="deleteHolydaysGapB" value="" size="16" maxlength="16" /></td>
+						name="deleteHolydaysGapB" placeholder="JJ-MM-AAAA" size="16" maxlength="16" /></td>
 					<td><input type="submit" name="deleteHolydaysGapButton"
 						value="Supprimer" class="sansLabelNoSpace" /></td>
 				</tr>

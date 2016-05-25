@@ -12,7 +12,7 @@
         <form method="post" action="connection">
             <fieldset>
                 <legend>Connexion</legend>
-                <label for="username">Adresse email <span class="requis">*</span></label>
+                <label for="username">Nom d'utilisateur <span class="requis">*</span></label>
                 <input type="text" name="username" value="<c:out value="${user.username}"/>" size="20" maxlength="60" />
                 <span class="error">${form.errors['username']}</span>
                 <br />

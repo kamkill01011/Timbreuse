@@ -17,12 +17,12 @@
 		<legend>Ajouter un enseigant</legend>
 		<form method="post" action="admin">
 			<label for="addFirstnameTeacher">Prénom : </label> <input type="text"
-				id="addFirstnameTeacher" name="addFirstnameTeacher" value=""
+				id="addFirstnameTeacher" name="addFirstnameTeacher" placeholder="Jean"
 				size="32" maxlength="64" /> <br /> <label for="addLastname">Nom
 				: </label> <input type="text" id="addLastnameTeacher"
-				name="addLastnameTeacher" value="" size="32" maxlength="64" /> <br />
+				name="addLastnameTeacher" placeholder="Dupond" size="32" maxlength="64" /> <br />
 			<label for="addClasse">Classe(s) : </label> <input type="text"
-				id="addClasseTeacher" name="addClasseTeacher" value="" size="32"
+				id="addClasseTeacher" name="addClasseTeacher" placeholder="YE-S1a, YE-S1b, ..." size="32"
 				maxlength="64" /> <br /> <input type="submit" name="addTeacher"
 				value="Ajouter" class="sansLabel" />
 		</form>
