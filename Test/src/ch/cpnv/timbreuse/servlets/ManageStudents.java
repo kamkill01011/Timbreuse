@@ -25,8 +25,6 @@ import ch.cpnv.timbreuse.forms.DeleteStudentForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
-import static ch.cpnv.timbreuse.automation.Automation.endDay;
-
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
  *

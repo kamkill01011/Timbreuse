@@ -29,7 +29,6 @@ public class SetHolydays extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession();
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		
 		request.setAttribute("holydays", holydays);
@@ -37,7 +36,6 @@ public class SetHolydays extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		if(request.getParameter("addSingleHolydayButton")!=null) {
 			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
 			if(daoHolyday.isHolyday(holydaysForm.getSingleHolyday(request))==null) {

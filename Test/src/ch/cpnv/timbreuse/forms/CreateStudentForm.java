@@ -6,10 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.Student;
-import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOStudent;
-import ch.cpnv.timbreuse.dao.DAOUser;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 

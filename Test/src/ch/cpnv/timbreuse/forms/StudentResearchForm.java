@@ -9,7 +9,6 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOStudent;
-import ch.cpnv.timbreuse.dao.DAOUser;
 
 /**
  * Formulaire pour supprimer un élève dans la base de données
