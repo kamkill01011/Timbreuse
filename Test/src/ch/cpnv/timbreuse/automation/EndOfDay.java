@@ -1,12 +1,8 @@
 package ch.cpnv.timbreuse.automation;
 
-import java.awt.BorderLayout;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;

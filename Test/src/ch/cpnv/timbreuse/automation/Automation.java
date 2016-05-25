@@ -1,6 +1,5 @@
 package ch.cpnv.timbreuse.automation;
 
-import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 
 import java.util.ArrayList;
