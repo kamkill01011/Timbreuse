@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8" http-equiv="refresh" content="<%=session.getMaxInactiveInterval() %>; URL=/Timbreuse/logout" />
 <link type="text/css" rel="stylesheet" href="form.css" />
 </head>
 <ul class="menu">

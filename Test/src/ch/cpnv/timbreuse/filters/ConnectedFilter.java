@@ -36,7 +36,12 @@ public class ConnectedFilter implements Filter {
         if(session.getAttribute(ATT_SESSION_USER) != null || request.getRequestURI().endsWith(".css")) {
         	chain.doFilter(request, response);
         } else {
+        	if(!request.getRequestURI().equals("/Timbreuse/connection")) {
+        		session.invalidate();
+        		System.out.println("TIMED OUT");
+        	}
         	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+        	//response.sendRedirect(request.getContextPath()+VIEW_CONNECTION);
         }
 	}
 

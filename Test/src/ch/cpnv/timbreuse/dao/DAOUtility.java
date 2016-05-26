@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 import ch.cpnv.timbreuse.beans.Holyday;
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
@@ -268,7 +269,7 @@ public final class DAOUtility {
 	 * @return liste triée des congés
 	 */
 	public static ArrayList<Holyday> sortDateList(ArrayList<Holyday> dateList) {
-		if(dateList.size()!=0 || dateList == null) {
+		if(dateList.size()!=0) {
 			int[] dateListInt = new int[dateList.size()];
 			for (int i = 0; i < dateList.size(); i++) {
 				dateListInt[i] = stringToDate(dateList.get(i).getDate()).fixed();
@@ -281,7 +282,21 @@ public final class DAOUtility {
 				result.add(holyday);
 			}
 			return result;
-		} return dateList;
+		}
+		return dateList;
 	}
+	
+	/*
+	public static ArrayList<Student> sortStudentList(ArrayList<Student> studentList) {
+		if(studentList.size()!=0) {
+			ArrayList<Student> result = new ArrayList<Student>();
+			String a = "zzz";
+			for (int i = 0; i < studentList.size(); i++) {
+				
+			}
+		}
+	}*/
 }
+
+
 

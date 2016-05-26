@@ -4,7 +4,6 @@
 <%@include file="/WEB-INF/header.jsp"%>
 <html>
     <head>
-        <meta charset="utf-8" />
         <title>Changer de mot de passe</title>
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
