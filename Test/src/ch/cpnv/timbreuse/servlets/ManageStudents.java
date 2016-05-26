@@ -107,5 +107,6 @@ public class ManageStudents extends HttpServlet{
 		request.setAttribute("selectedClasse", selectedClasse);
 
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		//response.sendRedirect(request.getContextPath()+"/managestudents");
 	}
 }

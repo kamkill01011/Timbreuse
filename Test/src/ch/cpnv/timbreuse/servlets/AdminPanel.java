@@ -34,7 +34,8 @@ public class AdminPanel extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession();
+		//HttpSession session = request.getSession(false);
+		
 		//Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getEmail());//useless?
 		
 		if(request.getParameter("addTeacher") != null) {
@@ -59,5 +60,6 @@ public class AdminPanel extends HttpServlet {
 			daoUser.delete(deleteForm.selectAdminToDelet(request));
 		}
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		//response.sendRedirect(request.getContextPath()+"/admin");
 	}
 }

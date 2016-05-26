@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   version="3.0">
-  
+  	
   	<filter>
     	<filter-name>Set Character Encoding</filter-name>
     	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -75,5 +75,7 @@
 		<servlet-class>ch.cpnv.timbreuse.servlets.EndDay</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
- 	
+ 	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
 </web-app>

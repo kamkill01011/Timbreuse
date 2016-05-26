@@ -36,12 +36,6 @@
 		<p>Dimanche : ${currentStudent.sunday}</p>
 	</fieldset>
 	<fieldset>
-		<legend>Compte utilisateur</legend>
-		<p>Nom d'utilisateur : ${sessionScope.userSession.username}</p>
-		<p>Mot de passe : ${sessionScope.userSession.password}</p>
-	</fieldset>
-	
-	<fieldset>
 		<legend>Logs</legend>
 		<table>
 			<tr>

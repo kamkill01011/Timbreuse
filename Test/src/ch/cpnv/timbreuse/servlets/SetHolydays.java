@@ -70,5 +70,6 @@ public class SetHolydays extends HttpServlet {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
+		//response.sendRedirect(request.getContextPath()+"/setholydays");
 	}
 }

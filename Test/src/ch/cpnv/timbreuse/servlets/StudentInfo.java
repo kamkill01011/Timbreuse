@@ -57,6 +57,7 @@ public class StudentInfo extends HttpServlet {
 		
 		request.setAttribute("currentStudent", student);
 		request.setAttribute("logs", logs);
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		//this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/info");
 	}
 }
