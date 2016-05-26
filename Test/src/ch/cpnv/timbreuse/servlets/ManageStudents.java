@@ -32,6 +32,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 @WebServlet("/managestudents")
 public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
+	public static final String USER_SESSION_ATT ="userSession";
 	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
 	private DAOLog daoLog;
@@ -48,7 +49,7 @@ public class ManageStudents extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		//récupère l'ensaignant connecté notamment pour afficher ses classes 
 		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
+		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
 
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
@@ -56,7 +57,7 @@ public class ManageStudents extends HttpServlet{
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getUsername());
+		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
 		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");

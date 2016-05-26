@@ -12,6 +12,7 @@ import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
+import ch.cpnv.timbreuse.gui.CustomConsole;
 
 public class EndDay extends HttpServlet {
 	private DAOStudent daoStudent;
@@ -20,6 +21,7 @@ public class EndDay extends HttpServlet {
 	EndOfDay eod;
 
 	public void init() {
+		CustomConsole.init();//strart a console for System.out and System.err
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoLog 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
 		this.daoHolyday = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoHolyday();

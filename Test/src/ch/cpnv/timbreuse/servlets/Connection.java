@@ -46,6 +46,7 @@ public class Connection extends HttpServlet {
 		//request.setAttribute(USER_ATT, user);//useless
 		
 		if(connectionForm.getErrors().isEmpty()) {
+			System.out.println(user.getUsername() + " connecting");
 			session.setAttribute(USER_SESSION_ATT, user);
 			response.sendRedirect(request.getContextPath() + CONNECTING);
 		} else {
