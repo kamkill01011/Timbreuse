@@ -16,18 +16,17 @@
     </form>
     <fieldset>
 		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
-		<p>Status : ${currentStudent.status}</p>
 		<p>Différence : ${currentStudent.timeDiff}</p>
 		<p>Temps effectué aujourd'hui : ${currentStudent.todayTime}</p>
+		<p>Status : ${currentStudent.status}</p>
+		<p>Dernier timbrage : ${currentStudent.lastCheckDate} / ${currentStudent.lastCheckTime}</p>
 		<p>Classe : ${currentStudent.classe}</p>
 		<p>E-mail : ${currentStudent.email}</p>
-		<p>Heure dernier timbrage : ${currentStudent.lastCheckTime}</p>
-		<p>Date dernier timbrage : ${currentStudent.lastCheckDate}</p>
 		<p>Date d'inscription : ${currentStudent.startDate}</p>
 	</fieldset>
 	<fieldset>
 		<legend>Horaire</legend>
-		<p>Lund : ${currentStudent.monday}</p>
+		<p>Lundi : ${currentStudent.monday}</p>
 		<p>Mardi : ${currentStudent.tuesday}</p>
 		<p>Mercredi : ${currentStudent.wednesday}</p>
 		<p>Jeudi : ${currentStudent.thursday}</p>

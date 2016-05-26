@@ -49,8 +49,7 @@
 									<th>Prénom</th>
 									<th>Différence</th>
 									<th>Status</th>
-									<th>Dernier timbrage (date)</th>
-									<th>Dernier timbrage (heure)</th>
+									<th>Dernier timbrage</th>
 									<th>E-mail</th>
 									<th>Logs</th>
 								</tr>
@@ -61,8 +60,7 @@
 										<td>${i.firstname}</td>
 										<td>${i.timeDiff}</td>
 										<td class="${i.status}" >${i.status}</td>
-										<td>${i.lastCheckDate}</td>
-										<td>${i.lastCheckTime}</td>
+										<td>${i.lastCheckDate} / ${i.lastCheckTime}</td>
 										<td>${i.email}</td>
 										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" class="sansLabelNoSpace" /></td>
 									</tr>
