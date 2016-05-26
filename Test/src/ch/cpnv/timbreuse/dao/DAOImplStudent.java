@@ -267,7 +267,7 @@ public class DAOImplStudent implements DAOStudent {
 	}
 	
 	@Override
-	public void setTimeDiff(Student student) {
+	public int setTimeDiff(Student student) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
@@ -280,5 +280,6 @@ public class DAOImplStudent implements DAOStudent {
 		} finally {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
+		return getDayOfWeekTimetable(student);
 	}
 }

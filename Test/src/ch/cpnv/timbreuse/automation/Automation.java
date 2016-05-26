@@ -46,15 +46,15 @@ public final class Automation {
 		ArrayList<Student> students = daoStudent.getNotCheckedOutStudents();
 		for (int i = 0; i < students.size(); i++) {
 			if(students.get(i).getStatus().equals("ARR")) {			
-				checkoutAllStudent(students.get(i),daoStudent, daoLog);
+				checkoutStudent(students.get(i),daoStudent, daoLog);
 			}
 			resetTodayTime(students.get(i), daoStudent);
-			setTimediff(students.get(i), daoStudent);
+			setTimediff(students.get(i), daoStudent, daoLog);
 		}
 		System.out.println("Day ended.");
 	}
 	
-	private static void checkoutAllStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {
+	private static void checkoutStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {
 		daoStudent.changeStatus(student, daoLog.addLog(student));//change time
 	}
 	
@@ -62,7 +62,7 @@ public final class Automation {
 		daoStudent.resetTodayTime(student);
 	}
 	
-	private static void setTimediff(Student student, DAOStudent daoStudent) {
-		daoStudent.setTimeDiff(student);
+	private static void setTimediff(Student student, DAOStudent daoStudent, DAOLog daoLog) {
+		daoLog.endDayLog(student, SecondsPastMidnight.toString(daoStudent.setTimeDiff(student)));
 	}
 }

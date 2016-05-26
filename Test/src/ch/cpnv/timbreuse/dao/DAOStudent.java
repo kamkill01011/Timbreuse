@@ -40,5 +40,5 @@ public interface DAOStudent {
 
 	void resetTodayTime(Student student);
 
-	void setTimeDiff(Student student);
+	int setTimeDiff(Student student);
 }

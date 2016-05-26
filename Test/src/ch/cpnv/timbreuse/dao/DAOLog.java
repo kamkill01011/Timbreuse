@@ -23,5 +23,7 @@ public interface DAOLog {
 
 	ArrayList<Log> getStudentLogs(Student student);
 
-	String addTimeLog(Student student, int time);
+	void addTimeLog(Student student, int time);
+
+	void endDayLog(Student student, String SubTime);
 }

@@ -18,7 +18,6 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
 public class DAOImplLog implements DAOLog {
 	private static final String SQL_INSERT_LOG = "INSERT INTO logs(id,Username,Date,Time,Status) VALUES(default,?,?,?,?)";
-	private static final String SQL_INSERT_TIME_LOG = "INSERT INTO logs(id,Username,Date,Time,Status) VALUES(default,?,?,?,?)";
 	private static final String SQL_SELECT_STATUS = "SELECT Status FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_SELECT_STUDENT_LOGS = "SELECT id,Username,Date,Time,Status FROM logs WHERE Username=?";
 
@@ -33,12 +32,10 @@ public class DAOImplLog implements DAOLog {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
-		String firstname = student.getFirstname();
-		String lastname = student.getLastname();
 		String newStatus = getNewStatus(student);
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(firstname, lastname), currentDate(), currentTime(), newStatus);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), currentTime(), newStatus);
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de l'ajout de log.");
@@ -53,16 +50,13 @@ public class DAOImplLog implements DAOLog {
 
 
 	@Override
-	public String addTimeLog(Student student, int time) {
+	public void addTimeLog(Student student, int time) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
-		String firstname = student.getFirstname();
-		String lastname = student.getLastname();
-		String newStatus = "ADD";
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_TIME_LOG, true, generateUsername(firstname, lastname), currentDate(), time, newStatus);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), time, "ADD");
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de l'ajout de log.");
@@ -72,7 +66,25 @@ public class DAOImplLog implements DAOLog {
 		} finally {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
-		return newStatus;
+	}
+
+	@Override
+	public void endDayLog(Student student, String SubTime) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), currentTime(), "DAY");
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec de l'ajout de log.");
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
 	}
 
 	@Override
