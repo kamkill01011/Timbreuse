@@ -1,6 +1,7 @@
 package ch.cpnv.timbreuse.automation;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
+import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,15 @@ public final class Automation {
 		return timeUpdated;
 	}
 	
+	public static int checkoutTime(Student student) {
+		int checkoutTime = currentTime();
+		if(checkoutTime > 82740) {//need to be soft coded (82740 = 22h59, 57600 = 16h)
+			if (SecondsPastMidnight.stringToInt(student.getLastCheckTime()) < 57600) checkoutTime = 57600;
+			else checkoutTime = SecondsPastMidnight.stringToInt(student.getLastCheckTime())+1;
+		}
+		return checkoutTime;
+	}
+	
 	public static void endDay(DAOStudent daoStudent, DAOLog daoLog, DAOHolyday daoHolyday) {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		for (int i = 0; i < holydays.size(); i++) {
@@ -55,7 +65,7 @@ public final class Automation {
 	}
 	
 	private static void checkoutStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {
-		daoStudent.changeStatus(student, daoLog.addLog(student));//change time
+		daoStudent.changeStatus(student, daoLog.addLog(student));
 	}
 	
 	private static void resetTodayTime(Student student, DAOStudent daoStudent) {

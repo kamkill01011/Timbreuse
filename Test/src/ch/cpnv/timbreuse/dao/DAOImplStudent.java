@@ -17,6 +17,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
+import static ch.cpnv.timbreuse.automation.Automation.checkoutTime;
 import static ch.cpnv.timbreuse.automation.Automation.updateTime;
 
 public class DAOImplStudent implements DAOStudent {
@@ -184,11 +185,8 @@ public class DAOImplStudent implements DAOStudent {
 		String firstname = student.getFirstname();//avec ID et pas nom + prénom
 		String lastname = student.getLastname();
 		int[] updatedTime = {0, 0};
-		int checkoutTime = currentTime();
-		if(checkoutTime > 82800) {//need to be soft coded (82800 = 23h, 57600 = 16h)
-			if (SecondsPastMidnight.stringToInt(student.getLastCheckTime()) < 57600) checkoutTime = 57600;
-			else checkoutTime = SecondsPastMidnight.stringToInt(student.getLastCheckTime())+1;
-		}
+		int checkoutTime = checkoutTime(student);
+		
 		if(newStatus.equals("DEP")) updatedTime = updateTime(student.getTimeDiff(), student.getTodayTime(), student.getLastCheckTime(), checkoutTime);
 		
 		try {

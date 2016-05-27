@@ -15,6 +15,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
 import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
+import static ch.cpnv.timbreuse.automation.Automation.checkoutTime;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
 public class DAOImplLog implements DAOLog {
@@ -35,9 +36,10 @@ public class DAOImplLog implements DAOLog {
 		PreparedStatement preparedStatement = null;
 		ResultSet autoGenValue = null;
 		String newStatus = getNewStatus(student);
+		int checkoutTime = checkoutTime(student);
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), currentTime(), newStatus);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), checkoutTime, newStatus);
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de l'ajout de log.");
@@ -146,7 +148,7 @@ public class DAOImplLog implements DAOLog {
 		}
 		return logs;
 	}
-//INSERT INTO logs(id,Username,Date,Time,Status) VALUES(default,?,?,?,?)";
+	
 	public String setSicknessLeaveLog(Student student) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
