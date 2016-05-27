@@ -75,7 +75,7 @@ public class DAOImplLog implements DAOLog {
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), currentTime(), "DAY");
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), SubTime, "DAY");
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de l'ajout de log.");

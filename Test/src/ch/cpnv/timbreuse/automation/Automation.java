@@ -63,6 +63,6 @@ public final class Automation {
 	}
 	
 	private static void setTimediff(Student student, DAOStudent daoStudent, DAOLog daoLog) {
-		daoLog.endDayLog(student, SecondsPastMidnight.toString(daoStudent.setTimeDiff(student)));
+		daoLog.endDayLog(student, "-" + SecondsPastMidnight.toString(daoStudent.setTimeDiff(student)));
 	}
 }

@@ -23,12 +23,6 @@ public class EndOfDay {
 	}
 	
 	public void init() {
-		/*JFrame frame = new JFrame("test");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new JLabel("test"), BorderLayout.CENTER);
-		frame.pack();
-		frame.setVisible(true);*/
-		
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
 		calendar.set(Calendar.MINUTE, 0);
