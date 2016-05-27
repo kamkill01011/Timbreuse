@@ -116,13 +116,9 @@ public class DAOImplLog implements DAOLog {
 	}
 	
 	private String inverseStatus(String actualStatus) {//private ?
-		if(actualStatus.equals("DEP")) {
-			return "ARR";
-		} else if(actualStatus.equals("ARR")) {
-			return "DEP";
-		} else if(actualStatus.equals("MED")) {
-			return "ARR";
-		}
+		if(actualStatus.equals("DEP")) return "ARR";
+		else if(actualStatus.equals("ARR")) return "DEP";
+		else if(actualStatus.equals("MED")) return "ARR";
 		return "ERR";
 	}
 	
