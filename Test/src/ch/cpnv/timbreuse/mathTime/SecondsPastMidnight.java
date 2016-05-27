@@ -16,9 +16,9 @@ public final class SecondsPastMidnight {
 		if(seconds<=-60 || seconds>=60) {
 			throw new IllegalArgumentException("secondes invalides");
 		}
-		if(hours<=-30 || hours>=30) {
+		/*if(hours<=-30 || hours>=30) {
 			throw new IllegalArgumentException("heure invalide");
-		}
+		}*/
 		return (hours*3600)+(minutes*60)+seconds;
 	}
 	

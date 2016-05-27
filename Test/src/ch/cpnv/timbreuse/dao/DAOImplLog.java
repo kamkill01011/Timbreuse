@@ -21,6 +21,7 @@ public class DAOImplLog implements DAOLog {
 	private static final String SQL_INSERT_LOG = "INSERT INTO logs(id,Username,Date,Time,Status) VALUES(default,?,?,?,?)";
 	private static final String SQL_SELECT_STATUS = "SELECT Status FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_SELECT_STUDENT_LOGS = "SELECT id,Username,Date,Time,Status FROM logs WHERE Username=?";
+	
 
 	private DAOFactory daoFactory;
 
@@ -117,6 +118,8 @@ public class DAOImplLog implements DAOLog {
 			return "ARR";
 		} else if(actualStatus.equals("ARR")) {
 			return "DEP";
+		} else if(actualStatus.equals("MED")) {
+			return "ARR";
 		}
 		return "ERR";
 	}
@@ -143,7 +146,23 @@ public class DAOImplLog implements DAOLog {
 		}
 		return logs;
 	}
-
+//INSERT INTO logs(id,Username,Date,Time,Status) VALUES(default,?,?,?,?)";
+	public String setSicknessLeaveLog(Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(),student.getLastname()),currentDate(),currentTime(),"MED");
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
+		return "MED";
+	}
+	
 	private static Log map(ResultSet resultSet) throws SQLException {
 		Log log = new Log();
 		log.setId(resultSet.getLong("id"));

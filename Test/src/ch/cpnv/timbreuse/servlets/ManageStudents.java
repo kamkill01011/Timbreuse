@@ -15,6 +15,7 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
+import ch.cpnv.timbreuse.dao.DAOImplLog;
 import ch.cpnv.timbreuse.dao.DAOImplStudent;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
@@ -82,6 +83,10 @@ public class ManageStudents extends HttpServlet{
 					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						daoStudent.changeStatus(student, daoLog.addLog(student));
+					}
+					if(request.getParameter("sickDay") != null) {
+						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+						((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
 					}
 				}
 			}

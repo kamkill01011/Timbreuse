@@ -34,6 +34,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM eleves";
 	private static final String SQL_RESET_TODAYTIME = "UPDATE eleves SET TodayTime='0' WHERE id=?";
 	private static final String SQL_SET_TIMEDIFF = "UPDATE eleves SET TimeDiff=? WHERE id=?";
+	private static final String SQL_UPDATE_STATUS_SICKNESS = "UPDATE eleves SET Status=? WHERE Firstname=? AND Lastname=?";
 
 	private DAOFactory daoFactory;
 
@@ -283,3 +284,6 @@ public class DAOImplStudent implements DAOStudent {
 		return getDayOfWeekTimetable(student);
 	}
 }
+
+
+
