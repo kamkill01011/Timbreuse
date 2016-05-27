@@ -55,11 +55,9 @@ public final class Automation {
 		}
 		ArrayList<Student> students = daoStudent.getNotCheckedOutStudents();
 		for (int i = 0; i < students.size(); i++) {
-			if(students.get(i).getStatus().equals("ARR")) {			
-				checkoutStudent(students.get(i),daoStudent, daoLog);
-			}
+			if(students.get(i).getStatus().equals("ARR")) checkoutStudent(students.get(i),daoStudent, daoLog);
 			resetTodayTime(students.get(i), daoStudent);
-			setTimediff(students.get(i), daoStudent, daoLog);
+			if(!students.get(i).getStatus().equals("MED")) setTimediff(students.get(i), daoStudent, daoLog);
 		}
 		System.out.println("Day ended.");
 	}
