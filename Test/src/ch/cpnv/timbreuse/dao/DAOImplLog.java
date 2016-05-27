@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
@@ -75,7 +76,7 @@ public class DAOImplLog implements DAOLog {
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), SubTime, "DAY");
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_LOG, true, generateUsername(student.getFirstname(), student.getLastname()), currentDate(), SecondsPastMidnight.stringToInt(SubTime), "DAY");
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de l'ajout de log.");
