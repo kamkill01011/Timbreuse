@@ -26,6 +26,8 @@ public class DAOImplTeacher implements DAOTeacher {
 	private static final String SQL_DELETE_TEACHER = "DELETE FROM profs WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_DELETE_USER = "DELETE FROM users WHERE Firstname=? AND Lastname=? AND PermissionLevel=2";
 	private static final String SQL_SET_NEW_CLASSES = "UPDATE profs SET Class=? WHERE Email=?";
+	private static final String SQL_GET_STUDENT_IN_CLASS = "SELECT * FROM eleves WHERE Class=? group by Class";
+	
 	
 	private DAOFactory daoFactory;
 	
@@ -162,5 +164,37 @@ public class DAOImplTeacher implements DAOTeacher {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
+	}
+
+	@Override
+	public String[] getClasseTimeTable(String classe, DAOStudent daoStudent) throws DAOException {
+		String[] timeTable = new String[8];
+		Student student = new Student();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_GET_STUDENT_IN_CLASS, false, classe);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				String email = resultSet.getString("Email");
+				student = daoStudent.find(email.substring(0, email.indexOf("@")));
+				timeTable[0] = classe;
+				timeTable[1] = student.getMonday();
+				timeTable[2] = student.getTuesday();
+				timeTable[3] = student.getWednesday();
+				timeTable[4] = student.getThursday();
+				timeTable[5] = student.getFriday();
+				timeTable[6] = student.getSaturday();
+				timeTable[7] = student.getSunday();
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		return timeTable;
 	}
 }

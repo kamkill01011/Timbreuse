@@ -286,6 +286,17 @@ public final class DAOUtility {
 		return dateList;
 	}
 	
+	public static ArrayList<String> classes(String s) {
+		ArrayList<String> resurlt = new ArrayList<>();
+		s = s.replaceAll("\\s+", "");//maybe useless, need to be tested
+		while(s.indexOf(",") > 0) {
+			resurlt.add(s.substring(0, s.indexOf(",")));
+			s = s.substring(s.indexOf(",") + 1);
+		}
+		resurlt.add(s);
+		return resurlt;
+	}
+	
 	/*
 	public static ArrayList<Student> sortStudentList(ArrayList<Student> studentList) {
 		if(studentList.size()!=0) {
