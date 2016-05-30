@@ -7,14 +7,12 @@ import java.util.TimerTask;
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
-import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 import static ch.cpnv.timbreuse.automation.Automation.endDay;
-import static ch.cpnv.timbreuse.dao.DAOUtility.currentDate;
-import static ch.cpnv.timbreuse.dao.DAOUtility.currentTime;
 
 public class EndOfDay {
-	Timer timer;
+	private Timer timer;
+	private Calendar calendar;
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
 	private DAOHolyday daoHolyday;
@@ -26,13 +24,13 @@ public class EndOfDay {
 	}
 	
 	public void init() {
-		Calendar calendar = Calendar.getInstance();
+		calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		
 		timer = new Timer();
-		timer.schedule(new EndOfDayTask(), calendar.getTime());
+		timer.scheduleAtFixedRate(new EndOfDayTask(), calendar.getTime(), 1000 * 60 * 60 * 24);
 		
 		System.out.println("End of day init...");
 	}
