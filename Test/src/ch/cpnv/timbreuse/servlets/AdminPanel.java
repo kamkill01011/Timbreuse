@@ -57,6 +57,12 @@ public class AdminPanel extends HttpServlet {
 			DeleteTeacherForm deleteForm = new DeleteTeacherForm(daoTeacher);
 			daoTeacher.deleteTeacher(deleteForm.selectTeacherToDelete(request));
 		}
+		for (int i = 0; i < teachers.size(); i++) {
+			if(request.getParameter("" + teachers.get(i).getId()) != null) {
+				daoTeacher.setNewClasses(teachers.get(i), request.getParameter("classes"));
+				break;//quitter la boucle car on affiche que les logs d'un seul élève
+			}
+		}
 		
 		if(request.getParameter("addAdmin") != null) {
 			CreateAdminForm createForm = new CreateAdminForm(daoAdmin);

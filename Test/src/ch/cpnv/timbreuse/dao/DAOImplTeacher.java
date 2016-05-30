@@ -12,8 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.jasypt.util.text.BasicTextEncryptor;
+
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
+import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplTeacher implements DAOTeacher {
 	private static final String SQL_SELECT_PROF_BY_EMAIL = "SELECT * FROM profs WHERE Email=?";
@@ -22,6 +25,7 @@ public class DAOImplTeacher implements DAOTeacher {
 	private static final String SQL_INSERT_USER = "INSERT INTO users(id,Username,Password,PermissionLevel,Firstname,Lastname) VALUES(default,?,?,2,?,?)";
 	private static final String SQL_DELETE_TEACHER = "DELETE FROM profs WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_DELETE_USER = "DELETE FROM users WHERE Firstname=? AND Lastname=? AND PermissionLevel=2";
+	private static final String SQL_SET_NEW_CLASSES = "UPDATE profs SET Class=? WHERE Email=?";
 	
 	private DAOFactory daoFactory;
 	
@@ -139,5 +143,24 @@ public class DAOImplTeacher implements DAOTeacher {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
 		return list;
+	}
+
+	@Override
+	public void setNewClasses(Teacher teacher, String newClasses) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_CLASSES, false, newClasses, teacher.getEmail());
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec du changement de mot de passe.");
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
 	}
 }

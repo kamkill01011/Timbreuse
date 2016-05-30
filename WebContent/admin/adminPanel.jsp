@@ -16,35 +16,23 @@
 	<fieldset>
 		<legend>Ajouter un enseigant</legend>
 		<form method="post" action="admin">
-			<label for="addFirstnameTeacher">Prénom : </label> <input type="text"
-				id="addFirstnameTeacher" name="addFirstnameTeacher" placeholder="Jean"
-				size="32" maxlength="64" /> <br /> <label for="addLastname">Nom
-				: </label> <input type="text" id="addLastnameTeacher"
-				name="addLastnameTeacher" placeholder="Dupond" size="32" maxlength="64" /> <br />
-			<label for="addClasse">Classe(s) : </label> <input type="text"
-				id="addClasseTeacher" name="addClasseTeacher" placeholder="YE-S1a, YE-S1b, ..." size="32"
-				maxlength="64" /> <br /> <input type="submit" name="addTeacher"
-				value="Ajouter" class="sansLabel" />
+			<label for="addFirstnameTeacher">Prénom : </label> <input type="text" id="addFirstnameTeacher" name="addFirstnameTeacher" placeholder="Jean" size="32" maxlength="64" /> <br /> <label for="addLastname">Nom : </label> <input type="text" id="addLastnameTeacher" name="addLastnameTeacher" placeholder="Dupond" size="32" maxlength="64" /> <br />
+			<label for="addClasse">Classe(s) : </label> <input type="text" id="addClasseTeacher" name="addClasseTeacher" placeholder="YE-S1a, YE-S1b, ..." size="32" maxlength="64" /> <br /> <input type="submit" name="addTeacher" value="Ajouter" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
 	<fieldset>
 		<legend>Supprimer un enseigant</legend>
 		<form method="post" action="admin">
-			<label for="deletFirstnameTeacger">Prénom : </label> <input
-				type="text" id="deleteFirstnameTeacher"
-				name="deleteFirstnameTeacher" value="" size="32" maxlength="64" />
-			<br /> <label for="deletLastname">Nom : </label> <input type="text"
-				id="deleteLastnameTeacher" name="deleteLastnameTeacher" value=""
-				size="32" maxlength="64" /> <br /> <input type="submit"
-				name="deleteTeacher" value="Supprimer" class="sansLabel" />
+			<label for="deletFirstnameTeacger">Prénom : </label> <input type="text" id="deleteFirstnameTeacher" name="deleteFirstnameTeacher" value="" size="32" maxlength="64" />
+			<br /> <label for="deletLastname">Nom : </label> <input type="text" id="deleteLastnameTeacher" name="deleteLastnameTeacher" value="" size="32" maxlength="64" /> <br /> <input type="submit" name="deleteTeacher" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
 	<br />
 	
 	<fieldset>
 		<legend>Liste des enseigants</legend>
-		<form method="post" action="teachers">
+		<form method="post" action="admin">
 			<table>
 				<tr>
 					<th>Nom</th>
@@ -58,8 +46,8 @@
 						<td>${i.lastname}</td>
 						<td>${i.firstname}</td>
 						<td>${i.email}</td>
-						<td><input type="text" id="classes" name="classes" value="${i.classe}" size="32" maxlength="64" /></td>
-						<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Changer les classes" class="sansLabelNoSpace" /></td>
+						<td><input type="text" id="classes" name="classes" value="${i.classe}" placeholder="YE-S1a, YE-S1b, ..." size="32" maxlength="64" /></td>
+						<td><input type="submit" id="${i.id}" name="${i.id}" value="Changer les classes" class="sansLabelNoSpace" /></td>
 					</tr>
 				</c:forEach>
 			</table>

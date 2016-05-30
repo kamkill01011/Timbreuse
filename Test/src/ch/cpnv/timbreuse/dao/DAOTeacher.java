@@ -39,4 +39,6 @@ public interface DAOTeacher {
 	 * @throws DAOException ???
 	 */
 	ArrayList<Student> listClass(String classe, DAOStudent daoStudent) throws DAOException;
+
+	void setNewClasses(Teacher Teacher, String newClasses);
 }
