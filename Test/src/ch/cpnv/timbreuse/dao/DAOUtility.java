@@ -186,14 +186,14 @@ public final class DAOUtility {
 	}
 
 	/**
-	 * Génère un mot de passe aléatoire de longueur 8 pour la 1ère connexion
-	 * @return Mot de passe 8 caractères
+	 * Génère un mot de passe aléatoire de longueur 7 pour la 1ère connexion
+	 * @return Mot de passe 7 caractères
 	 */
 	public static String randomPassword() {
 		Random r = new Random();
 		String password = "";
 		String alphabet="1234567890qwertzuiopasdfghjklyxcvbnm";
-		for(int i=0;i<8;i++) {
+		for(int i=0;i<7;i++) {
 			password+=alphabet.charAt(r.nextInt(alphabet.length()));
 		}
 		return password;

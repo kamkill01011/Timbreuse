@@ -17,9 +17,11 @@ import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOImplLog;
 import ch.cpnv.timbreuse.dao.DAOImplStudent;
+import ch.cpnv.timbreuse.dao.DAOImplUser;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
+import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
 import ch.cpnv.timbreuse.forms.CreateStudentForm;
 import ch.cpnv.timbreuse.forms.DeleteStudentForm;
@@ -37,6 +39,7 @@ public class ManageStudents extends HttpServlet{
 	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
 	private DAOLog daoLog;
+	private DAOUser daoUser;
 	private String selectedClasse;
 	private Student selectedStudent;
 	private ArrayList<Log> logs = new ArrayList<>();
@@ -45,6 +48,7 @@ public class ManageStudents extends HttpServlet{
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
 		this.daoLog 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
+		this.daoUser	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -63,9 +67,10 @@ public class ManageStudents extends HttpServlet{
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
 		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;
-		
+
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();
+		ArrayList<User> usersInClass = new ArrayList<User>();
 		if(selectedClasse != null) {
 			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
 			request.setAttribute("studentsInClass", studentsInClass);
@@ -88,8 +93,20 @@ public class ManageStudents extends HttpServlet{
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
 					}
+
+				}
+				if(request.getParameter("listPassword") != null) {		
+					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(i).getFirstname(), studentsInClass.get(i).getLastname());
+					if(user != null) {
+						usersInClass.add(user);
+					}
 				}
 			}
+			//////////////////////////////////
+			for (int j = 0; j < usersInClass.size(); j++) {
+				System.out.println(usersInClass.get(j).getUsername());
+			}
+			/////////////////////////////////
 		}
 
 		//à supprimer ou modifier
@@ -103,11 +120,11 @@ public class ManageStudents extends HttpServlet{
 			DeleteStudentForm deleteForm = new DeleteStudentForm(daoStudent);
 			daoStudent.delete(deleteForm.selectStudentToDelete(request));
 		}
-		
+
 		if(selectedStudent != null) logs = daoLog.getStudentLogs(selectedStudent);
-		
+
 		if(selectedClasse != null) request.setAttribute("studentsInClass", daoTeacher.listClass(selectedClasse, daoStudent));
-		
+
 		request.setAttribute("logs", logs);
 		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);

@@ -18,6 +18,8 @@ public class DAOImplUser implements DAOUser {
 	private static final String SQL_SELECT_USER_CONNECTION = "SELECT * FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
+	private static final String SQL_SELECT_LIST_PASSWORD_BY_CLASS = "SELECT Username, Password FROM users WHERE Firstname=? AND Lastname=? AND CHAR_LENGTH(Password) < 9";
+	
 	private DAOFactory daoFactory;
 
 	public DAOImplUser(DAOFactory daoFactory) {
@@ -106,5 +108,27 @@ public class DAOImplUser implements DAOUser {
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
+	}
+	
+	public User getDefaultPassword(String firstname, String lastname) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		User user = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_LIST_PASSWORD_BY_CLASS, false, firstname, lastname);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				user = new User();
+				user.setUsername(resultSet.getString("Username"));
+				user.setPassword(resultSet.getString("Password"));
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		return user;
 	}
 }
