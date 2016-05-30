@@ -49,7 +49,7 @@ public final class Automation {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		for (int i = 0; i < holydays.size(); i++) {
 			if(Date.stringToDate(holydays.get(i).getDate()).equals(Date.stringToDate(currentDate()))) {
-				System.out.println(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : Holyday, day ended.");
+				System.out.println("Holyday, day ended.");
 				return;
 			}
 		}
@@ -59,7 +59,7 @@ public final class Automation {
 			resetTodayTime(students.get(i), daoStudent);
 			if(!students.get(i).getStatus().equals("MED")) setTimediff(students.get(i), daoStudent, daoLog);
 		}
-		System.out.println(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : Day ended.");
+		System.out.println("Day ended.");
 	}
 	
 	private static void checkoutStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {

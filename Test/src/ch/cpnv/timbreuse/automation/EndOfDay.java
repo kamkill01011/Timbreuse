@@ -34,7 +34,7 @@ public class EndOfDay {
 		timer = new Timer();
 		timer.schedule(new EndOfDayTask(), calendar.getTime());
 		
-		System.out.println(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : End of day init...");
+		System.out.println("End of day init...");
 	}
 	
 	class EndOfDayTask extends TimerTask {

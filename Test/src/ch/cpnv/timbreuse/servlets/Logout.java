@@ -29,7 +29,7 @@ public class Logout extends HttpServlet {
         HttpSession session = request.getSession();
         
         User user = (User) session.getAttribute(USER_SESSION_ATT);
-		System.out.println(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : " + user.getUsername() + " logged out");
+		System.out.println(user.getUsername() + " logged out");
         session.invalidate();
         
         response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
