@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 
 import ch.cpnv.timbreuse.beans.Student;
+import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import static ch.cpnv.timbreuse.dao.DAOUtility.preparedRequestInitialisation;
 import static ch.cpnv.timbreuse.dao.DAOUtility.closeObjects;
@@ -19,6 +21,7 @@ public class DAOImplUser implements DAOUser {
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
 	private static final String SQL_SELECT_LIST_PASSWORD_BY_CLASS = "SELECT Username, Password FROM users WHERE Firstname=? AND Lastname=? AND CHAR_LENGTH(Password) < 9";
+	private static final String SQL_LIST_TEACHERS = "SELECT * FROM profs";
 	
 	private DAOFactory daoFactory;
 
@@ -130,5 +133,27 @@ public class DAOImplUser implements DAOUser {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
 		return user;
+	}
+
+	public ArrayList<Teacher> listTeachers(DAOTeacher daoTeacher) throws DAOException {
+		ArrayList<Teacher> list = new ArrayList<Teacher>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_LIST_TEACHERS, false);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				String email = resultSet.getString("Email");
+				list.add(daoTeacher.findTeacher(email.substring(0, email.indexOf("@"))));
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+		return list;
 	}
 }

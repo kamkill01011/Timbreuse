@@ -18,7 +18,7 @@ public interface DAOTeacher {
 	 * @return L'enseigant correspondant à l'adresse mail
 	 * @throws DAOException ???
 	 */
-	Teacher findTeacher(String email) throws DAOException;
+	Teacher findTeacher(String username) throws DAOException;
 	
 	/**
 	 * @param teacher l'enseignant à supprimer

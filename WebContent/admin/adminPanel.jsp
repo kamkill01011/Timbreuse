@@ -41,6 +41,32 @@
 		</form>
 	</fieldset>
 	<br />
+	
+	<fieldset>
+		<legend>Liste des enseigants</legend>
+		<form method="post" action="teachers">
+			<table>
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>E-mail</th>
+					<th>Classes</th>
+					<th>Actions</th>
+				</tr>
+				<c:forEach items="${teachers}" var="i">
+					<tr>
+						<td>${i.lastname}</td>
+						<td>${i.firstname}</td>
+						<td>${i.email}</td>
+						<td><input type="text" id="classes" name="classes" value="${i.classe}" size="32" maxlength="64" /></td>
+						<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Changer les classes" class="sansLabelNoSpace" /></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</form>
+	</fieldset>
+	<br />
+	
 	<fieldset class="adminField">
 		<legend>Créer un admin</legend>
 		<form method="post" action="admin">

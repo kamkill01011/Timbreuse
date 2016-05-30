@@ -54,8 +54,8 @@ public class DAOImplTeacher implements DAOTeacher {
 	}
 
 	@Override
-	public Teacher findTeacher(String email) throws DAOException {
-		return findTeacher(SQL_SELECT_PROF_BY_EMAIL, email);
+	public Teacher findTeacher(String username) throws DAOException {
+		return findTeacher(SQL_SELECT_PROF_BY_EMAIL, username);
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		return null;
 	}
 	
-	private Teacher findTeacher(String sql, String email) {
+	private Teacher findTeacher(String sql, String username) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -94,7 +94,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, sql, false, email+"@cpnv.ch");
+			preparedStatement = preparedRequestInitialisation(connection, sql, false, username+"@cpnv.ch");
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				teacher = map(resultSet);
@@ -131,28 +131,7 @@ public class DAOImplTeacher implements DAOTeacher {
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				String email = resultSet.getString("Email");
-				Student student = daoStudent.find(email.substring(0, email.indexOf("@")));
-				
-				/*student.setId(resultSet.getLong("id"));
-				student.setClasse(resultSet.getString("Class"));
-				student.setLastname(resultSet.getString("Lastname"));
-				student.setFirstname(resultSet.getString("Firstname"));
-				student.setTimeDiff(resultSet.getInt("TimeDiff"));
-				student.setTodayTime(resultSet.getInt("TodayTime"));
-				student.setStatus(resultSet.getString("Status"));
-				student.setLastCheckTime(resultSet.getInt("LastCheckTime"));
-				student.setLastCheckDate(resultSet.getString("LastCheckDate"));
-				student.setStartDate(resultSet.getString("StartDate"));
-				student.setMonday(resultSet.getInt("Monday"));
-				student.setTuesday(resultSet.getInt("Tuesday"));
-				student.setWednesday(resultSet.getInt("Wednesday"));
-				student.setThursday(resultSet.getInt("Thursday"));
-				student.setFriday(resultSet.getInt("Friday"));
-				student.setSaturday(resultSet.getInt("Saturday"));
-				student.setSunday(resultSet.getInt("Sunday"));
-				student.setEmail(resultSet.getString("Email"));*/
-				
-				list.add(student);
+				list.add(daoStudent.find(email.substring(0, email.indexOf("@"))));
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);

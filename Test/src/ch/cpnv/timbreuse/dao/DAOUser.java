@@ -37,5 +37,4 @@ public interface DAOUser {
      * @throws DAOException ???
      */
     void setNewPassword(User user, String newPassord) throws DAOException;
-
 }

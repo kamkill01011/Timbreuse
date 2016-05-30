@@ -74,6 +74,7 @@
 							<input type="submit" name="listPassword" value="Liste Mot de Passe" class="sansLabelNoSpace" />
 							<br />
 						</td>
+					</tr>
 				</table>
 			</form>
 		</fieldset>
