@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOTeacher;
+import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.classes;
 
@@ -42,8 +44,29 @@ public class SetTimeTables extends HttpServlet{
 		for (int i = 0; i < classes.size(); i++) {
 			timeTables.add(daoTeacher.getClasseTimeTable(classes.get(i), daoStudent));
 		}
-		/*teachers = ((DAOImplUser)daoUser).listTeachers(daoTeacher);
-		request.setAttribute("teachers", teachers);*/
+		request.setAttribute("timeTables", timeTables);
+		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+	}
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
+		ArrayList<String> classes = classes(teacher.getClasse());
+		ArrayList<String[]> timeTables = new ArrayList<>();
+		for (int i = 0; i < classes.size(); i++) {
+			if(request.getParameter(classes.get(i)) != null) {
+				int[] newTimeTable = new int[7];
+				for (int j = 0; j < newTimeTable.length; j++) {
+					newTimeTable[j] = SecondsPastMidnight.stringToInt(request.getParameter(classes.get(i) + (j+1)));
+					//System.out.println(request.getParameter(classes.get(i) + (j+1)));
+				}
+				ArrayList<Student> students = daoTeacher.listClass(classes.get(i), daoStudent);
+				for (int j = 0; j < students.size(); j++) {
+					daoStudent.changeTimeTables(newTimeTable, students.get(j));
+				}
+			}
+			timeTables.add(daoTeacher.getClasseTimeTable(classes.get(i), daoStudent));
+		}
 		request.setAttribute("timeTables", timeTables);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}

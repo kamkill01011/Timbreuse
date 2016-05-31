@@ -35,7 +35,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM eleves";
 	private static final String SQL_RESET_TODAYTIME = "UPDATE eleves SET TodayTime='0' WHERE id=?";
 	private static final String SQL_SET_TIMEDIFF = "UPDATE eleves SET TimeDiff=? WHERE id=?";
-	private static final String SQL_UPDATE_STATUS_SICKNESS = "UPDATE eleves SET Status=? WHERE Firstname=? AND Lastname=?";
+	private static final String SQL_SET_TIME_TABLE = "UPDATE eleves SET Monday=?,Tuesday=?, Wednesday=?, Thursday=?, Friday=?, Saturday=?, Sunday=? WHERE id=?";
 
 	private DAOFactory daoFactory;
 
@@ -261,7 +261,6 @@ public class DAOImplStudent implements DAOStudent {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(autoGenValue, preparedStatement, connection);
-
 		}
 	}
 	
@@ -280,6 +279,22 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
 		return getDayOfWeekTimetable(student);
+	}
+	
+	@Override
+	public void changeTimeTables(int[] newTImeTable, Student student) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_TIME_TABLE, false, newTImeTable[0], newTImeTable[1], newTImeTable[2], newTImeTable[3], newTImeTable[4], newTImeTable[5], newTImeTable[6], student.getId());
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+		}
 	}
 }
 

@@ -41,4 +41,6 @@ public interface DAOStudent {
 	void resetTodayTime(Student student);
 
 	int setTimeDiff(Student student);
+
+	void changeTimeTables(int[] newTImeTable, Student student);
 }

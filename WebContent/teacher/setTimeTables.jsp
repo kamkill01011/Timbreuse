@@ -14,7 +14,7 @@
 	<h1 class="pageTitle">Gestion des horaires des classes</h1>
 		<fieldset>
 			<legend>${selectedClasse}</legend>
-			<form method="get" action="settimetables" id="timetables">
+			<form method="post" action="settimetables" id="timetables">
 				<table>
 					<tr>
 						<th>Classe</th>
@@ -36,7 +36,7 @@
 											${j}
 										</c:when>    
 										<c:otherwise> 
-   											<input type="text" name="modifyTimeDiff" value="${j}" placeholder="HH:MM:SS" size="8" maxlength="8" />
+   											<input type="text" name="${i[0]}${k.index}" value="${j}" placeholder="HH:MM:SS" size="8" maxlength="8" />
 										</c:otherwise>
 									</c:choose>
 								</td>
