@@ -119,7 +119,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		teacher.setId(resultSet.getLong("id"));
 		teacher.setFirstname(resultSet.getString("Firstname"));
 		teacher.setLastname(resultSet.getString("Lastname"));
-		teacher.setClasse(resultSet.getString("Class"));
+		teacher.setClasse(resultSet.getString("Class").replaceAll("\\s+", ""));
 		teacher.setEmail(resultSet.getString("Email"));
 		return teacher;
 	}
@@ -166,7 +166,6 @@ public class DAOImplTeacher implements DAOTeacher {
 		}
 	}
 
-	@Override
 	public String[] getClasseTimeTable(String classe, DAOStudent daoStudent) throws DAOException {
 		String[] timeTable = new String[8];
 		Student student = new Student();

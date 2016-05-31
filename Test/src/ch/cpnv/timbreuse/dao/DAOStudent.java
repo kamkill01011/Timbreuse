@@ -9,7 +9,7 @@ public interface DAOStudent {
     /**
      * @param student Nouvel élève à créer
      */
-    void create(Student student) throws DAOException;
+    void create(Student student, DAOTeacher daoTeacher) throws DAOException;
 
     /**
      * @param username Nom d'utilisateur de l'élève à trouver

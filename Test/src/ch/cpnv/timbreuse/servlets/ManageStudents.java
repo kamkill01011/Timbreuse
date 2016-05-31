@@ -129,7 +129,7 @@ public class ManageStudents extends HttpServlet{
 		if(request.getParameter("add")!=null) {
 			CreateStudentForm createForm = new CreateStudentForm(daoStudent);
 			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
-				daoStudent.create(createForm.isStudent(request));
+				daoStudent.create(createForm.isStudent(request), daoTeacher);
 			}
 		}
 		if(request.getParameter("delete")!=null) {

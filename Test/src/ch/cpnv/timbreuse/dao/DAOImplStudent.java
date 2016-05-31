@@ -22,7 +22,7 @@ import static ch.cpnv.timbreuse.automation.Automation.updateTime;
 
 public class DAOImplStudent implements DAOStudent {
 
-	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheckDate,LastCheckTime,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email) VALUES (default,?,?,?,'0','0',default,null,null,?,'25200','25200','0','25200','14400','0','0',?)";
+	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheckDate,LastCheckTime,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email) VALUES (default,?,?,?,'0','0',default,null,null,?,?,?,?,?,?,?,?,?)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
@@ -87,15 +87,22 @@ public class DAOImplStudent implements DAOStudent {
 	}
 
 	@Override
-	public void create(Student student) throws DAOException {
+	public void create(Student student, DAOTeacher daoTeacher) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
 		ResultSet autoGenValue = null;
+		int[] timeTable = {0,0,0,0,0,0,0};
+		String[] newTimeTable = daoTeacher.getClasseTimeTable(student.getClasse(), this);
+		if(newTimeTable[0] != null) {
+			for (int i = 1; i < newTimeTable.length; i++) {
+				timeTable[i-1] = SecondsPastMidnight.stringToInt(newTimeTable[i]);
+			}
+		}
 
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, student.getClasse(),student.getLastname(),student.getFirstname(),currentDate(),student.getEmail());
+			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_INSERT, true, student.getClasse(),student.getLastname(),student.getFirstname(),currentDate(),timeTable[0],timeTable[1],timeTable[2],timeTable[3],timeTable[4],timeTable[5],timeTable[6],student.getEmail());
 			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_INSERT, true, generateUsername(student.getFirstname(),student.getLastname()),randomPassword(),student.getLastname(),student.getFirstname());
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();

@@ -42,7 +42,8 @@ public class SetTimeTables extends HttpServlet{
 		ArrayList<String> classes = classes(teacher.getClasse());
 		ArrayList<String[]> timeTables = new ArrayList<>();
 		for (int i = 0; i < classes.size(); i++) {
-			timeTables.add(daoTeacher.getClasseTimeTable(classes.get(i), daoStudent));
+			String[] tempTimeTables = daoTeacher.getClasseTimeTable(classes.get(i), daoStudent);
+			if(tempTimeTables[0] != null) timeTables.add(tempTimeTables);
 		}
 		request.setAttribute("timeTables", timeTables);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
@@ -58,14 +59,14 @@ public class SetTimeTables extends HttpServlet{
 				int[] newTimeTable = new int[7];
 				for (int j = 0; j < newTimeTable.length; j++) {
 					newTimeTable[j] = SecondsPastMidnight.stringToInt(request.getParameter(classes.get(i) + (j+1)));
-					//System.out.println(request.getParameter(classes.get(i) + (j+1)));
 				}
 				ArrayList<Student> students = daoTeacher.listClass(classes.get(i), daoStudent);
 				for (int j = 0; j < students.size(); j++) {
 					daoStudent.changeTimeTables(newTimeTable, students.get(j));
 				}
 			}
-			timeTables.add(daoTeacher.getClasseTimeTable(classes.get(i), daoStudent));
+			String[] tempTimeTables = daoTeacher.getClasseTimeTable(classes.get(i), daoStudent);
+			if(tempTimeTables[0] != null) timeTables.add(tempTimeTables);
 		}
 		request.setAttribute("timeTables", timeTables);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
