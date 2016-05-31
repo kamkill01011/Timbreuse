@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.jni.File;
 
+import ch.cpnv.timbreuse.automation.MailTo;
 import ch.cpnv.timbreuse.automation.txtWriter;
 import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
@@ -116,6 +117,7 @@ public class ManageStudents extends HttpServlet{
 					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
 					if(user != null) {
 						txtWriter.writeListPassword(user, selectedClasse);
+						MailTo.sendEmail(user);
 					}
 				}
 				this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
