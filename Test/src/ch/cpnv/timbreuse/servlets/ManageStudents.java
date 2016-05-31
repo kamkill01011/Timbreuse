@@ -1,5 +1,7 @@
 package ch.cpnv.timbreuse.servlets;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.jni.File;
+
+import ch.cpnv.timbreuse.automation.txtWriter;
 import ch.cpnv.timbreuse.beans.Log;
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
@@ -66,14 +71,19 @@ public class ManageStudents extends HttpServlet{
 		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
-		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;
+		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;	
+
+		if(request.getParameter("listPassword") != null) {	
+			BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClasse+".txt"));
+			fileOut.write("".getBytes());
+			fileOut.close();
+		}
 
 		//recherche les élèves de la classe (si une classe est sélectionnée)
 		ArrayList<Student> studentsInClass = new ArrayList<Student>();
-		ArrayList<User> usersInClass = new ArrayList<User>();
 		if(selectedClasse != null) {
 			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
-			request.setAttribute("studentsInClass", studentsInClass);
+			request.setAttribute("studentsInClass", studentsInClass);	
 			for (int i = 0; i < studentsInClass.size(); i++) {
 				if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
 					selectedStudent = studentsInClass.get(i);
@@ -93,20 +103,20 @@ public class ManageStudents extends HttpServlet{
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
 					}
-
 				}
-				if(request.getParameter("listPassword") != null) {		
-					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(i).getFirstname(), studentsInClass.get(i).getLastname());
+
+			}
+
+			if(request.getParameter("listPassword") != null) {		
+				for (int j = 0; j < studentsInClass.size(); j++) {
+					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
 					if(user != null) {
-						usersInClass.add(user);
+						txtWriter.writeListPassword(user, selectedClasse);
 					}
 				}
+				this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
+				return;
 			}
-			//////////////////////////////////
-			for (int j = 0; j < usersInClass.size(); j++) {
-				System.out.println(usersInClass.get(j).getUsername());
-			}
-			/////////////////////////////////
 		}
 
 		//à supprimer ou modifier

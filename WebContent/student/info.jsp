@@ -41,9 +41,9 @@
 				<th>Date</th>
 				<th>Heure</th>
 				<th>Statut</th>
-				<td>Légende: DEP=Départ, ARR=Arrivée, ADD=Temps Ajouté, ERR=Erreur</td>
+				<td>Légende: DEP=Départ, ARR=Arrivée, ADD=Temps Ajouté, MED=Absence Maladie, DAY=Calcul temps fin de journée ERR=Erreur</td>
 			</tr>
-			<c:forEach items="${logs}" var="i" end="10">
+			<c:forEach items="${logs}" var="i" end="20">
 				<tr>
 					<td>${i.username}</td>
 					<td>${i.date}</td>

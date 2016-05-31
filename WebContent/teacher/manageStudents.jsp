@@ -89,6 +89,7 @@
 							<th>Date</th>
 							<th>Time</th>
 							<th>Status</th>
+							<td>Légende: DEP=Départ, ARR=Arrivée, ADD=Temps Ajouté, MED=Absence Maladie, DAY=Calcul temps fin de journée ERR=Erreur</td>
 						</tr>
 						<c:forEach items="${logs}" var="i" end="30">
 							<tr>
