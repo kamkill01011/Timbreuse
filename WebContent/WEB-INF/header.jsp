@@ -10,6 +10,7 @@
 	<li><a class="homeActive" href="/Timbreuse/connecting.jsp">CPNV</a></li>
 	<c:if test="${sessionScope.userSession.permissionLevel == 2}">
 		<li><a href="/Timbreuse/setholydays">Paramétrer les congés</a></li>
+		<li><a href="/Timbreuse/settimetables">modifier les horaires</a></li>
 	</c:if>
 	<li><a href="/Timbreuse/changepassword">Changer Mot de Passe</a></li>
 	<li><a href="/Timbreuse/logout">Déconnexion</a></li>
