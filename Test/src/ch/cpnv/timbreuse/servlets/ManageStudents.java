@@ -61,7 +61,7 @@ public class ManageStudents extends HttpServlet{
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
-
+		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
@@ -71,7 +71,11 @@ public class ManageStudents extends HttpServlet{
 		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
-		if(tempSelectedClasse != null) selectedClasse = tempSelectedClasse;	
+		if(tempSelectedClasse != null) {
+			logs.clear();
+			selectedStudent = null;
+			selectedClasse = tempSelectedClasse;	
+		}
 
 		if(request.getParameter("listPassword") != null) {	
 			BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClasse+".txt"));
