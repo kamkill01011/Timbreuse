@@ -12,11 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.jasypt.util.text.BasicTextEncryptor;
-
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
-import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplTeacher implements DAOTeacher {
 	private static final String SQL_SELECT_PROF_BY_EMAIL = "SELECT * FROM profs WHERE Email=?";

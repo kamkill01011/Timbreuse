@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.Random;
 
 import ch.cpnv.timbreuse.beans.Holyday;
-import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 

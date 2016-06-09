@@ -1,9 +1,6 @@
 package ch.cpnv.timbreuse.automation;
 
 import ch.cpnv.timbreuse.beans.User;
-import ch.cpnv.timbreuse.dao.DAOUtility;
-
-import javax.servlet.http.*;
 
 import com.moyosoft.connector.com.ComponentObjectModelException;
 import com.moyosoft.connector.exception.LibraryNotFoundException;
@@ -13,17 +10,8 @@ import com.moyosoft.connector.ms.outlook.folder.OutlookFolder;
 import com.moyosoft.connector.ms.outlook.item.ItemType;
 import com.moyosoft.connector.ms.outlook.mail.OutlookMail;
 
-import javax.servlet.*;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.activation.*;
-import java.io.*;
-import java.util.*;
-
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
-import java.util.Properties;
 
 public class MailTo {
 
@@ -36,8 +24,8 @@ public class MailTo {
 			OutlookFolder outbox = outlookApplication.getDefaultFolder(FolderType.OUTBOX);
 			OutlookMail mail = (OutlookMail) outbox.createItem(ItemType.MAIL);
 			mail.setSubject("Timbreuse Nouveau Mot de Passe");
-			System.out.println(user.getFirstname());
-			System.err.println(user.getLastname());
+			//System.out.println(user.getFirstname());
+			//System.err.println(user.getLastname());
 			mail.setTo(generateEmail(user.getFirstname(), user.getLastname()));
 			mail.setBody("Voici votre nouveau mot de passe: "+password+"\n Veuillez le changer lors de votre connexion.");
 			mail.send();
