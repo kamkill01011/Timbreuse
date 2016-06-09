@@ -18,6 +18,7 @@
                 <br />
                 <label for="password">Mot de passe <span class="requis">*</span></label>
                 <input type="password" name="password" value="" size="20" maxlength="20" />
+                <a href="/Timbreuse/passwordforgotten"><i>Mot de passe oublié ?</i></a>
                 <span class="error">${form.errors['password']}</span>
                 <br />
                 <input type="submit" name="connection" value="Connexion" class="login" />

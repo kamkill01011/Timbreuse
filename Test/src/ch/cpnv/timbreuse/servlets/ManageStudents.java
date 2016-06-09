@@ -33,6 +33,7 @@ import ch.cpnv.timbreuse.forms.CreateStudentForm;
 import ch.cpnv.timbreuse.forms.DeleteStudentForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
+import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
 
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
@@ -117,7 +118,9 @@ public class ManageStudents extends HttpServlet{
 					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
 					if(user != null) {
 						txtWriter.writeListPassword(user, selectedClasse);
-						MailTo.sendEmail(user);
+						String password = randomPassword();
+						MailTo.sendEmail(user, password);
+						daoUser.setNewPassword(user, password);
 					}
 				}
 				this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);

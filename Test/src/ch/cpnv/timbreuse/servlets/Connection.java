@@ -44,7 +44,7 @@ public class Connection extends HttpServlet {
 		//Stockage du form dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
 		//request.setAttribute(USER_ATT, user);//useless
-		
+
 		if(connectionForm.getErrors().isEmpty()) {
 			System.out.println(user.getUsername() + " connecting");
 			session.setAttribute(USER_SESSION_ATT, user);
@@ -53,5 +53,6 @@ public class Connection extends HttpServlet {
 			session.setAttribute(USER_SESSION_ATT, null);
 			this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
 		}
+
 	}
 }

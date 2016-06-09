@@ -32,8 +32,7 @@ public class ConnectedFilter implements Filter {
         
         //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
-        
-        if(session.getAttribute(ATT_SESSION_USER) != null || request.getRequestURI().endsWith(".css")) {
+        if(session.getAttribute(ATT_SESSION_USER) != null || request.getRequestURI().endsWith(".css") || request.getRequestURI().contains("passwordforgotten")) {
         	chain.doFilter(request, response);
         } else {
         	if(!request.getRequestURI().equals("/Timbreuse/connection")) {

@@ -30,7 +30,7 @@ public class MailTo {
 	private MailTo() {
 	}
 
-	public static void sendEmail(User user) {
+	public static void sendEmail(User user, String password) {
 		try {
 			Outlook outlookApplication = new Outlook();
 			OutlookFolder outbox = outlookApplication.getDefaultFolder(FolderType.OUTBOX);
@@ -39,7 +39,7 @@ public class MailTo {
 			System.out.println(user.getFirstname());
 			System.err.println(user.getLastname());
 			mail.setTo(generateEmail(user.getFirstname(), user.getLastname()));
-			mail.setBody("***************************TEST*************************** \n Voici votre nouveau mot de passe: "+DAOUtility.randomPassword()+"\n Veuillez le changer lors de votre connexion.");
+			mail.setBody("Voici votre nouveau mot de passe: "+password+"\n Veuillez le changer lors de votre connexion.");
 			mail.send();
 			outlookApplication.dispose();
 
