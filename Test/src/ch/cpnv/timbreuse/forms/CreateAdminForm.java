@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOUser;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
@@ -16,10 +15,8 @@ public class CreateAdminForm {
 	private static final String LASTNAME_FIELD = "addLastnameAdmin";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOUser daoUser;
 	
-	public CreateAdminForm(DAOUser daoUser) {
-		this.daoUser = daoUser;
+	public CreateAdminForm() {
 	}
 	
 	/**

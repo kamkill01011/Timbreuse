@@ -5,17 +5,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.dao.DAOUtility;
 
 public class PasswordForgottenForm {
 	private static final String USERNAME_FIELD = "usernamePasswordForgotten";
 	private String result;
 	private Map<String, String> errors      = new HashMap<String, String>();
-	private DAOUser daoUser;
 	
-	public PasswordForgottenForm(DAOUser daoUser) {
-		this.daoUser = daoUser;
+	public PasswordForgottenForm() {
 	}
 	
 	/**
@@ -54,13 +51,4 @@ public class PasswordForgottenForm {
 			return value;
 		}
 	}
-	
-	/**
-	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-	 * @param field Nom du champ de l'erreur
-	 * @param message Message de l'erreur
-	 */
-	private void setError(String field, String message) {
-        errors.put(field, message);
-    }
 }

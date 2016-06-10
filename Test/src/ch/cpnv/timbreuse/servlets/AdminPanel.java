@@ -42,19 +42,15 @@ public class AdminPanel extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session = request.getSession(false);
-		
-		//Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute("userSession"))).getEmail());//useless?
-		
 		if(request.getParameter("addTeacher") != null) {
-			CreateTeacherForm createForm = new CreateTeacherForm(daoTeacher);
+			CreateTeacherForm createForm = new CreateTeacherForm();
 			if(daoTeacher.findTeacher(generateEmail(createForm.getTeacher(request).getFirstname(), createForm.getTeacher(request).getLastname())) == null) {
 			daoTeacher.createTeacher(createForm.getTeacher(request));
 			}
 		}
 		
 		if(request.getParameter("deleteTeacher") != null) {
-			DeleteTeacherForm deleteForm = new DeleteTeacherForm(daoTeacher);
+			DeleteTeacherForm deleteForm = new DeleteTeacherForm();
 			daoTeacher.deleteTeacher(deleteForm.selectTeacherToDelete(request));
 		}
 		for (int i = 0; i < teachers.size(); i++) {
@@ -65,12 +61,12 @@ public class AdminPanel extends HttpServlet {
 		}
 		
 		if(request.getParameter("addAdmin") != null) {
-			CreateAdminForm createForm = new CreateAdminForm(daoAdmin);
+			CreateAdminForm createForm = new CreateAdminForm();
 			daoAdmin.create(createForm.getAdmin(request));
 		}
 		
 		if(request.getParameter("deleteAdmin") != null) {
-			DeleteAdminForm deleteForm = new DeleteAdminForm(daoAdmin);
+			DeleteAdminForm deleteForm = new DeleteAdminForm();
 			daoAdmin.delete(deleteForm.selectAdminToDelet(request));
 		}
 

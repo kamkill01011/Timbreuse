@@ -7,17 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOTeacher;
 
 public class DeleteTeacherForm {
 	private static final String FIRSTNAME_FIELD = "deleteFirstnameTeacher";
 	private static final String LASTNAME_FIELD = "deleteLastnameTeacher";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOTeacher daoTeacher;
 	
-	public DeleteTeacherForm(DAOTeacher daoTeacher) {
-		this.daoTeacher = daoTeacher;
+	public DeleteTeacherForm() {
 	}
 	
 	/**

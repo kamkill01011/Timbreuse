@@ -87,17 +87,6 @@ public final class ConnectionForm {
     }
     
     /**
-     * Valide l'adresse email saisie.
-     * @param username Nom d'utilisateur (prénom.nom)
-     * @throws Exception ???
-     */
-    private void emailValidation(String username) throws Exception {
-    	if (username != null && !username.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-            throw new Exception("Merci de saisir une adresse mail valide.");
-        }
-    }
-    
-    /**
      * Valide le mot de passe saisi.
      * @param password Mot de passe
      * @throws Exception ???

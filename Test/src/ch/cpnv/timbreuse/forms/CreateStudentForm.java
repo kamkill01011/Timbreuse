@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOStudent;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
@@ -21,10 +20,8 @@ public class CreateStudentForm {
 	private static final String LASTNAME_FIELD = "addLastname";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOStudent daoStudent;
 	
-	public CreateStudentForm(DAOStudent daoStudent) {
-		this.daoStudent = daoStudent;
+	public CreateStudentForm() {
 	}
 
     /**

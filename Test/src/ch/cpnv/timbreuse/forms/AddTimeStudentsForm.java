@@ -1,26 +1,19 @@
 package ch.cpnv.timbreuse.forms;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.dao.DAOException;
-import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 public class AddTimeStudentsForm {
 	private static final String ADD_TIME_FIELD = "modifyTimeDiff";
-	private ArrayList<Student> classe;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private String result;
-	private DAOStudent daoStudent;
+	private String result;;
 
-	public AddTimeStudentsForm (DAOStudent daoStudent, ArrayList<Student> classe) {
-		this.classe = classe;
-		this.daoStudent = daoStudent;
+	public AddTimeStudentsForm () {
 	}
 
 	/**

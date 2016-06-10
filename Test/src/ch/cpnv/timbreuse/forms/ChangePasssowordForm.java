@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.User;
-import ch.cpnv.timbreuse.dao.DAOUser;
 
 /**
  * Formulaire pour changer un mot de passe 
@@ -18,10 +17,8 @@ public class ChangePasssowordForm {
 	private static final String NEW_PWD_CONFIRM_FIELD = "confirm";
 	private String result;
 	private Map<String, String> errors      = new HashMap<String, String>();
-	private DAOUser daoUser;
 	
-	public ChangePasssowordForm(DAOUser daoUser) {
-		this.daoUser = daoUser;
+	public ChangePasssowordForm() {
 	}
 	
 	/**

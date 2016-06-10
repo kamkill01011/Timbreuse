@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.beans.Holyday;
 import ch.cpnv.timbreuse.dao.DAOFactory;
@@ -37,7 +36,7 @@ public class SetHolydays extends HttpServlet {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("addSingleHolydayButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			SetHolydaysForm holydaysForm = new SetHolydaysForm();
 			if(daoHolyday.isHolyday(holydaysForm.getSingleHolyday(request))==null) {
 				ArrayList<String> holyday = new ArrayList<String>();
 				holyday.add(holydaysForm.getSingleHolyday(request));
@@ -45,7 +44,7 @@ public class SetHolydays extends HttpServlet {
 			}
 		}
 		if(request.getParameter("addHolydayGapButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			SetHolydaysForm holydaysForm = new SetHolydaysForm();
 			ArrayList<String> holydaysListTemp = holydaysForm.getHolydaysGap(request);
 			ArrayList<String> holydaysListResult = new ArrayList<String>();
 			for (int i = 0; i < holydaysListTemp.size(); i++) {
@@ -56,13 +55,13 @@ public class SetHolydays extends HttpServlet {
 			daoHolyday.addHolyday(holydaysListResult);
 		}
 		if(request.getParameter("deleteSingleHolydayButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			SetHolydaysForm holydaysForm = new SetHolydaysForm();
 			ArrayList<String> holyday = new ArrayList<String>();
 			holyday.add(holydaysForm.getDelSingleHolyday(request));
 			daoHolyday.deleteHolyday(holyday);
 		}
 		if(request.getParameter("deleteHolydaysGapButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm(daoHolyday);
+			SetHolydaysForm holydaysForm = new SetHolydaysForm();
 			ArrayList<String> holydays = holydaysForm.getDelHolydaysGap(request);
 			daoHolyday.deleteHolyday(holydays);
 		}

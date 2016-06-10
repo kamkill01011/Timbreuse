@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ch.cpnv.timbreuse.automation.MailTo;
 import ch.cpnv.timbreuse.beans.User;
@@ -30,7 +29,7 @@ public class PasswordForgotten extends HttpServlet {
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PasswordForgottenForm passwordForgottenForm = new PasswordForgottenForm(daoUser);
+		PasswordForgottenForm passwordForgottenForm = new PasswordForgottenForm();
 		User user = daoUser.findUser(passwordForgottenForm.getUsernamePasswordForgotten(request));
 		if(passwordForgottenForm.getErrors().isEmpty()) {
 			String password = DAOUtility.randomPassword();

@@ -35,7 +35,7 @@ public class ChangePassword extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ChangePasssowordForm passwordForm = new ChangePasssowordForm(daoUser);
+		ChangePasssowordForm passwordForm = new ChangePasssowordForm();
 		HttpSession session = request.getSession();
 		User user = daoUser.findUser(((User)session.getAttribute("userSession")).getUsername());
 		try {

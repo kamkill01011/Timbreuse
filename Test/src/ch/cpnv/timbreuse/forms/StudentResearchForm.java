@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import ch.cpnv.timbreuse.beans.Student;
-import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 
@@ -45,7 +44,6 @@ public final class StudentResearchForm {
 	public Student researchUser(HttpServletRequest request) {
 		String lastname = getFieldValue(request, LASTNAME_FIELD);
 		Student student = new Student(); //table eleves
-		User user = new User(); //table users
 		try {
 			if(errors.isEmpty()) {
 				student = daoStudent.find(lastname);

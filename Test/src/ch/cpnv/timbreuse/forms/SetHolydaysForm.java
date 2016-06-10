@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.mathTime.Date;
 
 import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
@@ -23,10 +22,8 @@ public class SetHolydaysForm {
 	
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	private DAOHolyday daoHolyday;
 	
-	public SetHolydaysForm(DAOHolyday daoHolyday) {
-		this.daoHolyday = daoHolyday;
+	public SetHolydaysForm() {
 	}
 	
 	/**

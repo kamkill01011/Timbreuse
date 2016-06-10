@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.jni.File;
-
 import ch.cpnv.timbreuse.automation.MailTo;
 import ch.cpnv.timbreuse.automation.txtWriter;
 import ch.cpnv.timbreuse.beans.Log;
@@ -96,7 +94,7 @@ public class ManageStudents extends HttpServlet{
 					break;//quitter la boucle car on affiche que les logs d'un seul élève
 				}else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 					if(request.getParameter("addTime") != null) {
-						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm(daoStudent, studentsInClass);
+						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
 						daoLog.addTimeLog(student, addTimeForm.getTimeDiffField(request));
@@ -130,13 +128,13 @@ public class ManageStudents extends HttpServlet{
 
 		//à supprimer ou modifier
 		if(request.getParameter("add")!=null) {
-			CreateStudentForm createForm = new CreateStudentForm(daoStudent);
+			CreateStudentForm createForm = new CreateStudentForm();
 			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
 				daoStudent.create(createForm.isStudent(request), daoTeacher);
 			}
 		}
 		if(request.getParameter("delete")!=null) {
-			DeleteStudentForm deleteForm = new DeleteStudentForm(daoStudent);
+			DeleteStudentForm deleteForm = new DeleteStudentForm();
 			daoStudent.delete(deleteForm.selectStudentToDelete(request));
 		}
 
