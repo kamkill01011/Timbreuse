@@ -12,47 +12,57 @@ import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
 import static ch.cpnv.timbreuse.mathTime.Date.isDayValid;
 import static ch.cpnv.timbreuse.dao.DAOUtility.addZeroToString;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de création de congés
+ */
 public class SetHolydaysForm {
-	private static final String ADD_SINGLE_HOLYDAY = "addSingleHolyday";
-	private static final String ADD_HOLYDAYS_GAP_A = "addHolydaysGapA";
-	private static final String ADD_HOLYDAYS_GAP_B = "addHolydaysGapB";
-	private static final String DEL_SINGLE_HOLYDAY = "deleteSingleHolyday";
-	private static final String DEL_HOLYDAYS_GAP_A = "deleteHolydaysGapA";
-	private static final String DEL_HOLYDAYS_GAP_B = "deleteHolydaysGapB";
-	
+
+	private static final String ADD_SINGLE_HOLYDAY = "addSingleHolyday";	//champ ajout d'un jour de congé isolé
+	private static final String ADD_HOLYDAYS_GAP_A = "addHolydaysGapA";		//champ ajout de plusieurs jours de congé (Borne A)
+	private static final String ADD_HOLYDAYS_GAP_B = "addHolydaysGapB";		//champ ajout de plusieurs jours de congé (Borne B)
+	private static final String DEL_SINGLE_HOLYDAY = "deleteSingleHolyday"; //champ suppression d'un jour de congé
+	private static final String DEL_HOLYDAYS_GAP_A = "deleteHolydaysGapA";	//champ suppression de plusieurs jours de congé (Borne A)
+	private static final String DEL_HOLYDAYS_GAP_B = "deleteHolydaysGapB";	//champ suppression de plusieurs jours de congé (Borne B)
+
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	
-	public SetHolydaysForm() {
+
+	public SetHolydaysForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
-	
+
 	/**
 	 * @return Le résultat
 	 */
 	public String getResult() {
 		return result;
 	}
-	
+
 	/**
 	 * @return Une map des erreurs
 	 */
 	public Map<String, String> getErrors() {
-        return errors;
-    }
-	
+		return errors;
+	}
+
 	/**
-	 * Retourne le jour ferié en int
-	 * @param request
-	 * @return jour ferié (int)
+	 * Retourne le jour ferié en String à ajouter
+	 * @param request HttpServletRequest
+	 * @return jour ferié (String)
 	 */
 	public String getSingleHolyday(HttpServletRequest request) {
 		return getFieldValue(request, ADD_SINGLE_HOLYDAY);
 	}
-	
+
+	/**
+	 * Retourne le jour ferié en String à supprimer
+	 * @param request HttpServletRequest
+	 * @return jour ferié (String)
+	 */
 	public String getDelSingleHolyday(HttpServletRequest request) {
 		return getFieldValue(request, DEL_SINGLE_HOLYDAY);
 	}
-	
+
 	/**
 	 * Retourne un arryList de la plage de jours feriés.
 	 * @param request
@@ -67,15 +77,15 @@ public class SetHolydaysForm {
 		} catch(Exception e) {
 			setError(ADD_HOLYDAYS_GAP_B, e.getMessage()); //vérifie si l'intervalle entré est possible
 		}
-		
+
 		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {
 			if(isDayValid(i)) {
-			holydaysGap.add(addZeroToString(Date.fixedToDate(i).toString()));
-		}
+				holydaysGap.add(addZeroToString(Date.fixedToDate(i).toString()));
+			}
 		}
 		return holydaysGap;
 	}
-	
+
 	/**
 	 * Retourne un arryList de la plage de jours feriés.
 	 * @param request
@@ -90,13 +100,13 @@ public class SetHolydaysForm {
 		} catch(Exception e) {
 			setError(DEL_HOLYDAYS_GAP_B, e.getMessage()); //vérifie si l'intervalle entré est possible
 		}
-		
+
 		for (int i = dateA.fixed(); i <= dateB.fixed(); i++) {
 			holydaysGap.add(addZeroToString(Date.fixedToDate(i).toString()));
 		}
 		return holydaysGap;
 	}
-	
+
 	/**
 	 * Vérifie si l'intervalle entré est correct. Sinon, lance une exception.
 	 * @param A Borne A intervalle
@@ -107,7 +117,7 @@ public class SetHolydaysForm {
 			throw new Exception("Intervalle incorrect.");
 		}
 	}
-	
+
 	/**
 	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu sinon.
 	 * @param request Requête envoyée par la servlet
@@ -122,13 +132,13 @@ public class SetHolydaysForm {
 			return value;
 		}
 	}
-	
+
 	/**
 	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
 	 * @param field Nom du champ de l'erreur
 	 * @param message Message de l'erreur
 	 */
 	private void setError(String field, String message) {
-        errors.put(field, message);
-    }
+		errors.put(field, message);
+	}
 }

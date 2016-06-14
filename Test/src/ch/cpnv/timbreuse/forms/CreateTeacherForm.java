@@ -8,18 +8,23 @@ import ch.cpnv.timbreuse.dao.DAOException;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère de formulaire de création d'un professeur
+ */
 public class CreateTeacherForm {
-	private static final String FIRSTNAME_FIELD ="addFirstnameTeacher";
-	private static final String LASTNAME_FIELD = "addLastnameTeacher";
-	private static final String CLASSES_FIELD = "addClasseTeacher";
+	
+	private static final String FIRSTNAME_FIELD ="addFirstnameTeacher";	//champ prénom
+	private static final String LASTNAME_FIELD = "addLastnameTeacher";	//champ nom
+	private static final String CLASSES_FIELD = "addClasseTeacher";		//champ classe(s)
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public CreateTeacherForm() {
+	public CreateTeacherForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 	
 	/**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -31,7 +36,6 @@ public class CreateTeacherForm {
 	public String getResult() {
 		return result;
 	}
-	
 	
 	/**
 	 * Associe un nouvel enseignant au champs du formulaire.

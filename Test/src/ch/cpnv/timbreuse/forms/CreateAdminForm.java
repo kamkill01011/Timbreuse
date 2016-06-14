@@ -10,17 +10,21 @@ import ch.cpnv.timbreuse.dao.DAOException;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de création d'un admin
+ */
 public class CreateAdminForm {
-	private static final String FIRSTNAME_FIELD ="addFirstnameAdmin";
-	private static final String LASTNAME_FIELD = "addLastnameAdmin";
+	private static final String FIRSTNAME_FIELD ="addFirstnameAdmin";	//champ ajout admin (prénom)
+	private static final String LASTNAME_FIELD = "addLastnameAdmin";	//champ ajout admin (nom)
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public CreateAdminForm() {
+	public CreateAdminForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 	
 	/**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -33,6 +37,11 @@ public class CreateAdminForm {
 		return result;
 	}
 	
+	/**
+	 * Crée un objet user avec le niveau de permission admin (1)
+	 * @param request HttpServletRequest
+	 * @return un admin (User)
+	 */
 	public User getAdmin(HttpServletRequest request) {
 		User admin = new User();
 		try {
@@ -66,15 +75,3 @@ public class CreateAdminForm {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

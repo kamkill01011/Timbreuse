@@ -9,12 +9,12 @@ import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
 /**
- * Formulaire pour se connecter
- *
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de connexion
  */
 public final class ConnectionForm {
-    private static final String USERNAME_FIELD = "username";
-    private static final String PASSWORD_FIELD = "password";
+    private static final String USERNAME_FIELD = "username";	//champ nom d'utilisateur
+    private static final String PASSWORD_FIELD = "password";	//champ mot de passe
     private String result;
     private Map<String, String> errors = new HashMap<String, String>();
     private DAOUser daoUser;
@@ -42,7 +42,7 @@ public final class ConnectionForm {
      * @return L'utilisateur correspondant aux identifiants donnés
      */
     public User connectUser(HttpServletRequest request) {
-        /* Récupération des champs du formulaire */
+        // Récupération des champs du formulaire 
         String email = getFieldValue(request, USERNAME_FIELD);
         String password = getFieldValue(request, PASSWORD_FIELD);
         String username;
@@ -51,33 +51,24 @@ public final class ConnectionForm {
         } else {
         	username = email;
         }
-        
         User user = new User();
-
-        /* Validation du champ username. */
-        /*try {
-            emailValidation(email);
-        } catch (Exception e) {
-            setError(USERNAME_FIELD, e.getMessage());
-        }*/
         
-
-        /* Validation du champ mot de passe. */
+        //Validation du champ mot de passe
         try {
             passwordValidation(password);
         } catch (Exception e) {
             setError(PASSWORD_FIELD, e.getMessage());
         }
         
+        //Vérifie le couple nom d'utilisateur/mot de passe correspond à celui 
+        //enregistré en base de données
         try {        	
         	user = connectionValidation(username, password);
         } catch(Exception e) {
         	setError(USERNAME_FIELD, e.getMessage());
         }
         
-        
-        
-        /* Initialisation du résultat global de la validation. */
+        // Initialisation du résultat global de la validation
         if (errors.isEmpty()) {
             result = "Succès de la connexion.";
         } else {
@@ -89,7 +80,6 @@ public final class ConnectionForm {
     /**
      * Valide le mot de passe saisi.
      * @param password Mot de passe
-     * @throws Exception ???
      */
     private void passwordValidation(String password) throws Exception {
         if (password != null) {
@@ -106,7 +96,6 @@ public final class ConnectionForm {
      * @param username Nom d'utilisateur
      * @param password Mot de passe
      * @return L'utilisateur correspondant aux identifiants donnés
-     * @throws Exception ???
      */
     private User connectionValidation(String username, String password) throws Exception {
     	User user = new User();

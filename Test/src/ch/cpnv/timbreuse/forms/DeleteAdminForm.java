@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import ch.cpnv.timbreuse.beans.User;
 import ch.cpnv.timbreuse.dao.DAOException;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de suppression d'un admin
+ */
 public class DeleteAdminForm {
-	private static final String FIRSTNAME_FIELD = "deleteFirstnameAdmin";
-	private static final String LASTNAME_FIELD = "deleteLastnameAdmin";
+	
+	private static final String FIRSTNAME_FIELD = "deleteFirstnameAdmin";	//champ prénom
+	private static final String LASTNAME_FIELD = "deleteLastnameAdmin";		//champ nom
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public DeleteAdminForm() {
+	public DeleteAdminForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 	
 	/**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -31,6 +36,11 @@ public class DeleteAdminForm {
 		return result;
 	}
 	
+	/**
+	 * Génère et retourne un admin de type User
+	 * @param request HttpServletRequest
+	 * @return admin (User)
+	 */
 	public User selectAdminToDelet(HttpServletRequest request) {
 		User user = new User();
 		try {

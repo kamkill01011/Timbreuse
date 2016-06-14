@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import ch.cpnv.timbreuse.beans.User;
 
 /**
- * Formulaire pour changer un mot de passe 
- *
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire pour changer un mot de passe 
  */
 public class ChangePasssowordForm {
-	private static final String CURRENT_PWD_FIELD = "old";
-	private static final String NEW_PWD_FIELD = "new";
-	private static final String NEW_PWD_CONFIRM_FIELD = "confirm";
+	private static final String CURRENT_PWD_FIELD = "old"; 			//champ mot de passe actuel
+	private static final String NEW_PWD_FIELD = "new";				//champ nouveau mot de passe
+	private static final String NEW_PWD_CONFIRM_FIELD = "confirm";	//champ confirmation nouveau mot de passe
 	private String result;
 	private Map<String, String> errors      = new HashMap<String, String>();
 	
-	public ChangePasssowordForm() {
+	public ChangePasssowordForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 	
 	/**
@@ -39,7 +39,6 @@ public class ChangePasssowordForm {
 	 * @param request Requête envoyée par la servlet contenant l'ancien mot de passe, le nouveau et la confimation
 	 * @param user Utilisateur à qui il faut changer le mot de passe
 	 * @return Si les informations sont correctes et que le mot de passe peut être changé
-	 * @throws Exception ???
 	 */
 	public boolean testChangePassword(HttpServletRequest request, User user) throws Exception {
 		String currentPassword = getFieldValue(request, CURRENT_PWD_FIELD);

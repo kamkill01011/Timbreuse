@@ -11,21 +11,22 @@ import ch.cpnv.timbreuse.dao.DAOException;
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
 /**
- * Formulaire pour créer un élève dans la base de données
- *
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de création d'un élève
  */
 public class CreateStudentForm {
-	private static final String CLASS_FIELD = "addClass";
-	private static final String FIRSTNAME_FIELD = "addFirstname";
-	private static final String LASTNAME_FIELD = "addLastname";
+	
+	private static final String CLASS_FIELD = "addClass";			//champ classe
+	private static final String FIRSTNAME_FIELD = "addFirstname";	//champ prénom
+	private static final String LASTNAME_FIELD = "addLastname";		//champ nom
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public CreateStudentForm() {
+	public CreateStudentForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 
     /**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -48,6 +49,7 @@ public class CreateStudentForm {
     }
 	
 	/**
+	 * Génère un nouvel élève de type Student
 	 * @param request Requête envoyée par la servlet contenant les informations nécessaire créer un nouvel élève
 	 * @return Le nouvel élève
 	 */

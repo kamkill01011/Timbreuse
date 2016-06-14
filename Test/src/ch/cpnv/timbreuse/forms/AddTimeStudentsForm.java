@@ -8,16 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire pour ajouter ou soustraire du temps à un élève
+ */
 public class AddTimeStudentsForm {
-	private static final String ADD_TIME_FIELD = "modifyTimeDiff";
+	
+	private static final String ADD_TIME_FIELD = "modifyTimeDiff"; //champ du formulaire
 	private Map<String, String> errors = new HashMap<String, String>();
-	private String result;;
+	private String result;
 
-	public AddTimeStudentsForm () {
+	public AddTimeStudentsForm () { //Constructeur privé par défaut vide => rend la classe non instantiable
+		
 	}
 
 	/**
-	 * @return Une ma des erreurs
+	 * @return Une map des erreurs
 	 */
 	public Map<String, String> getErreurs() {
 		return errors;
@@ -30,6 +36,11 @@ public class AddTimeStudentsForm {
 		return result;
 	}
 
+	/** 
+	 * Récupère et retourne l'entier dans le champ ADD_TIME_FIELD du formulaire
+	 * @param request HttpServletRequest
+	 * @return temps en int
+	 */
 	public int getTimeDiffField(HttpServletRequest request) {
 		int time = 0;
 		try {
@@ -37,6 +48,7 @@ public class AddTimeStudentsForm {
 				String timeString = getFieldValue(request, ADD_TIME_FIELD);
 				timeString = timeString.replaceAll("\\s+", ""); //supprime les espaces
 				String hours, minutes, seconds;
+				//Modifie légèrement l'affichage si l'entier est négatif. (-HH:-mm:-ss devient -HH:mm:ss)
 				if(timeString.contains("-")) {
 					hours = timeString.substring(1, timeString.indexOf(":"));
 					minutes = timeString.substring(timeString.indexOf(":")+1, timeString.lastIndexOf(":"));

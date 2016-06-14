@@ -10,11 +10,13 @@ import ch.cpnv.timbreuse.dao.DAOException;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 
 /**
- * Formulaire pour supprimer un élève dans la base de données
- *
+ * @author Mathieu.JEE Kamil.AMRANI
+ * Gère le formulaire de recherche d'un élève
  */
+@Deprecated
 public final class StudentResearchForm {
-	private static final String LASTNAME_FIELD = "researchLastname";
+	
+	private static final String LASTNAME_FIELD = "researchLastname";	//champ nom
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	private DAOStudent daoStudent;
@@ -24,7 +26,7 @@ public final class StudentResearchForm {
 	}
 
     /**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;

@@ -9,20 +9,21 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.dao.DAOException;
 
 /**
- * Formulaire pour supprimer un élève dans la base de données
- *
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire pour supprimer un élève dans la base de données
  */
 public class DeleteStudentForm {
-	private static final String FIRSTNAME_FIELD = "deletFirstname";
-	private static final String LASTNAME_FIELD = "deletLastname";
+	
+	private static final String FIRSTNAME_FIELD = "deletFirstname";	//champ prénom
+	private static final String LASTNAME_FIELD = "deletLastname";	//champ nom
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public DeleteStudentForm() {
+	public DeleteStudentForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 
     /**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -36,6 +37,7 @@ public class DeleteStudentForm {
 	}
 	
 	/**
+	 * Génère l'élève à supprimer
 	 * @param request Requête envoyée par la servlet contenant les informations nécessaire supprimer un élève
 	 * @return L'élève supprimé
 	 */

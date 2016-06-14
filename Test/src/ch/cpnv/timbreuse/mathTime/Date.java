@@ -3,6 +3,11 @@ package ch.cpnv.timbreuse.mathTime;
 import static ch.cpnv.timbreuse.mathTime.Math.modF;
 import static ch.cpnv.timbreuse.mathTime.Math.divF;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère les dates 
+ *
+ */
 public final class Date {
 
 	private int day, month, year;
@@ -50,7 +55,7 @@ public final class Date {
 	}
 
 	/**
-	 * Retourne la date distance du nombre de jours donnés de la date à laquelle on l'applique.
+	 * Retourne la date distante du nombre de jours donnés de la date à laquelle on l'applique.
 	 * @param daysDiff
 	 * @return 
 	 */
@@ -58,22 +63,27 @@ public final class Date {
 		return fixedToDate(dateToFixed(day, month, year)+daysDiff);
 	}
 
+	/**
+	 * Modifie la date (Date) vers le format JavaDate
+	 * @return date en JavaDate
+	 */
 	public java.util.Date toJavaDate() {
 		return new java.util.Date(year, month, day);
 	}
 
+	/* 
+	 * Override de la méthode ToString pour la classe Date
+	 * @return Retourne la date en string dans un format précis
+	 */
 	public String toString() {
 		return Integer.toString(day)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
 	}
 
-	public boolean equals(Object that) {
-		return false;
-	}
-
-	public int compareTo(Date that) {
-		return 0;
-	}
-
+	/**
+	 * Convertit une dateString en Date
+	 * @param dateString "JJ-MM-AAAA"
+	 * @return Date
+	 */
 	public static Date stringToDate(String dateString) {
 		if(dateString==null) {
 			return null;
@@ -84,10 +94,21 @@ public final class Date {
 		return new Date(day, month, year);
 	}
 
+	/**
+	 * Vérifie si l'année passée en paramètre est bissextile
+	 * @param y année
+	 * @return true, si année bissextile 
+	 */
 	private static boolean isLeapYear(int y) {
 		return ((modF(y, 4)==0) && (modF(y, 100)!=0)) || (modF(y, 400)==0);
 	}
 
+	/**
+	 * Retourne le nombre de jours dans un mois
+	 * @param m mois
+	 * @param y année
+	 * @return nombre de jours dans un mois
+	 */
 	private static int daysInMonth(int m, int y) {
 		if(m==2 && isLeapYear(y)==true) {
 			return 29;
@@ -100,6 +121,11 @@ public final class Date {
 		}
 	}
 
+	/**
+	 * Vérifie que la date (int) existe bien dans le calendrier.
+	 * @param dateInt
+	 * @return true, si la date existe 
+	 */
 	public static boolean isDayValid(int dateInt) {
 		Date date = fixedToDate(dateInt);
 		if(date.day()>daysInMonth(date.month(), date.year())) {
@@ -113,9 +139,16 @@ public final class Date {
 		else { return -2;}
 	}
 
+	/**
+	 * Convertit la date (Date) en entier.
+	 * @param d jour
+	 * @param m mois
+	 * @param y année
+	 * @return date en entier
+	 */
 	private static int dateToFixed(int d, int m, int y) {
 		int y0 = y-1;
-		int c = calculC(m, y);
+		int c = calculC(m, y); //calcul de la constante c
 		return 365*y0 + divF(y0, 4) - divF(y0, 100) + divF(y0, 400) + divF(((367*m)-362), 12) + c + d;
 	}
 
@@ -126,6 +159,11 @@ public final class Date {
 		else { return 2;}
 	}
 
+	/**
+	 * .Convertit une date (int) en une date (Date).
+	 * @param n date int
+	 * @return date (Date)
+	 */
 	public static Date fixedToDate(int n) {
 		int d0 = n-1;
 		int n400 = divF(d0, 146097);
@@ -138,18 +176,23 @@ public final class Date {
 		int y0 = 400*n400 + 100*n100 + 4*n4 + n1;
 
 		int p = n - dateToFixed(1, 1, y0+1);
-		int c = calculC2(n, y0);
+		int c = calculC2(n, y0); //calcul de la constante c
 		int m = divF(((12*(p+c))+373), 367);
 
 		int d = n - dateToFixed(1, m, y0+1) + 1;
 		return new Date(d,m,y0+1);
 	}
 
+	/**
+	 * Convertit la date (Date) en entier.
+	 * @return date int
+	 */
 	public int fixed() {
 		return dateToFixed(day, month, year);
 	}
 
-	/**Retourne le jour de la semaine de la date
+	/**
+	 * Retourne le jour de la semaine de la date
 	 * @return jour de la semaine de la date
 	 */
 	public String dayOfWeek() {

@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import ch.cpnv.timbreuse.beans.Teacher;
 import ch.cpnv.timbreuse.dao.DAOException;
 
+/**
+ * @author Mathieu.JEE, Kamil.AMRANI
+ * Gère le formulaire de suppression d'un professeur
+ */
 public class DeleteTeacherForm {
-	private static final String FIRSTNAME_FIELD = "deleteFirstnameTeacher";
-	private static final String LASTNAME_FIELD = "deleteLastnameTeacher";
+	
+	private static final String FIRSTNAME_FIELD = "deleteFirstnameTeacher"; //champ prénom
+	private static final String LASTNAME_FIELD = "deleteLastnameTeacher";	//champ nom
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 	
-	public DeleteTeacherForm() {
+	public DeleteTeacherForm() { //Constructeur privé par défaut vide => rend la classe non instantiable
 	}
 	
 	/**
-     * @return Une ma des erreurs
+     * @return Une map des erreurs
      */
 	public Map<String, String> getErreurs() {
         return errors;
@@ -31,6 +36,11 @@ public class DeleteTeacherForm {
 		return result;
 	}
 	
+	/**
+	 * Génère le professeur à supprimer
+	 * @param request HttpServletRequest
+	 * @return professeur à supprimer (Teacher)
+	 */
 	public Teacher selectTeacherToDelete(HttpServletRequest request) {
 		Teacher teacher = new Teacher();
 		try {
