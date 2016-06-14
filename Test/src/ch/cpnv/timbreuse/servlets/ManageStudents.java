@@ -32,6 +32,7 @@ import ch.cpnv.timbreuse.forms.DeleteStudentForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
+import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
 
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
@@ -101,7 +102,8 @@ public class ManageStudents extends HttpServlet{
 					}
 					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						daoStudent.changeStatus(student, daoLog.addLog(student));
+						checkoutStudent(student, daoStudent, daoLog);
+						//daoStudent.changeStatus(student, daoLog.addLog(student));
 					}
 					if(request.getParameter("sickDay") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());

@@ -10,6 +10,11 @@ import ch.cpnv.timbreuse.dao.DAOStudent;
 
 import static ch.cpnv.timbreuse.automation.Automation.endDay;
 
+/**
+ * Execute une TimerTask à la fin de chaque journée (à 23:00:00)
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 public class EndOfDay {
 	private Timer timer;
 	private Calendar calendar;
@@ -23,6 +28,9 @@ public class EndOfDay {
 		this.daoHolyday = daoHolyday;
 	}
 	
+	/**
+	 * Initialisation du Timer
+	 */
 	public void init() {
 		calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 23);
@@ -35,6 +43,11 @@ public class EndOfDay {
 		System.out.println("End of day init...");
 	}
 	
+	/**
+	 * TimerTask qui s'effectue à la fin de chaque journée
+	 * @author Mathieu.JEE Kamil.AMRANI
+	 *
+	 */
 	class EndOfDayTask extends TimerTask {
 
 		@Override

@@ -7,11 +7,21 @@ import java.io.IOException;
 
 import ch.cpnv.timbreuse.beans.User;
 
+/**
+ * Pas utilisé
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
+@Deprecated
 public class txtWriter {
 
 	private txtWriter() {
 	}
 
+	/**
+	 * @param user Nom de l'utilisateur
+	 * @param selectedClass Nom de la classe de l'utilisateur (aussi nom du fichier)
+	 */
 	public static void writeListPassword(User user, String selectedClass) {
 		BufferedOutputStream fileOut = null;
 		try {

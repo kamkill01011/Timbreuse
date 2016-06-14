@@ -18,6 +18,8 @@ import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.dao.DAOUser;
 
+import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
+
 /**
  * Servlet qui affiche les information d'un élève
  *
@@ -50,7 +52,8 @@ public class StudentInfo extends HttpServlet {
 		HttpSession session = request.getSession();
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		if(request.getParameter("newStatus") != null) {
-			daoStudent.changeStatus(student, daoLog.addLog(student));
+			checkoutStudent(student, daoStudent, daoLog);
+			//daoStudent.changeStatus(student, daoLog.addLog(student));
 		}
 		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
