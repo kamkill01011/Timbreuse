@@ -1,8 +1,13 @@
 package ch.cpnv.timbreuse.beans;
 
+/**
+ * Bean vacance
+ * @author Mathieu.JEE Kamil.AMRANI
+ * 
+ */
 public class Holyday {
-	private Long id;
-	private String date;
+	private Long id;//ID
+	private String date;//date
 	
 	public Long getId() {
 		return id;

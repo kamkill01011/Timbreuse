@@ -4,16 +4,16 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 
-
 /**
- * Objet utilisateur
+ * Bean utilisateur
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class User {
 
-    private Long		id;
-    private String		lastname,firstname,password,username;
-    private int 		permissionLevel;
+    private Long		id;//ID
+    private String		lastname,firstname,password,username;//nom, prénom, mot de passe, nom d'utilistateur
+    private int 		permissionLevel;//niveau de permission : 1 = admin, 2 = enseignant, 3 = élève
     
     public Long getId() {
         return id;

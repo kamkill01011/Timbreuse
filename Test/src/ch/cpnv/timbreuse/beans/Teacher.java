@@ -3,13 +3,14 @@ package ch.cpnv.timbreuse.beans;
 import static ch.cpnv.timbreuse.dao.DAOUtility.upperFirstLetter;
 
 /**
- * Objet enseignant
+ * Bean enseignant
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class Teacher {
 	
-	private long id;
-	private String firstname, lastname, classe, email;
+	private long id;//ID
+	private String firstname, lastname, classe, email;//prénom, nom, classe, e-mail
 	
 	public long getId() {
 		return id;

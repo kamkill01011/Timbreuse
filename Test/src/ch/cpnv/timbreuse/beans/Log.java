@@ -3,14 +3,15 @@ package ch.cpnv.timbreuse.beans;
 import ch.cpnv.timbreuse.mathTime.SecondsPastMidnight;
 
 /**
- * Objet utilisateur
+ * Bean lgo
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class Log {
 
-    private Long		id;
-    private String		username,date,status;
-    private int 		time;
+    private Long		id;//ID
+    private String		username,date,status;//nom de l'utilisateur affecté, date de la modification
+    private int 		time;//heure OU valeur de la modification
     
     public Long getId() {
         return id;
