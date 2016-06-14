@@ -24,7 +24,7 @@ public class CustomOutputStream extends OutputStream {
 	@Override
 	public void write(int b) throws IOException {
 		// redirects data to the text area
-		if(newLine) textArea.append(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : " + String.valueOf((char)b));
+		if(newLine) textArea.append(currentDate() + " / " + SecondsPastMidnight.toString(currentTime()) + " : " + String.valueOf((char)b));//print la date et l'heure si c'est une nouvelle ligne
 		else textArea.append(String.valueOf((char)b));
 		newLine = b == '\n';
 		// scrolls the text area to the end of data

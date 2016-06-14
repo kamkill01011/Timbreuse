@@ -6,10 +6,17 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Console pour l'application
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 public class CustomConsole {
 	
+	/**
+	 * Initialise la console
+	 */
 	public static void init() {
-		
 		JTextArea textArea = new JTextArea(50, 10);
 		textArea.setEditable(false);
 
@@ -21,7 +28,7 @@ public class CustomConsole {
 		JScrollPane sp = new JScrollPane(textArea);
 		frame.add(sp);
 		frame.setSize(400, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//si on ferme la console l'application s'arrête
 		frame.setVisible(true);
 	}
 }
