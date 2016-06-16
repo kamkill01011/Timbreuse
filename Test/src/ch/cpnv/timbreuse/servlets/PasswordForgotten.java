@@ -15,19 +15,27 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.dao.DAOUtility;
 import ch.cpnv.timbreuse.forms.PasswordForgottenForm;
 
+/**
+ * Servlet qui permet aux utilisateurs de récupérer leurs mots de passe
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 @WebServlet("/passwordforgotten")
 public class PasswordForgotten extends HttpServlet {
 	public static final String VIEW_PASSWORDFORGOTTEN = "/WEB-INF/passwordForgotten.jsp";
 	private DAOUser daoUser;
-	
+
+	@Override
 	public void init() {
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().getRequestDispatcher(VIEW_PASSWORDFORGOTTEN).forward(request, response);
 	}
-	
+
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PasswordForgottenForm passwordForgottenForm = new PasswordForgottenForm();
 		User user = daoUser.findUser(passwordForgottenForm.getUsernamePasswordForgotten(request));
@@ -36,7 +44,6 @@ public class PasswordForgotten extends HttpServlet {
 			MailTo.sendEmail(user, password);
 			daoUser.setNewPassword(user, password);
 		}
-		//this.getServletContext().getRequestDispatcher("/logout").forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/logout");
 	}
 }

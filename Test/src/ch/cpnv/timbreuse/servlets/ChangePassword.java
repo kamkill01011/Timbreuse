@@ -15,6 +15,7 @@ import ch.cpnv.timbreuse.forms.ChangePasssowordForm;
 
 /**
  * Servlet de changement de mot de passe
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 @WebServlet("/changepassword")
@@ -26,14 +27,17 @@ public class ChangePassword extends HttpServlet {
 	public static final String USER_SESSION_ATT ="userSession";
 	private DAOUser daoUser;
 
+	@Override
 	public void init() {
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		this.getServletContext().getRequestDispatcher(VIEW_CHANGEPASSWORD).forward(request, response);
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ChangePasssowordForm passwordForm = new ChangePasssowordForm();
 		HttpSession session = request.getSession();

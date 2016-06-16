@@ -15,6 +15,7 @@ import ch.cpnv.timbreuse.forms.ConnectionForm;
 
 /**
  * Servlet qui permet aux utilisateurs de se connecter
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 @WebServlet("/connection")
@@ -29,21 +30,22 @@ public class Connection extends HttpServlet {
 	public static final String USER_SESSION_ATT ="userSession";
 	private DAOUser daoUser;
 
+	@Override
 	public void init() {
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ConnectionForm connectionForm = new ConnectionForm(daoUser);
 		User user = connectionForm.connectUser(request);
 		HttpSession session = request.getSession();	
-		//Stockage du form dans l'obj request
 		request.setAttribute(FORM_ATT, connectionForm);
-		//request.setAttribute(USER_ATT, user);//useless
 
 		if(connectionForm.getErrors().isEmpty()) {
 			System.out.println(user.getUsername() + " connecting");

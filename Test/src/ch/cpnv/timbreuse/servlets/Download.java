@@ -14,14 +14,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet pour télécharger un fichier avec des informations pour les nouveaux élèves
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 @WebServlet(urlPatterns = "/files/*", initParams = @WebInitParam(name="path", value="/files/"))
 public class Download extends HttpServlet {
-	public static final int BUFFER_SIZE = 10240; // 10ko
+	public static final int BUFFER_SIZE = 10240;// 10ko
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		//Lecture du paramètre 'path' passé à  la servlet via la déclaration dans le web.xml
@@ -56,8 +63,8 @@ public class Download extends HttpServlet {
 		}
 
 		//Initialise la réponse HTTP
-		response.reset(); //efface l'intégralité du contenu de la réponse
-		response.setBufferSize(BUFFER_SIZE); //Obligatoire après un reset
+		response.reset();//efface l'intégralité du contenu de la réponse
+		response.setBufferSize(BUFFER_SIZE);//Obligatoire après un reset
 		response.setContentType(type);
 		//création de l'en-tête http
 		response.setHeader("Content-Length", String.valueOf(file.length())); 

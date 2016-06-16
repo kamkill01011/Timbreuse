@@ -22,6 +22,7 @@ import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
 
 /**
  * Servlet qui affiche les information d'un élève
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 @WebServlet("/info")
@@ -30,13 +31,15 @@ public class StudentInfo extends HttpServlet {
 	private DAOUser daoUser;
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
-	
+
+	@Override
 	public void init() {
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoLog = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
@@ -47,20 +50,18 @@ public class StudentInfo extends HttpServlet {
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 	
-	
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		Student student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		if(request.getParameter("newStatus") != null) {
 			checkoutStudent(student, daoStudent, daoLog);
-			//daoStudent.changeStatus(student, daoLog.addLog(student));
 		}
 		student = daoUser.findStudent(((User)session.getAttribute("userSession")).getUsername(), daoStudent);
 		ArrayList<Log> logs = daoLog.getStudentLogs(student);
 		
 		request.setAttribute("currentStudent", student);
 		request.setAttribute("logs", logs);
-		//this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/info");
 	}
 }

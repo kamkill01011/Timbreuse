@@ -22,6 +22,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.classes;
 
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 @WebServlet("/settimetables")
@@ -30,12 +31,14 @@ public class SetTimeTables extends HttpServlet{
 	public static final String USER_SESSION_ATT ="userSession";
 	private DAOTeacher daoTeacher;
 	private DAOStudent daoStudent;
-	
+
+	@Override
 	public void init() {
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 	}
-	
+
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
@@ -48,7 +51,8 @@ public class SetTimeTables extends HttpServlet{
 		request.setAttribute("timeTables", timeTables);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
-	
+
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());

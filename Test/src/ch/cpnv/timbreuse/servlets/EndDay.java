@@ -14,12 +14,18 @@ import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
 import ch.cpnv.timbreuse.gui.CustomConsole;
 
+/**
+ * Servlet qui initialise les automatisme pour les fins de journées
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 public class EndDay extends HttpServlet {
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
 	private DAOHolyday daoHolyday;
 	EndOfDay eod;
 
+	@Override
 	public void init() {
 		CustomConsole.init();//strart a console for System.out and System.err
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
@@ -28,7 +34,8 @@ public class EndDay extends HttpServlet {
 		eod = new EndOfDay(daoStudent, daoLog, daoHolyday);
 		eod.init();
 	}
-	
+
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 	}
 }

@@ -14,6 +14,11 @@ import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOHolyday;
 import ch.cpnv.timbreuse.forms.SetHolydaysForm;
 
+/**
+ * Servelet pour les enseigant  qui leur permet de gérer les horaires de leurs classes
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 @WebServlet("/setholydays")
 public class SetHolydays extends HttpServlet {
 	public static final String VIEW_SETHOLYDAYS = "/teacher/setHolydays.jsp";
@@ -23,17 +28,20 @@ public class SetHolydays extends HttpServlet {
 	public static final String USER_SESSION_ATT ="userSession";
 	private DAOHolyday daoHolyday;
 
+	@Override
 	public void init() {
 		this.daoHolyday = ((DAOFactory)getServletContext().getAttribute("daofactory")).getDaoHolyday();
 	}
-	
+
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		
 		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
-	
+
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("addSingleHolydayButton")!=null) {
 			SetHolydaysForm holydaysForm = new SetHolydaysForm();
@@ -69,6 +77,5 @@ public class SetHolydays extends HttpServlet {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
 		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
-		//response.sendRedirect(request.getContextPath()+"/setholydays");
 	}
 }

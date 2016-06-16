@@ -21,6 +21,11 @@ import ch.cpnv.timbreuse.forms.DeleteTeacherForm;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
+/**
+ * Servlet pour les administrateurs qui leur permet de gérer les autres administrateurs et les enseigants
+ * @author Mathieu.JEE Kamil.AMRANI
+ *
+ */
 @WebServlet("/admin")
 public class AdminPanel extends HttpServlet {
 	public static final String VIEW = "/admin/adminPanel.jsp";
@@ -28,19 +33,22 @@ public class AdminPanel extends HttpServlet {
 	private DAOUser daoUser;
 	private DAOTeacher daoTeacher;
 	private ArrayList<Teacher> teachers = new ArrayList<>();
-	
+
+	@Override
 	public void init() {
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
 		this.daoAdmin = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoAdmin();
 		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
-	
+
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		teachers = ((DAOImplUser)daoUser).listTeachers(daoTeacher);
 		request.setAttribute("teachers", teachers);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
-	
+
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("addTeacher") != null) {
 			CreateTeacherForm createForm = new CreateTeacherForm();
@@ -73,6 +81,5 @@ public class AdminPanel extends HttpServlet {
 		teachers = ((DAOImplUser)daoUser).listTeachers(daoTeacher);
 		request.setAttribute("teachers", teachers);
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-		//response.sendRedirect(request.getContextPath()+"/admin");
 	}
 }

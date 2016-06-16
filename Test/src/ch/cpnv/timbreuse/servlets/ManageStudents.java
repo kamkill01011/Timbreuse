@@ -36,6 +36,7 @@ import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
 
 /**
  * Servlet pour les enseigants qui leur permet de gèrer leurs élèves
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 @WebServlet("/managestudents")
@@ -50,6 +51,7 @@ public class ManageStudents extends HttpServlet{
 	private Student selectedStudent;
 	private ArrayList<Log> logs = new ArrayList<>();
 
+	@Override
 	public void init() {
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoTeacher = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoTeacher();
@@ -57,6 +59,7 @@ public class ManageStudents extends HttpServlet{
 		this.daoUser	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 	}
 
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		//récupère l'ensaignant connecté notamment pour afficher ses classes 
 		HttpSession session = request.getSession();
@@ -66,10 +69,10 @@ public class ManageStudents extends HttpServlet{
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
-		//addTime to Student(s)
 		//change la classe sélectionnle si elle a changée
 		String tempSelectedClasse = (String) request.getParameter("classe");
 		if(tempSelectedClasse != null) {
@@ -103,7 +106,6 @@ public class ManageStudents extends HttpServlet{
 					if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						checkoutStudent(student, daoStudent, daoLog);
-						//daoStudent.changeStatus(student, daoLog.addLog(student));
 					}
 					if(request.getParameter("sickDay") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
@@ -113,7 +115,7 @@ public class ManageStudents extends HttpServlet{
 
 			}
 
-			if(request.getParameter("listPassword") != null) {		
+			if(request.getParameter("listPassword") != null) {
 				for (int j = 0; j < studentsInClass.size(); j++) {
 					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
 					if(user != null) {
@@ -128,13 +130,13 @@ public class ManageStudents extends HttpServlet{
 			}
 		}
 
-		//à supprimer ou modifier
 		if(request.getParameter("add")!=null) {
 			CreateStudentForm createForm = new CreateStudentForm();
 			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
 				daoStudent.create(createForm.isStudent(request), daoTeacher);
 			}
 		}
+		
 		if(request.getParameter("delete")!=null) {
 			DeleteStudentForm deleteForm = new DeleteStudentForm();
 			daoStudent.delete(deleteForm.selectStudentToDelete(request));
@@ -149,6 +151,5 @@ public class ManageStudents extends HttpServlet{
 		request.setAttribute("selectedClasse", selectedClasse);
 
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-		//response.sendRedirect(request.getContextPath()+"/managestudents");
 	}
 }
