@@ -16,6 +16,7 @@ import ch.cpnv.timbreuse.beans.User;
 
 /**
  * Redirige les utilisateurs vers leur page d'accueil delon leur niveau de permission
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class ConnectionFilter implements Filter {
@@ -34,28 +35,24 @@ public class ConnectionFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        
-        //ressources qui ne doivent pas être filtrées (css, ...)
-        /*String path = request.getRequestURI().substring( request.getContextPath().length() );
-        if(path.startsWith("/inc")) {
-            chain.doFilter(request, response);
-            return;
-        }*/
-        
-        //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
 
         if(session.getAttribute(ATT_SESSION_USER) != null) {
         	User user = (User) session.getAttribute(ATT_SESSION_USER);
-        	if(user.getPermissionLevel() == 3){
+        	switch (user.getPermissionLevel()) {
+			case 3:
         		response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
-        	} else if(user.getPermissionLevel() == 2){
+				break;
+			case 2:
         		response.sendRedirect(request.getContextPath() + VIEW_TEACHER);
-        	} else if(user.getPermissionLevel() == 1){
+				break;
+			case 1:
         		response.sendRedirect(request.getContextPath() + VIEW_ADMIN);
-        	} else {
+				break;
+			default:
         		response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
-        	}
+				break;
+			}
         } else {
         	response.sendRedirect(request.getContextPath() + VIEW_CONNECTION);
         }

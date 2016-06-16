@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Redirige les visiteurs (non-connectés) vers la page de connexion sauf les page .css
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class ConnectedFilter implements Filter {
@@ -29,9 +30,8 @@ public class ConnectedFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        
-        //Récupération de la session depuis la requête
         HttpSession session = request.getSession();
+        
         if(session.getAttribute(ATT_SESSION_USER) != null || request.getRequestURI().endsWith(".css") || request.getRequestURI().contains("passwordforgotten")) {
         	chain.doFilter(request, response);
         } else {
@@ -40,7 +40,6 @@ public class ConnectedFilter implements Filter {
         		System.out.println("TIMED OUT");
         	}
         	request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-        	//response.sendRedirect(request.getContextPath()+VIEW_CONNECTION);
         }
 	}
 

@@ -16,6 +16,7 @@ import ch.cpnv.timbreuse.beans.User;
 
 /**
  * Filtre les ressources du dossier teacher
+ * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class TeacherFilter implements Filter {
@@ -34,17 +35,11 @@ public class TeacherFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-
-		//Récupération de la session depuis la requête
 		HttpSession session = request.getSession();
 
-		if(session.getAttribute(ATT_SESSION_USER) == null) {
-			request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
-		} else if(((User) session.getAttribute(ATT_SESSION_USER)).getPermissionLevel() == 2){
-			chain.doFilter(request, response);
-		} else {
-			request.getRequestDispatcher(VIEW_STUDENT).forward(request, response);
-		}
+		if(session.getAttribute(ATT_SESSION_USER) == null) request.getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+		else if(((User) session.getAttribute(ATT_SESSION_USER)).getPermissionLevel() == 2) chain.doFilter(request, response);
+		else request.getRequestDispatcher(VIEW_STUDENT).forward(request, response);
 	}
 
 	@Override
