@@ -18,11 +18,22 @@ public interface DAOStudent {
     Student find(String username) throws DAOException;
 
     /**
+     * @param ID du tag de l'élève à trouver
+     * @return L'élève correspondant à l'adresse mail
+     */
+    Student findByTag(String tag) throws DAOException;
+    
+    /**
+     * @param ID de l'élève à trouver
+     * @return L'élève correspondant à l'adresse mail
+     */
+    Student findStudentById(Long id);
+    
+    /**
      * @param student L'élève à supprimer
      */
     void delete(Student student) throws DAOException;
 
-    
     /**
      * @param id de l'élève en base de données
      * @param addedTime, nouveau temps à ajouter
@@ -43,4 +54,5 @@ public interface DAOStudent {
 	int setTimeDiff(Student student);
 
 	void changeTimeTables(int[] newTImeTable, Student student);
+
 }

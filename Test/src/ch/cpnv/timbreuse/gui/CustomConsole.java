@@ -9,18 +9,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
+import ch.cpnv.timbreuse.dao.DAOLog;
+import ch.cpnv.timbreuse.dao.DAOStudent;
+
+import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
+
 /**
  * Console pour l'application
  * @author Mathieu.JEE Kamil.AMRANI
  *
  */
 public class CustomConsole {
+	
 	private JTextArea textArea = new JTextArea(50, 10);
+	private DAOStudent daoStudent;
+	private DAOLog daoLog;
 	
 	/**
 	 * Initialise la console
 	 */
-	public void init() {
+	public void init(DAOStudent daoStudent, DAOLog daoLog) {
+		this.daoStudent = daoStudent;
+		this.daoLog = daoLog;
+		
 		textArea.setEditable(true);
 
 		PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
@@ -52,6 +63,7 @@ public class CustomConsole {
 					e.printStackTrace();
 				}
 				String lastLine = textArea.getText().substring(start, end);
+				checkoutStudent(lastLine, daoStudent, daoLog);
 			}
 		}
 

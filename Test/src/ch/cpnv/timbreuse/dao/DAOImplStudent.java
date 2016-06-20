@@ -27,6 +27,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
+	private static final String SQL_SELECT_STUDENT_BY_TAG = "SELECT * FROM eleves WHERE Tag=?";
 	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
@@ -66,6 +67,30 @@ public class DAOImplStudent implements DAOStudent {
 		return student;
 	}
 
+	@Override
+	public Student findByTag(String tag) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Student student = null;
+
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SELECT_STUDENT_BY_TAG, false, tag);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				student = map(resultSet);
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
+
+		return student;
+	}
+
+	@Override
 	public Student findStudentById(Long id) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

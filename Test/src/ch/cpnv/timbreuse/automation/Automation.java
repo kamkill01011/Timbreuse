@@ -94,6 +94,10 @@ public final class Automation {
 	public static void checkoutStudent(Student student, DAOStudent daoStudent, DAOLog daoLog) {
 		daoStudent.changeStatus(student, daoLog.addLog(student));
 	}
+
+	public static void checkoutStudent(String studentTagId, DAOStudent daoStudent, DAOLog daoLog) {
+		checkoutStudent(daoStudent.findByTag(studentTagId), daoStudent, daoLog);
+	}
 	
 	/**
 	 * Remet todayTime à zéro
