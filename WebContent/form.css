@@ -1,25 +1,24 @@
 /* Général ------------------------------------------------------------------------------------- */
-
 body, p, legend, label, input {
-    font: normal 10pt verdana, helvetica, sans-serif;
+	font: normal 10pt verdana, helvetica, sans-serif;
 }
 
 label, input {
-	display:block;
-	margin:auto;
+	display: block;
+	margin: auto;
 }
 
 fieldset {
-    border:2px solid green;
-    -moz-border-radius:8px;
-    -webkit-border-radius:8px;	
-    border-radius:8px;
-    margin-top: 20px;
+	border: 2px solid green;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	margin-top: 20px;
 }
 
 legend {
-    font-weight: bold;
-    color: #0568CD;
+	font-weight: bold;
+	color: #0568CD;
 }
 
 .succes {
@@ -31,16 +30,15 @@ legend {
 }
 
 .pageTitle {
-	text-shadow:1px 1px 1px rgba(179,179,179,1);
-	font-weight:bold;
-	color:#4768ED;
-	letter-spacing:0pt;
-	font-size:30px;
-	text-align:left;
-	font-family:arial, helvetica, sans-serif;
-	line-height:1;
-	padding:10px;
-
+	text-shadow: 1px 1px 1px rgba(179, 179, 179, 1);
+	font-weight: bold;
+	color: #4768ED;
+	letter-spacing: 0pt;
+	font-size: 30px;
+	text-align: left;
+	font-family: arial, helvetica, sans-serif;
+	line-height: 1;
+	padding: 10px;
 }
 
 /* LOGO ---------------------------------------------------------------------------------------- */
@@ -52,88 +50,76 @@ legend {
 	width: 250px;
 	height: auto;
 }*/
-
-.footerLogo{
-
+.footerLogo {
 	/* How pronounced should the 3D effects be */
 	perspective: 200px;
 	-webkit-perspective: 200px;
-	width:480px;
-	height:480px;
-	margin:0 auto;
-	border-radius:6px;
-	position:relative;
+	width: 480px;
+	height: 480px;
+	margin: 0 auto;
+	border-radius: 6px;
+	position: relative;
 }
 
 .cpnv-logo, .mct-logo {
 	/* Enable 3D transforms */
 	transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
-
 	/* We are using two separate divs for the front and back of the
 	   phone. This will hide the divs when they are flipped, so that the
 	   opposite side can be seen:  */
-
 	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
-
-	width:200px;
-	height:333px;
-
-	position:absolute;
-	top:50%;
-	left:50%;
-	margin:-166px 0 0 -100px;
-
-	background:url(http://img15.hostingpics.net/pics/477128MCT.jpg) no-repeat left center;
-
+	width: 200px;
+	height: 333px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -166px 0 0 -100px;
+	background: url(http://img15.hostingpics.net/pics/477128MCT.jpg)
+		no-repeat left center;
 	/* Animate the transitions */
-	transition:1.3s;
-} 
+	transition: 1.3s;
+}
 
 .cpnv-logo {
 	/* The back side is flipped 180 deg by default */
-	transform:rotateY(180deg);
-	-webkit-transform:rotateY(180deg);
-
-	background-position:right center;
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	background-position: right center;
 }
 
 .footerLogo:hover .mct-logo {
 	/* When the container is hovered, flip the front side and hide it .. */
-	transform:rotateY(180deg);
-	-webkit-transform:rotateY(180deg);
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
 }
 
 .footerLogo:hover .cpnv-logo {
 	/* .. at the same time flip the back side into visibility */
-	transform:rotateY(360deg);
-	-webkit-transform:rotateY(360deg);
+	transform: rotateY(360deg);
+	-webkit-transform: rotateY(360deg);
 }
-
 
 /* Forms --------------------------------------------------------------------------------------- */
-
 .DecoPwd {
-    float:left;
-    
+	float: left;
 }
 
-
 form label {
-    float: left;
-    width: 200px;
-    margin: 3px 5px 0px 0px;
+	float: left;
+	width: 200px;
+	margin: 3px 5px 0px 0px;
 }
 
 form input.timbrage {
 	margin-top: 10px;
 	background: #4CAF50;
-	background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
+	background-image: -webkit-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -moz-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -ms-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -o-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: linear-gradient(to bottom, #07bf0e, # #07bf0e);
 	-webkit-border-radius: 13;
 	-moz-border-radius: 13;
 	border-radius: 13px;
@@ -147,22 +133,22 @@ form input.timbrage {
 
 form input.timbrage:hover {
 	background: #00c455;
-  	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -o-linear-gradient(top, #00c455, #0dff00);
-  	background-image: linear-gradient(to bottom, #00c455, #0dff00);
-  	text-decoration: none;
+	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+	background-image: -o-linear-gradient(top, #00c455, #0dff00);
+	background-image: linear-gradient(to bottom, #00c455, #0dff00);
+	text-decoration: none;
 }
 
 form input.login {
 	margin-top: 10px;
 	background: #07bf0e;
-	background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
-	background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
+	background-image: -webkit-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -moz-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -ms-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -o-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: linear-gradient(to bottom, #07bf0e, # #07bf0e);
 	-webkit-border-radius: 13;
 	-moz-border-radius: 13;
 	border-radius: 13px;
@@ -176,132 +162,135 @@ form input.login {
 
 form input.login:hover {
 	background: #00c455;
-  	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
-  	background-image: -o-linear-gradient(top, #00c455, #0dff00);
-  	background-image: linear-gradient(to bottom, #00c455, #0dff00);
-  	text-decoration: none;
+	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+	background-image: -o-linear-gradient(top, #00c455, #0dff00);
+	background-image: linear-gradient(to bottom, #00c455, #0dff00);
+	text-decoration: none;
 }
 
 form input {
-    margin: 3px 3px 0px 0px;
-    border: 1px #999 solid;
+	margin: 3px 3px 0px 0px;
+	border: 1px #999 solid;
 }
 
 form input.sansLabel {
-  	background: #e0dde0;
-  	background-image: -webkit-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: -moz-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: -ms-linear-gradient(top, #e0dde0, #e0dde0);
- 	background-image: -o-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: linear-gradient(to bottom, #e0dde0, #e0dde0);
+	background: #e0dde0;
+	background-image: -webkit-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -moz-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -ms-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -o-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: linear-gradient(to bottom, #e0dde0, #e0dde0);
 	-webkit-border-radius: 5;
- 	-moz-border-radius: 5;
-    border-radius: 5px;
+	-moz-border-radius: 5;
+	border-radius: 5px;
 	font-family: Arial;
-    margin-left: 205px;
+	margin-left: 205px;
 }
 
 form input.sansLabel:hover {
 	background: #fafafa;
-  	background-image: -webkit-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -moz-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -ms-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -o-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: linear-gradient(to bottom, #fafafa, #fafafa);
-    
+	background-image: -webkit-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -moz-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -ms-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -o-linear-gradient(top, #fafafa, #fafafa);
+	background-image: linear-gradient(to bottom, #fafafa, #fafafa);
 }
 
 form input.sansLabelNoSpace {
 	background: #e0dde0;
-  	background-image: -webkit-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: -moz-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: -ms-linear-gradient(top, #e0dde0, #e0dde0);
- 	background-image: -o-linear-gradient(top, #e0dde0, #e0dde0);
-  	background-image: linear-gradient(to bottom, #e0dde0, #e0dde0);
+	background-image: -webkit-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -moz-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -ms-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: -o-linear-gradient(top, #e0dde0, #e0dde0);
+	background-image: linear-gradient(to bottom, #e0dde0, #e0dde0);
 	-webkit-border-radius: 5;
- 	-moz-border-radius: 5;
-    border-radius: 5px;
+	-moz-border-radius: 5;
+	border-radius: 5px;
 	font-family: Arial;
 }
 
 form input.sansLabelNoSpace:hover {
 	background: #fafafa;
-  	background-image: -webkit-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -moz-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -ms-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: -o-linear-gradient(top, #fafafa, #fafafa);
-  	background-image: linear-gradient(to bottom, #fafafa, #fafafa);
+	background-image: -webkit-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -moz-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -ms-linear-gradient(top, #fafafa, #fafafa);
+	background-image: -o-linear-gradient(top, #fafafa, #fafafa);
+	background-image: linear-gradient(to bottom, #fafafa, #fafafa);
 }
 
 form .requis {
-    color: #c00;
+	color: #c00;
 }
 
 form .logout {
-  margin-top: 20px;
-  background: #07bf0e;
-  background-image: -webkit-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -moz-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -ms-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: -o-linear-gradient(top, #07bf0e, ##07bf0e);
-  background-image: linear-gradient(to bottom, #07bf0e, ##07bf0e);
-  -webkit-border-radius: 13;
-  -moz-border-radius: 13;
-  border-radius: 13px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 13px;
-  padding: 6px 13px 6px 13px;
-  text-decoration: none;
+	margin-top: 20px;
+	background: #07bf0e;
+	background-image: -webkit-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -moz-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -ms-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: -o-linear-gradient(top, #07bf0e, # #07bf0e);
+	background-image: linear-gradient(to bottom, #07bf0e, # #07bf0e);
+	-webkit-border-radius: 13;
+	-moz-border-radius: 13;
+	border-radius: 13px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	padding: 6px 13px 6px 13px;
+	text-decoration: none;
 }
 
 form .logout:hover {
-  background: #00c455;
-  background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
-  background-image: -moz-linear-gradient(top, #00c455, #0dff00);
-  background-image: -ms-linear-gradient(top, #00c455, #0dff00);
-  background-image: -o-linear-gradient(top, #00c455, #0dff00);
-  background-image: linear-gradient(to bottom, #00c455, #0dff00);
-  text-decoration: none;
-}
- 
-a.button:before,
-a.button:after {
-    content: '';
-    position: absolute;
-    left: -1px;
-    height: 25px;
-    width: 80px;
-    bottom: -1px;
-}
- 
-a.button:before { 
-    height: 23px;
-    bottom: -4px;
-    border-top: 0;
+	background: #00c455;
+	background-image: -webkit-linear-gradient(top, #00c455, #0dff00);
+	background-image: -moz-linear-gradient(top, #00c455, #0dff00);
+	background-image: -ms-linear-gradient(top, #00c455, #0dff00);
+	background-image: -o-linear-gradient(top, #00c455, #0dff00);
+	background-image: linear-gradient(to bottom, #00c455, #0dff00);
+	text-decoration: none;
 }
 
+a.button:before, a.button:after {
+	content: '';
+	position: absolute;
+	left: -1px;
+	height: 25px;
+	width: 80px;
+	bottom: -1px;
+}
+
+a.button:before {
+	height: 23px;
+	bottom: -4px;
+	border-top: 0;
+}
+
+p.showStatus {
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	color: red;
+}
 
 /* Table --------------------------------------------------------------------------------------- */
-
 table, th, td {
-   border: 1px solid black;
+	border: 1px solid black;
 }
 
 table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 td {
-    height: 5px;
-    vertical-align: center;
+	height: 5px;
+	vertical-align: center;
 }
 
 th, td {
-    padding: 5px;
-    text-align: left;
+	padding: 5px;
+	text-align: left;
 }
 
 td.DEP {
@@ -329,29 +318,28 @@ td.DAY {
 }
 
 /* MENU BAR --------------------------------------------------------------------------------------------------*/
-
 .menu {
-  	list-style-type: none;
-    margin: 0;
-    overflow: hidden;
-    background-color: #333;
-    padding: 0px ;
+	list-style-type: none;
+	margin: 0;
+	overflow: hidden;
+	background-color: #333;
+	padding: 0px;
 }
 
 .menu li {
-  float: left;
+	float: left;
 }
 
 .menu li a {
-  display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
-.menu li a:hover:not(.homeActive) {
-  background-color: #111;
+.menu li a:hover:not (.homeActive ) {
+	background-color: #111;
 }
 
 .homeActive {
@@ -359,7 +347,85 @@ td.DAY {
 }
 
 /* OTHERS ----------------------------------------------------------------------------*/
-
 .noBorder {
 	border: none;
+}
+
+/* CLOCK ---------------------------------------------------------------------------------*/
+.clock {
+	border-radius: 50%;
+	background: #fff url(http://imgh.us/ios_clock.svg) no-repeat center;
+	background-size: 88%;
+	height: 20em;
+	padding-bottom: 31%;
+	position: relative;
+	width: 20em;
+}
+
+.clock.simple:after {
+	background: #000;
+	border-radius: 50%;
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 5%;
+	height: 5%;
+	z-index: 10;
+}
+
+.minutes-container, .hours-container, .seconds-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hours {
+  background: #000;
+  height: 20%;
+  left: 48.75%;
+  position: absolute;
+  top: 30%;
+  transform-origin: 50% 100%;
+  width: 2.5%;
+}
+
+.minutes {
+  background: #000;
+  height: 40%;
+  left: 49%;
+  position: absolute;
+  top: 10%;
+  transform-origin: 50% 100%;
+  width: 2%;
+}
+
+.seconds {
+  background: #000;
+  height: 45%;
+  left: 49.5%;
+  position: absolute;
+  top: 14%;
+  transform-origin: 50% 80%;
+  width: 1%;
+  z-index: 8;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.hours-container {
+  animation: rotate 43200s infinite linear;
+}
+.minutes-container {
+  animation: rotate 3600s infinite linear;
+}
+.seconds-container {
+  animation: rotate 60s infinite linear;
 }
