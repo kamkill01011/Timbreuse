@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
@@ -123,7 +125,7 @@ public class DAOImplTeacher implements DAOTeacher {
 
 	@Override
 	public ArrayList<Student> listClass(String classe, DAOStudent daoStudent) throws DAOException {
-		ArrayList<Student> list = new ArrayList<Student>();
+		ArrayList<Student> students = new ArrayList<Student>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -134,14 +136,22 @@ public class DAOImplTeacher implements DAOTeacher {
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				String email = resultSet.getString("Email");
-				list.add(daoStudent.find(email.substring(0, email.indexOf("@"))));
+				students.add(daoStudent.find(email.substring(0, email.indexOf("@"))));
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
-		return list;
+		
+		Collections.sort(students, new Comparator<Student>() {
+	        @Override
+	        public int compare(Student Student1, Student Student2) {
+	            return  Student1.getLastname().compareTo(Student2.getLastname());
+	        }
+	    });
+		
+		return students;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class PopUpFromOptionPane {
     	String newTag = JOptionPane.showInputDialog(parent, "Nouveau Tag : ", oldTag);
     	if(newTag != null) {
         	if(daoStudent.findByTag(newTag) == null) {
-        		System.out.println(student.getFirstname() + " <= " + newTag);
+        		System.out.println(student.getLastname() + " <= " + newTag);
         		daoStudent.changeTag(student, newTag);
         	}
     	}
