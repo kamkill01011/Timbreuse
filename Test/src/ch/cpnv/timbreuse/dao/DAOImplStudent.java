@@ -238,6 +238,7 @@ public class DAOImplStudent implements DAOStudent {
 		}
 	}
 	
+	@Override
 	public void changeTag(Student student, String newTag) throws DAOException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
