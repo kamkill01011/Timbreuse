@@ -14,7 +14,7 @@ import static ch.cpnv.timbreuse.mathTime.Date.stringToDate;
 public class Student {
 
     private Long		id;//ID
-    private String		email,lastname,firstname,classe,status;//e-mail, nom, prénom, classe, status (ARR, DEP, MED, ...)
+    private String		email,lastname,firstname,classe,status,tag;//e-mail, nom, prénom, classe, status (ARR, DEP, MED, ...), ID du tag assigné
     private Date		lastCheckDate,startDate;//date du dernier timbrage, date de début de la foration MCT
     private int			lastCheckTime,timeDiff,todayTime,monday,tuesday,wednesday,thursday,friday,saturday,sunday;//heure du dernier timbrage, différence de temps, heures effectuées aujourd'hui, heures à effectuer (pour chaque jour)
     
@@ -125,5 +125,11 @@ public class Student {
 	}
 	public void setSunday(int sunday) {
 		this.sunday = sunday;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 }

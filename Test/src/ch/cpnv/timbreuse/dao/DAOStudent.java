@@ -35,17 +35,22 @@ public interface DAOStudent {
     void delete(Student student) throws DAOException;
 
     /**
-     * @param id de l'élève en base de données
-     * @param addedTime, nouveau temps à ajouter
+     * @param student L'élève à modifier
+     * @param addedTime nouveau temps à ajouter
      */
-   // void addTimeStudent(int id, Time addedTime) throws DAOException;// Pourquoi pas dans linterface ?
-    
-    
+	void addTimeStudent(Student student, int addedTime) throws DAOException;// Pourquoi pas dans linterface ?
+
     /**
      * Modifie la colonne statut. (DEP => ARR, ARR => DEP)
      * @param student eleve concerné
      */
     void changeStatus(Student student, String newStatus) throws DAOException;
+    
+    /**
+     * Modifie la l'ID du tag de l'élève
+     * @param student eleve concerné
+     */
+    void changeTag(Student student, String newTag) throws DAOException;
 
 	ArrayList<Student>getNotCheckedOutStudents();
 

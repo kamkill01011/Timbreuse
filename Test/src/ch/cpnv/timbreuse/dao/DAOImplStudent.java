@@ -29,6 +29,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SELECT_STUDENT_BY_TAG = "SELECT * FROM eleves WHERE Tag=?";
 	private static final String SQL_ADD_TIME_STUDENTS = "UPDATE eleves SET TimeDiff=? WHERE id=?";
+	private static final String SQL_CHANGE_TAG_STUDENTS = "UPDATE eleves SET Tag=? WHERE id=?";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "SELECT * FROM eleves WHERE id=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=? WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_UPDATE_LASTCHECK_STATUS_STUDENT_DEP = "UPDATE eleves SET Status=?, LastCheckDate=?, LastCheckTime=?, TimeDiff=?, TodayTime=? WHERE Firstname=? AND Lastname=?";
@@ -190,6 +191,7 @@ public class DAOImplStudent implements DAOStudent {
 		student.setSaturday(resultSet.getInt("Saturday"));
 		student.setSunday(resultSet.getInt("Sunday"));
 		student.setEmail(resultSet.getString("Email"));
+		student.setTag(resultSet.getString("Tag"));
 		return student;
 	}
 
@@ -233,6 +235,22 @@ public class DAOImplStudent implements DAOStudent {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(autoGenValue, preparedStatement, connection);
+		}
+	}
+	
+	public void changeTag(Student student, String newTag) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet autoGenValue = null;
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_CHANGE_TAG_STUDENTS, false, newTag, student.getId());
+			preparedStatement.executeUpdate();
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(autoGenValue, preparedStatement, connection);
+
 		}
 	}
 	

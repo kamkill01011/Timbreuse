@@ -37,7 +37,7 @@ public class CustomConsole {
 		PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
 		System.setOut(printStream);
 		System.setErr(printStream);
-		JFrame frame = new JFrame("\"Console\"");
+		JFrame frame = new JFrame("Console");
 		JScrollPane sp = new JScrollPane(textArea);
 		
 		textArea.addKeyListener(new CustomKeyListener());
