@@ -96,23 +96,20 @@ public class ManageStudents extends HttpServlet{
 			for (int i = 0; i < studentsInClass.size(); i++) {
 				if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
 					selectedStudent = studentsInClass.get(i);
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-					PopUpFromOptionPane pfop = new PopUpFromOptionPane();
-					pfop.changeStudentTagPopUp(daoStudent, selectedStudent);
-					////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					break;//quitter la boucle car on affiche que les logs d'un seul élève
-				}else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+				} else if(request.getParameter("tags" + studentsInClass.get(i).getId()) != null) {
+					PopUpFromOptionPane pfop = new PopUpFromOptionPane();
+					pfop.changeStudentTagPopUp(daoStudent, studentsInClass.get(i));
+				} else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 					if(request.getParameter("addTime") != null) {
 						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
 						daoLog.addTimeLog(student, addTimeForm.getTimeDiffField(request));
-					}
-					if(request.getParameter("newStatus") != null) {
+					} else if(request.getParameter("newStatus") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						checkoutStudent(student, daoStudent, daoLog);
-					}
-					if(request.getParameter("sickDay") != null) {
+					} else if(request.getParameter("sickDay") != null) {
 						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
 						((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
 					}

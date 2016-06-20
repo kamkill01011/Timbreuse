@@ -51,6 +51,7 @@
 									<th>Dernier timbrage</th>
 									<th>E-mail</th>
 									<th>Logs</th>
+									<th>Tags</th>
 								</tr>
 								<c:forEach items="${studentsInClass}" var="i">
 									<tr>
@@ -62,6 +63,7 @@
 										<td>${i.lastCheckDate} / ${i.lastCheckTime}</td>
 										<td>${i.email}</td>
 										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" class="sansLabelNoSpace" /></td>
+										<td><input type="submit" id="tags${i.id}" name="tags${i.id}" value="Changer le tag" class="sansLabelNoSpace" /></td>
 									</tr>
 								</c:forEach>
 							</table>
