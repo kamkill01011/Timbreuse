@@ -10,9 +10,6 @@
 
     <body>
     <h1 class="pageTitle">Informations Personnelles</h1>
-    <form method="post" action="info">
-    	<input type="submit" name="newStatus" value="Timbrer" class="timbrage" />
-    </form>
     <fieldset>
 		<legend>${currentStudent.lastname} ${currentStudent.firstname}</legend>
 		<p>Différence : ${currentStudent.timeDiff}</p>

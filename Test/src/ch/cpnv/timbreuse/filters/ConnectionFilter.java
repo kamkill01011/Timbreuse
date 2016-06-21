@@ -24,6 +24,7 @@ public class ConnectionFilter implements Filter {
 	public static final String VIEW_STUDENT = "/info";
 	public static final String VIEW_TEACHER = "/managestudents";
 	public static final String VIEW_ADMIN = "/admin";
+	public static final String VIEW_DISPLAY = "/showDisplay";
     public static final String ATT_SESSION_USER = "userSession";
 
 	@Override
@@ -40,6 +41,9 @@ public class ConnectionFilter implements Filter {
         if(session.getAttribute(ATT_SESSION_USER) != null) {
         	User user = (User) session.getAttribute(ATT_SESSION_USER);
         	switch (user.getPermissionLevel()) {
+        	case 4:
+        		response.sendRedirect(request.getContextPath() + VIEW_DISPLAY);
+        		break;
 			case 3:
         		response.sendRedirect(request.getContextPath() + VIEW_STUDENT);
 				break;

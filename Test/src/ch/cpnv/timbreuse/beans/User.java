@@ -13,7 +13,7 @@ public class User {
 
     private Long		id;//ID
     private String		lastname,firstname,password,username;//nom, prénom, mot de passe, nom d'utilistateur
-    private int 		permissionLevel;//niveau de permission : 1 = admin, 2 = enseignant, 3 = élève
+    private int 		permissionLevel;//niveau de permission : 1 = admin, 2 = enseignant, 3 = élève, 4 = affichage écran info timbreuse
     
     public Long getId() {
         return id;

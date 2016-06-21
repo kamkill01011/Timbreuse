@@ -2,8 +2,10 @@ package ch.cpnv.timbreuse.gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.io.PrintStream;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,7 +26,7 @@ public class CustomConsole {
 	private JTextArea textArea = new JTextArea(50, 10);
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
-	
+	HttpServletResponse response;
 	/**
 	 * Initialise la console
 	 */
@@ -64,6 +66,13 @@ public class CustomConsole {
 				}
 				String lastLine = textArea.getText().substring(start, end);
 				checkoutStudent(lastLine, daoStudent, daoLog);
+				try {
+					response.sendRedirect("/Timbreuse/logout");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		}
 
