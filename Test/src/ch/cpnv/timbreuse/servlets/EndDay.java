@@ -31,7 +31,7 @@ public class EndDay extends HttpServlet {
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoLog 	= ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
 		this.daoHolyday = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoHolyday();
-		cc.init(daoStudent, daoLog);//strart a console for System.out and System.err
+		cc.init();//strart a console for System.out and System.err
 		eod = new EndOfDay(daoStudent, daoLog, daoHolyday);
 		eod.init();
 	}
