@@ -47,7 +47,6 @@ public class Display extends HttpServlet {
 			request.setAttribute("taggedStudent", new Student());
 		}
 		finally {
-			System.out.println(tag);
 			if(tag == null) {
 				this.getServletContext().getRequestDispatcher(WELCOME_VIEW).forward(request, response);
 			} else {

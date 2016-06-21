@@ -12,8 +12,7 @@
 	<p class="showStatus" style="color:#31B404">BONJOUR</p>
 	<form method="get" action="display">
 		<div class="center">
-			<input type="password" autofocus name="tagText" class="tagText"
-				size="8" maxlength="11" />
+			<input type="password" autofocus name="tagText" class="tagText" size="8" maxlength="11" />
 		</div>
 	</form>
 </body>

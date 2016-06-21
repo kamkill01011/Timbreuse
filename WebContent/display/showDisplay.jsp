@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" http-equiv="refresh" content="5;display"/>
+<meta charset="utf-8" http-equiv="refresh" content="5;display" />
 <title>Connexion</title>
 <link type="text/css" rel="stylesheet" href="form.css" />
 </head>
@@ -11,10 +11,10 @@
 	<h1 class="pageTitle">Timbreuse</h1>
 	<c:choose>
 		<c:when test="${taggedStudent.status=='DEP'}">
-			<p class="showStatus" style="color:#FF0000">DEPART</p>
+			<p class="showStatus" style="color: #FF0000">DEPART</p>
 		</c:when>
 		<c:when test="${taggedStudent.status=='ARR'}">
-			<p class="showStatus" style="color:#31B404">ARRIVEE</p>
+			<p class="showStatus" style="color: #31B404">ARRIVEE</p>
 		</c:when>
 		<c:otherwise>
 			<p class="showStatus">ERREUR</p>
@@ -22,16 +22,27 @@
 	</c:choose>
 	<form method="get" action="display">
 		<div class="center">
-			<input type="password" autofocus name="tagText" class="tagText"
-				size="8" maxlength="11" />
+			<input type="password" autofocus name="tagText" class="tagText" size="8" maxlength="11" />
 		</div>
 	</form>
-	<fieldset>
-		<legend></legend>
-		<p>Prénom: ${taggedStudent.firstname}</p>
-		<p>Nom: ${taggedStudent.lastname}</p>
-		<p>Différence: ${taggedStudent.timeDiff}</p>
-	</fieldset>
+	<c:choose>
+		<c:when test="${taggedStudent.status=='DEP'}">
+			<fieldset>
+				<legend></legend>
+				<p>Prénom: ${taggedStudent.firstname}</p>
+				<p>Nom: ${taggedStudent.lastname}</p>
+				<p>Différence: ${taggedStudent.timeDiff}</p>
+			</fieldset>
+		</c:when>
+		<c:when test="${taggedStudent.status=='ARR'}">
+			<fieldset>
+				<legend></legend>
+				<p>Prénom: ${taggedStudent.firstname}</p>
+				<p>Nom: ${taggedStudent.lastname}</p>
+				<p>Différence: ${taggedStudent.timeDiff}</p>
+			</fieldset>
+		</c:when>
+	</c:choose>
 </body>
 </html>
 <%@include file="/WEB-INF/footer.jsp"%>
