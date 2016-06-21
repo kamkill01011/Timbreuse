@@ -17,7 +17,7 @@
 			<p class="showStatus" style="color:#31B404">ARRIVEE</p>
 		</c:when>
 		<c:when test="${taggedStudent.status=='INI'}">
-			<p class="showStatus" style="color:#31B404">BONJOUR</p>
+			<p class="showStatus" style="color:#0000FF">BONJOUR</p>
 		</c:when>
 		<c:otherwise>
 			<p class="showStatus">ERREUR</p>
