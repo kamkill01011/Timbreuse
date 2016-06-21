@@ -39,6 +39,7 @@ public class showDisplay extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(-1);
 		Student student = new Student();
 		student.setStatus("INI");
 		request.setAttribute("taggedStudent", student);
@@ -48,6 +49,7 @@ public class showDisplay extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(-1);
 		String tag = request.getParameter("tagText");
 		try {
 			checkoutStudent(tag, daoStudent, daoLog);
@@ -58,6 +60,7 @@ public class showDisplay extends HttpServlet {
 		}
 		finally {
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+			
 		}
 	}
 }
