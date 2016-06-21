@@ -13,7 +13,6 @@ import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.dao.DAOFactory;
 import ch.cpnv.timbreuse.dao.DAOLog;
 import ch.cpnv.timbreuse.dao.DAOStudent;
-import ch.cpnv.timbreuse.dao.DAOUser;
 
 import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
 /**
@@ -21,33 +20,22 @@ import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
  * @author Mathieu.JEE Kamil.AMRANI
  *
  */
-@WebServlet("/showDisplay")
-public class showDisplay extends HttpServlet {
-	public static final String VIEW = "/display/showDisplay.jsp";
+@WebServlet("/display")
+public class Display extends HttpServlet {
+	public static final String WELCOME_VIEW = "/display/welcomeDisplay.jsp";
+	public static final String SHOW_VIEW = "/display/showDisplay.jsp";
 	public static final String USER_SESSION_ATT ="userSession";
-	private DAOUser daoUser;
 	private DAOStudent daoStudent;
 	private DAOLog daoLog;
 
 	@Override
 	public void init() {
-		this.daoUser = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoUser();
 		this.daoStudent = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoStudent();
 		this.daoLog = ((DAOFactory) getServletContext().getAttribute("daofactory")).getDaoLog();
 	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(-1);
-		Student student = new Student();
-		student.setStatus("INI");
-		request.setAttribute("taggedStudent", student);
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-	}
-
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(-1);
 		String tag = request.getParameter("tagText");
@@ -59,9 +47,23 @@ public class showDisplay extends HttpServlet {
 			request.setAttribute("taggedStudent", new Student());
 		}
 		finally {
-			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-			
+			System.out.println(tag);
+			if(tag == null) {
+				this.getServletContext().getRequestDispatcher(WELCOME_VIEW).forward(request, response);
+			} else {
+				this.getServletContext().getRequestDispatcher(SHOW_VIEW).forward(request, response);
+			}
 		}
+	}
+
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(-1);
+		Student student = new Student();
+		student.setStatus("INI");
+		request.setAttribute("taggedStudent", student);
+		this.getServletContext().getRequestDispatcher(SHOW_VIEW).forward(request, response);
 	}
 }
 

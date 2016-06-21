@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8" http-equiv="refresh" content="5;display"/>
 <title>Connexion</title>
 <link type="text/css" rel="stylesheet" href="form.css" />
 </head>
@@ -16,25 +16,22 @@
 		<c:when test="${taggedStudent.status=='ARR'}">
 			<p class="showStatus" style="color:#31B404">ARRIVEE</p>
 		</c:when>
-		<c:when test="${taggedStudent.status=='INI'}">
-			<p class="showStatus" style="color:#31B404">BONJOUR</p>
-		</c:when>
 		<c:otherwise>
 			<p class="showStatus">ERREUR</p>
 		</c:otherwise>
 	</c:choose>
+	<form method="get" action="display">
+		<div class="center">
+			<input type="password" autofocus name="tagText" class="tagText"
+				size="8" maxlength="11" />
+		</div>
+	</form>
 	<fieldset>
 		<legend></legend>
 		<p>Prénom: ${taggedStudent.firstname}</p>
 		<p>Nom: ${taggedStudent.lastname}</p>
 		<p>Différence: ${taggedStudent.timeDiff}</p>
 	</fieldset>
-	<form method="post" action="showDisplay">
-		<div class="center">
-			<input type="password" autofocus name="tagText" class="tagText"
-				size="8" maxlength="11" />
-		</div>
-	</form>
 </body>
 </html>
 <%@include file="/WEB-INF/footer.jsp"%>

@@ -24,7 +24,7 @@ public class ConnectionFilter implements Filter {
 	public static final String VIEW_STUDENT = "/info";
 	public static final String VIEW_TEACHER = "/managestudents";
 	public static final String VIEW_ADMIN = "/admin";
-	public static final String VIEW_DISPLAY = "/showDisplay";
+	public static final String VIEW_DISPLAY = "/display";
     public static final String ATT_SESSION_USER = "userSession";
 
 	@Override
