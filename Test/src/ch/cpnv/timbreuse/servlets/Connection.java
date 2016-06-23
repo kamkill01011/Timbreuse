@@ -28,6 +28,7 @@ public class Connection extends HttpServlet {
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
 	public static final String USER_SESSION_ATT ="userSession";
+	public static final String VIEW_ERR = "/error";
 	private DAOUser daoUser;
 
 	@Override
@@ -42,19 +43,22 @@ public class Connection extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ConnectionForm connectionForm = new ConnectionForm(daoUser);
-		User user = connectionForm.connectUser(request);
-		HttpSession session = request.getSession();	
-		request.setAttribute(FORM_ATT, connectionForm);
+		try {
+			ConnectionForm connectionForm = new ConnectionForm(daoUser);
+			User user = connectionForm.connectUser(request);
+			HttpSession session = request.getSession();	
+			request.setAttribute(FORM_ATT, connectionForm);
 
-		if(connectionForm.getErrors().isEmpty()) {
-			System.out.println(user.getUsername() + " connecting");
-			session.setAttribute(USER_SESSION_ATT, user);
-			response.sendRedirect(request.getContextPath() + CONNECTING);
-		} else {
-			session.setAttribute(USER_SESSION_ATT, null);
-			this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+			if(connectionForm.getErrors().isEmpty()) {
+				System.out.println(user.getUsername() + " connecting");
+				session.setAttribute(USER_SESSION_ATT, user);
+				response.sendRedirect(request.getContextPath() + CONNECTING);
+			} else {
+				session.setAttribute(USER_SESSION_ATT, null);
+				this.getServletContext().getRequestDispatcher(VIEW_CONNECTION).forward(request, response);
+			}
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}
-
 	}
 }

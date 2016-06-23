@@ -29,6 +29,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 @WebServlet("/admin")
 public class AdminPanel extends HttpServlet {
 	public static final String VIEW = "/admin/adminPanel.jsp";
+	public static final String VIEW_ERR = "/error";
 	private DAOUser daoAdmin;
 	private DAOUser daoUser;
 	private DAOTeacher daoTeacher;
@@ -50,36 +51,40 @@ public class AdminPanel extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("addTeacher") != null) {
-			CreateTeacherForm createForm = new CreateTeacherForm();
-			if(daoTeacher.findTeacher(generateEmail(createForm.getTeacher(request).getFirstname(), createForm.getTeacher(request).getLastname())) == null) {
-			daoTeacher.createTeacher(createForm.getTeacher(request));
+		try {
+			if(request.getParameter("addTeacher") != null) {
+				CreateTeacherForm createForm = new CreateTeacherForm();
+				if(daoTeacher.findTeacher(generateEmail(createForm.getTeacher(request).getFirstname(), createForm.getTeacher(request).getLastname())) == null) {
+					daoTeacher.createTeacher(createForm.getTeacher(request));
+				}
 			}
-		}
-		
-		if(request.getParameter("deleteTeacher") != null) {
-			DeleteTeacherForm deleteForm = new DeleteTeacherForm();
-			daoTeacher.deleteTeacher(deleteForm.selectTeacherToDelete(request));
-		}
-		for (int i = 0; i < teachers.size(); i++) {
-			if(request.getParameter("" + teachers.get(i).getId()) != null) {
-				daoTeacher.setNewClasses(teachers.get(i), request.getParameter("classes"));
-				break;
-			}
-		}
-		
-		if(request.getParameter("addAdmin") != null) {
-			CreateAdminForm createForm = new CreateAdminForm();
-			daoAdmin.create(createForm.getAdmin(request));
-		}
-		
-		if(request.getParameter("deleteAdmin") != null) {
-			DeleteAdminForm deleteForm = new DeleteAdminForm();
-			daoAdmin.delete(deleteForm.selectAdminToDelet(request));
-		}
 
-		teachers = ((DAOImplUser)daoUser).listTeachers(daoTeacher);
-		request.setAttribute("teachers", teachers);
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+			if(request.getParameter("deleteTeacher") != null) {
+				DeleteTeacherForm deleteForm = new DeleteTeacherForm();
+				daoTeacher.deleteTeacher(deleteForm.selectTeacherToDelete(request));
+			}
+			for (int i = 0; i < teachers.size(); i++) {
+				if(request.getParameter("" + teachers.get(i).getId()) != null) {
+					daoTeacher.setNewClasses(teachers.get(i), request.getParameter("classes"));
+					break;
+				}
+			}
+
+			if(request.getParameter("addAdmin") != null) {
+				CreateAdminForm createForm = new CreateAdminForm();
+				daoAdmin.create(createForm.getAdmin(request));
+			}
+
+			if(request.getParameter("deleteAdmin") != null) {
+				DeleteAdminForm deleteForm = new DeleteAdminForm();
+				daoAdmin.delete(deleteForm.selectAdminToDelet(request));
+			}
+
+			teachers = ((DAOImplUser)daoUser).listTeachers(daoTeacher);
+			request.setAttribute("teachers", teachers);
+			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
+		}
 	}
 }

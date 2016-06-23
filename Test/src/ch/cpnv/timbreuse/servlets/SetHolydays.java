@@ -22,6 +22,7 @@ import ch.cpnv.timbreuse.forms.SetHolydaysForm;
 @WebServlet("/setholydays")
 public class SetHolydays extends HttpServlet {
 	public static final String VIEW_SETHOLYDAYS = "/teacher/setHolydays.jsp";
+	public static final String VIEW_ERR = "/error";
 	public static final String CONNECTING = "/connecting.jsp";
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
@@ -36,46 +37,50 @@ public class SetHolydays extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
-		
+
 		request.setAttribute("holydays", holydays);
 		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("addSingleHolydayButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm();
-			if(daoHolyday.isHolyday(holydaysForm.getSingleHolyday(request))==null) {
-				ArrayList<String> holyday = new ArrayList<String>();
-				holyday.add(holydaysForm.getSingleHolyday(request));
-				daoHolyday.addHolyday(holyday);
-			}
-		}
-		if(request.getParameter("addHolydayGapButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm();
-			ArrayList<String> holydaysListTemp = holydaysForm.getHolydaysGap(request);
-			ArrayList<String> holydaysListResult = new ArrayList<String>();
-			for (int i = 0; i < holydaysListTemp.size(); i++) {
-				if(daoHolyday.isHolyday(holydaysListTemp.get(i))==null) {
-					holydaysListResult.add(holydaysListTemp.get(i));
+		try {
+			if(request.getParameter("addSingleHolydayButton")!=null) {
+				SetHolydaysForm holydaysForm = new SetHolydaysForm();
+				if(daoHolyday.isHolyday(holydaysForm.getSingleHolyday(request))==null) {
+					ArrayList<String> holyday = new ArrayList<String>();
+					holyday.add(holydaysForm.getSingleHolyday(request));
+					daoHolyday.addHolyday(holyday);
 				}
 			}
-			daoHolyday.addHolyday(holydaysListResult);
+			if(request.getParameter("addHolydayGapButton")!=null) {
+				SetHolydaysForm holydaysForm = new SetHolydaysForm();
+				ArrayList<String> holydaysListTemp = holydaysForm.getHolydaysGap(request);
+				ArrayList<String> holydaysListResult = new ArrayList<String>();
+				for (int i = 0; i < holydaysListTemp.size(); i++) {
+					if(daoHolyday.isHolyday(holydaysListTemp.get(i))==null) {
+						holydaysListResult.add(holydaysListTemp.get(i));
+					}
+				}
+				daoHolyday.addHolyday(holydaysListResult);
+			}
+			if(request.getParameter("deleteSingleHolydayButton")!=null) {
+				SetHolydaysForm holydaysForm = new SetHolydaysForm();
+				ArrayList<String> holyday = new ArrayList<String>();
+				holyday.add(holydaysForm.getDelSingleHolyday(request));
+				daoHolyday.deleteHolyday(holyday);
+			}
+			if(request.getParameter("deleteHolydaysGapButton")!=null) {
+				SetHolydaysForm holydaysForm = new SetHolydaysForm();
+				ArrayList<String> holydays = holydaysForm.getDelHolydaysGap(request);
+				daoHolyday.deleteHolyday(holydays);
+			}
+
+			ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
+			request.setAttribute("holydays", holydays);
+			this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}
-		if(request.getParameter("deleteSingleHolydayButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm();
-			ArrayList<String> holyday = new ArrayList<String>();
-			holyday.add(holydaysForm.getDelSingleHolyday(request));
-			daoHolyday.deleteHolyday(holyday);
-		}
-		if(request.getParameter("deleteHolydaysGapButton")!=null) {
-			SetHolydaysForm holydaysForm = new SetHolydaysForm();
-			ArrayList<String> holydays = holydaysForm.getDelHolydaysGap(request);
-			daoHolyday.deleteHolyday(holydays);
-		}
-		
-		ArrayList<Holyday> holydays = daoHolyday.getAllHolydays();
-		request.setAttribute("holydays", holydays);
-		this.getServletContext().getRequestDispatcher(VIEW_SETHOLYDAYS).forward(request, response);
 	}
 }

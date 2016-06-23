@@ -67,94 +67,94 @@ public class ManageStudents extends HttpServlet{
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
 		request.setAttribute("currentTeacher", teacher);
-		
+
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-		HttpSession session = request.getSession();
-		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
-		//change la classe sélectionnle si elle a changée
-		String tempSelectedClasse = (String) request.getParameter("classe");
-		if(tempSelectedClasse != null) {
-			logs.clear();
-			selectedStudent = null;
-			selectedClasse = tempSelectedClasse;	
-		}
+			HttpSession session = request.getSession();
+			Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
+			//change la classe sélectionnle si elle a changée
+			String tempSelectedClasse = (String) request.getParameter("classe");
+			if(tempSelectedClasse != null) {
+				logs.clear();
+				selectedStudent = null;
+				selectedClasse = tempSelectedClasse;	
+			}
 
-		if(request.getParameter("listPassword") != null) {	
-			BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClasse+".txt"));
-			fileOut.write("".getBytes());
-			fileOut.close();
-		}
+			if(request.getParameter("listPassword") != null) {	
+				BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClasse+".txt"));
+				fileOut.write("".getBytes());
+				fileOut.close();
+			}
 
-		//recherche les élèves de la classe (si une classe est sélectionnée)
-		ArrayList<Student> studentsInClass = new ArrayList<Student>();
-		if(selectedClasse != null) {
-			studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
-			request.setAttribute("studentsInClass", studentsInClass);	
-			for (int i = 0; i < studentsInClass.size(); i++) {
-				if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
-					selectedStudent = studentsInClass.get(i);
-					break;//quitter la boucle car on affiche que les logs d'un seul élève
-				} else if(request.getParameter("tags" + studentsInClass.get(i).getId()) != null) {
-					PopUpFromOptionPane pfop = new PopUpFromOptionPane();
-					pfop.changeStudentTagPopUp(daoStudent, studentsInClass.get(i));
-				} else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
-					if(request.getParameter("addTime") != null) {
-						AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();
-						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
-						daoLog.addTimeLog(student, addTimeForm.getTimeDiffField(request));
-					} else if(request.getParameter("newStatus") != null) {
-						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						checkoutStudent(student, daoStudent, daoLog);
-					} else if(request.getParameter("sickDay") != null) {
-						Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
-						((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
+			//recherche les élèves de la classe (si une classe est sélectionnée)
+			ArrayList<Student> studentsInClass = new ArrayList<Student>();
+			if(selectedClasse != null) {
+				studentsInClass = daoTeacher.listClass(selectedClasse, daoStudent);
+				request.setAttribute("studentsInClass", studentsInClass);	
+				for (int i = 0; i < studentsInClass.size(); i++) {
+					if(request.getParameter("logs" + studentsInClass.get(i).getId()) != null) {
+						selectedStudent = studentsInClass.get(i);
+						break;//quitter la boucle car on affiche que les logs d'un seul élève
+					} else if(request.getParameter("tags" + studentsInClass.get(i).getId()) != null) {
+						PopUpFromOptionPane pfop = new PopUpFromOptionPane();
+						pfop.changeStudentTagPopUp(daoStudent, studentsInClass.get(i));
+					} else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
+						if(request.getParameter("addTime") != null) {
+							AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();
+							Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+							((DAOImplStudent)daoStudent).addTimeStudent(student, addTimeForm.getTimeDiffField(request));
+							daoLog.addTimeLog(student, addTimeForm.getTimeDiffField(request));
+						} else if(request.getParameter("newStatus") != null) {
+							Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+							checkoutStudent(student, daoStudent, daoLog);
+						} else if(request.getParameter("sickDay") != null) {
+							Student student = ((DAOImplStudent)daoStudent).findStudentById(studentsInClass.get(i).getId());
+							((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
+						}
 					}
+
 				}
 
-			}
-
-			if(request.getParameter("listPassword") != null) {
-				for (int j = 0; j < studentsInClass.size(); j++) {
-					User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
-					if(user != null) {
-						txtWriter.writeListPassword(user, selectedClasse);
-						String password = randomPassword();
-						MailTo.sendEmail(user, password);
-						daoUser.setNewPassword(user, password);
+				if(request.getParameter("listPassword") != null) {
+					for (int j = 0; j < studentsInClass.size(); j++) {
+						User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
+						if(user != null) {
+							txtWriter.writeListPassword(user, selectedClasse);
+							String password = randomPassword();
+							MailTo.sendEmail(user, password);
+							daoUser.setNewPassword(user, password);
+						}
 					}
+					this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
+					return;
 				}
-				this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
-				return;
 			}
-		}
 
-		if(request.getParameter("add")!=null) {
-			CreateStudentForm createForm = new CreateStudentForm();
-			if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
-				daoStudent.create(createForm.isStudent(request), daoTeacher);
+			if(request.getParameter("add")!=null) {
+				CreateStudentForm createForm = new CreateStudentForm();
+				if(daoStudent.find(generateUsername(createForm.isStudent(request).getFirstname(), createForm.isStudent(request).getLastname())) == null) {
+					daoStudent.create(createForm.isStudent(request), daoTeacher);
+				}
 			}
-		}
-		
-		if(request.getParameter("delete")!=null) {
-			DeleteStudentForm deleteForm = new DeleteStudentForm();
-			daoStudent.delete(deleteForm.selectStudentToDelete(request));
-		}
 
-		if(selectedStudent != null) logs = daoLog.getStudentLogs(selectedStudent);
+			if(request.getParameter("delete")!=null) {
+				DeleteStudentForm deleteForm = new DeleteStudentForm();
+				daoStudent.delete(deleteForm.selectStudentToDelete(request));
+			}
 
-		if(selectedClasse != null) request.setAttribute("studentsInClass", daoTeacher.listClass(selectedClasse, daoStudent));
+			if(selectedStudent != null) logs = daoLog.getStudentLogs(selectedStudent);
 
-		request.setAttribute("logs", logs);
-		request.setAttribute("currentTeacher", teacher);
-		request.setAttribute("selectedClasse", selectedClasse);
-		
-		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+			if(selectedClasse != null) request.setAttribute("studentsInClass", daoTeacher.listClass(selectedClasse, daoStudent));
+
+			request.setAttribute("logs", logs);
+			request.setAttribute("currentTeacher", teacher);
+			request.setAttribute("selectedClasse", selectedClasse);
+
+			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch(Exception e) {
 			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}

@@ -23,6 +23,7 @@ import ch.cpnv.timbreuse.forms.PasswordForgottenForm;
 @WebServlet("/passwordforgotten")
 public class PasswordForgotten extends HttpServlet {
 	public static final String VIEW_PASSWORDFORGOTTEN = "/WEB-INF/passwordForgotten.jsp";
+	public static final String VIEW_ERR = "/error";
 	private DAOUser daoUser;
 
 	@Override
@@ -37,13 +38,17 @@ public class PasswordForgotten extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PasswordForgottenForm passwordForgottenForm = new PasswordForgottenForm();
-		User user = daoUser.findUser(passwordForgottenForm.getUsernamePasswordForgotten(request));
-		if(passwordForgottenForm.getErrors().isEmpty()) {
-			String password = DAOUtility.randomPassword();
-			MailTo.sendEmail(user, password);
-			daoUser.setNewPassword(user, password);
+		try {
+			PasswordForgottenForm passwordForgottenForm = new PasswordForgottenForm();
+			User user = daoUser.findUser(passwordForgottenForm.getUsernamePasswordForgotten(request));
+			if(passwordForgottenForm.getErrors().isEmpty()) {
+				String password = DAOUtility.randomPassword();
+				MailTo.sendEmail(user, password);
+				daoUser.setNewPassword(user, password);
+			}
+			response.sendRedirect(request.getContextPath()+"/logout");
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}
-		response.sendRedirect(request.getContextPath()+"/logout");
 	}
 }

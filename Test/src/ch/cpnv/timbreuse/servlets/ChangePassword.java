@@ -25,6 +25,7 @@ public class ChangePassword extends HttpServlet {
 	public static final String USER_ATT = "user";
 	public static final String FORM_ATT = "form";
 	public static final String USER_SESSION_ATT ="userSession";
+	public static final String VIEW_ERR = "/error";
 	private DAOUser daoUser;
 
 	@Override
@@ -39,22 +40,26 @@ public class ChangePassword extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ChangePasssowordForm passwordForm = new ChangePasssowordForm();
-		HttpSession session = request.getSession();
-		User user = daoUser.findUser(((User)session.getAttribute("userSession")).getUsername());
 		try {
-			passwordForm.testChangePassword(request, user);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		request.setAttribute(FORM_ATT, passwordForm);
-		//change le mot de passe si les informations sont correctes
-		if(passwordForm.getErrors().isEmpty()) {
-			daoUser.setNewPassword(user, passwordForm.getNewPassword(request));
-			response.sendRedirect(request.getContextPath() + CONNECTING);
-		} else {
-			this.getServletContext().getRequestDispatcher(VIEW_CHANGEPASSWORD).forward(request, response);
+			ChangePasssowordForm passwordForm = new ChangePasssowordForm();
+			HttpSession session = request.getSession();
+			User user = daoUser.findUser(((User)session.getAttribute("userSession")).getUsername());
+			try {
+				passwordForm.testChangePassword(request, user);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.setAttribute(FORM_ATT, passwordForm);
+			//change le mot de passe si les informations sont correctes
+			if(passwordForm.getErrors().isEmpty()) {
+				daoUser.setNewPassword(user, passwordForm.getNewPassword(request));
+				response.sendRedirect(request.getContextPath() + CONNECTING);
+			} else {
+				this.getServletContext().getRequestDispatcher(VIEW_CHANGEPASSWORD).forward(request, response);
+			}
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}
 	}
 }
