@@ -29,7 +29,6 @@ import ch.cpnv.timbreuse.dao.DAOUser;
 import ch.cpnv.timbreuse.forms.AddTimeStudentsForm;
 import ch.cpnv.timbreuse.forms.CreateStudentForm;
 import ch.cpnv.timbreuse.forms.DeleteStudentForm;
-import ch.cpnv.timbreuse.gui.PopUpFromOptionPane;
 
 import static ch.cpnv.timbreuse.dao.DAOUtility.generateUsername;
 import static ch.cpnv.timbreuse.dao.DAOUtility.randomPassword;
@@ -100,8 +99,13 @@ public class ManageStudents extends HttpServlet{
 						selectedStudent = studentsInClass.get(i);
 						break;//quitter la boucle car on affiche que les logs d'un seul élève
 					} else if(request.getParameter("tags" + studentsInClass.get(i).getId()) != null) {
-						PopUpFromOptionPane pfop = new PopUpFromOptionPane();
-						pfop.changeStudentTagPopUp(daoStudent, studentsInClass.get(i));
+				    	String newTag = request.getParameter("newTag");
+				    	if(newTag != null) {
+				        	if(daoStudent.findByTag(newTag) == null) {
+				        		daoStudent.changeTag(studentsInClass.get(i), newTag);
+				        	}
+				    	}
+						System.out.println(request.getParameter("newTag"));
 					} else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 						if(request.getParameter("addTime") != null) {
 							AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();

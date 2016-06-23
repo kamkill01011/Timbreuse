@@ -63,12 +63,13 @@
 										<td>${i.lastCheckDate} / ${i.lastCheckTime}</td>
 										<td>${i.email}</td>
 										<td><input type="submit" id="logs${i.id}" name="logs${i.id}" value="Afficher les logs" class="sansLabelNoSpace" /></td>
-										<td><input type="submit" id="tags${i.id}" name="tags${i.id}" value="Changer le tag" class="sansLabelNoSpace" /></td>
+										<td><input type="submit" id="tags${i.id}" name="tags${i.id}" value="Changer le tag" class="sansLabelNoSpace" onClick='popup("${i.tag}")' /></td>
 									</tr>
 								</c:forEach>
 							</table>
 						</td>
 						<td>
+							<input type="hidden" id="newTag" name="newTag" />
 							<input type="text" name="modifyTimeDiff" placeholder="HH:MM:SS" size="32" maxlength="64" />
 							<input type="submit" name="addTime" value="Ajouter du temps" class="sansLabelNoSpace" />
 							<input type="submit" name="newStatus" value="Timbrer" class="sansLabelNoSpace" />
@@ -133,7 +134,7 @@
 			<input type="submit" name="delete" value="Supprimer" class="sansLabel" />
 		</form>
 	</fieldset>
-	<!--http://p2p.wrox.com/asp-forms/18230-how-put-check-all-checkbox.html-->
+	<!--function checkAll(form, cbox) => http://p2p.wrox.com/asp-forms/18230-how-put-check-all-checkbox.html-->
 	<script type='text/javascript'>
 		function checkAll(form, cbox) {
 			var ct;
@@ -144,6 +145,13 @@
 			for (var i = 1; i < form.length; i++) {
 				if (form[i].type == 'checkbox')
 					form[i].checked = cbox.checked;
+			}
+		}
+		
+		function popup(oldTag) {
+			var newTag = prompt("Nouveau Tag : ", oldTag);
+			if(newTag != null){
+				document.getElementById("newTag").value = newTag;
 			}
 		}
 	</script>

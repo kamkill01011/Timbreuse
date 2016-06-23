@@ -18,8 +18,8 @@ public interface DAOStudent {
     Student find(String username) throws DAOException;
 
     /**
-     * @param ID du tag de l'élève à trouver
-     * @return L'élève correspondant à l'adresse mail
+     * @param tag Tag de l'élève à trouver
+     * @return L'élève correspondant au tag
      */
     Student findByTag(String tag) throws DAOException;
     

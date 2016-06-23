@@ -252,7 +252,7 @@ public class DAOImplStudent implements DAOStudent {
 			throw new DAOException(e);
 		} finally {
 			closeObjects(autoGenValue, preparedStatement, connection);
-
+    		System.out.println(student.getLastname() + " <= " + newTag);
 		}
 	}
 	
