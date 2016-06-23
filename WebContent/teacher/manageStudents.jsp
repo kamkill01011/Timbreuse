@@ -72,8 +72,8 @@
 							<input type="text" name="modifyTimeDiff" placeholder="HH:MM:SS" size="32" maxlength="64" />
 							<input type="submit" name="addTime" value="Ajouter du temps" class="sansLabelNoSpace" />
 							<input type="submit" name="newStatus" value="Timbrer" class="sansLabelNoSpace" />
-							<input type="submit" name ="sickDay" value="Congé Maladie" class="sansLabelNoSpace" />
-							<input type="submit" name="listPassword" value="Liste Mot de Passe" class="sansLabelNoSpace" />
+							<input type="submit" name ="sickDay" value="Congé maladie" class="sansLabelNoSpace" />
+							<input type="submit" name="listPassword" value="Envoyer les mots de passe" class="sansLabelNoSpace" />
 							<br />
 						</td>
 					</tr>
