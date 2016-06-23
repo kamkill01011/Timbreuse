@@ -8,6 +8,6 @@
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
 <body>
-	<p>Une erreur est survenue</p>
+	<p>Une erreur est survenue, veuillez retourner à la page précédente</p>
 </body>
 </html>
