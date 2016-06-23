@@ -38,9 +38,25 @@ public interface DAOTeacher {
 	 * @return Liste de tous les élèves de la classe
 	 * @throws DAOException ???
 	 */
+	/**
+	 * @param classe La classe voulu
+	 * @param daoStudent Le DAO pour accéder à la table élèves
+	 * @return Une liste de tous les élèves de la classe
+	 * @throws DAOException ???
+	 */
 	ArrayList<Student> listClass(String classe, DAOStudent daoStudent) throws DAOException;
 
+	/**
+	 * @param Teacher L'enseignant
+	 * @param newClasses Toutes les classe de l'enseignant
+	 */
 	void setNewClasses(Teacher Teacher, String newClasses);
 
+	/**
+	 * @param classe La classe
+	 * @param daoStudent Le DAO pour accéder à la table élèves
+	 * @return Un tableau avec le nom de la classe puis l'horaire de chaque jour
+	 * @throws DAOException ???
+	 */
 	String[] getClasseTimeTable(String classe, DAOStudent daoStudent) throws DAOException;
 }

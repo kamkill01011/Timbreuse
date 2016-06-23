@@ -52,12 +52,26 @@ public interface DAOStudent {
      */
     void changeTag(Student student, String newTag) throws DAOException;
 
+	/**
+	 * @return Une liste de tous les élèves
+	 */
 	ArrayList<Student>getNotCheckedOutStudents();
 
+	/**
+	 * @param student L'élève
+	 */
 	void resetTodayTime(Student student);
 
+	/**
+	 * @param student L'élève
+	 * @return Nombre d'heures que l'élève doit effectuer
+	 */
 	int setTimeDiff(Student student);
 
+	/**
+	 * @param newTImeTable Nouvel horaire 
+	 * @param student L'élève
+	 */
 	void changeTimeTables(int[] newTImeTable, Student student);
 
 }

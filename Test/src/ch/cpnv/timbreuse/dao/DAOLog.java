@@ -21,9 +21,21 @@ public interface DAOLog {
 	 */
 	String getNewStatus(Student student) throws DAOException;
 
+	/**
+	 * @param student L'élève
+	 * @return Tout les logs de l'élève
+	 */
 	ArrayList<Log> getStudentLogs(Student student);
 
+	/**
+	 * @param student L'élève
+	 * @param time Temps à ajouter
+	 */
 	void addTimeLog(Student student, int time);
 
+	/**
+	 * @param student L'élève
+	 * @param SubTime Nombre d'heures que l'élève doit effectuer et qui lui seront sourtraies
+	 */
 	void endDayLog(Student student, String SubTime);
 }
