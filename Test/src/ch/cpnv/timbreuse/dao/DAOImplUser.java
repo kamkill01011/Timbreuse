@@ -20,7 +20,7 @@ public class DAOImplUser implements DAOUser {
 	private static final String SQL_SELECT_USER_CONNECTION = "SELECT * FROM users WHERE Username=?";
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
-	private static final String SQL_SELECT_LIST_PASSWORD_BY_CLASS = "SELECT * FROM users WHERE Firstname=? AND Lastname=? AND CHAR_LENGTH(Password) < 9";
+	private static final String SQL_SELECT_LIST_PASSWORD_BY_CLASS = "SELECT * FROM users WHERE Firstname=? AND Lastname=? AND CHAR_LENGTH(Password) < 8";
 	private static final String SQL_LIST_TEACHERS = "SELECT * FROM profs";
 	
 	private DAOFactory daoFactory;

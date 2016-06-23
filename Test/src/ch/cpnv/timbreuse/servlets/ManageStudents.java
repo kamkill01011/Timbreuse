@@ -43,6 +43,7 @@ import static ch.cpnv.timbreuse.automation.Automation.checkoutStudent;
 @WebServlet("/managestudents")
 public class ManageStudents extends HttpServlet{
 	public static final String VIEW = "/teacher/manageStudents.jsp";
+	public static final String VIEW_ERR = "/error";
 	public static final String USER_SESSION_ATT ="userSession";
 	private DAOStudent daoStudent;
 	private DAOTeacher daoTeacher;
@@ -72,6 +73,7 @@ public class ManageStudents extends HttpServlet{
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		HttpSession session = request.getSession();
 		Teacher teacher = daoTeacher.findTeacher(((User)(session.getAttribute(USER_SESSION_ATT))).getUsername());
 		//change la classe sélectionnle si elle a changée
@@ -151,7 +153,10 @@ public class ManageStudents extends HttpServlet{
 		request.setAttribute("logs", logs);
 		request.setAttribute("currentTeacher", teacher);
 		request.setAttribute("selectedClasse", selectedClasse);
-
+		
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+		} catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + VIEW_ERR);
+		}
 	}
 }

@@ -144,6 +144,7 @@ public class DAOImplTeacher implements DAOTeacher {
 			closeObjects(resultSet, preparedStatement, connection);
 		}
 		
+		//Ordre les élèves dans l'ordre alphabetique 
 		Collections.sort(students, new Comparator<Student>() {
 	        @Override
 	        public int compare(Student Student1, Student Student2) {

@@ -45,9 +45,11 @@ public class ChangePasssowordForm {
 		if(!(currentPassword.equals(user.getPassword()))) {
 			setError(CURRENT_PWD_FIELD, "Mot de passe actuel erroné.");
 			return false;
-		}
-		else if(!testNewPassword(request)) {
+		} else if(!testNewPassword(request)) {
 			setError(NEW_PWD_CONFIRM_FIELD, "Confirmation du nouveau mot de passe échouée.");
+			return false;
+		} else if(getFieldValue(request, NEW_PWD_FIELD).length() < 8) {
+			setError(NEW_PWD_FIELD, "Le nouveau mot de passe est trop court.");
 			return false;
 		}
 		return true;
