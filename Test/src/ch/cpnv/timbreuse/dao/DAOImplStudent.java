@@ -39,6 +39,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_SET_TIMEDIFF = "UPDATE eleves SET TimeDiff=? WHERE id=?";
 	private static final String SQL_SET_TIME_TABLE = "UPDATE eleves SET Monday=?,Tuesday=?, Wednesday=?, Thursday=?, Friday=?, Saturday=?, Sunday=? WHERE id=?";
 
+	private static final int MAX_TIME_DIFF = SecondsPastMidnight.stringToInt("20:00:00");
 	private DAOFactory daoFactory;
 
 	public DAOImplStudent(DAOFactory daoFactory) {
@@ -201,7 +202,7 @@ public class DAOImplStudent implements DAOStudent {
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, addTime(addedTime, SecondsPastMidnight.stringToInt(student.getTimeDiff())), student.getId()); //getTImeDIff mod local time
+			preparedStatement = preparedRequestInitialisation(connection, SQL_ADD_TIME_STUDENTS, false, maxTimeDiff(addTime(addedTime, SecondsPastMidnight.stringToInt(student.getTimeDiff()))), student.getId()); //getTImeDIff mod local time
 			preparedStatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -322,7 +323,7 @@ public class DAOImplStudent implements DAOStudent {
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_TIMEDIFF, false, SecondsPastMidnight.stringToInt(student.getTimeDiff()) - getDayOfWeekTimetable(student), student.getId());
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_TIMEDIFF, false, maxTimeDiff(SecondsPastMidnight.stringToInt(student.getTimeDiff()) - getDayOfWeekTimetable(student)), student.getId());
 			preparedStatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -347,7 +348,8 @@ public class DAOImplStudent implements DAOStudent {
 			closeObjects(autoGenValue, preparedStatement, connection);
 		}
 	}
+	
+	public int maxTimeDiff(int newTime) {
+		return Math.min(MAX_TIME_DIFF, newTime);
+	}
 }
-
-
-
