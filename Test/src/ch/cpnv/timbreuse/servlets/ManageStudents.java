@@ -105,7 +105,6 @@ public class ManageStudents extends HttpServlet{
 				        		daoStudent.changeTag(studentsInClass.get(i), newTag);
 				        	}
 				    	}
-						System.out.println(request.getParameter("newTag"));
 					} else if(request.getParameter("id" + studentsInClass.get(i).getId()) != null) {
 						if(request.getParameter("addTime") != null) {
 							AddTimeStudentsForm addTimeForm = new AddTimeStudentsForm();
@@ -120,7 +119,6 @@ public class ManageStudents extends HttpServlet{
 							((DAOImplStudent)daoStudent).changeStatus(student, ((DAOImplLog)daoLog).setSicknessLeaveLog(student));
 						}
 					}
-
 				}
 
 				if(request.getParameter("listPassword") != null) {
