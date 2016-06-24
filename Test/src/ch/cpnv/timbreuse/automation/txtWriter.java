@@ -12,7 +12,6 @@ import ch.cpnv.timbreuse.beans.User;
  * @author Mathieu.JEE Kamil.AMRANI
  *
  */
-@Deprecated
 public class txtWriter {
 
 	private txtWriter() {
@@ -25,7 +24,7 @@ public class txtWriter {
 	public static void writeListPassword(User user, String selectedClass) {
 		BufferedOutputStream fileOut = null;
 		try {
-			fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClass+".txt", true));
+			fileOut = new BufferedOutputStream(new FileOutputStream("/files/"+selectedClass+".txt", true));
 			fileOut.write("\r\n".getBytes());
 			fileOut.write("Adresse: http://172.16.104.176:8080/Timbreuse/connection".getBytes());
 			fileOut.write("\r\n".getBytes());

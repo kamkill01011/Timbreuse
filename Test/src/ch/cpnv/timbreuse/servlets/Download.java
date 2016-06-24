@@ -24,14 +24,7 @@ public class Download extends HttpServlet {
 	public static final int BUFFER_SIZE = 10240;// 10ko
 
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		//Lecture du paramètre 'path' passé à  la servlet via la déclaration dans le web.xml
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {//Lecture du paramètre 'path' passé à  la servlet via la déclaration dans le web.xml
 		String path = this.getServletConfig().getInitParameter("path");
 		//Récupération du chemin du fichier demandé au sein de l'url de la requête
 		String requiredFile = request.getPathInfo();
@@ -88,5 +81,10 @@ public class Download extends HttpServlet {
 			output.close();
 			input.close();
 		}
+	}
+
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
 	}
 }

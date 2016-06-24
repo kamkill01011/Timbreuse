@@ -14,6 +14,7 @@ import static ch.cpnv.timbreuse.dao.DAOUtility.generateEmail;
 
 
 /**
+ * !!! NE FONCTIONNE PAS SUR LE RASPBERRY PI !!!
  * Envoie un mail avec un nouveau mot de passe avec le compte Outlook de la session du demandeur
  * @author Mathieu.JEE Kamil.AMRANI
  *

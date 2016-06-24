@@ -10,12 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.jasypt.util.text.BasicTextEncryptor;
+
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.User;
 
 public class DAOImplAdmin implements DAOUser {
 	private static final String SQL_INSERT_ADMIN = "INSERT INTO users(id,Username,Password,PermissionLevel,Firstname,Lastname) VALUES(default,?,?,1,?,?)";
 	private static final String SQL_DELETE_ADMIN = "DELETE FROM users WHERE Firstname=? AND Lastname=? AND PermissionLevel=1";
+	private static final String SQL_SET_NEW_PWD = "UPDATE users SET Password=? WHERE Username=?";
 	private DAOFactory daoFactory;
 	
 	public DAOImplAdmin(DAOFactory daoFactory) {
@@ -32,7 +35,7 @@ public class DAOImplAdmin implements DAOUser {
 		String lastname = user.getLastname();
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_ADMIN, true, generateUsername(firstname, lastname),randomPassword(),firstname,lastname);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_ADMIN, true, generateUsername(firstname, lastname),generateUsername(firstname, lastname),firstname,lastname);
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de la création de l'admin.");
@@ -76,7 +79,24 @@ public class DAOImplAdmin implements DAOUser {
 	}
 	
 	@Override
-	public void setNewPassword(User user, String newPassord) throws DAOException {
-		// TODO Auto-generated method stub	
+	public void setNewPassword(User user, String newPassword, boolean encrypt) throws DAOException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		BasicTextEncryptor cryptor = new BasicTextEncryptor();
+		cryptor.setPassword("MonGrainDeSel");
+		if(encrypt) newPassword = cryptor.encrypt(newPassword);
+		try {
+			connection = daoFactory.getConnection();
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, newPassword,user.getUsername());
+			int statut = preparedStatement.executeUpdate();
+			if(statut == 0) {
+				throw new DAOException("Echec du changement de mot de passe.");
+			}
+		} catch(SQLException e) {
+			throw new DAOException(e);
+		} finally {
+			closeObjects(resultSet, preparedStatement, connection);
+		}
 	}
 }

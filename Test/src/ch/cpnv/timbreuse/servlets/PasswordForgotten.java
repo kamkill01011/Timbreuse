@@ -43,8 +43,8 @@ public class PasswordForgotten extends HttpServlet {
 			User user = daoUser.findUser(passwordForgottenForm.getUsernamePasswordForgotten(request));
 			if(passwordForgottenForm.getErrors().isEmpty()) {
 				String password = DAOUtility.randomPassword();
-				MailTo.sendEmail(user, password);
-				daoUser.setNewPassword(user, password);
+				//MailTo.sendEmail(user, password);
+				daoUser.setNewPassword(user, password, false);
 			}
 			response.sendRedirect(request.getContextPath()+"/logout");
 		} catch(Exception e) {

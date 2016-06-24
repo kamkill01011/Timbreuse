@@ -74,7 +74,7 @@
 							<input type="submit" name="addTime" value="Ajouter du temps" class="sansLabelNoSpace" />
 							<input type="submit" name="newStatus" value="Timbrer" class="sansLabelNoSpace" />
 							<input type="submit" name ="sickDay" value="Congé maladie" class="sansLabelNoSpace" />
-							<input type="submit" name="listPassword" value="Envoyer les mots de passe" class="sansLabelNoSpace" />
+							<input type="submit" name="listPassword" value="Liste mots de passe" class="sansLabelNoSpace" />
 							<br />
 						</td>
 					</tr>

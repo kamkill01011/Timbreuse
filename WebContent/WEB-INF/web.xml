@@ -55,6 +55,7 @@
     <filter-mapping>
         <filter-name>Teacher</filter-name>
         <url-pattern>/teacher/*</url-pattern>
+        <url-pattern>/files/*</url-pattern>
     	<dispatcher>REQUEST</dispatcher>
     	<dispatcher>FORWARD</dispatcher>
     </filter-mapping>

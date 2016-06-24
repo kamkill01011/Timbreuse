@@ -53,7 +53,7 @@ public class ChangePassword extends HttpServlet {
 			request.setAttribute(FORM_ATT, passwordForm);
 			//change le mot de passe si les informations sont correctes
 			if(passwordForm.getErrors().isEmpty()) {
-				daoUser.setNewPassword(user, passwordForm.getNewPassword(request));
+				daoUser.setNewPassword(user, passwordForm.getNewPassword(request), true);
 				response.sendRedirect(request.getContextPath() + CONNECTING);
 			} else {
 				this.getServletContext().getRequestDispatcher(VIEW_CHANGEPASSWORD).forward(request, response);

@@ -93,15 +93,16 @@ public class DAOImplUser implements DAOUser {
 	}
 
 	@Override
-	public void setNewPassword(User user, String newPassword) {
+	public void setNewPassword(User user, String newPassword, boolean encrypt) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		BasicTextEncryptor cryptor = new BasicTextEncryptor();
 		cryptor.setPassword("MonGrainDeSel");
+		if(encrypt) newPassword = cryptor.encrypt(newPassword);
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, cryptor.encrypt(newPassword),user.getUsername());
+			preparedStatement = preparedRequestInitialisation(connection, SQL_SET_NEW_PWD, false, newPassword,user.getUsername());
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec du changement de mot de passe.");

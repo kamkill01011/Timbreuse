@@ -45,7 +45,7 @@ public class DAOImplTeacher implements DAOTeacher {
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_TEACHER, true, firstname,lastname,teacher.getClasse(),generateEmail(firstname, lastname));
-			preparedStatement2 = preparedRequestInitialisation(connection, SQL_INSERT_USER, true, generateUsername(firstname,lastname),randomPassword(),firstname,lastname);
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_INSERT_USER, true, generateUsername(firstname,lastname),generateUsername(firstname,lastname),firstname,lastname);
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
 			if(statut == 0 || statut2 == 0) {

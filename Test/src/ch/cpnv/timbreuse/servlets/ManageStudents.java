@@ -126,12 +126,13 @@ public class ManageStudents extends HttpServlet{
 						User user = ((DAOImplUser)daoUser).getDefaultPassword(studentsInClass.get(j).getFirstname(), studentsInClass.get(j).getLastname());
 						if(user != null) {
 							txtWriter.writeListPassword(user, selectedClasse);
-							String password = randomPassword();
-							MailTo.sendEmail(user, password);
-							daoUser.setNewPassword(user, password);
+							//String password = randomPassword();
+							//MailTo.sendEmail(user, password);
+							//daoUser.setNewPassword(user, password, false);
 						}
 					}
-					this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/files/"+selectedClasse+".txt");
+					//this.getServletContext().getRequestDispatcher("/files/"+selectedClasse+".txt").forward(request, response);
 					return;
 				}
 			}
