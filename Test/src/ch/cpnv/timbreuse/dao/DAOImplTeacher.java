@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.jasypt.util.text.BasicTextEncryptor;
+
 import ch.cpnv.timbreuse.beans.Student;
 import ch.cpnv.timbreuse.beans.Teacher;
 
@@ -42,10 +44,14 @@ public class DAOImplTeacher implements DAOTeacher {
 		ResultSet autoGenValue = null;
 		String firstname = teacher.getFirstname();
 		String lastname = teacher.getLastname();
+		String username = generateUsername(firstname,lastname);
+		BasicTextEncryptor cryptor = new BasicTextEncryptor();
+		cryptor.setPassword("MonGrainDeSel");
+		String password = cryptor.encrypt(username);
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_TEACHER, true, firstname,lastname,teacher.getClasse(),generateEmail(firstname, lastname));
-			preparedStatement2 = preparedRequestInitialisation(connection, SQL_INSERT_USER, true, generateUsername(firstname,lastname),generateUsername(firstname,lastname),firstname,lastname);
+			preparedStatement2 = preparedRequestInitialisation(connection, SQL_INSERT_USER, true, username,password,firstname,lastname);
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
 			if(statut == 0 || statut2 == 0) {

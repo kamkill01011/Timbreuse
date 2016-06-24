@@ -33,9 +33,13 @@ public class DAOImplAdmin implements DAOUser {
 		ResultSet autoGenValue = null;
 		String firstname = user.getFirstname();
 		String lastname = user.getLastname();
+		String username = generateUsername(firstname,lastname);
+		BasicTextEncryptor cryptor = new BasicTextEncryptor();
+		cryptor.setPassword("MonGrainDeSel");
+		String password = cryptor.encrypt(username);
 		try {
 			connection = daoFactory.getConnection();
-			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_ADMIN, true, generateUsername(firstname, lastname),generateUsername(firstname, lastname),firstname,lastname);
+			preparedStatement = preparedRequestInitialisation(connection, SQL_INSERT_ADMIN, true, username,password,firstname,lastname);
 			int statut = preparedStatement.executeUpdate();
 			if(statut == 0) {
 				throw new DAOException("Echec de la création de l'admin.");
