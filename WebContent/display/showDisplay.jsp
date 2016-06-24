@@ -26,20 +26,10 @@
 		</div>
 	</form>
 	<c:choose>
-		<c:when test="${taggedStudent.status=='DEP'}">
+		<c:when test="${taggedStudent.status=='DEP' or taggedStudent.status=='ARR'}">
 			<fieldset>
-				<legend></legend>
-				<p>Prénom: ${taggedStudent.firstname}</p>
-				<p>Nom: ${taggedStudent.lastname}</p>
-				<p>Différence: ${taggedStudent.timeDiff}</p>
-			</fieldset>
-		</c:when>
-		<c:when test="${taggedStudent.status=='ARR'}">
-			<fieldset>
-				<legend></legend>
-				<p>Prénom: ${taggedStudent.firstname}</p>
-				<p>Nom: ${taggedStudent.lastname}</p>
-				<p>Différence: ${taggedStudent.timeDiff}</p>
+				<legend>${taggedStudent.firstname} ${taggedStudent.lastname}</legend>
+				<p class="showStatus">${taggedStudent.timeDiff}</p>
 			</fieldset>
 		</c:when>
 	</c:choose>

@@ -165,7 +165,8 @@ public class DAOImplStudent implements DAOStudent {
 			preparedStatement3 = preparedRequestInitialisation(connection, SQL_STUDENT_LOGS_CLEAR, false, generateUsername(student.getFirstname(), student.getLastname()));
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
-			if(statut == 0 || statut2 == 0) {
+			int statut3 = preparedStatement3.executeUpdate();
+			if(statut == 0 || statut2 == 0 || statut3 == 0) {
 				throw new DAOException("Echec de la suppression.");
 			}
 		} catch(SQLException e) {
