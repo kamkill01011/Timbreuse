@@ -83,11 +83,12 @@ public class ManageStudents extends HttpServlet{
 				selectedClasse = tempSelectedClasse;	
 			}
 
-			if(request.getParameter("listPassword") != null) {	
+			//PW from all DO NOT USE !
+			/*if(request.getParameter("listPassword") != null) {	
 				BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("P:/files/"+selectedClasse+".txt"));
 				fileOut.write("".getBytes());
 				fileOut.close();
-			}
+			}*/
 
 			//recherche les élèves de la classe (si une classe est sélectionnée)
 			ArrayList<Student> studentsInClass = new ArrayList<Student>();
@@ -159,6 +160,8 @@ public class ManageStudents extends HttpServlet{
 
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			response.sendRedirect(request.getContextPath() + VIEW_ERR);
 		}
 	}

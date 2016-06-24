@@ -39,8 +39,7 @@ public class Download extends HttpServlet {
 		//Décode le nom de fichier récupéré, au cas où il contient des caractères spéciaux ou espaces
 		requiredFile = URLDecoder.decode(requiredFile, "UTF-8");
 		//Prépare l'objet file
-		File file = new File(path, requiredFile);
-		//Vörifie que le fichier existe
+		File file = new File("/home/pi/Downloads/" + path, requiredFile);//Vörifie que le fichier existe
 		if (!file.exists()) {
 			// Si non, alors on envoie une erreur 404
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

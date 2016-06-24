@@ -25,6 +25,7 @@ public class DAOImplStudent implements DAOStudent {
 	private static final String SQL_STUDENT_INSERT = "INSERT INTO eleves(id,Class,Lastname,Firstname,TimeDiff,TodayTime,Status,LastCheckDate,LastCheckTime,StartDate,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Email) VALUES (default,?,?,?,'0','0',default,null,null,?,?,?,?,?,?,?,?,?)";
 	private static final String SQL_STUDENT_DELETE = "DELETE FROM eleves WHERE Firstname=? AND Lastname=?";
 	private static final String SQL_USER_DELETE = "DELETE FROM users WHERE Lastname=? AND Firstname=?";
+	private static final String SQL_STUDENT_LOGS_CLEAR = "DELETE FROM logs WHERE Username=?";
 	private static final String SQL_USER_INSERT = "INSERT INTO users(id,Username,Password,PermissionLevel,Lastname,Firstname) VALUES(default,?,?,3,?,?)"; //PermissionLevel: 1=Admin, 2=profs, 3=eleves
 	private static final String SQL_SELECT_STUDENT_BY_EMAIL = "SELECT * FROM eleves WHERE Email=?";
 	private static final String SQL_SELECT_STUDENT_BY_TAG = "SELECT * FROM eleves WHERE Tag=?";
@@ -155,11 +156,13 @@ public class DAOImplStudent implements DAOStudent {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
+		PreparedStatement preparedStatement3 = null;
 		ResultSet autoGenValue = null;
 		try {
 			connection = daoFactory.getConnection();
 			preparedStatement = preparedRequestInitialisation(connection, SQL_STUDENT_DELETE, false, student.getFirstname(), student.getLastname());
 			preparedStatement2 = preparedRequestInitialisation(connection, SQL_USER_DELETE, false, student.getLastname(),student.getFirstname());
+			preparedStatement3 = preparedRequestInitialisation(connection, SQL_STUDENT_LOGS_CLEAR, false, generateUsername(student.getFirstname(), student.getLastname()));
 			int statut = preparedStatement.executeUpdate();
 			int statut2 = preparedStatement2.executeUpdate();
 			if(statut == 0 || statut2 == 0) {
