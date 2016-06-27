@@ -124,7 +124,7 @@ public class ManageStudents extends HttpServlet{
 
 				if(request.getParameter("listPassword") != null) {
 					//Clear le fichier
-					BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("home/pi/Downloads" + "/files/"+selectedClasse+".txt"));
+					BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("/home/pi/Downloads" + "/files/"+selectedClasse+".txt"));
 					fileOut.write("".getBytes());
 					fileOut.close();
 					for (int j = 0; j < studentsInClass.size(); j++) {
