@@ -65,7 +65,7 @@ public class AdminPanel extends HttpServlet {
 			}
 			for (int i = 0; i < teachers.size(); i++) {
 				if(request.getParameter("" + teachers.get(i).getId()) != null) {
-					daoTeacher.setNewClasses(teachers.get(i), request.getParameter("classes"));
+					daoTeacher.setNewClasses(teachers.get(i), request.getParameter("classes" + teachers.get(i).getId()));
 					break;
 				}
 			}

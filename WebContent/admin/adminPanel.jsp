@@ -46,7 +46,7 @@
 						<td>${i.lastname}</td>
 						<td>${i.firstname}</td>
 						<td>${i.email}</td>
-						<td><input type="text" id="classes" name="classes" value="${i.classe}" placeholder="YE-S1a, YE-S1b, ..." size="32" maxlength="64" /></td>
+						<td><input type="text" id="classes${i.id}" name="classes${i.id}" value="${i.classe}" placeholder="YE-S1a, YE-S1b, ..." size="32" maxlength="64" /></td>
 						<td><input type="submit" id="${i.id}" name="${i.id}" value="Changer les classes" class="sansLabelNoSpace" /></td>
 					</tr>
 				</c:forEach>
