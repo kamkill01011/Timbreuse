@@ -1,6 +1,7 @@
 package ch.cpnv.timbreuse.mathTime;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.signum;
 
 /**
  * @author Mathieu.JEE, Kamil.AMRANI
@@ -47,7 +48,9 @@ public final class SecondsPastMidnight {
 	 */
 	public static int hours(int spm) {
 		if(spm<-INFINITE || spm>INFINITE) {
-			throw new IllegalArgumentException();
+			//throw new IllegalArgumentException();
+			System.out.println("too many minutes !!!");
+			return Math.divF((int) (INFINITE * signum(spm)), 3600);
 		}
 		return Math.divF(spm, 3600);
 	}
@@ -60,7 +63,9 @@ public final class SecondsPastMidnight {
 	 */
 	public static int minutes(int spm) {
 		if(spm<-INFINITE || spm>INFINITE) {
-			throw new IllegalArgumentException();
+			//throw new IllegalArgumentException();
+			System.out.println("too many minutes !!!");
+			return Math.divF(Math.modF((int) (INFINITE * signum(spm)), 3600), 60);
 		}
 		return Math.divF(Math.modF(spm, 3600), 60);
 	}
@@ -73,7 +78,9 @@ public final class SecondsPastMidnight {
 	 */
 	public static int seconds(int spm) {
 		if(spm<-INFINITE || spm>INFINITE) {
-			throw new IllegalArgumentException();
+			//throw new IllegalArgumentException();
+			System.out.println("too many secondes !!!");
+			return Math.modF(Math.modF((int) (INFINITE * signum(spm)), 3600), 60);
 		}
 		return Math.modF(Math.modF(spm, 3600),60);
 	}

@@ -142,7 +142,7 @@ public class DAOImplTeacher implements DAOTeacher {
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				String email = resultSet.getString("Email");
-				students.add(daoStudent.find(email.substring(0, email.indexOf("@"))));
+				if(email != null && !email.isEmpty()) students.add(daoStudent.find(email.substring(0, email.indexOf("@"))));
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
@@ -193,6 +193,7 @@ public class DAOImplTeacher implements DAOTeacher {
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
 				String email = resultSet.getString("Email");
+				try{
 				student = daoStudent.find(email.substring(0, email.indexOf("@")));
 				timeTable[0] = classe;
 				timeTable[1] = student.getMonday();
@@ -202,6 +203,10 @@ public class DAOImplTeacher implements DAOTeacher {
 				timeTable[5] = student.getFriday();
 				timeTable[6] = student.getSaturday();
 				timeTable[7] = student.getSunday();
+				} catch (Exception e) {
+					System.out.println("no email");
+					e.printStackTrace();
+				}
 			}
 		} catch(SQLException e) {
 			throw new DAOException(e);
